@@ -12692,6 +12692,10 @@ part number 2062-2P from STA</description>
 <attribute name="LCSC_PART_NUMBER" value="C25804"/>
 </part>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="+3V11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -13591,6 +13595,18 @@ part number 2062-2P from STA</description>
 <instance part="GND3" gate="1" x="353.06" y="-15.24" smashed="yes">
 <attribute name="VALUE" x="350.52" y="-17.78" size="1.778" layer="96"/>
 </instance>
+<instance part="+3V11" gate="G$1" x="528.32" y="-63.5" smashed="yes">
+<attribute name="VALUE" x="525.78" y="-68.58" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+3V12" gate="G$1" x="467.36" y="-63.5" smashed="yes">
+<attribute name="VALUE" x="464.82" y="-68.58" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+3V13" gate="G$1" x="408.94" y="-63.5" smashed="yes">
+<attribute name="VALUE" x="406.4" y="-68.58" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+3V14" gate="G$1" x="345.44" y="-63.5" smashed="yes">
+<attribute name="VALUE" x="342.9" y="-68.58" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 <bus name="ESP32_BUS:+3V3,+5V,2,4,5,12,13,14,15,16,17,18,19,20,21/SDA,22/SCL,23,25,26,27,32,33,34,35,36,39,GND">
@@ -13605,15 +13621,19 @@ part number 2062-2P from STA</description>
 </segment>
 <segment>
 <wire x1="297.18" y1="-25.4" x2="297.18" y2="-35.56" width="0.762" layer="92"/>
+<label x="294.64" y="-35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="360.68" y1="-25.4" x2="360.68" y2="-35.56" width="0.762" layer="92"/>
+<label x="358.14" y="-35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="419.1" y1="-25.4" x2="419.1" y2="-35.56" width="0.762" layer="92"/>
+<label x="416.56" y="-35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="480.06" y1="-25.4" x2="480.06" y2="-35.56" width="0.762" layer="92"/>
+<label x="477.52" y="-35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="314.96" y1="223.52" x2="314.96" y2="208.28" width="0.762" layer="92"/>
@@ -13621,6 +13641,18 @@ part number 2062-2P from STA</description>
 </segment>
 <segment>
 <wire x1="81.28" y1="27.94" x2="81.28" y2="7.62" width="0.762" layer="92"/>
+</segment>
+<segment>
+<wire x1="340.36" y1="-63.5" x2="340.36" y2="-66.04" width="0.762" layer="92"/>
+</segment>
+<segment>
+<wire x1="403.86" y1="-63.5" x2="403.86" y2="-66.04" width="0.762" layer="92"/>
+</segment>
+<segment>
+<wire x1="462.28" y1="-63.5" x2="462.28" y2="-66.04" width="0.762" layer="92"/>
+</segment>
+<segment>
+<wire x1="523.24" y1="-63.5" x2="523.24" y2="-66.04" width="0.762" layer="92"/>
 </segment>
 </bus>
 <bus name="NEBULA:A[0..15],B[0..15],C[0..15],D[0..15]">
@@ -14298,12 +14330,40 @@ part number 2062-2P from STA</description>
 <wire x1="320.04" y1="0" x2="320.04" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="320.04" y1="-2.54" x2="317.5" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="!RESET"/>
+<pinref part="+3V14" gate="G$1" pin="+3V3"/>
+<wire x1="335.28" y1="-68.58" x2="345.44" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="345.44" y1="-68.58" x2="345.44" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="!RESET"/>
+<pinref part="+3V13" gate="G$1" pin="+3V3"/>
+<wire x1="398.78" y1="-68.58" x2="408.94" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="408.94" y1="-68.58" x2="408.94" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="!RESET"/>
+<pinref part="+3V12" gate="G$1" pin="+3V3"/>
+<wire x1="457.2" y1="-68.58" x2="467.36" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="467.36" y1="-68.58" x2="467.36" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U5" gate="G$1" pin="!RESET"/>
+<pinref part="+3V11" gate="G$1" pin="+3V3"/>
+<wire x1="518.16" y1="-68.58" x2="528.32" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="528.32" y1="-68.58" x2="528.32" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="36" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="VP"/>
 <wire x1="96.52" y1="116.84" x2="91.44" y2="116.84" width="0.1524" layer="91"/>
 <label x="86.36" y="116.84" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="INTB"/>
+<wire x1="457.2" y1="-66.04" x2="462.28" y2="-66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="39" class="0">
@@ -14322,6 +14382,10 @@ part number 2062-2P from STA</description>
 <wire x1="177.8" y1="119.38" x2="177.8" y2="116.84" width="0.1524" layer="91"/>
 <junction x="177.8" y="116.84"/>
 </segment>
+<segment>
+<pinref part="U5" gate="G$1" pin="INTB"/>
+<wire x1="518.16" y1="-66.04" x2="523.24" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="34" class="0">
 <segment>
@@ -14329,12 +14393,20 @@ part number 2062-2P from STA</description>
 <wire x1="96.52" y1="111.76" x2="91.44" y2="111.76" width="0.1524" layer="91"/>
 <label x="86.36" y="111.76" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="INTB"/>
+<wire x1="335.28" y1="-66.04" x2="340.36" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="35" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO35"/>
 <wire x1="96.52" y1="109.22" x2="91.44" y2="109.22" width="0.1524" layer="91"/>
 <label x="86.36" y="109.22" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="INTB"/>
+<wire x1="398.78" y1="-66.04" x2="403.86" y2="-66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="32" class="0">
