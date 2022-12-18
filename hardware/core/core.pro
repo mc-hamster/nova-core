@@ -2,24 +2,24 @@ EAGLE AutoRouter Statistics:
 
 Job           : /Users/jmcasler/Documents/GitHub/mchamster/nova-nebula/hardware/core/core.brd
 
-Start at      : 21:33:06 (12/12/22)
-End at        : 21:34:48 (12/12/22)
-Elapsed time  : 00:01:40
+Start at      : 21:27:41 (12/17/22)
+End at        : 21:33:38 (12/17/22)
+Elapsed time  : 00:04:25
 
-Signals       :   378   RoutingGrid: 25 mil  Layers: 4
-Connections   :   997   predefined:  30 ( 0 Vias )
+Signals       :   474   RoutingGrid: 12.5 mil  Layers: 4
+Connections   :  1229   predefined:  40 ( 0 Vias )
 
-Router memory :   451152
+Router memory :   1979424
 
 Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:01  00:00:46  00:00:13  00:00:13  00:00:13  00:00:14
-Number of Ripups  :         0        82         0         0         0         0
+Time per pass     :  00:00:01  00:01:34  00:00:35  00:00:42  00:00:45  00:00:48
+Number of Ripups  :         0        42         0         0         0         0
 max. Level        :         0         2         0         0         0         0
-max. Total        :         0       171         0         0         0         0
+max. Total        :         0       179         0         0         0         0
 
-Routed            :       118       963       963       963       963       963
-Vias              :         0       999       665       625       612       601
-Resolution        :    14.8 %    99.6 %    99.6 %    99.6 %    99.6 %    99.6 %
+Routed            :       163      1188      1188      1189      1189      1189
+Vias              :         0      1292       821       785       766       763
+Resolution        :    16.5 %    99.9 %    99.9 %   100.0 %   100.0 %   100.0 %
 
-Final             : 99.5% finished. Polygons may have fallen apart.
+Final             : 100.0% finished
