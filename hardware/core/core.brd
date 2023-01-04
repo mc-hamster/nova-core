@@ -9,7 +9,7 @@
 <grid distance="0.025" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="$GND" color="16" fill="10" visible="yes" active="yes"/>
+<layer number="2" name="$GND" color="16" fill="10" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
 <layer number="5" name="Route5" color="19" fill="1" visible="no" active="no"/>
@@ -4768,11 +4768,11 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="37" x="69.85" y="119.38" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="69.85" y="119.38" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="C89" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E5-13" package3d_urn="urn:adsk.eagle:package:23375/1" value="2200uf" x="137.16" y="7.62" smashed="yes" rot="R270">
-<attribute name="DIST" value="https://amzn.to/3iR84VS" x="137.16" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="POPULARITY" value="7" x="137.16" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="137.16" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="133.223" y="12.192" size="1.778" layer="27" ratio="10" rot="R270"/>
+<element name="C89" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E5-13" package3d_urn="urn:adsk.eagle:package:23375/1" value="2200uf" x="137.16" y="8.255" smashed="yes" rot="R270">
+<attribute name="DIST" value="https://amzn.to/3iR84VS" x="137.16" y="8.255" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="POPULARITY" value="7" x="137.16" y="8.255" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="137.16" y="8.255" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="133.223" y="12.827" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="R188" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="137.795" smashed="yes" rot="R90">
 <attribute name="LCSC_PART" value="C25804" x="63.5" y="137.795" size="1.778" layer="27" rot="R90" display="off"/>
@@ -5656,7 +5656,7 @@ design rules under a new name.</description>
 <wire x1="100.01" y1="24.13" x2="99.91" y2="21.59" width="0" layer="19" extent="1-1"/>
 <wire x1="102.21" y1="18.81" x2="99.91" y2="21.59" width="0" layer="19" extent="1-1"/>
 <wire x1="97.8111" y1="5.055" x2="102.21" y2="18.81" width="0" layer="19" extent="1-1"/>
-<wire x1="137.16" y1="10.16" x2="102.21" y2="18.81" width="0" layer="19" extent="1-1"/>
+<wire x1="137.16" y1="10.795" x2="102.21" y2="18.81" width="0" layer="19" extent="1-1"/>
 <wire x1="82.12" y1="160.02" x2="75.565" y2="101.4222" width="0" layer="19" extent="1-1"/>
 <wire x1="21.197" y1="4.445" x2="89.75" y2="21.59" width="0" layer="19" extent="1-1"/>
 <wire x1="13.97" y1="29.21" x2="21.197" y2="4.445" width="0" layer="19" extent="1-1"/>
