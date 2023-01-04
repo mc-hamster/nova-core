@@ -166,8 +166,8 @@
 <wire x1="159.69" y1="0" x2="159.69" y2="163.82" width="0" layer="20"/>
 <wire x1="159.69" y1="163.82" x2="0" y2="163.82" width="0" layer="20"/>
 <wire x1="0" y1="163.82" x2="0" y2="0" width="0" layer="20"/>
-<text x="153.67" y="60.96" size="1.27" layer="25" rot="R180">Nova Core v003
-(c) Jm Casler 2022
+<text x="153.67" y="60.96" size="1.27" layer="25" rot="R180">Nova Core v004
+(c) Jm Casler 2023
 www.casler.org
 www.oontz.com</text>
 <text x="114.3" y="3.175" size="1.4224" layer="21" rot="R180">12v    GND   5v   GND</text>
@@ -182,7 +182,7 @@ www.oontz.com</text>
 <text x="14.605" y="19.05" size="1.778" layer="21">+3v</text>
 <text x="97.79" y="26.67" size="1.778" layer="21">GND</text>
 <text x="2.54" y="17.78" size="1.778" layer="21">GND</text>
-<text x="10.795" y="158.115" size="3.81" layer="25">NOVA CORE v003</text>
+<text x="10.795" y="158.115" size="3.81" layer="25">NOVA CORE v004</text>
 <text x="22.86" y="1.27" size="1.6764" layer="21">3v
 5v
 12v
