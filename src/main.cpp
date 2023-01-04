@@ -18,7 +18,10 @@ AsyncEventSource events("/events");
 TaskHandle_t Task1;
 TaskHandle_t Task2;
 
-Adafruit_MCP23X17 mcp;
+Adafruit_MCP23X17 mcp_a;
+Adafruit_MCP23X17 mcp_b;
+Adafruit_MCP23X17 mcp_c;
+Adafruit_MCP23X17 mcp_d;
 
 void Task1code(void *parameter)
 {
@@ -29,66 +32,78 @@ void Task1code(void *parameter)
 
     uint8_t i;
 
-    for (i = 0; i <= 7; ++i)
+    Serial.println("mcp_a");
+    
+    for (i = 0; i <= 15; ++i)
     {
-      mcp.digitalWrite(i, HIGH);
-      mcp.digitalWrite(i, HIGH);
-      delay(250);
-      mcp.digitalWrite(i, LOW);
-      mcp.digitalWrite(i, LOW);
-      delay(250);
+      mcp_a.digitalWrite(i, HIGH);
+      mcp_a.writeGPIOAB(0b0000000000000001);
+      delay(100);
+      mcp_a.digitalWrite(i, LOW);
+      delay(100);
     }
+    
     /*
-    mcp.digitalWrite(0, HIGH);
-    mcp.digitalWrite(0, HIGH);
-    delay(500);
-    mcp.digitalWrite(0, LOW);
-    mcp.digitalWrite(0, LOW);
-    delay(500);
-    mcp.digitalWrite(1, HIGH);
-    mcp.digitalWrite(1, HIGH);
-    delay(500);
-    mcp.digitalWrite(1, LOW);
-    mcp.digitalWrite(1, LOW);
-    delay(500);
-    mcp.digitalWrite(2, HIGH);
-    mcp.digitalWrite(2, HIGH);
-    delay(500);
-    mcp.digitalWrite(2, LOW);
-    mcp.digitalWrite(2, LOW);
-    delay(500);
-    mcp.digitalWrite(3, HIGH);
-    mcp.digitalWrite(3, HIGH);
-    delay(500);
-    mcp.digitalWrite(3, LOW);
-    mcp.digitalWrite(3, LOW);
-    delay(500);
+        for (i = 0; i <= 1; ++i)
+        {
+          mcp_a.writeGPIOAB(0b0000000000000001);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
 
-    mcp.digitalWrite(4, HIGH);
-    mcp.digitalWrite(4, HIGH);
-    delay(500);
-    mcp.digitalWrite(4, LOW);
-    mcp.digitalWrite(4, LOW);
-    delay(500);
-    mcp.digitalWrite(5, HIGH);
-    mcp.digitalWrite(5, HIGH);
-    delay(500);
-    mcp.digitalWrite(6, LOW);
-    mcp.digitalWrite(6, LOW);
-    delay(500);
-    mcp.digitalWrite(6, HIGH);
-    mcp.digitalWrite(6, HIGH);
-    delay(500);
-    mcp.digitalWrite(7, LOW);
-    mcp.digitalWrite(7, LOW);
-    delay(500);
-    mcp.digitalWrite(3, HIGH);
-    mcp.digitalWrite(3, HIGH);
-    delay(500);
-    mcp.digitalWrite(3, LOW);
-    mcp.digitalWrite(3, LOW);
-    delay(500);
+          mcp_a.writeGPIOAB(0b0000000000000010);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
+
+          mcp_a.writeGPIOAB(0b0000000000000100);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
+
+          mcp_a.writeGPIOAB(0b0000000000001000);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
+
+          mcp_a.writeGPIOAB(0b0000000000010000);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
+
+          mcp_a.writeGPIOAB(0b0000000000100000);
+          delay(100);
+          mcp_a.writeGPIOAB(0b0000000000000000);
+          delay(100);
+        }
     */
+
+    Serial.println("mcp_b");
+    for (i = 0; i <= 15; ++i)
+    {
+      mcp_b.digitalWrite(i, HIGH);
+      delay(100);
+      mcp_b.digitalWrite(i, LOW);
+      delay(100);
+    }
+
+    Serial.println("mcp_c");
+    for (i = 0; i <= 15; ++i)
+    {
+      mcp_c.digitalWrite(i, HIGH);
+      delay(100);
+      mcp_c.digitalWrite(i, LOW);
+      delay(100);
+    }
+
+    Serial.println("mcp_d");
+    for (i = 0; i <= 15; ++i)
+    {
+      mcp_d.digitalWrite(i, HIGH);
+      delay(100);
+      mcp_d.digitalWrite(i, LOW);
+      delay(100);
+    }
   }
 }
 
@@ -331,25 +346,40 @@ void setup()
 
   Serial.println("MCP23xxx Blink Test!");
 
-  // uncomment appropriate mcp.begin
-  if (!mcp.begin_I2C())
+  if (!mcp_a.begin_I2C(0x20))
   {
-    // if (!mcp.begin_SPI(CS_PIN)) {
-    Serial.println("Error.");
+    Serial.println("Error - mcp_a");
+    while (1)
+      ;
+  }
+  if (!mcp_b.begin_I2C(0x21))
+  {
+    Serial.println("Error - mcp_b");
+    while (1)
+      ;
+  }
+  if (!mcp_c.begin_I2C(0x22))
+  {
+    Serial.println("Error - mcp_c");
+    while (1)
+      ;
+  }
+  if (!mcp_d.begin_I2C(0x23))
+  {
+    Serial.println("Error - mcp_d");
     while (1)
       ;
   }
 
   // configure pin for output
-  mcp.pinMode(0, OUTPUT);
-  mcp.pinMode(1, OUTPUT);
-  mcp.pinMode(2, OUTPUT);
-  mcp.pinMode(3, OUTPUT);
-  mcp.pinMode(4, OUTPUT);
-  mcp.pinMode(5, OUTPUT);
-  mcp.pinMode(6, OUTPUT);
-  mcp.pinMode(7, OUTPUT);
-
+  uint8_t i = 0;
+  for (i = 0; i <= 15; ++i)
+  {
+    mcp_a.pinMode(i, OUTPUT);
+    mcp_b.pinMode(i, OUTPUT);
+    mcp_c.pinMode(i, OUTPUT);
+    mcp_d.pinMode(i, OUTPUT);
+  }
   /*
       core1 - main program code
       core0 - esp32 network stack
