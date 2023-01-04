@@ -18,9 +18,6 @@ AsyncEventSource events("/events");
 TaskHandle_t Task1;
 TaskHandle_t Task2;
 
-const int led_1 = 32;
-const int led_2 = 25;
-
 Adafruit_MCP23X17 mcp;
 
 void Task1code(void *parameter)
@@ -29,10 +26,69 @@ void Task1code(void *parameter)
   Serial.println(xPortGetCoreID());
   for (;;)
   {
-    digitalWrite(led_1, HIGH);
+
+    uint8_t i;
+
+    for (i = 0; i <= 7; ++i)
+    {
+      mcp.digitalWrite(i, HIGH);
+      mcp.digitalWrite(i, HIGH);
+      delay(250);
+      mcp.digitalWrite(i, LOW);
+      mcp.digitalWrite(i, LOW);
+      delay(250);
+    }
+    /*
+    mcp.digitalWrite(0, HIGH);
+    mcp.digitalWrite(0, HIGH);
     delay(500);
-    digitalWrite(led_1, LOW);
+    mcp.digitalWrite(0, LOW);
+    mcp.digitalWrite(0, LOW);
     delay(500);
+    mcp.digitalWrite(1, HIGH);
+    mcp.digitalWrite(1, HIGH);
+    delay(500);
+    mcp.digitalWrite(1, LOW);
+    mcp.digitalWrite(1, LOW);
+    delay(500);
+    mcp.digitalWrite(2, HIGH);
+    mcp.digitalWrite(2, HIGH);
+    delay(500);
+    mcp.digitalWrite(2, LOW);
+    mcp.digitalWrite(2, LOW);
+    delay(500);
+    mcp.digitalWrite(3, HIGH);
+    mcp.digitalWrite(3, HIGH);
+    delay(500);
+    mcp.digitalWrite(3, LOW);
+    mcp.digitalWrite(3, LOW);
+    delay(500);
+
+    mcp.digitalWrite(4, HIGH);
+    mcp.digitalWrite(4, HIGH);
+    delay(500);
+    mcp.digitalWrite(4, LOW);
+    mcp.digitalWrite(4, LOW);
+    delay(500);
+    mcp.digitalWrite(5, HIGH);
+    mcp.digitalWrite(5, HIGH);
+    delay(500);
+    mcp.digitalWrite(6, LOW);
+    mcp.digitalWrite(6, LOW);
+    delay(500);
+    mcp.digitalWrite(6, HIGH);
+    mcp.digitalWrite(6, HIGH);
+    delay(500);
+    mcp.digitalWrite(7, LOW);
+    mcp.digitalWrite(7, LOW);
+    delay(500);
+    mcp.digitalWrite(3, HIGH);
+    mcp.digitalWrite(3, HIGH);
+    delay(500);
+    mcp.digitalWrite(3, LOW);
+    mcp.digitalWrite(3, LOW);
+    delay(500);
+    */
   }
 }
 
@@ -42,10 +98,12 @@ void Task2code(void *parameter)
   Serial.println(xPortGetCoreID());
   for (;;)
   {
+    /*
     digitalWrite(led_2, HIGH);
     delay(1000);
     digitalWrite(led_2, LOW);
     delay(1000);
+    */
   }
 }
 
@@ -155,7 +213,7 @@ const char *http_password = "admin";
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(921600);
   Serial.print("setup() is running on core ");
   Serial.println(xPortGetCoreID());
 
@@ -284,6 +342,13 @@ void setup()
 
   // configure pin for output
   mcp.pinMode(0, OUTPUT);
+  mcp.pinMode(1, OUTPUT);
+  mcp.pinMode(2, OUTPUT);
+  mcp.pinMode(3, OUTPUT);
+  mcp.pinMode(4, OUTPUT);
+  mcp.pinMode(5, OUTPUT);
+  mcp.pinMode(6, OUTPUT);
+  mcp.pinMode(7, OUTPUT);
 
   /*
       core1 - main program code
@@ -299,11 +364,6 @@ void loop()
 {
   ArduinoOTA.handle();
   ws.cleanupClients();
-  Serial.print("loop() is running on core ");
-  Serial.println(xPortGetCoreID());
-
-  mcp.digitalWrite(0, HIGH);
-  delay(500);
-  mcp.digitalWrite(0, LOW);
-  delay(500);
+  // Serial.print("loop() is running on core ");
+  // Serial.println(xPortGetCoreID());
 }
