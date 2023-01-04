@@ -6,36 +6,36 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="no"/>
-<layer number="2" name="$GND" color="16" fill="1" visible="yes" active="no"/>
-<layer number="3" name="Route3" color="17" fill="1" visible="yes" active="no"/>
-<layer number="4" name="Route4" color="18" fill="1" visible="yes" active="no"/>
-<layer number="5" name="Route5" color="19" fill="1" visible="yes" active="no"/>
-<layer number="6" name="Route6" color="25" fill="1" visible="yes" active="no"/>
-<layer number="7" name="Route7" color="26" fill="1" visible="yes" active="no"/>
-<layer number="8" name="Route8" color="27" fill="1" visible="yes" active="no"/>
-<layer number="9" name="Route9" color="28" fill="1" visible="yes" active="no"/>
-<layer number="10" name="Route10" color="29" fill="1" visible="yes" active="no"/>
-<layer number="11" name="Route11" color="30" fill="1" visible="yes" active="no"/>
-<layer number="12" name="Route12" color="20" fill="1" visible="yes" active="no"/>
-<layer number="13" name="Route13" color="21" fill="1" visible="yes" active="no"/>
-<layer number="14" name="Route14" color="22" fill="1" visible="yes" active="no"/>
-<layer number="15" name="Route15" color="23" fill="1" visible="yes" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="no"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="no"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="no"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="no"/>
-<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="no"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="no"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="no"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="no"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="no"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
+<layer number="2" name="$GND" color="16" fill="1" visible="no" active="no"/>
+<layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
+<layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
+<layer number="5" name="Route5" color="19" fill="1" visible="no" active="no"/>
+<layer number="6" name="Route6" color="25" fill="1" visible="no" active="no"/>
+<layer number="7" name="Route7" color="26" fill="1" visible="no" active="no"/>
+<layer number="8" name="Route8" color="27" fill="1" visible="no" active="no"/>
+<layer number="9" name="Route9" color="28" fill="1" visible="no" active="no"/>
+<layer number="10" name="Route10" color="29" fill="1" visible="no" active="no"/>
+<layer number="11" name="Route11" color="30" fill="1" visible="no" active="no"/>
+<layer number="12" name="Route12" color="20" fill="1" visible="no" active="no"/>
+<layer number="13" name="Route13" color="21" fill="1" visible="no" active="no"/>
+<layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="no" active="no"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="no" active="no"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="no"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="no"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="no"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="no"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="no"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="no"/>
@@ -44,8 +44,8 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="no"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="no"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="no"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="no"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="no"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="no"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="no"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="no"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="no"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="no"/>
@@ -53,19 +53,19 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="no"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="no"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="no"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="no"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="no"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="no"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="no"/>
-<layer number="50" name="dxf" color="7" fill="1" visible="yes" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="no"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="no"/>
-<layer number="53" name="tGND_GNDA" color="7" fill="9" visible="yes" active="no"/>
-<layer number="54" name="bGND_GNDA" color="1" fill="9" visible="yes" active="no"/>
-<layer number="56" name="wert" color="7" fill="1" visible="yes" active="no"/>
-<layer number="57" name="tCAD" color="7" fill="1" visible="yes" active="no"/>
-<layer number="59" name="tCarbon" color="7" fill="1" visible="yes" active="no"/>
-<layer number="60" name="bCarbon" color="7" fill="1" visible="yes" active="no"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="no"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="no"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
+<layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
+<layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
+<layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
+<layer number="57" name="tCAD" color="7" fill="1" visible="no" active="no"/>
+<layer number="59" name="tCarbon" color="7" fill="1" visible="no" active="no"/>
+<layer number="60" name="bCarbon" color="7" fill="1" visible="no" active="no"/>
 <layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
@@ -23073,6 +23073,2496 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="JLC PCB Basic Parts_loc" urn="urn:adsk.eagle:library:38668506">
+<description>&lt;h1&gt;(JL@C) JLC PCB Basic Parts Eagle Library with LCSC Part Numbers&lt;/h1&gt; &lt;h2&gt;by Combinatix, &lt;a href='https://github.com/Combinatix/JLCPCB-Basic-Parts/'&gt;https://github.com/Combinatix/JLCPCB-Basic-Parts/&lt;/a&gt;&lt;/h2&gt; &lt;h3&gt;This library contains a selection of &lt;i&gt;BASIC&lt;/i&gt; parts supplied by JLC PCB manufacturer, including their order codes (LCSC Part Number)&lt;/h3&gt; &lt;hr&gt; &lt;p&gt;Every part has these attributes:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;b&gt;LCSC_DATASHEET&lt;/b&gt; = Datasheet url for the selected part&lt;/li&gt; &lt;li&gt;&lt;b&gt;LCSC_PART&lt;/b&gt; = LCSC Part numbers - it matches the products listed at &lt;a href="https://jlcpcb.com/parts"&gt;https://jlcpcb.com/parts&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;b&gt;LCSC_PRICE1_EUR&lt;/b&gt; = Price of EACH, if specified by JLC PCB in their export csv&lt;/li&gt; &lt;li&gt;&lt;b&gt;LCSC_ROTATION_CCW&lt;/b&gt; = Rotation correction that ULP script reads during CPL export. This can solve a package rotation incompatibility&lt;/li&gt; &lt;li&gt;&lt;b&gt;PROPERTIES&lt;/b&gt; = Part's basic properties for your quick reference.&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Catalog Last Update: 2022-01-15&lt;/p&gt; &lt;b&gt;Version History:&lt;/b&gt; &lt;p&gt;2021-12-01: Added Dual Opamps (SOIC 8), Bug fixes (rotation problems)&lt;/p&gt; &lt;p&gt;2021-12-01: Added SMD Inductors 0402 - 1206. Updated and unified parts descriptions to be more consistent&lt;/p&gt; &lt;p&gt;2021-11-30: First BETA release. Library contains SMD Resistors, Capacitors, Diodes, SOT-23 Transistors&lt;/p&gt; &lt;p&gt;&lt;/p&gt;</description>
+<packages>
+<package name="R0402" urn="urn:adsk.eagle:footprint:23043/3" library_version="1">
+<description>&lt;b&gt;Chip RESISTOR 0402 EIA (1005 Metric)&lt;/b&gt;</description>
+<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
+<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
+<wire x1="-1" y1="0.483" x2="1" y2="0.483" width="0.0508" layer="39"/>
+<wire x1="1" y1="0.483" x2="1" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="1" y1="-0.483" x2="-1" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="-1" y1="-0.483" x2="-1" y2="0.483" width="0.0508" layer="39"/>
+<smd name="1" x="-0.5" y="0" dx="0.6" dy="0.7" layer="1"/>
+<smd name="2" x="0.5" y="0" dx="0.6" dy="0.7" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
+<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.35" x2="0.1999" y2="0.35" layer="35"/>
+</package>
+<package name="R0603" urn="urn:adsk.eagle:footprint:23044/1" library_version="1">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
+<wire x1="-0.432" y1="-0.356" x2="0.432" y2="-0.356" width="0.1524" layer="51"/>
+<wire x1="0.432" y1="0.356" x2="-0.432" y2="0.356" width="0.1524" layer="51"/>
+<wire x1="-1.473" y1="0.983" x2="1.473" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="0.983" x2="1.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="-0.983" x2="-1.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-1.473" y1="-0.983" x2="-1.473" y2="0.983" width="0.0508" layer="39"/>
+<smd name="1" x="-0.85" y="0" dx="1" dy="1.1" layer="1"/>
+<smd name="2" x="0.85" y="0" dx="1" dy="1.1" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="0.4318" y1="-0.4318" x2="0.8382" y2="0.4318" layer="51"/>
+<rectangle x1="-0.8382" y1="-0.4318" x2="-0.4318" y2="0.4318" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
+</package>
+<package name="R0805" urn="urn:adsk.eagle:footprint:23045/1" library_version="1">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;</description>
+<wire x1="-0.41" y1="0.635" x2="0.41" y2="0.635" width="0.1524" layer="51"/>
+<wire x1="-0.41" y1="-0.635" x2="0.41" y2="-0.635" width="0.1524" layer="51"/>
+<wire x1="-1.973" y1="0.983" x2="1.973" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="1.973" y1="0.983" x2="1.973" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="1.973" y1="-0.983" x2="-1.973" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-1.973" y1="-0.983" x2="-1.973" y2="0.983" width="0.0508" layer="39"/>
+<smd name="1" x="-0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<smd name="2" x="0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<text x="-0.635" y="1.27" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="0.4064" y1="-0.6985" x2="1.0564" y2="0.7015" layer="51"/>
+<rectangle x1="-1.0668" y1="-0.6985" x2="-0.4168" y2="0.7015" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.5001" x2="0.1999" y2="0.5001" layer="35"/>
+</package>
+<package name="R1206" urn="urn:adsk.eagle:footprint:23047/1" library_version="1">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
+<wire x1="0.9525" y1="-0.8128" x2="-0.9652" y2="-0.8128" width="0.1524" layer="51"/>
+<wire x1="0.9525" y1="0.8128" x2="-0.9652" y2="0.8128" width="0.1524" layer="51"/>
+<wire x1="-2.473" y1="0.983" x2="2.473" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="0.983" x2="2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="-0.983" x2="-2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-2.473" y1="-0.983" x2="-2.473" y2="0.983" width="0.0508" layer="39"/>
+<smd name="2" x="1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
+<smd name="1" x="-1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
+<text x="-1.27" y="1.27" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.27" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.6891" y1="-0.8763" x2="-0.9525" y2="0.8763" layer="51"/>
+<rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="51"/>
+<rectangle x1="-0.3" y1="-0.7" x2="0.3" y2="0.7" layer="35"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="R0402" urn="urn:adsk.eagle:package:23547/3" type="model" library_version="1">
+<description>Chip RESISTOR 0402 EIA (1005 Metric)</description>
+<packageinstances>
+<packageinstance name="R0402"/>
+</packageinstances>
+</package3d>
+<package3d name="R0603" urn="urn:adsk.eagle:package:23555/3" type="model" library_version="1">
+<description>RESISTOR</description>
+<packageinstances>
+<packageinstance name="R0603"/>
+</packageinstances>
+</package3d>
+<package3d name="R0805" urn="urn:adsk.eagle:package:23553/2" type="model" library_version="1">
+<description>RESISTOR</description>
+<packageinstances>
+<packageinstance name="R0805"/>
+</packageinstances>
+</package3d>
+<package3d name="R1206" urn="urn:adsk.eagle:package:23540/2" type="model" library_version="1">
+<description>RESISTOR</description>
+<packageinstances>
+<packageinstance name="R1206"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="R-EU" urn="urn:adsk.eagle:symbol:38668520/1" library_version="1">
+<description>&lt;h1&gt;Resistor&lt;/h1&gt; EU symbol</description>
+<wire x1="-2.54" y1="-0.889" x2="2.54" y2="-0.889" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0.889" x2="-2.54" y2="0.889" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-0.889" x2="2.54" y2="0.889" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-0.889" x2="-2.54" y2="0.889" width="0.254" layer="94"/>
+<text x="-3.81" y="1.4986" size="1.778" layer="95">&gt;NAME</text>
+<text x="-3.81" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="R_" urn="urn:adsk.eagle:component:38668563/1" prefix="R" library_version="1">
+<description>&lt;h1&gt;Resistor&lt;/h1&gt; &lt;p&gt;General purpose SMD Resistor&lt;/p&gt;</description>
+<gates>
+<gate name="R1" symbol="R-EU" x="0" y="0"/>
+</gates>
+<devices>
+<device name="_0402" package="R0402">
+<connects>
+<connect gate="R1" pin="1" pad="1"/>
+<connect gate="R1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23547/3"/>
+</package3dinstances>
+<technologies>
+<technology name="0R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0402WGF0000TCE_C17168.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17168" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="987433" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±800ppm -55°C~+155°C 0Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1201TCE_C25862.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25862" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="121125" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 1.2kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1501TCE_C25867.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25867" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="312925" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 1.5kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="100K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1003TCE_C25741.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25741" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="423883" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 100kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="100R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF1000TCE_C25076.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25076" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1672116" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 100Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25744" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="11564817" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 10kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0402WGF1005TCE_C26082.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26082" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="167325" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 10MOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF100JTCE_C25077.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25077" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="439143" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 10Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="120K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1203TCE_C25750.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25750" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="135452" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 120kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="120R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF1200TCE_C25079.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25079" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="478854" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 120Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="12K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1202TCE_C25752.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25752" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="49975" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 12kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="150K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1503TCE_C25755.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25755" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="128267" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 150kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="150R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF1500TCE_C25082.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25082" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="180794" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 150Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="15K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1502TCE_C25756.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25756" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="460460" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 15kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="18K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF1802TCE_C25762.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25762" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="15841" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 18kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C11702" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3758383" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 1kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0402WGF1004TCE_C26083.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26083" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1171974" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 1MOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF100KTCE_C25086.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25086" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="22037" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 1Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2201TCE_C25879.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25879" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="387501" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 2.2kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.4K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2401TCE_C25882.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25882" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="28975" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 2.4kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="200K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2003TCE_C25764.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25764" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="420957" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 200kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="200R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF2000TCE_C25087.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25087" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="664974" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 200Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="20K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2002TCE_C25765.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25765" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="376032" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 20kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="220K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2203TCE_C25767.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25767" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="115680" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 220kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="220R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF2200TCE_C25091.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25091" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="710444" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 220Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="22K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2202TCE_C25768.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25768" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="64025" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 22kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="22R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF220JTCE_C25092.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25092" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="992925" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 22Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="24K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2402TCE_C25769.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25769" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="100393" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 24kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="27K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF2702TCE_C25771.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25771" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="171573" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 27kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0402WGF2001TCE_C4109.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4109" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="914869" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 2kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="3.3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF3301TCE_C25890.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25890" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="184727" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 3.3kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="3.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260330_UNI-ROYAL-Uniroyal-Elec-0402WGF3901TCE_C51721.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C51721" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="125163" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 3.9kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="300K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF3003TCE_C25774.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25774" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="19669" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 300kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="300R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF3000TCE_C25102.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25102" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="185262" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 300Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="330K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF3303TCE_C25778.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25778" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="15043" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 330kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="330R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF3300TCE_C25104.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25104" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="431435" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 330Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="33K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF3302TCE_C25779.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25779" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="435778" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 33kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="33R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF330JTCE_C25105.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25105" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1292085" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 33Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="39K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF3902TCE_C25783.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25783" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7735" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 39kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="4.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF4701TCE_C25900.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25900" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2784412" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 4.7kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="470K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF4703TCE_C25790.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25790" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="80139" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 470kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="470R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF4700TCE_C25117.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25117" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="83930" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 470Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="47K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF4702TCE_C25792.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25792" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1322764" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 47kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="47R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF470JTCE_C25118.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25118" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="292838" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±200ppm -55°C~+155°C 47Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="49.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF4992TCE_C25897.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25897" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="293887" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 49.9kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="49.9R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF499JTCE_C25120.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25120" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="164247" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 49.9Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="5.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF5101TCE_C25905.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25905" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1228443" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 5.1kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="5.6K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF5601TCE_C25908.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25908" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="73576" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 5.6kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="510K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0402WGF5103TCE_C11616.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C11616" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="205581" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 510kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="510R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF5100TCE_C25123.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25123" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="133820" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 510Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="51K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF5102TCE_C25794.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25794" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="153472" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 51kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="51R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF510JTCE_C25125.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25125" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="243950" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 51Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="56K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF5602TCE_C25796.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25796" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="116685" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 56kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="6.8K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0402WGF6801TCE_C25917.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25917" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="231083" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 6.8kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="680R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF6800TCE_C25130.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25130" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="24118" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 680Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="68K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260230_UNI-ROYAL-Uniroyal-Elec-0402WGF6802TCE_C36871.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C36871" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="61795" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 68kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="7.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0402WGF7501TCE_C25918.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25918" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="136568" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 7.5kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="75K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0402WGF7502TCE_C25798.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25798" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="100400" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 75kOhm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="75R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0402WGF750JTCE_C25133.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25133" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="382107" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 75Ohm 0402  ROHS" constant="no"/>
+</technology>
+<technology name="8.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0402WGF8201TCE_C25924.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25924" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="91259" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/16W Thick Film Resistors 50V ±100ppm -55°C~+155°C 8.2kOhm 0402  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_0603" package="R0603">
+<connects>
+<connect gate="R1" pin="1" pad="1"/>
+<connect gate="R1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23555/3"/>
+</package3dinstances>
+<technologies>
+<technology name="0R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF0000T5E_C21189.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C21189" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="891306" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V -55°C~+155°C 0Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1101T5E_C22764.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22764" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="123057" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1.1kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1201T5E_C22765.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22765" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="476320" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1.2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1501T5E_C22843.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22843" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="894371" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1.5kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1.5M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF1504T5E_C4172.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4172" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="18940" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1.5MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1.8K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF1801T5E_C4177.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4177" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="356941" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1.8kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="100K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF1003T5E_C25803.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25803" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5826279" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 100kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="100R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1000T5E_C22775.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22775" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3700009" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±200ppm -55°C~+155°C 100Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF1002T5E_C25804.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25804" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7979018" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 10kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF1005T5E_C7250.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C7250" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="225158" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 10MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF100JT5E_C22859.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22859" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2733989" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±400ppm -55°C~+155°C 10Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="110K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF1103T5E_C25805.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25805" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="86411" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 110kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="11K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0603WAF1102T5E_C25950.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25950" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="103724" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 11kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="120K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF1203T5E_C25808.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25808" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="362242" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 120kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="120R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1200T5E_C22787.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22787" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="181977" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 120Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="12K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1202T5E_C22790.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22790" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="256802" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 12kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="130K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1303T5E_C22795.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22795" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="107177" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 130kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="13K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1302T5E_C22797.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22797" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="102990" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 13kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="150K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1503T5E_C22807.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22807" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="285183" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 150kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="150R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1500T5E_C22808.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22808" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="466893" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 150Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="15K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1502T5E_C22809.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22809" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="394790" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 15kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="15R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF150JT5E_C22810.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22810" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="45246" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 15Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="160K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1603T5E_C22813.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22813" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="84424" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 160kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="180K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1803T5E_C22827.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22827" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="175164" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 180kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="180R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1800T5E_C22828.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22828" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="137249" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 180Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="18K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF1802T5E_C25810.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25810" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="156018" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 18kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1001T5E_C21190.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C21190" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5175299" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF1004T5E_C22935.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22935" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1411723" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 1MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF100KT5E_C22936.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22936" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="226847" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±400ppm -55°C~+155°C 1Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF2201T5E_C4190.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4190" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="331536" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2.2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.2M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF2204T5E_C22938.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22938" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="13336" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2.2MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.2R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF220KT5E_C22939.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22939" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="322355" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±400ppm -55°C~+155°C 2.2Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.4K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF2401T5E_C22940.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22940" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="447666" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2.4kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF2701T5E_C13167.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C13167" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="65542" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2.7kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="200K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF2003T5E_C25811.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25811" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="665451" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 200kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="200R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF2000T5E_C8218.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C8218" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="301734" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 200Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="20K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF2002T5E_C4184.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4184" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2014241" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 20kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="20R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-0603WAF200JT5E_C22950.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22950" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="40713" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 20Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="220K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2203T5E_C22961.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22961" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="192313" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 220kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="220R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2200T5E_C22962.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22962" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="607613" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 220Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="22K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260230_UNI-ROYAL-Uniroyal-Elec-0603WAF2202T5E_C31850.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C31850" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="342507" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 22kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="22R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252330_UNI-ROYAL-Uniroyal-Elec-0603WAF220JT5E_C23345.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23345" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1173608" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 22Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="240K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF2403T5E_C4197.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4197" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="28297" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 240kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="240R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF2400T5E_C23350.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23350" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="173950" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 240Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="24K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF2402T5E_C23352.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23352" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="118657" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 24kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="270K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2703T5E_C22965.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22965" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="36231" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 270kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="270R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2700T5E_C22966.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22966" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="315292" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 270Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="27K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2702T5E_C22967.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22967" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="133243" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 27kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="27R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF270JT5E_C25190.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25190" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="107838" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±200ppm -55°C~+155°C 27Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2001T5E_C22975.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22975" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3372290" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF2004T5E_C22976.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22976" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="53230" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 2MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF200KT5E_C22977.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22977" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="338085" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±400ppm -55°C~+155°C 2Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3.3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3301T5E_C22978.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22978" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1921362" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 3.3kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3.6K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3601T5E_C22980.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22980" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="282702" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 3.6kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3901T5E_C23018.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23018" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="210846" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 3.9kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="300K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3003T5E_C23024.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23024" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="150642" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 300kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="300R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3000T5E_C23025.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23025" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="81005" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 300Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="30K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3002T5E_C22984.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22984" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="586743" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 30kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="330K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3303T5E_C23137.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23137" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="216883" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 330kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="330R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3300T5E_C23138.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23138" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="862746" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 330Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="33K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF3302T5E_C4216.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4216" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="246127" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 33kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="33R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF330JT5E_C23140.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23140" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="610469" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 33Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="360K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3603T5E_C23146.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23146" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="21609" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 360kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="360R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF3600T5E_C25194.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25194" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="182256" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 360Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="36K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3602T5E_C23147.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23147" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="32807" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 36kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="390K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3903T5E_C23150.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23150" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="19336" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 390kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="390R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3900T5E_C23151.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23151" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="16644" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 390Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="39K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3902T5E_C23153.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23153" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="105898" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 39kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF3001T5E_C4211.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4211" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="740793" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 3kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF3004T5E_C23156.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23156" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="172072" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 3MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4301T5E_C23159.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23159" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="160828" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 4.3kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4701T5E_C23162.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23162" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3103173" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 4.7kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4704T5E_C23163.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23163" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="15487" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 4.7MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF470KT5E_C23164.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23164" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="239404" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±400ppm -55°C~+155°C 4.7Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.99K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4991T5E_C23046.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23046" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="156833" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 4.99kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="40.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF4022T5E_C12447.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C12447" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="100097" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 40.2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="430K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0603WAF4303T5E_C25969.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25969" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="39197" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 430kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="430R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4300T5E_C23170.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23170" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="18794" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 430Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="43K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4302T5E_C23172.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23172" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="47219" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 43kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="470K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4703T5E_C23178.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23178" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="577528" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 470kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="470R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4700T5E_C23179.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23179" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="666559" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 470Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="47K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF4702T5E_C25819.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25819" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1052947" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 47kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="47R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF470JT5E_C23182.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23182" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="687203" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 47Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="49.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF4992T5E_C23184.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23184" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="390676" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 49.9kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="49.9R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF499JT5E_C23185.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23185" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="505010" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 49.9Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="5.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5101T5E_C23186.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23186" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2912883" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 5.1kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="5.1M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF5104T5E_C13320.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C13320" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="9989" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 5.1MOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="5.1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF510KT5E_C25197.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25197" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="51559" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±200ppm -55°C~+155°C 5.1Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="5.6K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5601T5E_C23189.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23189" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="186030" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 5.6kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="510K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5103T5E_C23192.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23192" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="210743" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 510kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="510R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5100T5E_C23193.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23193" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1494419" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 510Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="51K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5102T5E_C23196.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23196" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="568423" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 51kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="51R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF510JT5E_C23197.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23197" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="578447" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 51Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="560K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5603T5E_C23203.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23203" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="27128" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 560kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="560R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5600T5E_C23204.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23204" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="205741" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 560Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="56K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF5602T5E_C23206.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23206" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="334461" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 56kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="56R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF560JT5E_C25196.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25196" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="82739" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±200ppm -55°C~+155°C 56Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="6.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF6201T5E_C4260.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4260" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="176806" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 6.2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="6.8K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF6801T5E_C23212.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23212" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="213701" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 6.8kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="620R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF6200T5E_C23220.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23220" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="121281" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 620Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="62K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF6202T5E_C23221.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23221" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="19557" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 62kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="680K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0603WAF6803T5E_C25822.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25822" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="134268" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 680kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="680R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF6800T5E_C23228.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23228" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="501788" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 680Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="68K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF6802T5E_C23231.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23231" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="138814" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 68kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="68R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0603WAF680JT5E_C27592.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C27592" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="22064" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 68Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="7.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF7501T5E_C23234.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23234" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="230039" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 7.5kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="750K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF7503T5E_C23240.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23240" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="33321" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 750kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="750R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF7500T5E_C23241.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23241" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="59351" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 750Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="75K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252130_UNI-ROYAL-Uniroyal-Elec-0603WAF7502T5E_C23242.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23242" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="131965" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 75kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="75R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0603WAF750JT5E_C4275.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4275" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="329042" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±200ppm -55°C~+155°C 75Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="8.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0603WAF8201T5E_C25981.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25981" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="15822" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 8.2kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="820R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF8200T5E_C23253.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23253" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="181317" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 820Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="82K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF8202T5E_C23254.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23254" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="103891" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 82kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="82R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF820JT5E_C23255.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23255" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="149533" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 82Ohm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="9.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF9101T5E_C23260.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23260" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="149726" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 9.1kOhm 0603  ROHS" constant="no"/>
+</technology>
+<technology name="91K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0603WAF9102T5E_C23265.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23265" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="83900" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/10W Thick Film Resistors 75V ±100ppm -55°C~+155°C 91kOhm 0603  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_0805" package="R0805">
+<connects>
+<connect gate="R1" pin="1" pad="1"/>
+<connect gate="R1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23553/2"/>
+</package3dinstances>
+<technologies>
+<technology name="0R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F0000T5E_C17477.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17477" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="429252" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±800ppm -55°C~+155°C 0Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1201T5E_C17379.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17379" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="75424" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 1.2kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1501T5E_C4310.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4310" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="513812" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 1.5kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1.8K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1801T5E_C17398.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17398" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="115868" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 1.8kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="100K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260430_UNI-ROYAL-Uniroyal-Elec-0805W8F1003T5E_C149504.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C149504" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="424960" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 100kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="100R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1000T5E_C17408.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17408" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1593241" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 100Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1002T5E_C17414.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17414" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="6121674" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 10kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F1005T5E_C26108.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26108" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="34879" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 10MOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F100JT5E_C17415.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17415" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="868321" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±200ppm -55°C~+155°C 10Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="11K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1102T5E_C17429.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17429" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="9230" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 11kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="120K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1203T5E_C17436.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17436" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="120757" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 120kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="120R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1200T5E_C17437.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17437" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="176379" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 120Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="12K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1202T5E_C17444.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17444" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="377828" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 12kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="13K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1302T5E_C17455.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17455" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="8949" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 13kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="150K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1503T5E_C17470.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17470" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="43111" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 150kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="150R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1500T5E_C17471.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17471" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="68204" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 150Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="15K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1502T5E_C17475.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17475" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="422716" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 15kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="15R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17480" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="70445" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 15Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="16K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1602T5E_C17490.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17490" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5214" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 16kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="180K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1803T5E_C17501.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17501" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="124684" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 180kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="180R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0805W8F1800T5E_C25270.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25270" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="35532" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 180Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="18K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1802T5E_C17506.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17506" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="162232" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 18kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1001T5E_C17513.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17513" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4700749" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 1kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F1004T5E_C17514.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17514" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="380564" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 1MOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252230_UNI-ROYAL-Uniroyal-Elec-0805W8F100KT5E_C25271.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25271" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="83002" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±400ppm -55°C~+155°C 1Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2201T5E_C17520.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17520" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="360536" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 2.2kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.2M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F2204T5E_C26113.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26113" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="17952" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 2.2MOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.2R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F220KT5E_C17521.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17521" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="20001" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±400ppm -55°C~+155°C 2.2Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.4K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2401T5E_C17526.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17526" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="120922" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 2.4kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2701T5E_C17530.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17530" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="92844" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 2.7kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="200K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2003T5E_C17539.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17539" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="71260" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 200kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="200R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2000T5E_C17540.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17540" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="191249" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 200Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="20K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F2002T5E_C4328.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4328" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1300647" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 20kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="20R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F200JT5E_C17544.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17544" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="65096" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±200ppm -55°C~+155°C 20Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="220K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2203T5E_C17556.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17556" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="29082" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 220kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="220R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2200T5E_C17557.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17557" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="440728" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 220Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="22K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2202T5E_C17560.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17560" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="181083" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 22kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="22R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F220JT5E_C17561.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17561" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="326615" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 22Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="240R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2400T5E_C17572.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17572" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="43460" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 240Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="24K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2402T5E_C17575.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17575" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="146564" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 24kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="270K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2703T5E_C17589.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17589" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="11422" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 270kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="270R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2700T5E_C17590.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17590" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="61946" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 270Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="27K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2702T5E_C17593.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17593" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="106968" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 27kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="27R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F270JT5E_C17594.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17594" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="11156" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 27Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F2001T5E_C17604.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17604" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="629462" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 2kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F2004T5E_C26112.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26112" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="46532" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 2MOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F200KT5E_C17606.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17606" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="119171" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±400ppm -55°C~+155°C 2Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="3.3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F3301T5E_C26010.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26010" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="217144" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 3.3kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="3.6K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F3601T5E_C18359.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C18359" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="21390" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 3.6kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="3.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3901T5E_C17614.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17614" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="161737" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 3.9kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="300K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3003T5E_C17616.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17616" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="75096" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 300kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="300R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3000T5E_C17617.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17617" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="102996" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 300Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="30K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3002T5E_C17621.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17621" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="163632" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 30kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="330K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3303T5E_C17629.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17629" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="26296" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 330kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="330R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3300T5E_C17630.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17630" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="567449" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 330Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="33K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3302T5E_C17633.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17633" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="40110" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 33kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="33R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F330JT5E_C17634.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17634" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="348529" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±200ppm -55°C~+155°C 33Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="36K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F3602T5E_C4360.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4360" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="41042" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 36kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="390K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3903T5E_C17656.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17656" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7742" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 390kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="390R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3900T5E_C17655.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17655" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="65586" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 390Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="39K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260030_UNI-ROYAL-Uniroyal-Elec-0805W8F3902T5E_C25826.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25826" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="31212" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 39kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F3001T5E_C17661.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17661" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="268252" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 3kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.3K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4301T5E_C17667.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17667" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="53189" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 4.3kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4701T5E_C17673.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17673" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1562660" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 4.7kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.7R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F470KT5E_C17675.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17675" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="181985" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±200ppm -55°C~+155°C 4.7Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.99K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4991T5E_C17677.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17677" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="124867" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 4.99kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="43K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4302T5E_C17695.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17695" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="26063" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 43kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="470K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4703T5E_C17709.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17709" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="250845" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 470kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="470R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4700T5E_C17710.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17710" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="384157" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 470Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="47K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4702T5E_C17713.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17713" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="723102" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 47kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="47R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F470JT5E_C17714.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17714" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="198135" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±200ppm -55°C~+155°C 47Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="49.9K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F4992T5E_C17719.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17719" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="133709" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 49.9kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="49.9R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F499JT5E_C17720.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17720" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="276724" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 49.9Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="5.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F5101T5E_C27834.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C27834" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2117928" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 5.1kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="5.1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F510KT5E_C17724.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17724" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="37856" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±400ppm -55°C~+155°C 5.1Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="5.6K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-0805W8F5601T5E_C4382.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4382" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="310397" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 5.6kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="510K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F5103T5E_C17733.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17733" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="122653" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 510kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="510R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F5100T5E_C17734.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17734" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="471168" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 510Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="51K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F5102T5E_C17737.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17737" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="504227" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 51kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="51R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F510JT5E_C17738.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17738" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="181378" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 51Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="560R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110260130_UNI-ROYAL-Uniroyal-Elec-0805W8F5600T5E_C28636.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C28636" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="38931" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 560Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="56K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F5602T5E_C17756.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17756" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="49272" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 56kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="56R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F560JT5E_C17757.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17757" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="39966" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 56Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="6.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6201T5E_C17767.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17767" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="120042" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 6.2kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="6.8K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6801T5E_C17772.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17772" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="131269" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 6.8kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="62K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6202T5E_C17783.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17783" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="54591" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 62kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="680K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6803T5E_C17797.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17797" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7865" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 680kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="680R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6800T5E_C17798.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17798" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="143314" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 680Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="68K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F6802T5E_C17801.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17801" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="225277" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 68kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="68R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251830_UNI-ROYAL-Uniroyal-Elec-0805W8F680JT5E_C17802.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17802" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="40706" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±200ppm -55°C~+155°C 68Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="7.5K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F7501T5E_C17807.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17807" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="170168" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 7.5kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="750R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F7500T5E_C17818.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17818" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="89599" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 750Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="75K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F7502T5E_C17819.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17819" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="14207" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 75kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="8.2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F8201T5E_C17828.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17828" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="104986" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/8W Thick Film Resistors 150V ±100ppm -55°C~+155°C 8.2kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="820R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F8200T5E_C17837.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17837" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="14474" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 820Ohm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="82K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F8202T5E_C17840.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17840" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="126151" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 82kOhm 0805  ROHS" constant="no"/>
+</technology>
+<technology name="9.1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-0805W8F9101T5E_C17855.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17855" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="30172" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 125mW Thick Film Resistors 150V ±100ppm -55°C~+155°C 9.1kOhm 0805  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_1206" package="R1206">
+<connects>
+<connect gate="R1" pin="1" pad="1"/>
+<connect gate="R1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23540/2"/>
+</package3dinstances>
+<technologies>
+<technology name="0R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F0000T5E_C17888.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17888" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="399166" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±800ppm -55°C~+155°C 0Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1.2M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252030_UNI-ROYAL-Uniroyal-Elec-1206W4F1204T5E_C22107.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22107" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="80611" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 1.2MOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="100K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1003T5E_C17900.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17900" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="679391" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 100kOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="100M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110252330_UNI-ROYAL-Uniroyal-Elec-1206W4F100LT5E_C25334.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C25334" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="32845" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±800ppm -55°C~+155°C 100mOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="100R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1000T5E_C17901.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17901" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="724229" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 100Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="10K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1002T5E_C17902.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17902" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="562963" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 10kOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="10R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F100JT5E_C17903.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17903" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="456345" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±400ppm -55°C~+155°C 10Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="120R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1200T5E_C17909.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17909" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="77220" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 120Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="180R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1800T5E_C17924.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17924" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="20567" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±100ppm -55°C~+155°C 180Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251730_UNI-ROYAL-Uniroyal-Elec-1206W4F1001T5_C4410.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C4410" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="132098" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V -55°C~+155°C 1kOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1M">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F1004T5E_C17927.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17927" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1365519" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 1MOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F100KT5E_C17928.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17928" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="555258" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±800ppm -55°C~+155°C 1Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="20R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F200JT5E_C17955.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17955" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="169289" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 20Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="22R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F220JT5E_C17958.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17958" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="127532" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 22Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="2K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F2001T5E_C17944.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17944" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="142604" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 2kOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="300R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F3000T5E_C17887.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17887" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="38519" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 300Ohm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="4.7K">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F4701T5E_C17936.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17936" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="161665" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 250mW Thick Film Resistors 200V ±100ppm -55°C~+155°C 4.7kOhm 1206  ROHS" constant="no"/>
+</technology>
+<technology name="750R">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2110251930_UNI-ROYAL-Uniroyal-Elec-1206W4F7500T5E_C17985.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C17985" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="30926" constant="no"/>
+<attribute name="PROPERTIES" value="±1% 1/4W Thick Film Resistors 200V ±100ppm -55°C~+155°C 750Ohm 1206  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -25097,18 +27587,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </spice>
 <attribute name="LCSC_PART" value="C4190"/>
 </part>
-<part name="R132" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="12k">
-<spice>
-<pinmapping spiceprefix="R">
-<pinmap gate="G$1" pin="1" pinorder="1"/>
-<pinmap gate="G$1" pin="2" pinorder="2"/>
-</pinmapping>
-</spice>
-<attribute name="LCSC_PART" value="C22790"/>
-</part>
 <part name="GND99" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND100" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="+3V50" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="R133" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k">
 <spice>
 <pinmapping spiceprefix="R">
@@ -26839,6 +29319,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <part name="I2C_1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
 <part name="+3V54" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND46" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="+3V55" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="R220" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="270R"/>
+<part name="R221" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="56R"/>
+<part name="R222" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="56R"/>
+<part name="R223" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="270R"/>
+<part name="R224" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="82R"/>
+<part name="R132" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="1.8K"/>
 </parts>
 <sheets>
 <sheet>
@@ -26851,10 +29338,6 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <text x="678.18" y="-83.82" size="1.778" layer="95">i2c 0x25</text>
 <text x="746.76" y="-83.82" size="1.778" layer="95">i2c 0x26</text>
 <text x="810.26" y="-83.82" size="1.778" layer="95">i2c 0x27</text>
-<text x="185.42" y="-88.9" size="1.778" layer="91">TODO: 
-
-Power light
-Safety Engaged Light</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="114.3" y="106.68" smashed="yes" rot="R90">
@@ -28743,25 +31226,25 @@ Safety Engaged Light</text>
 <instance part="P+2" gate="1" x="86.36" y="-17.78" smashed="yes">
 <attribute name="VALUE" x="83.82" y="-22.86" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="S1" gate="G$1" x="172.72" y="-109.22" smashed="yes">
-<attribute name="NAME" x="172.72" y="-107.696" size="1.778" layer="95" font="vector" align="bottom-center"/>
-<attribute name="VALUE" x="172.72" y="-109.728" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="S1" gate="G$1" x="210.82" y="-109.22" smashed="yes">
+<attribute name="NAME" x="210.82" y="-107.696" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="210.82" y="-109.728" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="S2" gate="G$1" x="172.72" y="-116.84" smashed="yes">
-<attribute name="NAME" x="172.72" y="-115.316" size="1.778" layer="95" font="vector" align="bottom-center"/>
-<attribute name="VALUE" x="172.72" y="-117.348" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="S2" gate="G$1" x="210.82" y="-116.84" smashed="yes">
+<attribute name="NAME" x="210.82" y="-115.316" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="210.82" y="-117.348" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="S3" gate="G$1" x="172.72" y="-124.46" smashed="yes">
-<attribute name="NAME" x="172.72" y="-122.936" size="1.778" layer="95" font="vector" align="bottom-center"/>
-<attribute name="VALUE" x="172.72" y="-124.968" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="S3" gate="G$1" x="210.82" y="-124.46" smashed="yes">
+<attribute name="NAME" x="210.82" y="-122.936" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="210.82" y="-124.968" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="S4" gate="G$1" x="172.72" y="-132.08" smashed="yes">
-<attribute name="NAME" x="172.72" y="-130.556" size="1.778" layer="95" font="vector" align="bottom-center"/>
-<attribute name="VALUE" x="172.72" y="-132.588" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="S4" gate="G$1" x="210.82" y="-132.08" smashed="yes">
+<attribute name="NAME" x="210.82" y="-130.556" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="210.82" y="-132.588" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="S5" gate="G$1" x="172.72" y="-139.7" smashed="yes">
-<attribute name="NAME" x="172.72" y="-138.176" size="1.778" layer="95" font="vector" align="bottom-center"/>
-<attribute name="VALUE" x="172.72" y="-140.208" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="S5" gate="G$1" x="210.82" y="-139.7" smashed="yes">
+<attribute name="NAME" x="210.82" y="-138.176" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="210.82" y="-140.208" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
 <instance part="R125" gate="G$1" x="50.8" y="-83.82" smashed="yes">
 <attribute name="NAME" x="46.99" y="-82.3214" size="1.778" layer="95"/>
@@ -28816,30 +31299,30 @@ Safety Engaged Light</text>
 <instance part="P+10" gate="1" x="43.18" y="-76.2" smashed="yes">
 <attribute name="VALUE" x="40.64" y="-81.28" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="D86" gate="G$1" x="124.46" y="-109.22" smashed="yes" rot="R90">
-<attribute name="NAME" x="129.032" y="-112.649" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="123.952" y="-114.935" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="124.46" y="-109.22" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D86" gate="G$1" x="162.56" y="-109.22" smashed="yes" rot="R90">
+<attribute name="NAME" x="167.132" y="-112.649" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="162.052" y="-114.935" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="162.56" y="-109.22" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D87" gate="G$1" x="124.46" y="-116.84" smashed="yes" rot="R90">
-<attribute name="NAME" x="129.032" y="-120.269" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="123.952" y="-122.555" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="124.46" y="-116.84" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D87" gate="G$1" x="162.56" y="-116.84" smashed="yes" rot="R90">
+<attribute name="NAME" x="167.132" y="-120.269" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="162.052" y="-122.555" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="162.56" y="-116.84" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D88" gate="G$1" x="124.46" y="-124.46" smashed="yes" rot="R90">
-<attribute name="NAME" x="129.032" y="-127.889" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="123.952" y="-130.175" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="124.46" y="-124.46" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D88" gate="G$1" x="162.56" y="-124.46" smashed="yes" rot="R90">
+<attribute name="NAME" x="167.132" y="-127.889" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="162.052" y="-130.175" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="162.56" y="-124.46" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D89" gate="G$1" x="124.46" y="-139.7" smashed="yes" rot="R90">
-<attribute name="NAME" x="129.032" y="-143.129" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="123.952" y="-145.415" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="124.46" y="-139.7" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D89" gate="G$1" x="162.56" y="-139.7" smashed="yes" rot="R90">
+<attribute name="NAME" x="167.132" y="-143.129" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="162.052" y="-145.415" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="162.56" y="-139.7" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D90" gate="G$1" x="124.46" y="-132.08" smashed="yes" rot="R90">
-<attribute name="NAME" x="129.032" y="-135.509" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="123.952" y="-137.795" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="124.46" y="-132.08" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D90" gate="G$1" x="162.56" y="-132.08" smashed="yes" rot="R90">
+<attribute name="NAME" x="167.132" y="-135.509" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="162.052" y="-137.795" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="162.56" y="-132.08" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="D91" gate="G$1" x="48.26" y="175.26" smashed="yes" rot="R90">
 <attribute name="NAME" x="52.832" y="171.831" size="1.778" layer="95" font="vector" rot="R180"/>
@@ -28880,44 +31363,36 @@ Safety Engaged Light</text>
 <attribute name="VALUE" x="62.23" y="164.338" size="1.778" layer="96"/>
 <attribute name="LCSC_PART" x="66.04" y="167.64" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R132" gate="G$1" x="66.04" y="160.02" smashed="yes">
-<attribute name="NAME" x="62.23" y="161.5186" size="1.778" layer="95"/>
-<attribute name="VALUE" x="62.23" y="156.718" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="66.04" y="160.02" size="1.778" layer="96" display="off"/>
-</instance>
 <instance part="GND99" gate="1" x="78.74" y="144.78" smashed="yes">
 <attribute name="VALUE" x="76.2" y="142.24" size="1.778" layer="96"/>
 </instance>
-<instance part="GND100" gate="1" x="182.88" y="-147.32" smashed="yes">
-<attribute name="VALUE" x="180.34" y="-149.86" size="1.778" layer="96"/>
+<instance part="GND100" gate="1" x="220.98" y="-147.32" smashed="yes">
+<attribute name="VALUE" x="218.44" y="-149.86" size="1.778" layer="96"/>
 </instance>
-<instance part="+3V50" gate="G$1" x="116.84" y="-101.6" smashed="yes">
-<attribute name="VALUE" x="114.3" y="-104.14" size="1.778" layer="96" rot="R90"/>
+<instance part="R133" gate="G$1" x="147.32" y="-101.6" smashed="yes">
+<attribute name="NAME" x="143.51" y="-100.1014" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.51" y="-104.902" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="147.32" y="-101.6" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R133" gate="G$1" x="134.62" y="-101.6" smashed="yes">
-<attribute name="NAME" x="130.81" y="-100.1014" size="1.778" layer="95"/>
-<attribute name="VALUE" x="130.81" y="-104.902" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="134.62" y="-101.6" size="1.778" layer="96" display="off"/>
+<instance part="R134" gate="G$1" x="147.32" y="-93.98" smashed="yes">
+<attribute name="NAME" x="143.51" y="-92.4814" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.51" y="-97.282" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="147.32" y="-93.98" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R134" gate="G$1" x="134.62" y="-93.98" smashed="yes">
-<attribute name="NAME" x="130.81" y="-92.4814" size="1.778" layer="95"/>
-<attribute name="VALUE" x="130.81" y="-97.282" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="134.62" y="-93.98" size="1.778" layer="96" display="off"/>
+<instance part="R135" gate="G$1" x="147.32" y="-86.36" smashed="yes">
+<attribute name="NAME" x="143.51" y="-84.8614" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.51" y="-89.662" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="147.32" y="-86.36" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R135" gate="G$1" x="134.62" y="-86.36" smashed="yes">
-<attribute name="NAME" x="130.81" y="-84.8614" size="1.778" layer="95"/>
-<attribute name="VALUE" x="130.81" y="-89.662" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="134.62" y="-86.36" size="1.778" layer="96" display="off"/>
+<instance part="R136" gate="G$1" x="147.32" y="-78.74" smashed="yes">
+<attribute name="NAME" x="143.51" y="-77.2414" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.51" y="-82.042" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="147.32" y="-78.74" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R136" gate="G$1" x="134.62" y="-78.74" smashed="yes">
-<attribute name="NAME" x="130.81" y="-77.2414" size="1.778" layer="95"/>
-<attribute name="VALUE" x="130.81" y="-82.042" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="134.62" y="-78.74" size="1.778" layer="96" display="off"/>
-</instance>
-<instance part="R137" gate="G$1" x="134.62" y="-71.12" smashed="yes">
-<attribute name="NAME" x="130.81" y="-69.6214" size="1.778" layer="95"/>
-<attribute name="VALUE" x="130.81" y="-74.422" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="134.62" y="-71.12" size="1.778" layer="96" display="off"/>
+<instance part="R137" gate="G$1" x="147.32" y="-71.12" smashed="yes">
+<attribute name="NAME" x="143.51" y="-69.6214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.51" y="-74.422" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="147.32" y="-71.12" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R138" gate="G$1" x="325.12" y="7.62" smashed="yes">
 <attribute name="NAME" x="321.31" y="9.1186" size="1.778" layer="95"/>
@@ -30065,6 +32540,33 @@ Safety Engaged Light</text>
 <instance part="GND46" gate="1" x="215.9" y="25.4" smashed="yes" rot="R180">
 <attribute name="VALUE" x="218.44" y="27.94" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="+3V55" gate="G$1" x="142.24" y="-60.96" smashed="yes">
+<attribute name="VALUE" x="139.7" y="-63.5" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R220" gate="R1" x="149.86" y="-109.22" smashed="yes">
+<attribute name="NAME" x="146.05" y="-107.7214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="146.05" y="-112.522" size="1.778" layer="96"/>
+</instance>
+<instance part="R221" gate="R1" x="149.86" y="-116.84" smashed="yes">
+<attribute name="NAME" x="146.05" y="-115.3414" size="1.778" layer="95"/>
+<attribute name="VALUE" x="146.05" y="-120.142" size="1.778" layer="96"/>
+</instance>
+<instance part="R222" gate="R1" x="149.86" y="-124.46" smashed="yes">
+<attribute name="NAME" x="146.05" y="-122.9614" size="1.778" layer="95"/>
+<attribute name="VALUE" x="146.05" y="-127.762" size="1.778" layer="96"/>
+</instance>
+<instance part="R223" gate="R1" x="149.86" y="-132.08" smashed="yes">
+<attribute name="NAME" x="146.05" y="-130.5814" size="1.778" layer="95"/>
+<attribute name="VALUE" x="146.05" y="-135.382" size="1.778" layer="96"/>
+</instance>
+<instance part="R224" gate="R1" x="149.86" y="-139.7" smashed="yes">
+<attribute name="NAME" x="146.05" y="-138.2014" size="1.778" layer="95"/>
+<attribute name="VALUE" x="146.05" y="-143.002" size="1.778" layer="96"/>
+</instance>
+<instance part="R132" gate="R1" x="66.04" y="160.02" smashed="yes">
+<attribute name="NAME" x="62.23" y="161.5186" size="1.778" layer="95"/>
+<attribute name="VALUE" x="62.23" y="156.718" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 <bus name="ESP32_BUS:+3V3,+5V,2,4,5,12,13,14,15,16,17,18,19,20,21/SDA,22/SCL,23,25,26,27,32,33,34,35,36,39,GND">
@@ -30384,7 +32886,7 @@ Safety Engaged Light</text>
 <label x="43.18" y="-63.5" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<wire x1="167.64" y1="-101.6" x2="167.64" y2="-71.12" width="0.762" layer="92"/>
+<wire x1="205.74" y1="-101.6" x2="205.74" y2="-71.12" width="0.762" layer="92"/>
 </segment>
 <segment>
 <wire x1="254" y1="223.52" x2="254" y2="259.08" width="0.762" layer="92"/>
@@ -30875,34 +33377,34 @@ Safety Engaged Light</text>
 <wire x1="78.74" y1="152.4" x2="78.74" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="71.12" y1="167.64" x2="78.74" y2="167.64" width="0.1524" layer="91"/>
 <junction x="78.74" y="167.64"/>
-<pinref part="R132" gate="G$1" pin="2"/>
 <wire x1="71.12" y1="160.02" x2="78.74" y2="160.02" width="0.1524" layer="91"/>
 <junction x="78.74" y="160.02"/>
 <pinref part="R139" gate="G$1" pin="2"/>
 <wire x1="71.12" y1="152.4" x2="78.74" y2="152.4" width="0.1524" layer="91"/>
 <junction x="78.74" y="152.4"/>
+<pinref part="R132" gate="R1" pin="2"/>
 </segment>
 <segment>
 <pinref part="GND100" gate="1" pin="GND"/>
 <pinref part="S1" gate="G$1" pin="2"/>
-<wire x1="182.88" y1="-144.78" x2="182.88" y2="-139.7" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="-139.7" x2="182.88" y2="-132.08" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="-132.08" x2="182.88" y2="-124.46" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="-124.46" x2="182.88" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="-116.84" x2="182.88" y2="-109.22" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="-109.22" x2="177.8" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-144.78" x2="220.98" y2="-139.7" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-139.7" x2="220.98" y2="-132.08" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-132.08" x2="220.98" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-124.46" x2="220.98" y2="-116.84" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-116.84" x2="220.98" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-109.22" x2="215.9" y2="-109.22" width="0.1524" layer="91"/>
 <pinref part="S2" gate="G$1" pin="2"/>
-<wire x1="177.8" y1="-116.84" x2="182.88" y2="-116.84" width="0.1524" layer="91"/>
-<junction x="182.88" y="-116.84"/>
+<wire x1="215.9" y1="-116.84" x2="220.98" y2="-116.84" width="0.1524" layer="91"/>
+<junction x="220.98" y="-116.84"/>
 <pinref part="S3" gate="G$1" pin="2"/>
-<wire x1="177.8" y1="-124.46" x2="182.88" y2="-124.46" width="0.1524" layer="91"/>
-<junction x="182.88" y="-124.46"/>
+<wire x1="215.9" y1="-124.46" x2="220.98" y2="-124.46" width="0.1524" layer="91"/>
+<junction x="220.98" y="-124.46"/>
 <pinref part="S4" gate="G$1" pin="2"/>
-<wire x1="177.8" y1="-132.08" x2="182.88" y2="-132.08" width="0.1524" layer="91"/>
-<junction x="182.88" y="-132.08"/>
+<wire x1="215.9" y1="-132.08" x2="220.98" y2="-132.08" width="0.1524" layer="91"/>
+<junction x="220.98" y="-132.08"/>
 <pinref part="S5" gate="G$1" pin="2"/>
-<wire x1="177.8" y1="-139.7" x2="182.88" y2="-139.7" width="0.1524" layer="91"/>
-<junction x="182.88" y="-139.7"/>
+<wire x1="215.9" y1="-139.7" x2="220.98" y2="-139.7" width="0.1524" layer="91"/>
+<junction x="220.98" y="-139.7"/>
 </segment>
 <segment>
 <pinref part="IC22" gate="G$1" pin="ADJ"/>
@@ -32355,43 +34857,41 @@ Safety Engaged Light</text>
 <wire x1="43.18" y1="175.26" x2="45.72" y2="175.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="+3V50" gate="G$1" pin="+3V3"/>
-<pinref part="D86" gate="G$1" pin="A"/>
-<wire x1="116.84" y1="-104.14" x2="116.84" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-106.68" x2="116.84" y2="-109.22" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-109.22" x2="121.92" y2="-109.22" width="0.1524" layer="91"/>
-<pinref part="D87" gate="G$1" pin="A"/>
-<wire x1="116.84" y1="-109.22" x2="116.84" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-116.84" x2="121.92" y2="-116.84" width="0.1524" layer="91"/>
-<junction x="116.84" y="-109.22"/>
-<pinref part="D88" gate="G$1" pin="A"/>
-<wire x1="116.84" y1="-116.84" x2="116.84" y2="-124.46" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-124.46" x2="121.92" y2="-124.46" width="0.1524" layer="91"/>
-<junction x="116.84" y="-116.84"/>
-<pinref part="D90" gate="G$1" pin="A"/>
-<wire x1="116.84" y1="-124.46" x2="116.84" y2="-132.08" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-132.08" x2="121.92" y2="-132.08" width="0.1524" layer="91"/>
-<junction x="116.84" y="-124.46"/>
-<pinref part="D89" gate="G$1" pin="A"/>
-<wire x1="116.84" y1="-132.08" x2="116.84" y2="-139.7" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-139.7" x2="121.92" y2="-139.7" width="0.1524" layer="91"/>
-<junction x="116.84" y="-132.08"/>
 <pinref part="R137" gate="G$1" pin="1"/>
 <pinref part="R136" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-71.12" x2="129.54" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-71.12" x2="142.24" y2="-78.74" width="0.1524" layer="91"/>
 <pinref part="R135" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-78.74" x2="129.54" y2="-86.36" width="0.1524" layer="91"/>
-<junction x="129.54" y="-78.74"/>
+<wire x1="142.24" y1="-78.74" x2="142.24" y2="-86.36" width="0.1524" layer="91"/>
+<junction x="142.24" y="-78.74"/>
 <pinref part="R134" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-86.36" x2="129.54" y2="-93.98" width="0.1524" layer="91"/>
-<junction x="129.54" y="-86.36"/>
+<wire x1="142.24" y1="-86.36" x2="142.24" y2="-93.98" width="0.1524" layer="91"/>
+<junction x="142.24" y="-86.36"/>
 <pinref part="R133" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-93.98" x2="129.54" y2="-101.6" width="0.1524" layer="91"/>
-<junction x="129.54" y="-93.98"/>
-<wire x1="129.54" y1="-101.6" x2="129.54" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="-106.68" x2="116.84" y2="-106.68" width="0.1524" layer="91"/>
-<junction x="129.54" y="-101.6"/>
-<junction x="116.84" y="-106.68"/>
+<wire x1="142.24" y1="-93.98" x2="142.24" y2="-101.6" width="0.1524" layer="91"/>
+<junction x="142.24" y="-93.98"/>
+<wire x1="142.24" y1="-101.6" x2="142.24" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="142.24" y="-101.6"/>
+<pinref part="+3V55" gate="G$1" pin="+3V3"/>
+<wire x1="142.24" y1="-109.22" x2="142.24" y2="-116.84" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-116.84" x2="142.24" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-124.46" x2="142.24" y2="-132.08" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-132.08" x2="142.24" y2="-139.7" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="-71.12" x2="142.24" y2="-63.5" width="0.1524" layer="91"/>
+<junction x="142.24" y="-71.12"/>
+<pinref part="R220" gate="R1" pin="1"/>
+<wire x1="144.78" y1="-109.22" x2="142.24" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="142.24" y="-109.22"/>
+<pinref part="R221" gate="R1" pin="1"/>
+<wire x1="144.78" y1="-116.84" x2="142.24" y2="-116.84" width="0.1524" layer="91"/>
+<junction x="142.24" y="-116.84"/>
+<pinref part="R222" gate="R1" pin="1"/>
+<wire x1="142.24" y1="-124.46" x2="144.78" y2="-124.46" width="0.1524" layer="91"/>
+<junction x="142.24" y="-124.46"/>
+<pinref part="R223" gate="R1" pin="1"/>
+<wire x1="144.78" y1="-132.08" x2="142.24" y2="-132.08" width="0.1524" layer="91"/>
+<junction x="142.24" y="-132.08"/>
+<pinref part="R224" gate="R1" pin="1"/>
+<wire x1="142.24" y1="-139.7" x2="144.78" y2="-139.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R138" gate="G$1" pin="2"/>
@@ -35764,15 +38264,15 @@ Safety Engaged Light</text>
 <segment>
 <pinref part="D86" gate="G$1" pin="C"/>
 <pinref part="S1" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-109.22" x2="142.24" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="-109.22" x2="180.34" y2="-109.22" width="0.1524" layer="91"/>
 <pinref part="R137" gate="G$1" pin="2"/>
-<wire x1="142.24" y1="-109.22" x2="167.64" y2="-109.22" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-71.12" x2="142.24" y2="-71.12" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="-71.12" x2="142.24" y2="-109.22" width="0.1524" layer="91"/>
-<junction x="142.24" y="-109.22"/>
-<wire x1="167.64" y1="-71.12" x2="142.24" y2="-71.12" width="0.1524" layer="91"/>
-<junction x="142.24" y="-71.12"/>
-<label x="157.48" y="-71.12" size="1.778" layer="95"/>
+<wire x1="180.34" y1="-109.22" x2="205.74" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-71.12" x2="180.34" y2="-71.12" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="-71.12" x2="180.34" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="180.34" y="-109.22"/>
+<wire x1="205.74" y1="-71.12" x2="180.34" y2="-71.12" width="0.1524" layer="91"/>
+<junction x="180.34" y="-71.12"/>
+<label x="195.58" y="-71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="H9" class="0">
@@ -35790,15 +38290,15 @@ Safety Engaged Light</text>
 <segment>
 <pinref part="D87" gate="G$1" pin="C"/>
 <pinref part="S2" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-116.84" x2="144.78" y2="-116.84" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="-116.84" x2="182.88" y2="-116.84" width="0.1524" layer="91"/>
 <pinref part="R136" gate="G$1" pin="2"/>
-<wire x1="144.78" y1="-116.84" x2="167.64" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-78.74" x2="144.78" y2="-78.74" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="-78.74" x2="144.78" y2="-116.84" width="0.1524" layer="91"/>
-<junction x="144.78" y="-116.84"/>
-<wire x1="167.64" y1="-78.74" x2="144.78" y2="-78.74" width="0.1524" layer="91"/>
-<junction x="144.78" y="-78.74"/>
-<label x="157.48" y="-78.74" size="1.778" layer="95"/>
+<wire x1="182.88" y1="-116.84" x2="205.74" y2="-116.84" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-78.74" x2="182.88" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="-78.74" x2="182.88" y2="-116.84" width="0.1524" layer="91"/>
+<junction x="182.88" y="-116.84"/>
+<wire x1="205.74" y1="-78.74" x2="182.88" y2="-78.74" width="0.1524" layer="91"/>
+<junction x="182.88" y="-78.74"/>
+<label x="195.58" y="-78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="H10" class="0">
@@ -35816,15 +38316,15 @@ Safety Engaged Light</text>
 <segment>
 <pinref part="D88" gate="G$1" pin="C"/>
 <pinref part="S3" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-124.46" x2="147.32" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="-124.46" x2="185.42" y2="-124.46" width="0.1524" layer="91"/>
 <pinref part="R135" gate="G$1" pin="2"/>
-<wire x1="147.32" y1="-124.46" x2="167.64" y2="-124.46" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-86.36" x2="147.32" y2="-86.36" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="-86.36" x2="147.32" y2="-124.46" width="0.1524" layer="91"/>
-<junction x="147.32" y="-124.46"/>
-<wire x1="167.64" y1="-86.36" x2="147.32" y2="-86.36" width="0.1524" layer="91"/>
-<junction x="147.32" y="-86.36"/>
-<label x="157.48" y="-86.36" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-124.46" x2="205.74" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-86.36" x2="185.42" y2="-86.36" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="-86.36" x2="185.42" y2="-124.46" width="0.1524" layer="91"/>
+<junction x="185.42" y="-124.46"/>
+<wire x1="205.74" y1="-86.36" x2="185.42" y2="-86.36" width="0.1524" layer="91"/>
+<junction x="185.42" y="-86.36"/>
+<label x="195.58" y="-86.36" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="H11" class="0">
@@ -35842,15 +38342,15 @@ Safety Engaged Light</text>
 <segment>
 <pinref part="D90" gate="G$1" pin="C"/>
 <pinref part="S4" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-132.08" x2="149.86" y2="-132.08" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="-132.08" x2="187.96" y2="-132.08" width="0.1524" layer="91"/>
 <pinref part="R134" gate="G$1" pin="2"/>
-<wire x1="149.86" y1="-132.08" x2="167.64" y2="-132.08" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-93.98" x2="149.86" y2="-93.98" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="-93.98" x2="149.86" y2="-132.08" width="0.1524" layer="91"/>
-<junction x="149.86" y="-132.08"/>
-<wire x1="167.64" y1="-93.98" x2="149.86" y2="-93.98" width="0.1524" layer="91"/>
-<junction x="149.86" y="-93.98"/>
-<label x="157.48" y="-93.98" size="1.778" layer="95"/>
+<wire x1="187.96" y1="-132.08" x2="205.74" y2="-132.08" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-93.98" x2="187.96" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="-93.98" x2="187.96" y2="-132.08" width="0.1524" layer="91"/>
+<junction x="187.96" y="-132.08"/>
+<wire x1="205.74" y1="-93.98" x2="187.96" y2="-93.98" width="0.1524" layer="91"/>
+<junction x="187.96" y="-93.98"/>
+<label x="195.58" y="-93.98" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="H12" class="0">
@@ -35868,15 +38368,15 @@ Safety Engaged Light</text>
 <segment>
 <pinref part="D89" gate="G$1" pin="C"/>
 <pinref part="S5" gate="G$1" pin="1"/>
-<wire x1="129.54" y1="-139.7" x2="152.4" y2="-139.7" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="-139.7" x2="190.5" y2="-139.7" width="0.1524" layer="91"/>
 <pinref part="R133" gate="G$1" pin="2"/>
-<wire x1="152.4" y1="-139.7" x2="167.64" y2="-139.7" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-101.6" x2="152.4" y2="-101.6" width="0.1524" layer="91"/>
-<wire x1="152.4" y1="-101.6" x2="152.4" y2="-139.7" width="0.1524" layer="91"/>
-<junction x="152.4" y="-139.7"/>
-<wire x1="167.64" y1="-101.6" x2="152.4" y2="-101.6" width="0.1524" layer="91"/>
-<junction x="152.4" y="-101.6"/>
-<label x="157.48" y="-101.6" size="1.778" layer="95"/>
+<wire x1="190.5" y1="-139.7" x2="205.74" y2="-139.7" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-101.6" x2="190.5" y2="-101.6" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="-101.6" x2="190.5" y2="-139.7" width="0.1524" layer="91"/>
+<junction x="190.5" y="-139.7"/>
+<wire x1="205.74" y1="-101.6" x2="190.5" y2="-101.6" width="0.1524" layer="91"/>
+<junction x="190.5" y="-101.6"/>
+<label x="195.58" y="-101.6" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="H13" class="0">
@@ -36022,8 +38522,8 @@ Safety Engaged Light</text>
 <net name="N$158" class="0">
 <segment>
 <pinref part="D93" gate="G$1" pin="C"/>
-<pinref part="R132" gate="G$1" pin="1"/>
 <wire x1="53.34" y1="160.02" x2="60.96" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="R132" gate="R1" pin="1"/>
 </segment>
 </net>
 <net name="N$160" class="0">
@@ -38022,16 +40522,47 @@ Safety Engaged Light</text>
 <junction x="1188.72" y="60.96"/>
 </segment>
 </net>
+<net name="N$320" class="0">
+<segment>
+<pinref part="R220" gate="R1" pin="2"/>
+<pinref part="D86" gate="G$1" pin="A"/>
+<wire x1="154.94" y1="-109.22" x2="160.02" y2="-109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$321" class="0">
+<segment>
+<pinref part="D87" gate="G$1" pin="A"/>
+<pinref part="R221" gate="R1" pin="2"/>
+<wire x1="160.02" y1="-116.84" x2="154.94" y2="-116.84" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$322" class="0">
+<segment>
+<pinref part="R222" gate="R1" pin="2"/>
+<pinref part="D88" gate="G$1" pin="A"/>
+<wire x1="154.94" y1="-124.46" x2="160.02" y2="-124.46" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$323" class="0">
+<segment>
+<pinref part="R223" gate="R1" pin="2"/>
+<pinref part="D90" gate="G$1" pin="A"/>
+<wire x1="154.94" y1="-132.08" x2="160.02" y2="-132.08" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$324" class="0">
+<segment>
+<pinref part="D89" gate="G$1" pin="A"/>
+<pinref part="R224" gate="R1" pin="2"/>
+<wire x1="160.02" y1="-139.7" x2="154.94" y2="-139.7" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
 </schematic>
 </drawing>
 <compatibility>
-<note version="6.3" minversion="6.2.2" severity="warning">
-Since Version 6.2.2 text objects can contain more than one line,
-which will not be processed correctly with this version.
-</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
