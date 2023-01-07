@@ -23140,6 +23140,70 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="51"/>
 <rectangle x1="-0.3" y1="-0.7" x2="0.3" y2="0.7" layer="35"/>
 </package>
+<package name="C0402" urn="urn:adsk.eagle:footprint:38668534/1" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
+<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
+<wire x1="-1.219" y1="0.61" x2="1.219" y2="0.61" width="0.0508" layer="39"/>
+<wire x1="1.219" y1="0.61" x2="1.219" y2="-0.61" width="0.0508" layer="39"/>
+<wire x1="1.219" y1="-0.61" x2="-1.219" y2="-0.61" width="0.0508" layer="39"/>
+<wire x1="-1.219" y1="-0.61" x2="-1.219" y2="0.61" width="0.0508" layer="39"/>
+<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
+<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
+</package>
+<package name="C0603" urn="urn:adsk.eagle:footprint:38668533/1" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<wire x1="-1.473" y1="0.729" x2="1.473" y2="0.729" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="0.729" x2="1.473" y2="-0.729" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="-0.729" x2="-1.473" y2="-0.729" width="0.0508" layer="39"/>
+<wire x1="-1.473" y1="-0.729" x2="-1.473" y2="0.729" width="0.0508" layer="39"/>
+<wire x1="-0.356" y1="0.432" x2="0.356" y2="0.432" width="0.1016" layer="51"/>
+<wire x1="-0.356" y1="-0.419" x2="0.356" y2="-0.419" width="0.1016" layer="51"/>
+<smd name="1" x="-0.85" y="0" dx="1.1" dy="1" layer="1"/>
+<smd name="2" x="0.85" y="0" dx="1.1" dy="1" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.8382" y1="-0.4699" x2="-0.3381" y2="0.4801" layer="51"/>
+<rectangle x1="0.3302" y1="-0.4699" x2="0.8303" y2="0.4801" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
+</package>
+<package name="C0805" urn="urn:adsk.eagle:footprint:23124/1" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;&lt;p&gt;</description>
+<wire x1="-1.973" y1="0.983" x2="1.973" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="1.973" y1="-0.983" x2="-1.973" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-1.973" y1="-0.983" x2="-1.973" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="-0.381" y1="0.66" x2="0.381" y2="0.66" width="0.1016" layer="51"/>
+<wire x1="-0.356" y1="-0.66" x2="0.381" y2="-0.66" width="0.1016" layer="51"/>
+<wire x1="1.973" y1="0.983" x2="1.973" y2="-0.983" width="0.0508" layer="39"/>
+<smd name="1" x="-0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<smd name="2" x="0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<text x="-1.27" y="1.27" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.27" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.0922" y1="-0.7239" x2="-0.3421" y2="0.7262" layer="51"/>
+<rectangle x1="0.3556" y1="-0.7239" x2="1.1057" y2="0.7262" layer="51"/>
+<rectangle x1="-0.1001" y1="-0.4001" x2="0.1001" y2="0.4001" layer="35"/>
+</package>
+<package name="C1206" urn="urn:adsk.eagle:footprint:23125/1" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<wire x1="-2.473" y1="0.983" x2="2.473" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="-0.983" x2="-2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-2.473" y1="-0.983" x2="-2.473" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="0.983" x2="2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-0.965" y1="0.787" x2="0.965" y2="0.787" width="0.1016" layer="51"/>
+<wire x1="-0.965" y1="-0.787" x2="0.965" y2="-0.787" width="0.1016" layer="51"/>
+<smd name="1" x="-1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<smd name="2" x="1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<text x="-1.27" y="1.27" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.27" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.7018" y1="-0.8509" x2="-0.9517" y2="0.8491" layer="51"/>
+<rectangle x1="0.9517" y1="-0.8491" x2="1.7018" y2="0.8509" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="R0402" urn="urn:adsk.eagle:package:23547/3" type="model" library_version="1">
@@ -23166,6 +23230,30 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <packageinstance name="R1206"/>
 </packageinstances>
 </package3d>
+<package3d name="CAPC1005X60" urn="urn:adsk.eagle:package:38668555/1" type="model" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<packageinstances>
+<packageinstance name="C0402"/>
+</packageinstances>
+</package3d>
+<package3d name="C0603" urn="urn:adsk.eagle:package:38668554/1" type="model" library_version="1">
+<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<packageinstances>
+<packageinstance name="C0603"/>
+</packageinstances>
+</package3d>
+<package3d name="C0805" urn="urn:adsk.eagle:package:23617/2" type="model" library_version="1">
+<description>CAPACITOR</description>
+<packageinstances>
+<packageinstance name="C0805"/>
+</packageinstances>
+</package3d>
+<package3d name="C1206" urn="urn:adsk.eagle:package:23618/2" type="model" library_version="1">
+<description>CAPACITOR</description>
+<packageinstances>
+<packageinstance name="C1206"/>
+</packageinstances>
+</package3d>
 </packages3d>
 <symbols>
 <symbol name="R-EU" urn="urn:adsk.eagle:symbol:38668520/1" library_version="1">
@@ -23178,6 +23266,17 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <text x="-3.81" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="C-EU" urn="urn:adsk.eagle:symbol:38668519/1" library_version="1">
+<description>&lt;h1&gt;Capacitor&lt;/h1&gt; EU symbol, non-polarized</description>
+<wire x1="0" y1="0" x2="0" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="0" y2="-2.032" width="0.1524" layer="94"/>
+<text x="1.524" y="0.381" size="1.778" layer="95">&gt;NAME</text>
+<text x="1.524" y="-4.699" size="1.778" layer="96">&gt;VALUE</text>
+<rectangle x1="-2.032" y1="-2.032" x2="2.032" y2="-1.524" layer="94"/>
+<rectangle x1="-2.032" y1="-1.016" x2="2.032" y2="-0.508" layer="94"/>
+<pin name="1" x="0" y="2.54" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="2" x="0" y="-5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -25561,6 +25660,1162 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </device>
 </devices>
 </deviceset>
+<deviceset name="C_" urn="urn:adsk.eagle:component:38668562/1" prefix="C" library_version="1">
+<description>&lt;h1&gt;Capacitor&lt;/h1&gt; &lt;p&gt;General purpose SMD Capacitor&lt;/p&gt;</description>
+<gates>
+<gate name="C1" symbol="C-EU" x="0" y="0"/>
+</gates>
+<devices>
+<device name="_0402" package="C0402">
+<connects>
+<connect gate="C1" pin="1" pad="1"/>
+<connect gate="C1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:38668555/1"/>
+</package3dinstances>
+<technologies>
+<technology name="1.5PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151132_FH-Guangdong-Fenghua-Advanced-Tech-0402CG1R5C500NT_C1552.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1552" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="156501" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1.5pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="100NF/16V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191219_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1525" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7852677" constant="no"/>
+<attribute name="PROPERTIES" value="16V 100nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="100NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191222_Samsung-Electro-Mechanics-CL05B104KB54PNC_C307331.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C307331" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="959347" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="100PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810151218_FH-Guangdong-Fenghua-Advanced-Tech-0402CG101J500NT_C1546.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1546" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1032388" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191223_Samsung-Electro-Mechanics-CL05B103KB5NNNC_C15195.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C15195" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7659158" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191220_Samsung-Electro-Mechanics-CL05C100JB5NNNC_C32949.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C32949" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="197356" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/6.3V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191215_Samsung-Electro-Mechanics-CL05A106MQ5NUNC_C15525.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C15525" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1727946" constant="no"/>
+<attribute name="PROPERTIES" value="6.3V 10uF X5R ±20% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="12PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG120J500NT_C1547.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1547" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="103909" constant="no"/>
+<attribute name="PROPERTIES" value="50V 12pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="150PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810302110_FH-Guangdong-Fenghua-Advanced-Tech-0402B151K500NT_C1527.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1527" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5377" constant="no"/>
+<attribute name="PROPERTIES" value="50V 150pF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="15PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810111610_FH-Guangdong-Fenghua-Advanced-Tech-0402CG150J500NT_C1548.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1548" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="769350" constant="no"/>
+<attribute name="PROPERTIES" value="50V 15pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="18PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141814_FH-Guangdong-Fenghua-Advanced-Tech-0402CG180J500NT_C1549.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1549" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="143023" constant="no"/>
+<attribute name="PROPERTIES" value="50V 18pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1809291524_FH-Guangdong-Fenghua-Advanced-Tech-0402B102K500NT_C1523.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1523" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="312153" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG1R0C500NT_C1550.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1550" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4662154" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="1UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811091611_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C52923" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="6404174" constant="no"/>
+<attribute name="PROPERTIES" value="25V 1uF X5R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.2NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402B222K500NT_C1531.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1531" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="188650" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.2PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141843_FH-Guangdong-Fenghua-Advanced-Tech-0402CG2R2C500NT_C1559.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1559" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="210263" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.2UF/6.3V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811021410_Samsung-Electro-Mechanics-CL05A225MQ5NSNC_C12530.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C12530" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="937098" constant="no"/>
+<attribute name="PROPERTIES" value="6.3V 2.2uF X5R ±20% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="2.7PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG2R7C500NT_C1561.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1561" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="16592" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.7pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="20PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG200J500NT_C1554.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1554" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4018132" constant="no"/>
+<attribute name="PROPERTIES" value="50V 20pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="220NF/16V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810251021_Samsung-Electro-Mechanics-CL05B224KO5NNNC-_C16772.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C16772" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="24406" constant="no"/>
+<attribute name="PROPERTIES" value="16V 220nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="220PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151132_FH-Guangdong-Fenghua-Advanced-Tech-0402B221K500NT_C1530.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1530" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1593430" constant="no"/>
+<attribute name="PROPERTIES" value="50V 220pF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="22NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402B223K500NT_C1532.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1532" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="117809" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="22PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG220J500NT_C1555.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1555" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="273478" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="27PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG270J500NT_C1557.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1557" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="750259" constant="no"/>
+<attribute name="PROPERTIES" value="50V 27pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="3.3NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191211_Samsung-Electro-Mechanics-CL05B332KB5NNNC_C26404.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C26404" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7731" constant="no"/>
+<attribute name="PROPERTIES" value="50V 3.3nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="3.3PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG3R3C500NT_C1565.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1565" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="113539" constant="no"/>
+<attribute name="PROPERTIES" value="50V 3.3pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="30PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG300J500NT_C1570.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1570" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="42657" constant="no"/>
+<attribute name="PROPERTIES" value="50V 30pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="330PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810192025_Samsung-Electro-Mechanics-CL05C331JB5NNNC_C13533.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C13533" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="37162" constant="no"/>
+<attribute name="PROPERTIES" value="50V 330pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="33NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141711_FH-Guangdong-Fenghua-Advanced-Tech-0402F333M500NT_C1585.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1585" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="26614" constant="no"/>
+<attribute name="PROPERTIES" value="Y5V ±20% 33nF 50V 0402  ROHS" constant="no"/>
+</technology>
+<technology name="33PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141731_FH-Guangdong-Fenghua-Advanced-Tech-0402CG330J500NT_C1562.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1562" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1133835" constant="no"/>
+<attribute name="PROPERTIES" value="50V 33pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="4.7NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811031110_FH-Guangdong-Fenghua-Advanced-Tech-0402B472K500NT_C1538.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1538" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="406196" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="4.7PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG4R7C500NT_C1569.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1569" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="217505" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="4.7UF/10V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191211_Samsung-Electro-Mechanics-CL05A475MP5NRNC_C23733.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23733" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="424928" constant="no"/>
+<attribute name="PROPERTIES" value="10V 4.7uF X5R ±20% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="470NF/10V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191214_Samsung-Electro-Mechanics-CL05A474KP5NNNC-_C47339.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C47339" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="131868" constant="no"/>
+<attribute name="PROPERTIES" value="10V 470nF X5R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="470PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402B471K500NT_C1537.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1537" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="29330" constant="no"/>
+<attribute name="PROPERTIES" value="50V 470pF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="47PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151132_FH-Guangdong-Fenghua-Advanced-Tech-0402CG470J500NT_C1567.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1567" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="269226" constant="no"/>
+<attribute name="PROPERTIES" value="50V 47pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="6.8NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402B682K500NT_C1542.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1542" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="102093" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6.8nF X7R ±10% 0402  ROHS" constant="no"/>
+</technology>
+<technology name="6.8PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811141710_FH-Guangdong-Fenghua-Advanced-Tech-0402CG6R8C500NT_C1576.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1576" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="110389" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6.8pF C0G ±0.25pF 0402  ROHS" constant="no"/>
+</technology>
+<technology name="68PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191215_Samsung-Electro-Mechanics-CL05C680JB5NNNC_C14441.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C14441" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="35465" constant="no"/>
+<attribute name="PROPERTIES" value="50V 68pF C0G ±5% 0402  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_0603" package="C0603">
+<connects>
+<connect gate="C1" pin="1" pad="1"/>
+<connect gate="C1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:38668554/1"/>
+</package3dinstances>
+<technologies>
+<technology name="1.5NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061810_FH-Guangdong-Fenghua-Advanced-Tech-0603B152K500NT_C1595.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1595" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="968125" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1.5nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="100NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1809301912_YAGEO-CC0603KRX7R9BB104_C14663.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C14663" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7111530" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="100PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151136_Samsung-Electro-Mechanics-CL10C101JB8NNNC_C14858.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C14858" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2152181" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2102081402_FH-Guangdong-Fenghua-Advanced-Tech-0603B103K500NT_C57112.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C57112" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3812119" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261513_Samsung-Electro-Mechanics-CL10C100JB8NNNC_C1634.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1634" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="83514" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/10V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191219_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C19702" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2089400" constant="no"/>
+<attribute name="PROPERTIES" value="10V 10uF X5R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811110921_Samsung-Electro-Mechanics-CL10A106MA8NRNC_C96446.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C96446" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="119091" constant="no"/>
+<attribute name="PROPERTIES" value="X5R 25V ±20% 10uF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="12PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261515_Samsung-Electro-Mechanics-CL10C120JB8NNNC_C38523.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C38523" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="87030" constant="no"/>
+<attribute name="PROPERTIES" value="50V 12pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="150PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061810_FH-Guangdong-Fenghua-Advanced-Tech-0603B151K500NT_C1594.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1594" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="53373" constant="no"/>
+<attribute name="PROPERTIES" value="50V 150pF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="15NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061810_FH-Guangdong-Fenghua-Advanced-Tech-0603B153K500NT_C1596.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1596" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="8147" constant="no"/>
+<attribute name="PROPERTIES" value="50V 15nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="15PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261515_Samsung-Electro-Mechanics-CL10C150JB8NNNC_C1644.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1644" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="189543" constant="no"/>
+<attribute name="PROPERTIES" value="50V 15pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="18PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261621_Samsung-Electro-Mechanics-CL10C180JB8NNNC_C1647.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1647" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="52140" constant="no"/>
+<attribute name="PROPERTIES" value="50V 18pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811071810_Samsung-Electro-Mechanics-CL10B102KB8NNNC_C1588.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1588" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2243141" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261512_Samsung-Electro-Mechanics-CL10C010CB8NNNC_C23969.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23969" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4168" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="1UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261812_Samsung-Electro-Mechanics-CL10A105KB8NNNC_C15849.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C15849" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="14650365" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1uF X5R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.2NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810301614_FH-Guangdong-Fenghua-Advanced-Tech-0603B222K500NT_C1604.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1604" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="273964" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.2UF/16V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810271109_Samsung-Electro-Mechanics-CL10A225KO8NNNC_C23630.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C23630" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1324345" constant="no"/>
+<attribute name="PROPERTIES" value="16V 2.2uF X5R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.7NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151136_FH-Guangdong-Fenghua-Advanced-Tech-0603B272K500NT_C1609.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1609" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="55268" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.7nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="2.7PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261513_Samsung-Electro-Mechanics-CL10C2R7CB8NNNC_C16149.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C16149" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="9592" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.7pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="200PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061810_FH-Guangdong-Fenghua-Advanced-Tech-0603B201K500NT_C1600.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1600" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="46839" constant="no"/>
+<attribute name="PROPERTIES" value="50V 200pF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="20PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261514_Samsung-Electro-Mechanics-CL10C200JB8NNNC_C1648.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1648" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="274374" constant="no"/>
+<attribute name="PROPERTIES" value="50V 20pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="220NF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261513_Samsung-Electro-Mechanics-CL10B224KA8NNNC_C21120.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C21120" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="545148" constant="no"/>
+<attribute name="PROPERTIES" value="25V 220nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="220PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261515_Samsung-Electro-Mechanics-CL10B221KB8NNNC_C1603.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1603" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="33678" constant="no"/>
+<attribute name="PROPERTIES" value="50V 220pF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="22NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811101610_Samsung-Electro-Mechanics-CL10B223KB8NNNC_C21122.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C21122" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="336043" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="22PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810121815_Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1653" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="538610" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="22UF/6.3V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151138_Samsung-Electro-Mechanics-CL10A226MQ8NRNC_C59461.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C59461" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="6685052" constant="no"/>
+<attribute name="PROPERTIES" value="6.3V 22uF X5R ±20% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="27PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261514_Samsung-Electro-Mechanics-CL10C270JB8NNNC_C1656.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1656" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="8136" constant="no"/>
+<attribute name="PROPERTIES" value="50V 27pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3.3NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261513_Samsung-Electro-Mechanics-CL10B332KB8NNNC_C1613.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1613" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="55111" constant="no"/>
+<attribute name="PROPERTIES" value="50V 3.3nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="30PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1809300925_Samsung-Electro-Mechanics-CL10C300JB8NNNC_C22397.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C22397" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="59202" constant="no"/>
+<attribute name="PROPERTIES" value="50V 30pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="330NF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061811_FH-Guangdong-Fenghua-Advanced-Tech-0603B334K250NT_C1615.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1615" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="38890" constant="no"/>
+<attribute name="PROPERTIES" value="25V 330nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="330PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261512_Samsung-Electro-Mechanics-CL10C331JB8NNNC_C1664.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1664" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="76549" constant="no"/>
+<attribute name="PROPERTIES" value="50V 330pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="33NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261514_Samsung-Electro-Mechanics-CL10B333KB8NNNC_C21117.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C21117" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="135190" constant="no"/>
+<attribute name="PROPERTIES" value="50V 33nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="33PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151146_Samsung-Electro-Mechanics-CL10C330JB8NNNC_C1663.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1663" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3029" constant="no"/>
+<attribute name="PROPERTIES" value="50V 33pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="3PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061821_FH-Guangdong-Fenghua-Advanced-Tech-0603CG3R0C500NT_C46219.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C46219" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3532006" constant="no"/>
+<attribute name="PROPERTIES" value="50V 3pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061811_FH-Guangdong-Fenghua-Advanced-Tech-0603B472K500NT_C53987.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C53987" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="179917" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261624_FH-Guangdong-Fenghua-Advanced-Tech-0603CG4R7C500NT_C1669.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1669" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1338830" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="4.7UF/16V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261514_Samsung-Electro-Mechanics-CL10A475KO8NNNC_C19666.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C19666" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2027167" constant="no"/>
+<attribute name="PROPERTIES" value="16V 4.7uF X5R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="470NF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261513_Samsung-Electro-Mechanics-CL10B474KA8NNNC_C1623.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1623" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="737714" constant="no"/>
+<attribute name="PROPERTIES" value="25V 470nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="470PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810302011_FH-Guangdong-Fenghua-Advanced-Tech-0603B471K500NT_C1620.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1620" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="120237" constant="no"/>
+<attribute name="PROPERTIES" value="50V 470pF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="47NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261614_Samsung-Electro-Mechanics-CL10B473KB8NNNC_C1622.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1622" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="152232" constant="no"/>
+<attribute name="PROPERTIES" value="50V 47nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="47PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261610_Samsung-Electro-Mechanics-CL10C470JB8NNNC_C1671.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1671" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="95931" constant="no"/>
+<attribute name="PROPERTIES" value="50V 47pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="56PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261515_Samsung-Electro-Mechanics-CL10C560JB8NNNC_C39148.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C39148" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="27514" constant="no"/>
+<attribute name="PROPERTIES" value="50V 56pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="6.8NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061811_FH-Guangdong-Fenghua-Advanced-Tech-0603B682K500NT_C1631.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1631" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="179789" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6.8nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="6.8PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061822_FH-Guangdong-Fenghua-Advanced-Tech-0603CG6R8C500NT_C1679.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1679" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3679197" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6.8pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="680PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061822_FH-Guangdong-Fenghua-Advanced-Tech-0603B681K500NT_C1630.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1630" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="86513" constant="no"/>
+<attribute name="PROPERTIES" value="50V 680pF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="68NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811072020_Samsung-Electro-Mechanics-CL10B683KB8NNNC_C31658.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C31658" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="19607" constant="no"/>
+<attribute name="PROPERTIES" value="50V 68nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="68PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261521_Samsung-Electro-Mechanics-CL10C680JB8NNNC_C28262.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C28262" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="34680" constant="no"/>
+<attribute name="PROPERTIES" value="50V 68pF C0G ±5% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="6PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061822_FH-Guangdong-Fenghua-Advanced-Tech-0603CG6R0C500NT_C37474.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C37474" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="130037" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+<technology name="8.2NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810262007_Samsung-Electro-Mechanics-CL10B822KB8NNNC_C27920.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C27920" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4531" constant="no"/>
+<attribute name="PROPERTIES" value="50V 8.2nF X7R ±10% 0603  ROHS" constant="no"/>
+</technology>
+<technology name="8.2PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061811_FH-Guangdong-Fenghua-Advanced-Tech-0603CG8R2C500NT_C1685.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1685" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="4823" constant="no"/>
+<attribute name="PROPERTIES" value="50V 8.2pF C0G ±0.25pF 0603  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_0805" package="C0805">
+<connects>
+<connect gate="C1" pin="1" pad="1"/>
+<connect gate="C1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23617/2"/>
+</package3dinstances>
+<technologies>
+<technology name="1.5NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061723_FH-Guangdong-Fenghua-Advanced-Tech-0805B152K500NT_C1717.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1717" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="36317" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1.5nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="100NF/100V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191216_Samsung-Electro-Mechanics-CL21B104KCFNNNE_C28233.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C28233" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1245695" constant="no"/>
+<attribute name="PROPERTIES" value="100V 100nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="100NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810101813_YAGEO-CC0805KRX7R9BB104_C49678.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C49678" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3328509" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="100PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810241824_Samsung-Electro-Mechanics-CL21C101JBANNNC_C1790.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1790" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="360745" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151136_Samsung-Electro-Mechanics-CL21B103KBANNNC_C1710.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1710" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="886408" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191223_Samsung-Electro-Mechanics-CL21C100JBANNNC_C1785.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1785" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="47327" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811121310_Samsung-Electro-Mechanics-CL21A106KAYNNNE_C15850.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C15850" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1370441" constant="no"/>
+<attribute name="PROPERTIES" value="X5R 25V ±10% 10uF 0805  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/2004251506_Murata-Electronics-GRM21BR61H106KE43L_C440198.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C440198" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="71215" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10uF X5R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="12PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061723_FH-Guangdong-Fenghua-Advanced-Tech-0805CG120J500NT_C1792.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1792" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="36360" constant="no"/>
+<attribute name="PROPERTIES" value="50V 12pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="150PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061722_FH-Guangdong-Fenghua-Advanced-Tech-0805B151K500NT_C1716.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1716" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="11929" constant="no"/>
+<attribute name="PROPERTIES" value="50V 150pF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="15PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810241241_Samsung-Electro-Mechanics-CL21C150JBANNNC_C1794.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1794" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="32529" constant="no"/>
+<attribute name="PROPERTIES" value="50V 15pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="18PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811091217_FH-Guangdong-Fenghua-Advanced-Tech-0805CG180J500NT_C1797.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1797" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="71851" constant="no"/>
+<attribute name="PROPERTIES" value="50V 18pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1808311543_Samsung-Electro-Mechanics-CL21B102KBCNNNC_C46653.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C46653" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="203361" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="1UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191216_Samsung-Electro-Mechanics-CL21B105KBFNNNE_C28323.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C28323" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="6961318" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1uF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.2NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191215_Samsung-Electro-Mechanics-CL21C222JBFNNNE_C28260.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C28260" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="27130" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2nF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="2.2UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811101411_FH-Guangdong-Fenghua-Advanced-Tech-0805F225M500NT_C49217.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C49217" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="654398" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2uF Y5V ±20% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="20PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191220_Samsung-Electro-Mechanics-CL21C200JBANNNC_C1798.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1798" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="64875" constant="no"/>
+<attribute name="PROPERTIES" value="50V 20pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="220NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191222_Samsung-Electro-Mechanics-CL21B224KBFNNNE_C5378.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C5378" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="293675" constant="no"/>
+<attribute name="PROPERTIES" value="50V 220nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="220PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191219_Samsung-Electro-Mechanics-CL21B221KBANNNC_C53172.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C53172" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="39010" constant="no"/>
+<attribute name="PROPERTIES" value="50V 220pF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="22NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191222_Samsung-Electro-Mechanics-CL21B223KBANNNC_C1729.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1729" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="169058" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="22PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810271113_Samsung-Electro-Mechanics-CL21C220JBANNNC_C1804.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1804" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="54012" constant="no"/>
+<attribute name="PROPERTIES" value="50V 22pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="22UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811151152_Samsung-Electro-Mechanics-CL21A226MAQNNNE_C45783.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C45783" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1218863" constant="no"/>
+<attribute name="PROPERTIES" value="X5R 25V ±20% 22uF 0805  ROHS" constant="no"/>
+</technology>
+<technology name="3.3NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191220_Samsung-Electro-Mechanics-CL21B332KBANNNC-_C53175.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C53175" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5956" constant="no"/>
+<attribute name="PROPERTIES" value="50V 3.3nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="30PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191214_Samsung-Electro-Mechanics-CL21C300JBANNNC_C1809.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1809" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3097" constant="no"/>
+<attribute name="PROPERTIES" value="50V 30pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="330NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811071214_FH-Guangdong-Fenghua-Advanced-Tech-0805B334K500NT_C1740.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1740" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="7936" constant="no"/>
+<attribute name="PROPERTIES" value="50V 330nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="330PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191220_Samsung-Electro-Mechanics-CL21B331KBANNNC_C51207.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C51207" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1889" constant="no"/>
+<attribute name="PROPERTIES" value="50V 330pF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="33NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061723_FH-Guangdong-Fenghua-Advanced-Tech-0805B333K500NT_C1739.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1739" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="34059" constant="no"/>
+<attribute name="PROPERTIES" value="50V 33nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="33PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191222_Samsung-Electro-Mechanics-CL21C330JBANNNC_C1814.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1814" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="0" constant="no"/>
+<attribute name="PROPERTIES" value="50V 33pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.7NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061719_FH-Guangdong-Fenghua-Advanced-Tech-0805B472K500NT_C1744.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1744" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="210851" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="4.7UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810261822_Samsung-Electro-Mechanics-CL21A475KAQNNNE_C1779.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1779" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="2892119" constant="no"/>
+<attribute name="PROPERTIES" value="25V 4.7uF X5R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="470NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810251812_Samsung-Electro-Mechanics-CL21B474KBFNNNE_C13967.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C13967" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="58437" constant="no"/>
+<attribute name="PROPERTIES" value="50V 470nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="470PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811110920_FH-Guangdong-Fenghua-Advanced-Tech-0805B471K500NT_C1743.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1743" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="155633" constant="no"/>
+<attribute name="PROPERTIES" value="50V 470pF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="47NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811091614_Samsung-Electro-Mechanics-CL21B473KBCNNNC_C53134.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C53134" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="82817" constant="no"/>
+<attribute name="PROPERTIES" value="50V 47nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="47PF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810191215_Samsung-Electro-Mechanics-CL21C470JBANNNC_C14857.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C14857" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="51597" constant="no"/>
+<attribute name="PROPERTIES" value="50V 47pF C0G ±5% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="47UF/6.3V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811091612_Samsung-Electro-Mechanics-CL21A476MQYNNNE_C16780.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C16780" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="757408" constant="no"/>
+<attribute name="PROPERTIES" value="6.3V 47uF X5R ±20% 0805  ROHS" constant="no"/>
+</technology>
+<technology name="6.8NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811061724_FH-Guangdong-Fenghua-Advanced-Tech-0805B682K500NT_C1755.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1755" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="21310" constant="no"/>
+<attribute name="PROPERTIES" value="50V 6.8nF X7R ±10% 0805  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_1206" package="C1206">
+<connects>
+<connect gate="C1" pin="1" pad="1"/>
+<connect gate="C1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23618/2"/>
+</package3dinstances>
+<technologies>
+<technology name="100NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810221109_Samsung-Electro-Mechanics-CL31B104KBCNNNC_C24497.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C24497" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="536240" constant="no"/>
+<attribute name="PROPERTIES" value="50V 100nF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="100UF/6.3V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810301816_Samsung-Electro-Mechanics-CL31A107MQHNNNE_C15008.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C15008" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="547696" constant="no"/>
+<attribute name="PROPERTIES" value="6.3V 100uF X5R ±20% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="10NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811051111_FH-Guangdong-Fenghua-Advanced-Tech-1206B103K500NT_C1846.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1846" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="28382" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10nF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="10UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810221112_Samsung-Electro-Mechanics-CL31A106KBHNNNE_C13585.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C13585" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="3998322" constant="no"/>
+<attribute name="PROPERTIES" value="50V 10uF X5R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1NF/2KV">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810311314_FH-Guangdong-Fenghua-Advanced-Tech-1206B102K202NT_C9196.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C9196" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="8943689" constant="no"/>
+<attribute name="PROPERTIES" value="2kV 1nF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1NF/500V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810221111_Samsung-Electro-Mechanics-CL31B102KGFNNNE_C35216.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C35216" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="8254" constant="no"/>
+<attribute name="PROPERTIES" value="500V 1nF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="1UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810271109_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1848" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="5587768" constant="no"/>
+<attribute name="PROPERTIES" value="50V 1uF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="2.2UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811072012_Samsung-Electro-Mechanics-CL31B225KBHNNNE_C50254.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C50254" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="187224" constant="no"/>
+<attribute name="PROPERTIES" value="50V 2.2uF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="220NF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810311313_FH-Guangdong-Fenghua-Advanced-Tech-1206B224K500NT_C1857.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C1857" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="13850" constant="no"/>
+<attribute name="PROPERTIES" value="50V 220nF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="22UF/10V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810221121_Samsung-Electro-Mechanics-CL31A226KPHNNNE_C5672.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C5672" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="1286694" constant="no"/>
+<attribute name="PROPERTIES" value="10V 22uF X5R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="22UF/25V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811031514_Samsung-Electro-Mechanics-CL31A226KAHNNNE_C12891.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C12891" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="317536" constant="no"/>
+<attribute name="PROPERTIES" value="25V 22uF X5R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="4.7UF/50V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1811091112_FH-Guangdong-Fenghua-Advanced-Tech-1206B475K500NT_C29823.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C29823" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="223402" constant="no"/>
+<attribute name="PROPERTIES" value="50V 4.7uF X7R ±10% 1206  ROHS" constant="no"/>
+</technology>
+<technology name="47UF/10V">
+<attribute name="LCSC_DATASHEET" value="https://datasheet.lcsc.com/lcsc/1810221121_Samsung-Electro-Mechanics-CL31A476MPHNNNE_C96123.pdf" constant="no"/>
+<attribute name="LCSC_PART" value="C96123" constant="no"/>
+<attribute name="LCSC_PRICE1_EUR" value="" constant="no"/>
+<attribute name="LCSC_ROTATION_CCW" value="0" constant="no"/>
+<attribute name="LCSC_STOCK" value="279828" constant="no"/>
+<attribute name="PROPERTIES" value="10V 47uF X5R ±20% 1206  ROHS" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -25646,24 +26901,6 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="POWER_IN" library="con-phoenix-508" library_urn="urn:adsk.eagle:library:176" deviceset="MKDSN1,5/4-5,08" device="" package3d_urn="urn:adsk.eagle:package:9636/1"/>
 <part name="+3V4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="R26" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k">
-<spice>
-<pinmapping spiceprefix="R">
-<pinmap gate="G$1" pin="1" pinorder="1"/>
-<pinmap gate="G$1" pin="2" pinorder="2"/>
-</pinmapping>
-</spice>
-<attribute name="LCSC_PART" value="C25804"/>
-</part>
-<part name="R27" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k">
-<spice>
-<pinmapping spiceprefix="R">
-<pinmap gate="G$1" pin="1" pinorder="1"/>
-<pinmap gate="G$1" pin="2" pinorder="2"/>
-</pinmapping>
-</spice>
-<attribute name="LCSC_PART" value="C25804"/>
-</part>
 <part name="NEBULA_A" library="MCP23017-E_SO" library_urn="urn:adsk.eagle:library:37530508" deviceset="MCP23017-E/SO" device="" package3d_urn="urn:adsk.eagle:package:37530511/1">
 <attribute name="LCSC_PART" value="C629440"/>
 </part>
@@ -29326,6 +30563,11 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <part name="R223" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="270R"/>
 <part name="R224" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="82R"/>
 <part name="R132" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="1.8K"/>
+<part name="R26" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="2K"/>
+<part name="R27" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="2K"/>
+<part name="R225" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="R_" device="_0603" package3d_urn="urn:adsk.eagle:package:23555/3" technology="1K"/>
+<part name="C125" library="JLC PCB Basic Parts_loc" library_urn="urn:adsk.eagle:library:38668506" deviceset="C_" device="_0603" package3d_urn="urn:adsk.eagle:package:38668554/1" technology="1NF/50V"/>
+<part name="GND115" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -29430,16 +30672,6 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </instance>
 <instance part="+3V4" gate="G$1" x="193.04" y="88.9" smashed="yes">
 <attribute name="VALUE" x="190.5" y="83.82" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="R26" gate="G$1" x="193.04" y="71.12" smashed="yes" rot="R90">
-<attribute name="NAME" x="191.5414" y="67.31" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="196.342" y="67.31" size="1.778" layer="96" rot="R90"/>
-<attribute name="LCSC_PART" x="193.04" y="71.12" size="1.778" layer="96" rot="R90" display="off"/>
-</instance>
-<instance part="R27" gate="G$1" x="185.42" y="71.12" smashed="yes" rot="R90">
-<attribute name="NAME" x="183.9214" y="67.31" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="188.722" y="67.31" size="1.778" layer="96" rot="R90"/>
-<attribute name="LCSC_PART" x="185.42" y="71.12" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="NEBULA_A" gate="G$1" x="381" y="-50.8" smashed="yes">
 <attribute name="NAME" x="368.3" y="-25.4" size="1.778" layer="95"/>
@@ -31082,15 +32314,15 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <instance part="+3V47" gate="G$1" x="850.9" y="-63.5" smashed="yes">
 <attribute name="VALUE" x="848.36" y="-68.58" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LEDARRAY" gate="J$1" x="312.42" y="-30.48" smashed="yes">
-<attribute name="VALUE" x="309.88" y="-37.846" size="1.778" layer="96" font="vector"/>
-<attribute name="NAME" x="304.8" y="-24.892" size="1.778" layer="95" font="vector"/>
+<instance part="LEDARRAY" gate="J$1" x="304.8" y="-71.12" smashed="yes">
+<attribute name="VALUE" x="302.26" y="-78.486" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="297.18" y="-65.532" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="GND95" gate="1" x="322.58" y="-38.1" smashed="yes">
-<attribute name="VALUE" x="320.04" y="-40.64" size="1.778" layer="96"/>
+<instance part="GND95" gate="1" x="314.96" y="-78.74" smashed="yes">
+<attribute name="VALUE" x="312.42" y="-81.28" size="1.778" layer="96"/>
 </instance>
-<instance part="P+4" gate="1" x="322.58" y="-20.32" smashed="yes">
-<attribute name="VALUE" x="320.04" y="-25.4" size="1.778" layer="96" rot="R90"/>
+<instance part="P+4" gate="1" x="314.96" y="-60.96" smashed="yes">
+<attribute name="VALUE" x="312.42" y="-66.04" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="ACCESSORY" gate="A" x="170.18" y="-20.32" smashed="yes">
 <attribute name="NAME" x="163.83" y="-12.065" size="1.778" layer="95"/>
@@ -31216,15 +32448,15 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <attribute name="VALUE" x="1275.842" y="29.21" size="1.778" layer="96" rot="R90"/>
 <attribute name="LCSC_PART" x="1272.54" y="33.02" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="ULN2" gate="G$1" x="66.04" y="-45.72" smashed="yes" rot="MR180">
-<attribute name="NAME" x="55.88" y="-66.802" size="1.778" layer="95" rot="MR180"/>
-<attribute name="VALUE" x="55.88" y="-17.78" size="1.778" layer="96" rot="MR180"/>
+<instance part="ULN2" gate="G$1" x="66.04" y="-2.54" smashed="yes" rot="MR180">
+<attribute name="NAME" x="55.88" y="-23.622" size="1.778" layer="95" rot="MR180"/>
+<attribute name="VALUE" x="55.88" y="25.4" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="GND98" gate="1" x="50.8" y="-17.78" smashed="yes" rot="R180">
-<attribute name="VALUE" x="53.34" y="-15.24" size="1.778" layer="96" rot="R180"/>
+<instance part="GND98" gate="1" x="50.8" y="25.4" smashed="yes" rot="R180">
+<attribute name="VALUE" x="53.34" y="27.94" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="P+2" gate="1" x="86.36" y="-17.78" smashed="yes">
-<attribute name="VALUE" x="83.82" y="-22.86" size="1.778" layer="96" rot="R90"/>
+<instance part="P+2" gate="1" x="86.36" y="25.4" smashed="yes">
+<attribute name="VALUE" x="83.82" y="20.32" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="S1" gate="G$1" x="210.82" y="-109.22" smashed="yes">
 <attribute name="NAME" x="210.82" y="-107.696" size="1.778" layer="95" font="vector" align="bottom-center"/>
@@ -31246,58 +32478,58 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <attribute name="NAME" x="210.82" y="-138.176" size="1.778" layer="95" font="vector" align="bottom-center"/>
 <attribute name="VALUE" x="210.82" y="-140.208" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="R125" gate="G$1" x="50.8" y="-83.82" smashed="yes">
-<attribute name="NAME" x="46.99" y="-82.3214" size="1.778" layer="95"/>
-<attribute name="VALUE" x="46.99" y="-87.122" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="50.8" y="-83.82" size="1.778" layer="96" display="off"/>
+<instance part="R125" gate="G$1" x="50.8" y="-40.64" smashed="yes">
+<attribute name="NAME" x="46.99" y="-39.1414" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.99" y="-43.942" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="50.8" y="-40.64" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R126" gate="G$1" x="50.8" y="-91.44" smashed="yes">
-<attribute name="NAME" x="46.99" y="-89.9414" size="1.778" layer="95"/>
-<attribute name="VALUE" x="46.99" y="-94.742" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="50.8" y="-91.44" size="1.778" layer="96" display="off"/>
+<instance part="R126" gate="G$1" x="50.8" y="-48.26" smashed="yes">
+<attribute name="NAME" x="46.99" y="-46.7614" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.99" y="-51.562" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="50.8" y="-48.26" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R127" gate="G$1" x="50.8" y="-99.06" smashed="yes">
-<attribute name="NAME" x="46.99" y="-97.5614" size="1.778" layer="95"/>
-<attribute name="VALUE" x="46.99" y="-102.362" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="50.8" y="-99.06" size="1.778" layer="96" display="off"/>
+<instance part="R127" gate="G$1" x="50.8" y="-55.88" smashed="yes">
+<attribute name="NAME" x="46.99" y="-54.3814" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.99" y="-59.182" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="50.8" y="-55.88" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R128" gate="G$1" x="50.8" y="-106.68" smashed="yes">
-<attribute name="NAME" x="46.99" y="-105.1814" size="1.778" layer="95"/>
-<attribute name="VALUE" x="46.99" y="-109.982" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="50.8" y="-106.68" size="1.778" layer="96" display="off"/>
+<instance part="R128" gate="G$1" x="50.8" y="-63.5" smashed="yes">
+<attribute name="NAME" x="46.99" y="-62.0014" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.99" y="-66.802" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="50.8" y="-63.5" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="R129" gate="G$1" x="50.8" y="-114.3" smashed="yes">
-<attribute name="NAME" x="46.99" y="-112.8014" size="1.778" layer="95"/>
-<attribute name="VALUE" x="46.99" y="-117.602" size="1.778" layer="96"/>
-<attribute name="LCSC_PART" x="50.8" y="-114.3" size="1.778" layer="96" display="off"/>
+<instance part="R129" gate="G$1" x="50.8" y="-71.12" smashed="yes">
+<attribute name="NAME" x="46.99" y="-69.6214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.99" y="-74.422" size="1.778" layer="96"/>
+<attribute name="LCSC_PART" x="50.8" y="-71.12" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="D81" gate="G$1" x="68.58" y="-83.82" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.152" y="-87.249" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="68.072" y="-89.535" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="68.58" y="-83.82" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D81" gate="G$1" x="68.58" y="-40.64" smashed="yes" rot="R90">
+<attribute name="NAME" x="73.152" y="-44.069" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="68.072" y="-46.355" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="68.58" y="-40.64" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D82" gate="G$1" x="68.58" y="-91.44" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.152" y="-94.869" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="68.072" y="-97.155" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="68.58" y="-91.44" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D82" gate="G$1" x="68.58" y="-48.26" smashed="yes" rot="R90">
+<attribute name="NAME" x="73.152" y="-51.689" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="68.072" y="-53.975" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="68.58" y="-48.26" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D83" gate="G$1" x="68.58" y="-99.06" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.152" y="-102.489" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="68.072" y="-104.775" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="68.58" y="-99.06" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D83" gate="G$1" x="68.58" y="-55.88" smashed="yes" rot="R90">
+<attribute name="NAME" x="73.152" y="-59.309" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="68.072" y="-61.595" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="68.58" y="-55.88" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D84" gate="G$1" x="68.58" y="-114.3" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.152" y="-117.729" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="68.072" y="-120.015" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="68.58" y="-114.3" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D84" gate="G$1" x="68.58" y="-71.12" smashed="yes" rot="R90">
+<attribute name="NAME" x="73.152" y="-74.549" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="68.072" y="-76.835" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="68.58" y="-71.12" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="D85" gate="G$1" x="68.58" y="-106.68" smashed="yes" rot="R90">
-<attribute name="NAME" x="73.152" y="-110.109" size="1.778" layer="95" font="vector" rot="R180"/>
-<attribute name="VALUE" x="68.072" y="-112.395" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
-<attribute name="LCSC_PART" x="68.58" y="-106.68" size="1.778" layer="96" rot="R90" display="off"/>
+<instance part="D85" gate="G$1" x="68.58" y="-63.5" smashed="yes" rot="R90">
+<attribute name="NAME" x="73.152" y="-66.929" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="68.072" y="-69.215" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+<attribute name="LCSC_PART" x="68.58" y="-63.5" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="P+10" gate="1" x="43.18" y="-76.2" smashed="yes">
-<attribute name="VALUE" x="40.64" y="-81.28" size="1.778" layer="96" rot="R90"/>
+<instance part="P+10" gate="1" x="43.18" y="-33.02" smashed="yes">
+<attribute name="VALUE" x="40.64" y="-38.1" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="D86" gate="G$1" x="162.56" y="-109.22" smashed="yes" rot="R90">
 <attribute name="NAME" x="167.132" y="-112.649" size="1.778" layer="95" font="vector" rot="R180"/>
@@ -32567,6 +33799,25 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <attribute name="NAME" x="62.23" y="161.5186" size="1.778" layer="95"/>
 <attribute name="VALUE" x="62.23" y="156.718" size="1.778" layer="96"/>
 </instance>
+<instance part="R26" gate="R1" x="193.04" y="71.12" smashed="yes" rot="R90">
+<attribute name="NAME" x="191.5414" y="67.31" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="196.342" y="67.31" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R27" gate="R1" x="185.42" y="71.12" smashed="yes" rot="R90">
+<attribute name="NAME" x="183.9214" y="67.31" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="188.722" y="67.31" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R225" gate="R1" x="325.12" y="-22.86" smashed="yes">
+<attribute name="NAME" x="321.31" y="-21.3614" size="1.778" layer="95"/>
+<attribute name="VALUE" x="321.31" y="-26.162" size="1.778" layer="96"/>
+</instance>
+<instance part="C125" gate="C1" x="307.34" y="-22.86" smashed="yes" rot="R90">
+<attribute name="NAME" x="306.959" y="-21.336" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="312.039" y="-21.336" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND115" gate="1" x="294.64" y="-33.02" smashed="yes">
+<attribute name="VALUE" x="292.1" y="-35.56" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 <bus name="ESP32_BUS:+3V3,+5V,2,4,5,12,13,14,15,16,17,18,19,20,21/SDA,22/SCL,23,25,26,27,32,33,34,35,36,39,GND">
@@ -32720,15 +33971,15 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <wire x1="845.82" y1="-63.5" x2="845.82" y2="-66.04" width="0.762" layer="92"/>
 </segment>
 <segment>
-<wire x1="337.82" y1="-12.7" x2="347.98" y2="-12.7" width="0.762" layer="92"/>
-<label x="337.82" y="-17.78" size="1.778" layer="95"/>
+<wire x1="314.96" y1="-33.02" x2="325.12" y2="-33.02" width="0.762" layer="92"/>
+<label x="320.04" y="-38.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="327.66" y1="-35.56" x2="327.66" y2="-25.4" width="0.762" layer="92"/>
+<wire x1="320.04" y1="-76.2" x2="320.04" y2="-66.04" width="0.762" layer="92"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-27.94" x2="45.72" y2="-48.26" width="0.762" layer="92"/>
-<label x="43.18" y="-48.26" size="1.778" layer="95" rot="R90"/>
+<wire x1="45.72" y1="15.24" x2="45.72" y2="-5.08" width="0.762" layer="92"/>
+<label x="43.18" y="-5.08" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="27.94" y1="154.94" x2="27.94" y2="147.32" width="0.762" layer="92"/>
@@ -32882,8 +34133,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="187.96" y="-25.4" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-63.5" x2="45.72" y2="-53.34" width="0.762" layer="92"/>
-<label x="43.18" y="-63.5" size="1.778" layer="95" rot="R90"/>
+<wire x1="45.72" y1="-20.32" x2="45.72" y2="-10.16" width="0.762" layer="92"/>
+<label x="43.18" y="-20.32" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="205.74" y1="-101.6" x2="205.74" y2="-71.12" width="0.762" layer="92"/>
@@ -33345,8 +34596,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="GND95" gate="1" pin="GND"/>
 <pinref part="LEDARRAY" gate="J$1" pin="1"/>
-<wire x1="322.58" y1="-35.56" x2="322.58" y2="-33.02" width="0.1524" layer="91"/>
-<wire x1="322.58" y1="-33.02" x2="320.04" y2="-33.02" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="-76.2" x2="314.96" y2="-73.66" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="-73.66" x2="312.42" y2="-73.66" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND97" gate="1" pin="GND"/>
@@ -33363,8 +34614,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="GND98" gate="1" pin="GND"/>
 <pinref part="ULN2" gate="G$1" pin="9"/>
-<wire x1="50.8" y1="-20.32" x2="50.8" y2="-22.86" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="-22.86" x2="53.34" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="22.86" x2="50.8" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="20.32" x2="53.34" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R130" gate="G$1" pin="2"/>
@@ -33912,6 +35163,12 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <wire x1="223.52" y1="15.24" x2="215.9" y2="15.24" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="15.24" x2="215.9" y2="22.86" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="C125" gate="C1" pin="1"/>
+<pinref part="GND115" gate="1" pin="GND"/>
+<wire x1="304.8" y1="-22.86" x2="294.64" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="294.64" y1="-22.86" x2="294.64" y2="-30.48" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$1" class="0">
 <segment>
@@ -33942,8 +35199,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="P+2" gate="1" pin="+12V"/>
 <pinref part="ULN2" gate="G$1" pin="10"/>
-<wire x1="86.36" y1="-20.32" x2="86.36" y2="-22.86" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="-22.86" x2="81.28" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="22.86" x2="86.36" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="20.32" x2="81.28" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+12" gate="1" pin="+12V"/>
@@ -34072,29 +35329,29 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="LEDARRAY" gate="J$1" pin="3"/>
 <pinref part="P+4" gate="1" pin="+5V"/>
-<wire x1="320.04" y1="-27.94" x2="322.58" y2="-27.94" width="0.1524" layer="91"/>
-<wire x1="322.58" y1="-27.94" x2="322.58" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="312.42" y1="-68.58" x2="314.96" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="-68.58" x2="314.96" y2="-63.5" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R129" gate="G$1" pin="1"/>
-<wire x1="43.18" y1="-78.74" x2="43.18" y2="-83.82" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-83.82" x2="43.18" y2="-91.44" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-91.44" x2="43.18" y2="-99.06" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-99.06" x2="43.18" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-106.68" x2="43.18" y2="-114.3" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-114.3" x2="45.72" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-35.56" x2="43.18" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-40.64" x2="43.18" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-48.26" x2="43.18" y2="-55.88" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-55.88" x2="43.18" y2="-63.5" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-63.5" x2="43.18" y2="-71.12" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-71.12" x2="45.72" y2="-71.12" width="0.1524" layer="91"/>
 <pinref part="R128" gate="G$1" pin="1"/>
-<wire x1="45.72" y1="-106.68" x2="43.18" y2="-106.68" width="0.1524" layer="91"/>
-<junction x="43.18" y="-106.68"/>
+<wire x1="45.72" y1="-63.5" x2="43.18" y2="-63.5" width="0.1524" layer="91"/>
+<junction x="43.18" y="-63.5"/>
 <pinref part="R127" gate="G$1" pin="1"/>
-<wire x1="45.72" y1="-99.06" x2="43.18" y2="-99.06" width="0.1524" layer="91"/>
-<junction x="43.18" y="-99.06"/>
+<wire x1="45.72" y1="-55.88" x2="43.18" y2="-55.88" width="0.1524" layer="91"/>
+<junction x="43.18" y="-55.88"/>
 <pinref part="R126" gate="G$1" pin="1"/>
-<wire x1="45.72" y1="-91.44" x2="43.18" y2="-91.44" width="0.1524" layer="91"/>
-<junction x="43.18" y="-91.44"/>
+<wire x1="45.72" y1="-48.26" x2="43.18" y2="-48.26" width="0.1524" layer="91"/>
+<junction x="43.18" y="-48.26"/>
 <pinref part="R125" gate="G$1" pin="1"/>
-<wire x1="45.72" y1="-83.82" x2="43.18" y2="-83.82" width="0.1524" layer="91"/>
-<junction x="43.18" y="-83.82"/>
+<wire x1="45.72" y1="-40.64" x2="43.18" y2="-40.64" width="0.1524" layer="91"/>
+<junction x="43.18" y="-40.64"/>
 <pinref part="P+10" gate="1" pin="+5V"/>
 </segment>
 <segment>
@@ -34479,12 +35736,12 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="+3V4" gate="G$1" pin="+3V3"/>
 <wire x1="193.04" y1="86.36" x2="193.04" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="R26" gate="G$1" pin="2"/>
 <wire x1="193.04" y1="76.2" x2="193.04" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="R27" gate="G$1" pin="2"/>
 <wire x1="185.42" y1="76.2" x2="185.42" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="185.42" y1="78.74" x2="193.04" y2="78.74" width="0.1524" layer="91"/>
 <junction x="193.04" y="78.74"/>
+<pinref part="R26" gate="R1" pin="2"/>
+<pinref part="R27" gate="R1" pin="2"/>
 </segment>
 <segment>
 <pinref part="NEBULA_C" gate="G$1" pin="VDD"/>
@@ -34988,8 +36245,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="86.36" y="106.68" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-48.26" x2="53.34" y2="-48.26" width="0.1524" layer="91"/>
-<label x="48.26" y="-48.26" size="1.778" layer="95"/>
+<wire x1="45.72" y1="-5.08" x2="53.34" y2="-5.08" width="0.1524" layer="91"/>
+<label x="48.26" y="-5.08" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="4"/>
 </segment>
 </net>
@@ -35015,8 +36272,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="86.36" y="101.6" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-33.02" x2="53.34" y2="-33.02" width="0.1524" layer="91"/>
-<label x="48.26" y="-33.02" size="1.778" layer="95"/>
+<wire x1="45.72" y1="10.16" x2="53.34" y2="10.16" width="0.1524" layer="91"/>
+<label x="48.26" y="10.16" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="7"/>
 </segment>
 </net>
@@ -35027,8 +36284,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="86.36" y="99.06" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-38.1" x2="53.34" y2="-38.1" width="0.1524" layer="91"/>
-<label x="48.26" y="-38.1" size="1.778" layer="95"/>
+<wire x1="45.72" y1="5.08" x2="53.34" y2="5.08" width="0.1524" layer="91"/>
+<label x="48.26" y="5.08" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="6"/>
 </segment>
 </net>
@@ -35039,8 +36296,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="86.36" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-43.18" x2="53.34" y2="-43.18" width="0.1524" layer="91"/>
-<label x="48.26" y="-43.18" size="1.778" layer="95"/>
+<wire x1="45.72" y1="0" x2="53.34" y2="0" width="0.1524" layer="91"/>
+<label x="48.26" y="0" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="5"/>
 </segment>
 </net>
@@ -35080,87 +36337,17 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="190.5" y="40.64" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R62" gate="G$1" pin="1"/>
-<pinref part="R63" gate="G$1" pin="1"/>
-<wire x1="767.08" y1="264.16" x2="767.08" y2="195.58" width="0.1524" layer="91"/>
-<pinref part="R64" gate="G$1" pin="1"/>
-<wire x1="767.08" y1="195.58" x2="767.08" y2="114.3" width="0.1524" layer="91"/>
-<junction x="767.08" y="195.58"/>
-<wire x1="767.08" y1="114.3" x2="767.08" y2="50.8" width="0.1524" layer="91"/>
-<junction x="767.08" y="114.3"/>
-<pinref part="R65" gate="G$1" pin="1"/>
-<junction x="767.08" y="50.8"/>
-<pinref part="R58" gate="G$1" pin="1"/>
-<pinref part="R59" gate="G$1" pin="1"/>
-<wire x1="546.1" y1="266.7" x2="546.1" y2="198.12" width="0.1524" layer="91"/>
-<pinref part="R60" gate="G$1" pin="1"/>
-<wire x1="546.1" y1="198.12" x2="546.1" y2="116.84" width="0.1524" layer="91"/>
-<junction x="546.1" y="198.12"/>
-<pinref part="R61" gate="G$1" pin="1"/>
-<wire x1="546.1" y1="116.84" x2="546.1" y2="50.8" width="0.1524" layer="91"/>
-<junction x="546.1" y="116.84"/>
-<pinref part="R54" gate="G$1" pin="1"/>
-<wire x1="358.14" y1="266.7" x2="358.14" y2="198.12" width="0.1524" layer="91"/>
-<pinref part="J1" gate="G$1" pin="1"/>
-<wire x1="358.14" y1="198.12" x2="358.14" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="358.14" y1="116.84" x2="358.14" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="358.14" y1="50.8" x2="358.14" y2="-5.08" width="0.1524" layer="91"/>
-<pinref part="R57" gate="G$1" pin="1"/>
-<junction x="358.14" y="50.8"/>
-<pinref part="R56" gate="G$1" pin="1"/>
-<junction x="358.14" y="116.84"/>
-<pinref part="R55" gate="G$1" pin="1"/>
-<junction x="358.14" y="198.12"/>
-<wire x1="358.14" y1="-5.08" x2="337.82" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="337.82" y1="-5.08" x2="320.04" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="546.1" y1="50.8" x2="546.1" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="546.1" y1="-5.08" x2="403.86" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="546.1" y="50.8"/>
-<junction x="358.14" y="-5.08"/>
-<wire x1="403.86" y1="-5.08" x2="358.14" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="767.08" y1="50.8" x2="767.08" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="767.08" y1="-5.08" x2="546.1" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="546.1" y="-5.08"/>
-<pinref part="R67" gate="G$1" pin="1"/>
-<wire x1="403.86" y1="-10.16" x2="403.86" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="403.86" y="-5.08"/>
-<pinref part="R83" gate="G$1" pin="1"/>
-<wire x1="970.28" y1="266.7" x2="970.28" y2="198.12" width="0.1524" layer="91"/>
-<wire x1="970.28" y1="198.12" x2="970.28" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="970.28" y1="116.84" x2="970.28" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="970.28" y1="50.8" x2="970.28" y2="-5.08" width="0.1524" layer="91"/>
-<pinref part="R86" gate="G$1" pin="1"/>
-<junction x="970.28" y="50.8"/>
-<pinref part="R85" gate="G$1" pin="1"/>
-<junction x="970.28" y="116.84"/>
-<pinref part="R84" gate="G$1" pin="1"/>
-<junction x="970.28" y="198.12"/>
-<wire x1="767.08" y1="-5.08" x2="970.28" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="767.08" y="-5.08"/>
-<pinref part="R103" gate="G$1" pin="1"/>
-<wire x1="1201.42" y1="266.7" x2="1201.42" y2="198.12" width="0.1524" layer="91"/>
-<wire x1="1201.42" y1="198.12" x2="1201.42" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="1201.42" y1="116.84" x2="1201.42" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="1201.42" y1="50.8" x2="1201.42" y2="-5.08" width="0.1524" layer="91"/>
-<pinref part="R106" gate="G$1" pin="1"/>
-<junction x="1201.42" y="50.8"/>
-<pinref part="R105" gate="G$1" pin="1"/>
-<junction x="1201.42" y="116.84"/>
-<pinref part="R104" gate="G$1" pin="1"/>
-<junction x="1201.42" y="198.12"/>
-<wire x1="970.28" y1="-5.08" x2="1201.42" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="970.28" y="-5.08"/>
-<wire x1="337.82" y1="-12.7" x2="337.82" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="337.82" y="-5.08"/>
-<label x="332.74" y="-12.7" size="1.778" layer="95"/>
-<pinref part="JP1" gate="G$1" pin="1"/>
-<wire x1="320.04" y1="-5.08" x2="297.18" y2="-5.08" width="0.1524" layer="91"/>
-<junction x="320.04" y="-5.08"/>
-</segment>
-<segment>
 <pinref part="D94" gate="G$1" pin="A"/>
 <wire x1="27.94" y1="152.4" x2="45.72" y2="152.4" width="0.1524" layer="91"/>
 <label x="30.48" y="152.4" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R225" gate="R1" pin="1"/>
+<wire x1="320.04" y1="-33.02" x2="320.04" y2="-22.86" width="0.1524" layer="91"/>
+<pinref part="C125" gate="C1" pin="2"/>
+<wire x1="312.42" y1="-22.86" x2="320.04" y2="-22.86" width="0.1524" layer="91"/>
+<junction x="320.04" y="-22.86"/>
+<label x="322.58" y="-27.94" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="23" class="0">
@@ -35170,8 +36357,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="139.7" y="119.38" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-27.94" x2="53.34" y2="-27.94" width="0.1524" layer="91"/>
-<label x="48.26" y="-27.94" size="1.778" layer="95"/>
+<wire x1="45.72" y1="15.24" x2="53.34" y2="15.24" width="0.1524" layer="91"/>
+<label x="48.26" y="15.24" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="8"/>
 </segment>
 </net>
@@ -35411,7 +36598,7 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </segment>
 <segment>
 <pinref part="LEDARRAY" gate="J$1" pin="2"/>
-<wire x1="327.66" y1="-30.48" x2="320.04" y2="-30.48" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="-71.12" x2="312.42" y2="-71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="2" class="0">
@@ -35446,9 +36633,9 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </segment>
 <segment>
 <wire x1="177.8" y1="60.96" x2="193.04" y2="60.96" width="0.1524" layer="91"/>
-<pinref part="R26" gate="G$1" pin="1"/>
 <wire x1="193.04" y1="66.04" x2="193.04" y2="60.96" width="0.1524" layer="91"/>
 <label x="167.64" y="60.96" size="1.778" layer="95"/>
+<pinref part="R26" gate="R1" pin="1"/>
 </segment>
 <segment>
 <pinref part="NEBULA_A" gate="G$1" pin="SDA"/>
@@ -35501,9 +36688,9 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </segment>
 <segment>
 <wire x1="177.8" y1="63.5" x2="185.42" y2="63.5" width="0.1524" layer="91"/>
-<pinref part="R27" gate="G$1" pin="1"/>
 <wire x1="185.42" y1="66.04" x2="185.42" y2="63.5" width="0.1524" layer="91"/>
 <label x="167.64" y="63.5" size="1.778" layer="95"/>
+<pinref part="R27" gate="R1" pin="1"/>
 </segment>
 <segment>
 <pinref part="NEBULA_D" gate="G$1" pin="SCK"/>
@@ -36655,15 +37842,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <net name="N$51" class="0">
 <segment>
 <pinref part="GAME_INTERFACE" gate="G$1" pin="7"/>
-<wire x1="104.14" y1="15.24" x2="160.02" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="15.24" x2="160.02" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="ULN2" gate="G$1" pin="11"/>
-<wire x1="81.28" y1="-27.94" x2="86.36" y2="-27.94" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="-27.94" x2="104.14" y2="-27.94" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="-27.94" x2="104.14" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="-83.82" x2="86.36" y2="-27.94" width="0.1524" layer="91"/>
-<junction x="86.36" y="-27.94"/>
+<wire x1="81.28" y1="15.24" x2="86.36" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="-40.64" x2="86.36" y2="15.24" width="0.1524" layer="91"/>
+<junction x="86.36" y="15.24"/>
 <pinref part="D81" gate="G$1" pin="C"/>
-<wire x1="73.66" y1="-83.82" x2="86.36" y2="-83.82" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-40.64" x2="86.36" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$56" class="0">
@@ -36671,13 +37856,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="GAME_INTERFACE" gate="G$1" pin="8"/>
 <pinref part="ULN2" gate="G$1" pin="12"/>
 <wire x1="106.68" y1="12.7" x2="160.02" y2="12.7" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="-33.02" x2="88.9" y2="-33.02" width="0.1524" layer="91"/>
-<wire x1="88.9" y1="-33.02" x2="106.68" y2="-33.02" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="-33.02" x2="106.68" y2="12.7" width="0.1524" layer="91"/>
-<wire x1="88.9" y1="-91.44" x2="88.9" y2="-33.02" width="0.1524" layer="91"/>
-<junction x="88.9" y="-33.02"/>
+<wire x1="81.28" y1="10.16" x2="88.9" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="10.16" x2="106.68" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="10.16" x2="106.68" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="-48.26" x2="88.9" y2="10.16" width="0.1524" layer="91"/>
+<junction x="88.9" y="10.16"/>
 <pinref part="D82" gate="G$1" pin="C"/>
-<wire x1="73.66" y1="-91.44" x2="88.9" y2="-91.44" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-48.26" x2="88.9" y2="-48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$57" class="0">
@@ -36685,13 +37870,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="GAME_INTERFACE" gate="G$1" pin="9"/>
 <pinref part="ULN2" gate="G$1" pin="13"/>
 <wire x1="109.22" y1="10.16" x2="160.02" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="-38.1" x2="91.44" y2="-38.1" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="-38.1" x2="109.22" y2="-38.1" width="0.1524" layer="91"/>
-<wire x1="109.22" y1="-38.1" x2="109.22" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="-99.06" x2="91.44" y2="-38.1" width="0.1524" layer="91"/>
-<junction x="91.44" y="-38.1"/>
+<wire x1="81.28" y1="5.08" x2="91.44" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="5.08" x2="109.22" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="5.08" x2="109.22" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="-55.88" x2="91.44" y2="5.08" width="0.1524" layer="91"/>
+<junction x="91.44" y="5.08"/>
 <pinref part="D83" gate="G$1" pin="C"/>
-<wire x1="73.66" y1="-99.06" x2="91.44" y2="-99.06" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-55.88" x2="91.44" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$58" class="0">
@@ -36699,13 +37884,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="GAME_INTERFACE" gate="G$1" pin="10"/>
 <pinref part="ULN2" gate="G$1" pin="14"/>
 <wire x1="111.76" y1="7.62" x2="160.02" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="-43.18" x2="93.98" y2="-43.18" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="-43.18" x2="111.76" y2="-43.18" width="0.1524" layer="91"/>
-<wire x1="111.76" y1="-43.18" x2="111.76" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="-106.68" x2="93.98" y2="-43.18" width="0.1524" layer="91"/>
-<junction x="93.98" y="-43.18"/>
+<wire x1="81.28" y1="0" x2="93.98" y2="0" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="0" x2="111.76" y2="0" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="0" x2="111.76" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="-63.5" x2="93.98" y2="0" width="0.1524" layer="91"/>
+<junction x="93.98" y="0"/>
 <pinref part="D85" gate="G$1" pin="C"/>
-<wire x1="73.66" y1="-106.68" x2="93.98" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-63.5" x2="93.98" y2="-63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$59" class="0">
@@ -36713,13 +37898,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="GAME_INTERFACE" gate="G$1" pin="11"/>
 <pinref part="ULN2" gate="G$1" pin="15"/>
 <wire x1="114.3" y1="5.08" x2="160.02" y2="5.08" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="-48.26" x2="96.52" y2="-48.26" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="-48.26" x2="114.3" y2="-48.26" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="-48.26" x2="114.3" y2="5.08" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="-114.3" x2="96.52" y2="-48.26" width="0.1524" layer="91"/>
-<junction x="96.52" y="-48.26"/>
+<wire x1="81.28" y1="-5.08" x2="96.52" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="-5.08" x2="114.3" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="-5.08" x2="114.3" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="-71.12" x2="96.52" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="96.52" y="-5.08"/>
 <pinref part="D84" gate="G$1" pin="C"/>
-<wire x1="73.66" y1="-114.3" x2="96.52" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-71.12" x2="96.52" y2="-71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$89" class="4">
@@ -38391,8 +39576,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="180.34" y="-17.78" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-53.34" x2="53.34" y2="-53.34" width="0.1524" layer="91"/>
-<label x="48.26" y="-53.34" size="1.778" layer="95"/>
+<wire x1="45.72" y1="-10.16" x2="53.34" y2="-10.16" width="0.1524" layer="91"/>
+<label x="48.26" y="-10.16" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="3"/>
 </segment>
 </net>
@@ -38408,8 +39593,8 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="180.34" y="-20.32" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-58.42" x2="53.34" y2="-58.42" width="0.1524" layer="91"/>
-<label x="48.26" y="-58.42" size="1.778" layer="95"/>
+<wire x1="45.72" y1="-15.24" x2="53.34" y2="-15.24" width="0.1524" layer="91"/>
+<label x="48.26" y="-15.24" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -38425,42 +39610,36 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <label x="180.34" y="-22.86" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="-63.5" x2="53.34" y2="-63.5" width="0.1524" layer="91"/>
-<label x="48.26" y="-63.5" size="1.778" layer="95"/>
+<wire x1="45.72" y1="-20.32" x2="53.34" y2="-20.32" width="0.1524" layer="91"/>
+<label x="48.26" y="-20.32" size="1.778" layer="95"/>
 <pinref part="ULN2" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$148" class="0">
 <segment>
-<wire x1="116.84" y1="2.54" x2="129.54" y2="2.54" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="2.54" x2="129.54" y2="-17.78" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="-10.16" x2="129.54" y2="-17.78" width="0.1524" layer="91"/>
 <pinref part="ACCESSORY" gate="A" pin="2"/>
 <wire x1="129.54" y1="-17.78" x2="167.64" y2="-17.78" width="0.1524" layer="91"/>
 <pinref part="ULN2" gate="G$1" pin="16"/>
-<wire x1="81.28" y1="-53.34" x2="116.84" y2="-53.34" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="-53.34" x2="116.84" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="-10.16" x2="129.54" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$149" class="0">
 <segment>
-<wire x1="119.38" y1="-2.54" x2="127" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="127" y1="-2.54" x2="127" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="127" y1="-15.24" x2="127" y2="-20.32" width="0.1524" layer="91"/>
 <pinref part="ACCESSORY" gate="A" pin="3"/>
 <wire x1="127" y1="-20.32" x2="167.64" y2="-20.32" width="0.1524" layer="91"/>
 <pinref part="ULN2" gate="G$1" pin="17"/>
-<wire x1="81.28" y1="-58.42" x2="119.38" y2="-58.42" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="-58.42" x2="119.38" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="-15.24" x2="127" y2="-15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$150" class="0">
 <segment>
-<wire x1="121.92" y1="-7.62" x2="124.46" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="-7.62" x2="124.46" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="-20.32" x2="124.46" y2="-22.86" width="0.1524" layer="91"/>
 <pinref part="ACCESSORY" gate="A" pin="4"/>
 <wire x1="124.46" y1="-22.86" x2="167.64" y2="-22.86" width="0.1524" layer="91"/>
 <pinref part="ULN2" gate="G$1" pin="18"/>
-<wire x1="81.28" y1="-63.5" x2="121.92" y2="-63.5" width="0.1524" layer="91"/>
-<wire x1="121.92" y1="-63.5" x2="121.92" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="-20.32" x2="124.46" y2="-20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$159" class="0">
@@ -38474,35 +39653,35 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="R129" gate="G$1" pin="2"/>
 <pinref part="D84" gate="G$1" pin="A"/>
-<wire x1="55.88" y1="-114.3" x2="66.04" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-71.12" x2="66.04" y2="-71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$152" class="0">
 <segment>
 <pinref part="R128" gate="G$1" pin="2"/>
 <pinref part="D85" gate="G$1" pin="A"/>
-<wire x1="55.88" y1="-106.68" x2="66.04" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-63.5" x2="66.04" y2="-63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$153" class="0">
 <segment>
 <pinref part="R127" gate="G$1" pin="2"/>
 <pinref part="D83" gate="G$1" pin="A"/>
-<wire x1="55.88" y1="-99.06" x2="66.04" y2="-99.06" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-55.88" x2="66.04" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$154" class="0">
 <segment>
 <pinref part="R126" gate="G$1" pin="2"/>
 <pinref part="D82" gate="G$1" pin="A"/>
-<wire x1="55.88" y1="-91.44" x2="66.04" y2="-91.44" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-48.26" x2="66.04" y2="-48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$155" class="0">
 <segment>
 <pinref part="R125" gate="G$1" pin="2"/>
 <pinref part="D81" gate="G$1" pin="A"/>
-<wire x1="55.88" y1="-83.82" x2="66.04" y2="-83.82" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-40.64" x2="66.04" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$156" class="0">
@@ -40555,6 +41734,87 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="D89" gate="G$1" pin="A"/>
 <pinref part="R224" gate="R1" pin="2"/>
 <wire x1="160.02" y1="-139.7" x2="154.94" y2="-139.7" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="STAR_ENABLE" class="0">
+<segment>
+<pinref part="R83" gate="G$1" pin="1"/>
+<pinref part="R84" gate="G$1" pin="1"/>
+<wire x1="970.28" y1="266.7" x2="970.28" y2="198.12" width="0.1524" layer="91"/>
+<pinref part="R85" gate="G$1" pin="1"/>
+<wire x1="970.28" y1="198.12" x2="970.28" y2="116.84" width="0.1524" layer="91"/>
+<junction x="970.28" y="198.12"/>
+<pinref part="R86" gate="G$1" pin="1"/>
+<wire x1="970.28" y1="116.84" x2="970.28" y2="50.8" width="0.1524" layer="91"/>
+<junction x="970.28" y="116.84"/>
+<pinref part="R103" gate="G$1" pin="1"/>
+<pinref part="R104" gate="G$1" pin="1"/>
+<wire x1="1201.42" y1="266.7" x2="1201.42" y2="198.12" width="0.1524" layer="91"/>
+<pinref part="R105" gate="G$1" pin="1"/>
+<wire x1="1201.42" y1="198.12" x2="1201.42" y2="116.84" width="0.1524" layer="91"/>
+<junction x="1201.42" y="198.12"/>
+<pinref part="R106" gate="G$1" pin="1"/>
+<wire x1="1201.42" y1="116.84" x2="1201.42" y2="50.8" width="0.1524" layer="91"/>
+<junction x="1201.42" y="116.84"/>
+<wire x1="1201.42" y1="50.8" x2="1201.42" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="1201.42" y1="-5.08" x2="970.28" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="1201.42" y="50.8"/>
+<wire x1="970.28" y1="50.8" x2="970.28" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="970.28" y="50.8"/>
+<wire x1="970.28" y1="-5.08" x2="767.08" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="970.28" y="-5.08"/>
+<label x="784.86" y="-2.54" size="1.778" layer="95"/>
+<pinref part="R62" gate="G$1" pin="1"/>
+<pinref part="R63" gate="G$1" pin="1"/>
+<wire x1="767.08" y1="-5.08" x2="546.1" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="546.1" y1="-5.08" x2="403.86" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="403.86" y1="-5.08" x2="358.14" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="358.14" y1="-5.08" x2="330.2" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="-5.08" x2="320.04" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="767.08" y1="264.16" x2="767.08" y2="195.58" width="0.1524" layer="91"/>
+<pinref part="R64" gate="G$1" pin="1"/>
+<wire x1="767.08" y1="195.58" x2="767.08" y2="114.3" width="0.1524" layer="91"/>
+<junction x="767.08" y="195.58"/>
+<pinref part="R65" gate="G$1" pin="1"/>
+<wire x1="767.08" y1="114.3" x2="767.08" y2="50.8" width="0.1524" layer="91"/>
+<junction x="767.08" y="114.3"/>
+<wire x1="767.08" y1="50.8" x2="767.08" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="767.08" y="50.8"/>
+<junction x="767.08" y="-5.08"/>
+<pinref part="R58" gate="G$1" pin="1"/>
+<pinref part="R59" gate="G$1" pin="1"/>
+<wire x1="546.1" y1="266.7" x2="546.1" y2="198.12" width="0.1524" layer="91"/>
+<pinref part="R60" gate="G$1" pin="1"/>
+<wire x1="546.1" y1="198.12" x2="546.1" y2="116.84" width="0.1524" layer="91"/>
+<junction x="546.1" y="198.12"/>
+<pinref part="R61" gate="G$1" pin="1"/>
+<wire x1="546.1" y1="116.84" x2="546.1" y2="50.8" width="0.1524" layer="91"/>
+<junction x="546.1" y="116.84"/>
+<wire x1="546.1" y1="50.8" x2="546.1" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="546.1" y="50.8"/>
+<junction x="546.1" y="-5.08"/>
+<pinref part="JP1" gate="G$1" pin="1"/>
+<pinref part="J1" gate="G$1" pin="1"/>
+<wire x1="320.04" y1="-5.08" x2="297.18" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="320.04" y="-5.08"/>
+<pinref part="R67" gate="G$1" pin="1"/>
+<wire x1="403.86" y1="-10.16" x2="403.86" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="403.86" y="-5.08"/>
+<pinref part="R225" gate="R1" pin="2"/>
+<wire x1="330.2" y1="-22.86" x2="330.2" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="330.2" y="-5.08"/>
+<pinref part="R54" gate="G$1" pin="1"/>
+<pinref part="R55" gate="G$1" pin="1"/>
+<wire x1="358.14" y1="266.7" x2="358.14" y2="198.12" width="0.1524" layer="91"/>
+<pinref part="R56" gate="G$1" pin="1"/>
+<wire x1="358.14" y1="198.12" x2="358.14" y2="116.84" width="0.1524" layer="91"/>
+<junction x="358.14" y="198.12"/>
+<pinref part="R57" gate="G$1" pin="1"/>
+<wire x1="358.14" y1="116.84" x2="358.14" y2="50.8" width="0.1524" layer="91"/>
+<junction x="358.14" y="116.84"/>
+<wire x1="358.14" y1="50.8" x2="358.14" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="358.14" y="50.8"/>
+<junction x="358.14" y="-5.08"/>
 </segment>
 </net>
 </nets>

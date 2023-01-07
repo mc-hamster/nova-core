@@ -10,6 +10,8 @@
 
 #include <Adafruit_MCP23X17.h>
 
+#include "simona.h"
+
 // SKETCH BEGIN
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
