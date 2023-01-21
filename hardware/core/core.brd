@@ -6170,23 +6170,17 @@ design rules under a new name.</description>
 </signal>
 <signal name="36">
 <contactref element="U$1" pad="17"/>
-<contactref element="NEBULA_C" pad="19"/>
-<wire x1="74.92" y1="28.375" x2="81.915" y2="86.52" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="39">
 <contactref element="U$1" pad="18"/>
-<contactref element="NEBULA_D" pad="19"/>
-<wire x1="72.38" y1="28.375" x2="51.435" y2="86.52" width="0" layer="19" extent="1-1"/>
+<contactref element="NEBULA_H" pad="19"/>
+<wire x1="72.38" y1="28.375" x2="36.83" y2="72.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="34">
 <contactref element="U$1" pad="19"/>
-<contactref element="NEBULA_A" pad="19"/>
-<wire x1="69.84" y1="28.375" x2="143.51" y2="86.52" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="35">
 <contactref element="U$1" pad="20"/>
-<contactref element="NEBULA_B" pad="19"/>
-<wire x1="67.3" y1="28.375" x2="112.395" y2="86.52" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="32">
 <contactref element="U$1" pad="21"/>
@@ -6195,10 +6189,6 @@ design rules under a new name.</description>
 </signal>
 <signal name="33">
 <contactref element="U$1" pad="22"/>
-<contactref element="NEBULA_G" pad="19"/>
-<contactref element="NEBULA_H" pad="19"/>
-<wire x1="36.83" y1="72.55" x2="67.945" y2="72.55" width="0" layer="19" extent="1-1"/>
-<wire x1="62.22" y1="28.375" x2="67.945" y2="72.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="25">
 <contactref element="U$1" pad="23"/>
@@ -6243,13 +6233,9 @@ design rules under a new name.</description>
 </signal>
 <signal name="19">
 <contactref element="U$1" pad="10"/>
-<contactref element="NEBULA_F" pad="19"/>
-<wire x1="64.76" y1="3.605" x2="128.905" y2="72.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="18">
 <contactref element="U$1" pad="9"/>
-<contactref element="NEBULA_E" pad="19"/>
-<wire x1="62.22" y1="3.605" x2="20.32" y2="86.52" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="5">
 <contactref element="U$1" pad="8"/>
