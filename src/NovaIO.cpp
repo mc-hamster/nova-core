@@ -82,8 +82,11 @@ NovaIO::NovaIO()
         //mcp_h.pinMode(i, OUTPUT);
     }
 
-    mcp_h.pinMode(BUTTON_GREEN_IN_PIN, INPUT);
-
+    mcp_h.pinMode(BUTTON_RED_IN, INPUT);
+    mcp_h.pinMode(BUTTON_GREEN_IN, INPUT);
+    mcp_h.pinMode(BUTTON_BLUE_IN, INPUT);
+    mcp_h.pinMode(BUTTON_YELLOW_IN, INPUT);
+    mcp_h.pinMode(BUTTON_WHITE_IN, INPUT);
 
     // Turn off all outputs
     mcp_a.writeGPIOAB(0b0000000000000000);

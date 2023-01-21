@@ -2,6 +2,7 @@
 
 #include <Thread.h>
 #include <ThreadController.h>
+#include <Wire.h>
 
 #include "configuration.h"
 
@@ -16,25 +17,60 @@ Thread threadAmbient = Thread();
 // callback for myThread
 void callbackSimona()
 {
-  Serial.print("callbackSimona! I'm running on: ");
-  Serial.println(millis());
+  // Serial.print("callbackSimona! I'm running on: ");
+  // Serial.println(millis());
+  // Serial.println("Button Pressed!");
 
-  if (!novaIO->mcp_h.digitalRead(BUTTON_GREEN_IN_PIN))
+  if (!novaIO->mcp_h.digitalRead(BUTTON_RED_IN))
   {
-    Serial.println("Button Pressed!");
-    digitalWrite(23, true);
-    digitalWrite(BUTTON_GREEN_OUT_PIN, true);
-    digitalWrite(26, true);
-    digitalWrite(27, true);
-    digitalWrite(32, true);
-
+    digitalWrite(BUTTON_RED_OUT, true);
     delay(100);
   }
-  digitalWrite(23, false);
-  digitalWrite(BUTTON_GREEN_OUT_PIN, false);
-  digitalWrite(26, false);
-  digitalWrite(27, false);
-  digitalWrite(32, false);
+  else
+  {
+    digitalWrite(BUTTON_RED_OUT, false);
+  }
+
+  if (!novaIO->mcp_h.digitalRead(BUTTON_GREEN_IN))
+  {
+    digitalWrite(BUTTON_GREEN_OUT, true);
+    delay(100);
+  }
+  else
+  {
+    digitalWrite(BUTTON_GREEN_OUT, false);
+  }
+
+  if (!novaIO->mcp_h.digitalRead(BUTTON_BLUE_IN))
+  {
+    digitalWrite(BUTTON_BLUE_OUT, true);
+    delay(100);
+  }
+  else
+  {
+    digitalWrite(BUTTON_BLUE_OUT, false);
+  }
+
+  if (!novaIO->mcp_h.digitalRead(BUTTON_YELLOW_IN))
+  {
+    digitalWrite(BUTTON_YELLOW_OUT, true);
+    delay(100);
+  }
+  else
+  {
+    digitalWrite(BUTTON_YELLOW_OUT, false);
+  }
+
+
+  if (!novaIO->mcp_h.digitalRead(BUTTON_WHITE_IN))
+  {
+    digitalWrite(BUTTON_WHITE_OUT, true);
+    delay(100);
+  }
+  else
+  {
+    digitalWrite(BUTTON_WHITE_OUT, false);
+  }
 }
 
 // callback for myThread
@@ -66,26 +102,32 @@ void callbackAmbient()
     novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
     novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
   }
-
 }
 
 void setup()
 {
+  delay(1000);
   Serial.begin(921600);
+  Serial.println("NOVA: CORE");
   Serial.print("setup() is running on core ");
   Serial.println(xPortGetCoreID());
 
   Serial.setDebugOutput(true);
 
+  Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
+
+  Wire.begin();
+  Wire.setClock(400000UL);
+
   novaIO = new NovaIO();
 
   pinMode(ENABLE_DEVICE_PIN, INPUT);
 
-  pinMode(23, OUTPUT);
-  pinMode(BUTTON_GREEN_OUT_PIN, OUTPUT);
-  pinMode(26, OUTPUT);
-  pinMode(27, OUTPUT);
-  pinMode(32, OUTPUT);
+  pinMode(BUTTON_RED_OUT, OUTPUT);
+  pinMode(BUTTON_GREEN_OUT, OUTPUT);
+  pinMode(BUTTON_BLUE_OUT, OUTPUT);
+  pinMode(BUTTON_YELLOW_OUT, OUTPUT);
+  pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
   threadSimona.onRun(callbackSimona);
   threadSimona.setInterval(10);
