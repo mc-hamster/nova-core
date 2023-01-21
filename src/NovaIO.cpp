@@ -4,6 +4,7 @@
 // #include <semphr.h>
 
 #include "NovaIO.h"
+#include "configuration.h"
 
 // AirTime *airTime = NULL;
 
@@ -13,7 +14,6 @@ NovaIO::NovaIO()
 {
     // Do nothing
 
-    i2c_inuse = true;
 
     if (!mcp_a.begin_I2C(0x20))
     {
@@ -65,12 +65,8 @@ NovaIO::NovaIO()
         while (1)
             ;
     }
-    i2c_inuse = false;
 
     Serial.println("All MCP23X17 interfaces setup.");
-
-    i2c_inuse = true;
-    mcp_h.pinMode(BUTTON_GREEN_PIN, INPUT_PULLUP);
 
     uint8_t i = 0;
     for (i = 0; i <= 15; ++i)
@@ -83,8 +79,11 @@ NovaIO::NovaIO()
         mcp_f.pinMode(i, OUTPUT);
         mcp_g.pinMode(i, OUTPUT);
 
-        // mcp_h.pinMode(i, OUTPUT);
+        //mcp_h.pinMode(i, OUTPUT);
     }
+
+    mcp_h.pinMode(BUTTON_GREEN_IN_PIN, INPUT);
+
 
     // Turn off all outputs
     mcp_a.writeGPIOAB(0b0000000000000000);
@@ -93,39 +92,17 @@ NovaIO::NovaIO()
     mcp_d.writeGPIOAB(0b0000000000000000);
     mcp_e.writeGPIOAB(0b0000000000000000);
 
-    // delay(1000);
-
-    mcp_a.writeGPIOAB(0b1111111111111111);
-    mcp_b.writeGPIOAB(0b1111111111111111);
-    mcp_c.writeGPIOAB(0b1111111111111111);
-    mcp_d.writeGPIOAB(0b1111111111111111);
-    mcp_e.writeGPIOAB(0b1111111111111111);
-
-    delay(1000);
-
-    mcp_a.writeGPIOAB(0b0000000000000000);
-    mcp_b.writeGPIOAB(0b0000000000000000);
-    mcp_c.writeGPIOAB(0b0000000000000000);
-    mcp_d.writeGPIOAB(0b0000000000000000);
-    mcp_e.writeGPIOAB(0b0000000000000000);
-    i2c_inuse = false;
 }
 
 void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
 {
 
-    while (i2c_inuse)
-    {
-        delayMicroseconds(100);
-    };
-
-    i2c_inuse = true;
     mcp_a.writeGPIOAB(0b1111111111111111);
 
     delay(100);
 
     mcp_a.writeGPIOAB(0b0000000000000000);
-    i2c_inuse = false;
+
     delay(100);
 }
 
@@ -134,12 +111,6 @@ bool NovaIO::digitalRead(int which, int pin)
     Serial.print("digitalRead ");
     Serial.println(which);
 
-    while (i2c_inuse)
-    {
-        delayMicroseconds(100);
-    };
-
-    i2c_inuse = true;
 
     bool readValue = mcp_h.digitalRead(pin);
     Serial.println("read value ");
@@ -170,6 +141,6 @@ bool NovaIO::digitalRead(int which, int pin)
     else if (which == expH)
     {
     }
-    i2c_inuse = false;
+
     return 0;
 }

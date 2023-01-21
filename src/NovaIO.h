@@ -22,6 +22,11 @@ enum expansionIO
 class NovaIO
 {
 private:
+
+
+public:
+        NovaIO();
+
         Adafruit_MCP23X17 mcp_a;
         Adafruit_MCP23X17 mcp_b;
         Adafruit_MCP23X17 mcp_c;
@@ -30,13 +35,6 @@ private:
         Adafruit_MCP23X17 mcp_f;
         Adafruit_MCP23X17 mcp_g;
         Adafruit_MCP23X17 mcp_h; // Button inputs are on h
-
-        SemaphoreHandle_t mutex_v;
-
-        bool i2c_inuse;
-
-public:
-        NovaIO();
 
         void digitalWrite(enum expansionIO, int pin, bool state);
 
