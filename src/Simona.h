@@ -34,4 +34,6 @@ class Simona {
 
 };
 
+extern Simona *simona;
+
 #endif
