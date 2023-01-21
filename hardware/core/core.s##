@@ -36237,10 +36237,6 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="NEBULA_B" gate="G$1" pin="INTB"/>
 <wire x1="462.28" y1="-66.04" x2="467.36" y2="-66.04" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="NEBULA_H" gate="G$1" pin="INTB"/>
-<wire x1="845.82" y1="-66.04" x2="840.74" y2="-66.04" width="0.1524" layer="91"/>
-</segment>
 </net>
 <net name="32" class="0">
 <segment>
@@ -36263,6 +36259,10 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="NEBULA_G" gate="G$1" pin="INTB"/>
 <wire x1="777.24" y1="-66.04" x2="782.32" y2="-66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="NEBULA_H" gate="G$1" pin="INTB"/>
+<wire x1="840.74" y1="-66.04" x2="845.82" y2="-66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="25" class="0">

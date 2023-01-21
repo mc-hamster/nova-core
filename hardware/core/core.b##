@@ -6127,9 +6127,7 @@ design rules under a new name.</description>
 <signal name="35">
 <contactref element="U$1" pad="20"/>
 <contactref element="NEBULA_B" pad="19"/>
-<contactref element="NEBULA_H" pad="19"/>
 <wire x1="67.3" y1="28.375" x2="112.395" y2="86.52" width="0" layer="19" extent="1-1"/>
-<wire x1="36.83" y1="72.55" x2="67.3" y2="28.375" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="32">
 <contactref element="U$1" pad="21"/>
@@ -6139,6 +6137,8 @@ design rules under a new name.</description>
 <signal name="33">
 <contactref element="U$1" pad="22"/>
 <contactref element="NEBULA_G" pad="19"/>
+<contactref element="NEBULA_H" pad="19"/>
+<wire x1="36.83" y1="72.55" x2="67.945" y2="72.55" width="0" layer="19" extent="1-1"/>
 <wire x1="62.22" y1="28.375" x2="67.945" y2="72.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="25">
