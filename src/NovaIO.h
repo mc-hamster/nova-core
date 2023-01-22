@@ -37,6 +37,15 @@ public:
 
         void digitalWrite(enum expansionIO, int pin, bool state);
 
+        void mcpA_writeGPIOAB(uint16_t value);
+        void mcpB_writeGPIOAB(uint16_t value);
+        void mcpC_writeGPIOAB(uint16_t value);
+        void mcpD_writeGPIOAB(uint16_t value);
+        void mcpE_writeGPIOAB(uint16_t value);
+        void mcpF_writeGPIOAB(uint16_t value);
+        void mcpG_writeGPIOAB(uint16_t value);
+        void mcpH_writeGPIOAB(uint16_t value);
+
         bool expansionDigitalRead(int pin);
         xSemaphoreHandle mutex_i2c;
 };

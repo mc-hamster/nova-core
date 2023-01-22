@@ -111,19 +111,146 @@ void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
 
 bool NovaIO::expansionDigitalRead(int pin)
 {
-    //return 0;
+    // return 0;
     bool readValue;
     while (1) // After duration set Pins to end state
     {
-  //Serial.println("readValue");
         if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
         {
             readValue = mcp_h.digitalRead(pin);
             break;
         }
-        delay(1);
+        yield();
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
     return readValue;
+}
+
+void NovaIO::mcpA_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_a.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpB_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_b.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpC_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_c.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpD_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_d.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpE_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_e.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpF_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_f.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpG_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_g.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpH_writeGPIOAB(uint16_t value)
+{
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_h.writeGPIOAB(value);
+            break;
+        }
+        yield();
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }

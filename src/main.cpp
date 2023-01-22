@@ -140,10 +140,6 @@ void loop()
   /* Best not to have anything in this loop.
       Everything should be in freeRTOS tasks
   */
-  /*
-   if (threadSimona.shouldRun())
-     threadSimona.run();
-     */
 }
 
 /*--------------------------------------------------*/
@@ -157,40 +153,30 @@ void TaskAmbient(void *pvParameters) // This is a task.
   Serial.println("TaskAmbient is running");
   while (1) // A Task shall never return or exit.
   {
-    while (1) // After duration set Pins to end state
+    if (digitalRead(ENABLE_DEVICE_PIN))
     {
-      if (xSemaphoreTake(novaIO->mutex_i2c, 100) == pdTRUE) // if mutex was taken
-      {
-        if (digitalRead(ENABLE_DEVICE_PIN))
-        {
-          novaIO->mcp_a.writeGPIOAB(0b1111111111111111);
-          novaIO->mcp_b.writeGPIOAB(0b1111111111111111);
-          novaIO->mcp_c.writeGPIOAB(0b1111111111111111);
-          novaIO->mcp_d.writeGPIOAB(0b1111111111111111);
-          novaIO->mcp_e.writeGPIOAB(0b1111111111111111);
+      novaIO->mcpA_writeGPIOAB(0b1111111111111111);
+      novaIO->mcpB_writeGPIOAB(0b1111111111111111);
+      novaIO->mcpC_writeGPIOAB(0b1111111111111111);
+      novaIO->mcpD_writeGPIOAB(0b1111111111111111);
+      novaIO->mcpE_writeGPIOAB(0b1111111111111111);
 
-          // delay(10);
-
-          novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
-        }
-        else
-        {
-          novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
-          novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
-        }
-      }
-      break;
+      novaIO->mcpA_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpB_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpC_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpD_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpE_writeGPIOAB(0b0000000000000000);
+    }
+    else
+    {
+      novaIO->mcpA_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpB_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpC_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpD_writeGPIOAB(0b0000000000000000);
+      novaIO->mcpE_writeGPIOAB(0b0000000000000000);
     }
 
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
-    yield();                           // Should't do anything but it's here incase the watchdog needs it.
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(100);
   }
 }
