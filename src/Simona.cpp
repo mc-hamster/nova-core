@@ -6,16 +6,6 @@
 // Original Source: https://github.com/printnplay/SimpleSimon/blob/main/simon.ino
 // THANK YOU JAMES!
 
-//*****************************************
-
-/*
-int LENGTH = 400; // Length of time to play the main notes
-
-int gamepattern[20]; // Array to store game pattern in during play
-
-int difficulty = 1;
-*/
-//*****************************************
 
 Simona *simona = NULL;
 
@@ -27,7 +17,6 @@ Simona::Simona()
 
 void Simona::loop()
 {
-  // generate_game(); // Was used for testing a single-game mode before main menu was implimented
   main_menu();
 }
 
