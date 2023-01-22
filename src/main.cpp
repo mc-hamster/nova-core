@@ -8,11 +8,13 @@
 
 #include "Simona.h"
 #include "NovaIO.h"
-
-//    novaIO->digitalWrite(expA, 1, 1);
+#include "main.h"
 
 Thread threadSimona = Thread();
-Thread threadAmbient = Thread();
+
+void TaskAmbient(void *pvParameters);
+void TaskSimona(void *pvParameters);
+void Task3(void *pvParameters);
 
 // callback for myThread
 void callbackSimona()
@@ -21,6 +23,9 @@ void callbackSimona()
   // Serial.println(millis());
   // Serial.println("Button Pressed!");
 
+  simona->loop();
+
+  return;
   if (!novaIO->mcp_h.digitalRead(BUTTON_RED_IN))
   {
     digitalWrite(BUTTON_RED_OUT, true);
@@ -61,7 +66,6 @@ void callbackSimona()
     digitalWrite(BUTTON_YELLOW_OUT, false);
   }
 
-
   if (!novaIO->mcp_h.digitalRead(BUTTON_WHITE_IN))
   {
     digitalWrite(BUTTON_WHITE_OUT, true);
@@ -70,37 +74,6 @@ void callbackSimona()
   else
   {
     digitalWrite(BUTTON_WHITE_OUT, false);
-  }
-}
-
-// callback for myThread
-void callbackAmbient()
-{
-  if (digitalRead(ENABLE_DEVICE_PIN))
-  {
-    delay(10);
-
-    novaIO->mcp_a.writeGPIOAB(0b1111111111111111);
-    novaIO->mcp_b.writeGPIOAB(0b1111111111111111);
-    novaIO->mcp_c.writeGPIOAB(0b1111111111111111);
-    novaIO->mcp_d.writeGPIOAB(0b1111111111111111);
-    novaIO->mcp_e.writeGPIOAB(0b1111111111111111);
-
-    delay(10);
-
-    novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
-  }
-  else
-  {
-    novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
-    novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
   }
 }
 
@@ -119,7 +92,11 @@ void setup()
   Wire.begin();
   Wire.setClock(400000UL);
 
+  Serial.println("new NovaIO");
   novaIO = new NovaIO();
+
+  Serial.println("new Simona");
+  simona = new Simona();
 
   pinMode(ENABLE_DEVICE_PIN, INPUT);
 
@@ -129,19 +106,119 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
-  threadSimona.onRun(callbackSimona);
-  threadSimona.setInterval(10);
+  // threadSimona.onRun(callbackSimona);
+  // threadSimona.setInterval(10);
 
-  threadAmbient.onRun(callbackAmbient);
-  threadAmbient.setInterval(500);
+  /*
+    Priorities:
+      0 = Lowest
+      configMAX_PRIORITIES = highest
+  */
+  Serial.println("Create TaskAmbient");
+  xTaskCreate(&TaskAmbient, "TaskAmbient", 2048, NULL, 5, NULL);
+
+  Serial.println("Create TaskSimona");
+  xTaskCreate(&TaskSimona, "TasTaskSimonak2", 2048, NULL, 5, NULL);
+
+  /*
+    Serial.println("Create Task3");
+    xTaskCreate(
+        Task3, "Task3" // A name just for humans
+        ,
+        1024 // This stack size can be checked & adjusted by reading the Stack Highwater
+        ,
+        NULL, 2 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+        ,
+        NULL);
+
+        */
 }
 
 void loop()
 {
 
-  if (threadSimona.shouldRun())
-    threadSimona.run();
+  /* Best not to have anything in this loop.
+      Everything should be in freeRTOS tasks
+  */
+  /*
+   if (threadSimona.shouldRun())
+     threadSimona.run();
+     */
+}
 
-  if (threadAmbient.shouldRun())
-    threadAmbient.run();
+/*--------------------------------------------------*/
+/*---------------------- Tasks ---------------------*/
+/*--------------------------------------------------*/
+
+void TaskAmbient(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+
+  Serial.println("TaskAmbient is running");
+  while (1) // A Task shall never return or exit.
+  {
+    while (1) // After duration set Pins to end state
+    {
+      if (xSemaphoreTake(novaIO->mutex_i2c, 100) == pdTRUE) // if mutex was taken
+      {
+        if (digitalRead(ENABLE_DEVICE_PIN))
+        {
+          novaIO->mcp_a.writeGPIOAB(0b1111111111111111);
+          novaIO->mcp_b.writeGPIOAB(0b1111111111111111);
+          novaIO->mcp_c.writeGPIOAB(0b1111111111111111);
+          novaIO->mcp_d.writeGPIOAB(0b1111111111111111);
+          novaIO->mcp_e.writeGPIOAB(0b1111111111111111);
+
+          // delay(10);
+
+          novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
+        }
+        else
+        {
+          novaIO->mcp_a.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_b.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_c.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_d.writeGPIOAB(0b0000000000000000);
+          novaIO->mcp_e.writeGPIOAB(0b0000000000000000);
+        }
+      }
+      break;
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    yield();                           // Should't do anything but it's here incase the watchdog needs it.
+    delay(100);
+  }
+}
+
+void TaskSimona(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+  Serial.println("TaskSimona is running");
+
+  while (1) // A Task shall never return or exit.
+  {
+    Serial.println("in TaskSimona while");
+    simona->loop();
+    Serial.println("in TaskSimona while 2");
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    delay(10);
+    //  Do something
+  }
+}
+
+void Task3(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+  Serial.println("Task3 is running");
+
+  while (1) // A Task shall never return or exit.
+  {
+    delay(10);
+    // Do something
+  }
 }

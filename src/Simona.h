@@ -19,8 +19,6 @@ class Simona {
 
         void main_menu();
 
-        void setPins();
-
         void play_game();
 
         void generate_game();
@@ -29,9 +27,7 @@ class Simona {
 
         void game_over(bool win);
 
-        void testButtons();
-
-
+\
 };
 
 extern Simona *simona;

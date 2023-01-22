@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "main.h"
 #include "configuration.h"
 #include <Adafruit_MCP23X17.h>
 #include <Arduino.h>
@@ -22,8 +23,6 @@ enum expansionIO
 class NovaIO
 {
 private:
-
-
 public:
         NovaIO();
 
@@ -38,7 +37,8 @@ public:
 
         void digitalWrite(enum expansionIO, int pin, bool state);
 
-        bool digitalRead(int which, int pin);
+        bool expansionDigitalRead(int pin);
+        xSemaphoreHandle mutex_i2c;
 };
 
 extern NovaIO *novaIO;

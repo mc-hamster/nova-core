@@ -1,10 +1,9 @@
 #include <Arduino.h>
 #include <Adafruit_MCP23X17.h>
-// #include <Arduino_FreeRTOS.h>
-// #include <semphr.h>
 
 #include "NovaIO.h"
 #include "configuration.h"
+#include "main.h"
 
 // AirTime *airTime = NULL;
 
@@ -14,6 +13,7 @@ NovaIO::NovaIO()
 {
     // Do nothing
 
+    mutex_i2c = xSemaphoreCreateMutex();
 
     if (!mcp_a.begin_I2C(0x20))
     {
@@ -79,7 +79,7 @@ NovaIO::NovaIO()
         mcp_f.pinMode(i, OUTPUT);
         mcp_g.pinMode(i, OUTPUT);
 
-        //mcp_h.pinMode(i, OUTPUT);
+        // mcp_h.pinMode(i, OUTPUT);
     }
 
     mcp_h.pinMode(BUTTON_RED_IN, INPUT);
@@ -94,7 +94,7 @@ NovaIO::NovaIO()
     mcp_c.writeGPIOAB(0b0000000000000000);
     mcp_d.writeGPIOAB(0b0000000000000000);
     mcp_e.writeGPIOAB(0b0000000000000000);
-
+    Serial.println("All MCP23X17 interfaces setup. - Done");
 }
 
 void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
@@ -109,41 +109,21 @@ void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
     delay(100);
 }
 
-bool NovaIO::digitalRead(int which, int pin)
+bool NovaIO::expansionDigitalRead(int pin)
 {
-    Serial.print("digitalRead ");
-    Serial.println(which);
+    //return 0;
+    bool readValue;
+    while (1) // After duration set Pins to end state
+    {
+  //Serial.println("readValue");
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            readValue = mcp_h.digitalRead(pin);
+            break;
+        }
+        delay(1);
+    }
 
-
-    bool readValue = mcp_h.digitalRead(pin);
-    Serial.println("read value ");
-
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
     return readValue;
-    
-    if (which == expA)
-    {
-    }
-    else if (which == expB)
-    {
-    }
-    else if (which == expC)
-    {
-    }
-    else if (which == expD)
-    {
-    }
-    else if (which == expE)
-    {
-    }
-    else if (which == expF)
-    {
-    }
-    else if (which == expH)
-    {
-    }
-    else if (which == expH)
-    {
-    }
-
-    return 0;
 }
