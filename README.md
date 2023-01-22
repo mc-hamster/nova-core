@@ -1,2 +1,2 @@
-# nova-nebula
+# nova-core
 
