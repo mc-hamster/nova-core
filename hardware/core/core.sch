@@ -27899,7 +27899,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R55" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27908,7 +27908,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R56" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27917,7 +27917,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R57" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27926,7 +27926,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R58" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27935,7 +27935,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R59" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27944,7 +27944,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R60" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27953,7 +27953,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R61" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27962,7 +27962,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R62" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27971,7 +27971,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R63" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27980,7 +27980,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R64" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27989,7 +27989,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R65" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -27998,7 +27998,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="JST-PTH-2" package3d_urn="urn:adsk.eagle:package:38053/1"/>
 <part name="+3V23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -28283,7 +28283,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R84" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28292,7 +28292,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R85" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28301,7 +28301,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R86" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28310,7 +28310,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="STAR_13" library="con-jst-ph" library_urn="urn:adsk.eagle:library:37597460" deviceset="B8B-PH-K" device="" package3d_urn="urn:adsk.eagle:package:37597503/1"/>
 <part name="STAR_14" library="con-jst-ph" library_urn="urn:adsk.eagle:library:37597460" deviceset="B8B-PH-K" device="" package3d_urn="urn:adsk.eagle:package:37597503/1"/>
@@ -28515,7 +28515,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R104" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28524,7 +28524,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R105" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28533,7 +28533,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R106" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -28542,7 +28542,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="STAR_17" library="con-jst-ph" library_urn="urn:adsk.eagle:library:37597460" deviceset="B8B-PH-K" device="" package3d_urn="urn:adsk.eagle:package:37597503/1"/>
 <part name="STAR_18" library="con-jst-ph" library_urn="urn:adsk.eagle:library:37597460" deviceset="B8B-PH-K" device="" package3d_urn="urn:adsk.eagle:package:37597503/1"/>
@@ -29275,7 +29275,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R141" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29284,7 +29284,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R142" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29293,7 +29293,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R143" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29302,7 +29302,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R144" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29311,7 +29311,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R145" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29320,7 +29320,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R146" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29329,7 +29329,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R147" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29338,7 +29338,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="C37" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1nf">
 <spice>
@@ -29427,7 +29427,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R149" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29436,7 +29436,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R150" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29445,7 +29445,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R151" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29454,7 +29454,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R152" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29463,7 +29463,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R153" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29472,7 +29472,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R154" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29481,7 +29481,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R155" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29490,7 +29490,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="C45" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1nf">
 <spice>
@@ -29578,7 +29578,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R157" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29587,7 +29587,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R158" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29596,7 +29596,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R159" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29605,7 +29605,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R160" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29614,7 +29614,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R161" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29623,7 +29623,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R162" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29632,7 +29632,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R163" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29641,7 +29641,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="GND15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -29727,7 +29727,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R165" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29736,7 +29736,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R166" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29745,7 +29745,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R167" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29754,7 +29754,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R168" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29763,7 +29763,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R169" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29772,7 +29772,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R170" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29781,7 +29781,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R171" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29790,7 +29790,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="P+20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="ULN6" library="SparkFun-IC-Special-Function" library_urn="urn:adsk.eagle:library:527" deviceset="ULN2803" device="SOICW" package3d_urn="urn:adsk.eagle:package:39215/1">
@@ -29916,7 +29916,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R173" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29925,7 +29925,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R174" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29934,7 +29934,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R175" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29943,7 +29943,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -29954,7 +29954,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R177" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29963,7 +29963,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R178" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29972,7 +29972,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R179" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -29981,7 +29981,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="P+22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="R180" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
@@ -29991,7 +29991,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R181" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30000,7 +30000,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R182" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30009,7 +30009,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R183" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30018,7 +30018,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R184" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30027,7 +30027,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R185" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30036,7 +30036,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R186" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30045,7 +30045,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R187" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30054,7 +30054,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="GND22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND24" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -30233,7 +30233,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R189" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30242,7 +30242,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R190" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30251,7 +30251,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R191" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30260,7 +30260,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R193" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30269,7 +30269,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R194" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30278,7 +30278,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R195" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30287,7 +30287,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R196" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30296,7 +30296,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R192" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30305,7 +30305,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R197" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30314,7 +30314,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R198" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30323,7 +30323,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R199" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30332,7 +30332,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R200" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30341,7 +30341,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R201" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30350,7 +30350,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R202" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30359,7 +30359,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R203" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30368,7 +30368,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="GND69" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND71" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -30381,7 +30381,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R205" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30390,7 +30390,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R206" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30399,7 +30399,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R207" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30408,7 +30408,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R208" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30417,7 +30417,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R209" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30426,7 +30426,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R210" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30435,7 +30435,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R211" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30444,7 +30444,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R212" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30453,7 +30453,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R213" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30462,7 +30462,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R214" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30471,7 +30471,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R215" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30480,7 +30480,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R216" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30489,7 +30489,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R217" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30498,7 +30498,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R218" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30507,7 +30507,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="R219" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68">
 <spice>
@@ -30516,7 +30516,7 @@ Source: http://eshop.phoenixcontact.com .. 1729144.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
-<attribute name="LCSC_PART" value="C25804"/>
+<attribute name="LCSC_PART" value="c27592"/>
 </part>
 <part name="GND48" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND50" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>

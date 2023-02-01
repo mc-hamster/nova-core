@@ -3176,62 +3176,62 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="59.69" y="158.115" size="1.016" layer="27" ratio="10"/>
 </element>
 <element name="R54" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="154.94" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="154.94" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="154.94" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="154.94" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="154.94" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R55" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="147.32" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="147.32" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="147.32" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="147.32" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="147.32" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R56" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="139.7" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="139.7" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="139.7" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="139.7" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="139.7" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R57" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="132.08" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="132.08" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="132.08" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="132.08" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="132.08" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R58" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="124.46" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="124.46" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="124.46" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="124.46" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="124.46" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R59" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="116.84" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="116.84" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="116.84" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="116.84" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="116.84" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R60" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="109.22" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="109.22" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="109.22" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="109.22" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="109.22" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R61" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="101.6" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="101.6" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="101.6" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="101.6" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="101.6" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R62" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="93.98" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="93.98" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="93.98" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="93.98" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="93.98" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R63" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="86.36" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="86.36" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="86.36" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="86.36" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="86.36" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R64" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="78.74" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="78.74" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="78.74" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="78.74" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="78.74" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R65" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="71.12" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="71.12" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="71.12" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="71.12" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="71.12" y="141.605" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
@@ -3520,22 +3520,22 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="34.29" y="115.57" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
 </element>
 <element name="R83" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-29.845" y="146.685" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-29.845" y="146.685" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-29.845" y="146.685" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-29.845" y="146.685" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R84" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="55.88" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-42.545" y="151.765" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-42.545" y="151.765" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-42.545" y="151.765" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-42.545" y="151.765" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R85" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="48.26" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-55.245" y="156.845" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-55.245" y="156.845" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-55.245" y="156.845" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-55.245" y="156.845" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R86" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="40.64" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-67.945" y="161.925" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-67.945" y="161.925" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-67.945" y="161.925" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-67.945" y="161.925" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
@@ -3720,22 +3720,22 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="3.175" y="115.57" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
 </element>
 <element name="R103" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="33.02" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-70.485" y="147.32" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-70.485" y="147.32" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-70.485" y="147.32" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-70.485" y="147.32" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R104" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="25.4" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-83.185" y="153.035" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-83.185" y="153.035" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-83.185" y="153.035" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-83.185" y="153.035" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R105" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="17.78" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-95.885" y="158.75" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-95.885" y="158.75" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-95.885" y="158.75" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-95.885" y="158.75" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R106" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="10.16" y="141.605" smashed="yes" rot="R270">
-<attribute name="LCSC_PART" value="C25804" x="-108.585" y="164.465" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="-108.585" y="164.465" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="POPULARITY" value="77" x="-108.585" y="164.465" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-108.585" y="164.465" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
@@ -4378,42 +4378,42 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="141.859" y="93.218" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="R140" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="154.94" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="154.94" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="154.94" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="154.94" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="154.94" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R141" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="154.94" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="154.94" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="154.94" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="154.94" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="154.94" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R142" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="154.94" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="154.94" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="154.94" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="154.94" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="154.94" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R143" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="154.94" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="154.94" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="154.94" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="154.94" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="154.94" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R144" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="147.32" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="147.32" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="147.32" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="147.32" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="147.32" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R145" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="147.32" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="147.32" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="147.32" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="147.32" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="147.32" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R146" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="147.32" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="147.32" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="147.32" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="147.32" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="147.32" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R147" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="147.32" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="147.32" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="147.32" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="147.32" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="147.32" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
@@ -4463,42 +4463,42 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="127.254" y="93.218" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="R148" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="139.7" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="139.7" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="139.7" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="139.7" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="139.7" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R149" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="139.7" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="139.7" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="139.7" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="139.7" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="139.7" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R150" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="139.7" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="139.7" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="139.7" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="139.7" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="139.7" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R151" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="139.7" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="139.7" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="139.7" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="139.7" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="139.7" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R152" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="132.08" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="132.08" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="132.08" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="132.08" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="132.08" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R153" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="132.08" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="132.08" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="132.08" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="132.08" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="132.08" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R154" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="132.08" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="132.08" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="132.08" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="132.08" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="132.08" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R155" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="132.08" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="132.08" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="132.08" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="132.08" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="132.08" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
@@ -4548,42 +4548,42 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="112.014" y="93.218" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="R156" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="124.46" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="124.46" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="124.46" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="124.46" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="124.46" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R157" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="124.46" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="124.46" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="124.46" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="124.46" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="124.46" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R158" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="124.46" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="124.46" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="124.46" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="124.46" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="124.46" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R159" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="124.46" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="124.46" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="124.46" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="124.46" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="124.46" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R160" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="116.84" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="116.84" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="116.84" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="116.84" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="116.84" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R161" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="116.84" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="116.84" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="116.84" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="116.84" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="116.84" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R162" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="116.84" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="116.84" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="116.84" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="116.84" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="116.84" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R163" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="116.84" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="116.84" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="116.84" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="116.84" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="116.84" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
@@ -4628,42 +4628,42 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="115.57" y="115.57" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R164" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="109.22" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="109.22" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="109.22" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="109.22" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="109.22" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R165" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="109.22" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="109.22" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="109.22" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="109.22" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="109.22" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R166" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="109.22" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="109.22" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="109.22" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="109.22" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="109.22" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R167" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="109.22" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="109.22" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="109.22" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="109.22" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="109.22" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R168" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="101.6" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="101.6" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="101.6" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="101.6" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="101.6" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R169" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="101.6" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="101.6" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="101.6" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="101.6" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="101.6" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R170" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="101.6" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="101.6" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="101.6" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="101.6" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="101.6" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R171" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="101.6" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="101.6" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="101.6" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="101.6" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="101.6" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
@@ -4737,82 +4737,82 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="133.223" y="42.037" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="R172" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="93.98" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="93.98" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="93.98" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="93.98" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="93.98" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R173" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="93.98" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="93.98" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="93.98" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="93.98" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="93.98" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R174" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="93.98" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="93.98" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="93.98" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="93.98" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="93.98" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R175" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="93.98" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="93.98" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="93.98" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="93.98" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="93.98" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R176" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="86.36" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="86.36" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="86.36" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="86.36" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="86.36" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R177" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="86.36" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="86.36" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="86.36" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="86.36" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="86.36" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R178" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="86.36" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="86.36" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="86.36" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="86.36" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="86.36" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R179" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="86.36" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="86.36" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="86.36" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="86.36" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="86.36" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R180" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="78.74" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="78.74" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="78.74" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="78.74" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="78.74" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R181" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="78.74" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="78.74" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="78.74" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="78.74" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="78.74" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R182" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="78.74" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="78.74" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="78.74" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="78.74" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="78.74" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R183" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="78.74" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="78.74" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="78.74" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="78.74" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="78.74" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R184" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="71.12" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="71.12" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="71.12" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="71.12" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="71.12" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R185" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="71.12" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="71.12" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="71.12" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="71.12" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="71.12" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R186" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="71.12" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="71.12" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="71.12" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="71.12" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="71.12" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R187" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="71.12" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="71.12" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="71.12" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="71.12" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="71.12" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
@@ -4913,162 +4913,162 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="133.223" y="12.827" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="R188" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="63.5" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="63.5" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="63.5" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="63.5" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R189" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="63.5" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="63.5" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="63.5" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="63.5" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R190" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="63.5" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="63.5" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="63.5" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="63.5" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R191" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="63.5" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="63.5" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="63.5" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="63.5" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="63.5" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R193" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="55.88" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="55.88" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="55.88" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="55.88" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="55.88" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R194" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="55.88" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="55.88" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="55.88" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="55.88" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="55.88" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R195" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="55.88" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="55.88" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="55.88" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="55.88" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="55.88" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R196" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="55.88" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="55.88" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="55.88" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="55.88" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="55.88" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R192" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="48.26" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="48.26" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="48.26" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="48.26" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="48.26" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R197" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="48.26" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="48.26" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="48.26" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="48.26" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="48.26" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R198" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="48.26" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="48.26" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="48.26" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="48.26" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="48.26" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R199" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="48.26" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="48.26" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="48.26" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="48.26" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="48.26" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R200" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="40.64" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="40.64" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="40.64" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="40.64" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="40.64" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R201" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="40.64" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="40.64" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="40.64" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="40.64" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="40.64" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R202" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="40.64" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="40.64" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="40.64" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="40.64" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="40.64" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R203" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="40.64" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="40.64" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="40.64" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="40.64" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="40.64" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R204" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="33.02" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="33.02" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="33.02" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="33.02" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="33.02" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R205" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="33.02" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="33.02" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="33.02" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="33.02" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="33.02" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R206" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="33.02" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="33.02" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="33.02" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="33.02" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="33.02" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R207" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="33.02" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="33.02" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="33.02" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="33.02" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="33.02" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R208" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="25.4" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="25.4" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="25.4" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="25.4" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="25.4" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R209" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="25.4" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="25.4" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="25.4" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="25.4" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="25.4" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R210" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="25.4" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="25.4" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="25.4" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="25.4" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="25.4" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R211" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="25.4" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="25.4" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="25.4" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="25.4" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="25.4" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R212" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="17.78" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="17.78" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="17.78" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="17.78" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="17.78" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R213" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="17.78" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="17.78" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="17.78" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="17.78" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="17.78" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R214" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="17.78" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="17.78" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="17.78" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="17.78" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="17.78" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R215" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="17.78" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="17.78" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="17.78" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="17.78" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="17.78" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R216" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="10.16" y="132.715" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="10.16" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="10.16" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="10.16" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="10.16" y="132.715" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R217" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="10.16" y="128.905" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="10.16" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="10.16" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="10.16" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="10.16" y="128.905" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R218" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="10.16" y="125.095" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="10.16" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="10.16" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="10.16" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="10.16" y="125.095" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R219" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="68" x="10.16" y="121.285" smashed="yes" rot="R90">
-<attribute name="LCSC_PART" value="C25804" x="10.16" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="LCSC_PART" value="c27592" x="10.16" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="POPULARITY" value="77" x="10.16" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="10.16" y="121.285" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
