@@ -98,7 +98,7 @@ void setup()
   Serial.println("new Simona");
   simona = new Simona();
 
-  pinMode(ENABLE_DEVICE_PIN, INPUT);
+  pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
 
   pinMode(BUTTON_RED_OUT, OUTPUT);
   pinMode(BUTTON_GREEN_OUT, OUTPUT);
@@ -160,6 +160,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
       novaIO->mcpC_writeGPIOAB(0b1111111111111111);
       novaIO->mcpD_writeGPIOAB(0b1111111111111111);
       novaIO->mcpE_writeGPIOAB(0b1111111111111111);
+    delay(100);
 
       novaIO->mcpA_writeGPIOAB(0b0000000000000000);
       novaIO->mcpB_writeGPIOAB(0b0000000000000000);

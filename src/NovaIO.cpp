@@ -11,10 +11,30 @@ NovaIO *novaIO = NULL;
 
 NovaIO::NovaIO()
 {
-    // Do nothing
 
+    /*
+    These should be initilized to 0 for us, but let's do it again
+    anyway just to be sure. We can't let an unitilized variable be a safety
+    problem.
+    */
+    expOutPort_A = 0x00;
+    expOutPort_B = 0x00;
+    expOutPort_C = 0x00;
+    expOutPort_D = 0x00;
+    expOutPort_E = 0x00;
+    expOutPort_F = 0x00;
+    expOutPort_G = 0x00;
+    expOutPort_H = 0x00;
+
+    /*
+    Create the mutex semaphore for the i2c bus
+    */
     mutex_i2c = xSemaphoreCreateMutex();
 
+    /*
+    Initilize all the devices on the bus.
+    */
+    Serial.println("MCP23X17 interfaces setup.");
     if (!mcp_a.begin_I2C(0x20))
     {
         Serial.println("Error - mcp_a");
@@ -66,7 +86,7 @@ NovaIO::NovaIO()
             ;
     }
 
-    Serial.println("All MCP23X17 interfaces setup.");
+    Serial.println("MCP23X17 interfaces setup. - DONE");
 
     uint8_t i = 0;
     for (i = 0; i <= 15; ++i)
@@ -78,8 +98,6 @@ NovaIO::NovaIO()
         mcp_e.pinMode(i, OUTPUT);
         mcp_f.pinMode(i, OUTPUT);
         mcp_g.pinMode(i, OUTPUT);
-
-        // mcp_h.pinMode(i, OUTPUT);
     }
 
     mcp_h.pinMode(BUTTON_RED_IN, INPUT);
@@ -88,13 +106,15 @@ NovaIO::NovaIO()
     mcp_h.pinMode(BUTTON_YELLOW_IN, INPUT);
     mcp_h.pinMode(BUTTON_WHITE_IN, INPUT);
 
-    // Turn off all outputs
-    mcp_a.writeGPIOAB(0b0000000000000000);
-    mcp_b.writeGPIOAB(0b0000000000000000);
-    mcp_c.writeGPIOAB(0b0000000000000000);
-    mcp_d.writeGPIOAB(0b0000000000000000);
-    mcp_e.writeGPIOAB(0b0000000000000000);
-    Serial.println("All MCP23X17 interfaces setup. - Done");
+    // Set all the outputs to the initilized state.
+    mcp_a.writeGPIOAB(expOutPort_A);
+    mcp_b.writeGPIOAB(expOutPort_B);
+    mcp_c.writeGPIOAB(expOutPort_C);
+    mcp_d.writeGPIOAB(expOutPort_D);
+    mcp_e.writeGPIOAB(expOutPort_E);
+    mcp_e.writeGPIOAB(expOutPort_F);
+    mcp_e.writeGPIOAB(expOutPort_G);
+    Serial.println("MCP23X17 interfaces outputs set to initilized value.");
 }
 
 void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
@@ -120,7 +140,7 @@ bool NovaIO::expansionDigitalRead(int pin)
             readValue = mcp_h.digitalRead(pin);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -137,7 +157,7 @@ void NovaIO::mcpA_writeGPIOAB(uint16_t value)
             mcp_a.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -153,7 +173,7 @@ void NovaIO::mcpB_writeGPIOAB(uint16_t value)
             mcp_b.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -169,7 +189,7 @@ void NovaIO::mcpC_writeGPIOAB(uint16_t value)
             mcp_c.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -185,7 +205,7 @@ void NovaIO::mcpD_writeGPIOAB(uint16_t value)
             mcp_d.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -201,7 +221,7 @@ void NovaIO::mcpE_writeGPIOAB(uint16_t value)
             mcp_e.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -217,7 +237,7 @@ void NovaIO::mcpF_writeGPIOAB(uint16_t value)
             mcp_f.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -233,7 +253,7 @@ void NovaIO::mcpG_writeGPIOAB(uint16_t value)
             mcp_g.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
@@ -249,8 +269,45 @@ void NovaIO::mcpH_writeGPIOAB(uint16_t value)
             mcp_h.writeGPIOAB(value);
             break;
         }
-        yield();
+        yield(); // We yield to feed the watchdog.
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+/*
+direction is one of:
+  0 - Receive
+  1 - Transmit
+  3 - High Impedance
+  4 - Shutdown
+*/
+void NovaIO::setStarlink(u_int8_t direction, uint8_t star)
+{
+
+    /*
+
+        Source: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX1487-MAX491.pdf
+          See Function table from Page 10
+
+        Receiving
+            Receive Enable (RE) = Low
+            Driver Enable (DE) = Low
+
+        Transmitting
+            Receive Enable (RE) = Low
+            Driver Enable (DE) = High
+
+        High Impedance
+            Receive Enable (RE) = Low
+            Driver Enable (DE) = Low
+
+        Shutdown
+            Receive Enable (RE) = High
+            Driver Enable (DE) = Low
+
+
+    */
+
+   
 }
