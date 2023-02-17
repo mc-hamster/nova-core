@@ -26068,9 +26068,6 @@ CONN_05x2
 <class number="4" name="3V3" width="0.508" drill="0">
 <clearance class="4" value="0.254"/>
 </class>
-<class number="5" name="12V_FUSED" width="0.635" drill="0">
-<clearance class="5" value="0.254"/>
-</class>
 </classes>
 <parts>
 <part name="U$1" library="ESP32-DEVKITV1" deviceset="ESP32DEVKITV1" device=""/>
