@@ -29,3 +29,4 @@ main/credentials.h
 *.s#8
 *.s#9
 *.job
+*.pro
