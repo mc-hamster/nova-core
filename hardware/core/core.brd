@@ -245,6 +245,10 @@ Enable</text>
 <text x="4.445" y="38.735" size="0.8128" layer="21">SDA SCL GND 3v3</text>
 <text x="6.35" y="64.77" size="1.016" layer="21">IO19 IO34 IO36 SDA 3v3</text>
 <text x="6.35" y="75.565" size="1.016" layer="21">IO33 IO35 IO39 SCL GND</text>
+<text x="127.635" y="14.605" size="1.27" layer="21">Control
+Lighting (1.5A)
+
+Main (1.5A)</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
@@ -6930,7 +6934,7 @@ design rules under a new name.</description>
 <attribute name="LCSC_PART" value="C78695" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MANUFACTURER" value="BOURNS" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MPN" value="MF-MSMF" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="137.795" y="15.306" size="1.27" layer="25" rot="R180" align="bottom-center"/>
+<attribute name="NAME" x="146.05" y="17.846" size="1.27" layer="25" rot="R180" align="bottom-center"/>
 <attribute name="OPERATING_TEMPERATURE" value="-40 °C to +85 °C" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="PART_STATUS" value="Active" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="ROHS_COMPLIANCE" value="RoHS Compliant" x="142.24" y="14.605" size="1.778" layer="27" rot="R180" display="off"/>
@@ -6945,7 +6949,7 @@ design rules under a new name.</description>
 <attribute name="LCSC_PART" value="C78695" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MANUFACTURER" value="BOURNS" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MPN" value="MF-MSMF" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="137.795" y="19.751" size="1.27" layer="25" rot="R180" align="bottom-center"/>
+<attribute name="NAME" x="146.05" y="22.926" size="1.27" layer="25" rot="R180" align="bottom-center"/>
 <attribute name="OPERATING_TEMPERATURE" value="-40 °C to +85 °C" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="PART_STATUS" value="Active" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="ROHS_COMPLIANCE" value="RoHS Compliant" x="142.24" y="19.685" size="1.778" layer="27" rot="R180" display="off"/>
