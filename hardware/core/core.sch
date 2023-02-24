@@ -30885,6 +30885,7 @@ CONN_05x2
 <wire x1="254" y1="0" x2="1366.52" y2="0" width="0.1524" layer="98"/>
 <wire x1="1366.52" y1="0" x2="1366.52" y2="408.94" width="0.1524" layer="98"/>
 <wire x1="1366.52" y1="408.94" x2="254" y2="408.94" width="0.1524" layer="98"/>
+<text x="5.08" y="393.7" size="2.54" layer="98">MIDI-IN Interface</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="48.26" y="198.12" smashed="yes" rot="R90">

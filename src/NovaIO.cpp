@@ -5,8 +5,6 @@
 #include "configuration.h"
 #include "main.h"
 
-// AirTime *airTime = NULL;
-
 NovaIO *novaIO = NULL;
 
 NovaIO::NovaIO()
