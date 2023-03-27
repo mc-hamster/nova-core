@@ -176,6 +176,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
       novaIO->mcpD_writeGPIOAB(0b0000000000000000);
       novaIO->mcpE_writeGPIOAB(0b0000000000000000);
     }
+  Serial.println(".");
 
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(100);
