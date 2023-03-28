@@ -59,6 +59,11 @@ public:
         void mcpG_writeGPIOAB(uint16_t value);
         void mcpH_writeGPIOAB(uint16_t value);
 
+        void ledRed (bool value);
+        void ledGreen (bool value);
+        void ledBlue (bool value);
+        void ledYellow (bool value);
+
 /*
 Frame Buffer: Flame - For flame effects only. These effects work from the GPIO
   expanders. Write only.

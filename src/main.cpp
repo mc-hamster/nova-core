@@ -9,73 +9,13 @@
 #include "Simona.h"
 #include "NovaIO.h"
 #include "main.h"
+#include "Ambient.h"
 
 Thread threadSimona = Thread();
 
 void TaskAmbient(void *pvParameters);
 void TaskSimona(void *pvParameters);
 void Task3(void *pvParameters);
-
-// callback for myThread
-void callbackSimona()
-{
-  // Serial.print("callbackSimona! I'm running on: ");
-  // Serial.println(millis());
-  // Serial.println("Button Pressed!");
-
-  simona->loop();
-
-  return;
-  if (!novaIO->mcp_h.digitalRead(BUTTON_RED_IN))
-  {
-    digitalWrite(BUTTON_RED_OUT, true);
-    delay(100);
-  }
-  else
-  {
-    digitalWrite(BUTTON_RED_OUT, false);
-  }
-
-  if (!novaIO->mcp_h.digitalRead(BUTTON_GREEN_IN))
-  {
-    digitalWrite(BUTTON_GREEN_OUT, true);
-    delay(100);
-  }
-  else
-  {
-    digitalWrite(BUTTON_GREEN_OUT, false);
-  }
-
-  if (!novaIO->mcp_h.digitalRead(BUTTON_BLUE_IN))
-  {
-    digitalWrite(BUTTON_BLUE_OUT, true);
-    delay(100);
-  }
-  else
-  {
-    digitalWrite(BUTTON_BLUE_OUT, false);
-  }
-
-  if (!novaIO->mcp_h.digitalRead(BUTTON_YELLOW_IN))
-  {
-    digitalWrite(BUTTON_YELLOW_OUT, true);
-    delay(100);
-  }
-  else
-  {
-    digitalWrite(BUTTON_YELLOW_OUT, false);
-  }
-
-  if (!novaIO->mcp_h.digitalRead(BUTTON_WHITE_IN))
-  {
-    digitalWrite(BUTTON_WHITE_OUT, true);
-    delay(100);
-  }
-  else
-  {
-    digitalWrite(BUTTON_WHITE_OUT, false);
-  }
-}
 
 void setup()
 {
@@ -98,6 +38,9 @@ void setup()
   Serial.println("new Simona");
   simona = new Simona();
 
+  Serial.println("new Ambient");
+  ambient = new Ambient();
+
   pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
 
   pinMode(BUTTON_RED_OUT, OUTPUT);
@@ -105,9 +48,6 @@ void setup()
   pinMode(BUTTON_BLUE_OUT, OUTPUT);
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
-
-  // threadSimona.onRun(callbackSimona);
-  // threadSimona.setInterval(10);
 
   /*
     Priorities:
@@ -118,7 +58,7 @@ void setup()
   xTaskCreate(&TaskAmbient, "TaskAmbient", 2048, NULL, 5, NULL);
 
   Serial.println("Create TaskSimona");
-  xTaskCreate(&TaskSimona, "TasTaskSimonak2", 2048, NULL, 5, NULL);
+  xTaskCreate(&TaskSimona, "TasTaskSimona", 2048, NULL, 5, NULL);
 
   /*
     Serial.println("Create Task3");
@@ -153,33 +93,9 @@ void TaskAmbient(void *pvParameters) // This is a task.
   Serial.println("TaskAmbient is running");
   while (1) // A Task shall never return or exit.
   {
-    if (digitalRead(ENABLE_DEVICE_PIN))
-    {
-      novaIO->mcpA_writeGPIOAB(0b1111111111111111);
-      novaIO->mcpB_writeGPIOAB(0b1111111111111111);
-      novaIO->mcpC_writeGPIOAB(0b1111111111111111);
-      novaIO->mcpD_writeGPIOAB(0b1111111111111111);
-      novaIO->mcpE_writeGPIOAB(0b1111111111111111);
-    delay(100);
-
-      novaIO->mcpA_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpB_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpC_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpD_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpE_writeGPIOAB(0b0000000000000000);
-    }
-    else
-    {
-      novaIO->mcpA_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpB_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpC_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpD_writeGPIOAB(0b0000000000000000);
-      novaIO->mcpE_writeGPIOAB(0b0000000000000000);
-    }
-  Serial.println(".");
-
+    ambient->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(100);
+    // delay(50);
   }
 }
 
@@ -190,9 +106,18 @@ void TaskSimona(void *pvParameters) // This is a task.
 
   while (1) // A Task shall never return or exit.
   {
-    Serial.println("in TaskSimona while");
-    simona->loop();
-    Serial.println("in TaskSimona while 2");
+    // Serial.println("in TaskSimona while");
+    if (ambient->isSystemEnabled())
+    {
+
+      simona->loop();
+    }
+    else
+    {
+      Serial.println("system disabled");
+      // Don't run the game.
+    }
+    // Serial.println("in TaskSimona while 2");
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(10);
     //  Do something

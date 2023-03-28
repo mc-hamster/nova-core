@@ -6,7 +6,6 @@
 // Original Source: https://github.com/printnplay/SimpleSimon/blob/main/simon.ino
 // THANK YOU JAMES!
 
-
 Simona *simona = NULL;
 
 Simona::Simona()
@@ -159,38 +158,38 @@ void Simona::play_note(int index, int notespeed)
   Serial.println("play_note()");
   if (index == 1)
   {
-    digitalWrite(BUTTON_RED_OUT, HIGH);
+    novaIO->ledRed(HIGH);
   }
   else if (index == 2)
   {
-    digitalWrite(BUTTON_GREEN_OUT, HIGH);
+    novaIO->ledGreen(HIGH);
   }
   else if (index == 3)
   {
-    digitalWrite(BUTTON_BLUE_OUT, HIGH);
+    novaIO->ledBlue(HIGH);
   }
   else if (index == 4)
   {
-    digitalWrite(BUTTON_YELLOW_OUT, HIGH);
+    novaIO->ledYellow(HIGH);
   }
 
   delay(notespeed * 2);
 
   if (index == 1)
   {
-    digitalWrite(BUTTON_RED_OUT, LOW);
+    novaIO->ledRed(LOW);
   }
   else if (index == 2)
   {
-    digitalWrite(BUTTON_GREEN_OUT, LOW);
+    novaIO->ledGreen(LOW);
   }
   else if (index == 3)
   {
-    digitalWrite(BUTTON_BLUE_OUT, LOW);
+    novaIO->ledBlue(LOW);
   }
   else if (index == 4)
   {
-    digitalWrite(BUTTON_YELLOW_OUT, LOW);
+    novaIO->ledYellow(LOW);
   }
 
   delay(notespeed * 2);

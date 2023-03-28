@@ -306,6 +306,55 @@ void NovaIO::setStarlink(u_int8_t direction, uint8_t star)
 
 
     */
+}
 
-   
+void NovaIO::ledRed(bool value)
+{
+    if (value)
+    {
+        analogWrite(BUTTON_RED_OUT, 255);
+    }
+    else
+    {
+        analogWrite(BUTTON_RED_OUT, 0);
+    }
+}
+
+
+void NovaIO::ledGreen(bool value)
+{
+    if (value)
+    {
+        analogWrite(BUTTON_GREEN_OUT, 255);
+    }
+    else
+    {
+        analogWrite(BUTTON_GREEN_OUT, 0);
+    }
+}
+
+
+void NovaIO::ledBlue(bool value)
+{
+    if (value)
+    {
+        analogWrite(BUTTON_BLUE_OUT, 255);
+    }
+    else
+    {
+        analogWrite(BUTTON_BLUE_OUT, 0);
+    }
+}
+
+
+void NovaIO::ledYellow(bool value)
+{
+    if (value)
+    {
+        analogWrite(BUTTON_YELLOW_OUT, 255);
+    }
+    else
+    {
+        analogWrite(BUTTON_YELLOW_OUT, 0);
+    }
 }
