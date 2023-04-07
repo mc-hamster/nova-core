@@ -5,29 +5,27 @@
 
 #include <Arduino.h>
 
-class Simona {
-    private:
+class Simona
+{
+private:
+    uint32_t LENGTH = 400;
+    uint32_t gamepattern[20];
+    uint32_t difficulty = 1;
 
-        uint32_t LENGTH = 400;
-        uint32_t gamepattern[20];
-        uint32_t difficulty = 1;
+public:
+    Simona();
 
-    public: 
-        Simona();
+    void loop();
 
-        void loop();
+    void main_menu();
 
-        void main_menu();
+    void play_game();
 
-        void play_game();
+    void generate_game();
 
-        void generate_game();
+    void play_note(int index, int notespeed);
 
-        void play_note(int index, int notespeed);
-
-        void game_over(bool win);
-
-\
+    void game_over(bool win);
 };
 
 extern Simona *simona;

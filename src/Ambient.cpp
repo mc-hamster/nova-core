@@ -51,8 +51,8 @@ void Ambient::loop()
         analogWrite(BUTTON_YELLOW_OUT, disabledBrightness);
 
         disabledBrightness = disabledBrightness + disabledBrightnessFade;
-        //Serial.println("Safety!");
-        //Serial.println(disabledBrightness);
+        // Serial.println("Safety!");
+        // Serial.println(disabledBrightness);
         delay(2);
     }
 }
@@ -81,19 +81,26 @@ Emergency stop has been called. We need to begin shutdown.
 void Ambient::emergencyStopEnter()
 {
 
-    // Turn off all the outputs.
+    // Turn off all the outputs a few times incase there is a problem in the i2c bus
 
-    novaIO->mcpA_writeGPIOAB(0b0000000000000000);
-    novaIO->mcpB_writeGPIOAB(0b0000000000000000);
-    novaIO->mcpC_writeGPIOAB(0b0000000000000000);
-    novaIO->mcpD_writeGPIOAB(0b0000000000000000);
-    novaIO->mcpE_writeGPIOAB(0b0000000000000000);
+    for (int i = 0; i <= 4; i++)
+    {
+        // Turn off all the outputs.
+        novaIO->mcpA_writeGPIOAB(0b0000000000000000);
+        novaIO->mcpB_writeGPIOAB(0b0000000000000000);
+        novaIO->mcpC_writeGPIOAB(0b0000000000000000);
+        novaIO->mcpD_writeGPIOAB(0b0000000000000000);
+        novaIO->mcpE_writeGPIOAB(0b0000000000000000);
+
+        // Add a small delay to let the i2c bus settle down
+        delay(1);
+    }
 
     systemEnable = false;
-    // Do something
 }
 
-bool Ambient::isSystemEnabled(void) {
+bool Ambient::isSystemEnabled(void)
+{
     Serial.println("Is Simona Disabled!");
     return systemEnable;
 }
