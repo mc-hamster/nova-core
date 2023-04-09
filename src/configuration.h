@@ -20,6 +20,3 @@
 #define BUTTON_WHITE_IN 12 // On expansion H
 #define BUTTON_WHITE_OUT 32 // On esp32
 
-
-#define DEBUG_MSG(...) printf(__VA_ARGS__)
-#define LOG_DEBUG(...) printf(__VA_ARGS__)

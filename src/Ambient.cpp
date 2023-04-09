@@ -16,20 +16,27 @@ void Ambient::loop()
 
     if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
-        novaIO->mcpA_writeGPIOAB(0b1111111111111111);
-        novaIO->mcpB_writeGPIOAB(0b1111111111111111);
-        novaIO->mcpC_writeGPIOAB(0b1111111111111111);
-        novaIO->mcpD_writeGPIOAB(0b1111111111111111);
-        novaIO->mcpE_writeGPIOAB(0b1111111111111111);
-        delay(100);
+        if (0)
+        {
+            novaIO->mcpA_writeGPIOAB(0b1111111111111111);
+            novaIO->mcpB_writeGPIOAB(0b1111111111111111);
+            novaIO->mcpC_writeGPIOAB(0b1111111111111111);
+            novaIO->mcpD_writeGPIOAB(0b1111111111111111);
+            novaIO->mcpE_writeGPIOAB(0b1111111111111111);
+            delay(2000);
 
-        novaIO->mcpA_writeGPIOAB(0b0000000000000000);
-        novaIO->mcpB_writeGPIOAB(0b0000000000000000);
-        novaIO->mcpC_writeGPIOAB(0b0000000000000000);
-        novaIO->mcpD_writeGPIOAB(0b0000000000000000);
-        novaIO->mcpE_writeGPIOAB(0b0000000000000000);
-        delay(100);
-        // Play ambient display
+            novaIO->mcpA_writeGPIOAB(0b0000000000000000);
+            novaIO->mcpB_writeGPIOAB(0b0000000000000000);
+            novaIO->mcpC_writeGPIOAB(0b0000000000000000);
+            novaIO->mcpD_writeGPIOAB(0b0000000000000000);
+            novaIO->mcpE_writeGPIOAB(0b0000000000000000);
+            delay(2000);
+            // Play ambient display
+        }
+        novaIO->mcp_a.digitalWrite(1, HIGH);
+        delay(1000);
+        novaIO->mcp_a.digitalWrite(1, LOW);
+        delay(1000);
     }
     else if (systemEnable == false && digitalRead(ENABLE_DEVICE_PIN) == true)
     {

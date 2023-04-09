@@ -6,7 +6,7 @@
 
 #include "configuration.h"
 
-#include "Simona.h"
+#include "modes/Simona.h"
 #include "NovaIO.h"
 #include "main.h"
 #include "Ambient.h"

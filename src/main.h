@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Simona.h"
+#include "modes/Simona.h"
 #include "NovaIO.h"
 
 
