@@ -14,7 +14,7 @@
 Thread threadSimona = Thread();
 
 void TaskAmbient(void *pvParameters);
-void TaskSimona(void *pvParameters);
+void TaskModes(void *pvParameters);
 void Task3(void *pvParameters);
 
 void setup()
@@ -57,8 +57,8 @@ void setup()
   Serial.println("Create TaskAmbient");
   xTaskCreate(&TaskAmbient, "TaskAmbient", 2048, NULL, 5, NULL);
 
-  Serial.println("Create TaskSimona");
-  xTaskCreate(&TaskSimona, "TasTaskSimona", 2048, NULL, 5, NULL);
+  Serial.println("Create TaskModes");
+  xTaskCreate(&TaskModes, "TasTaskModes", 2048, NULL, 5, NULL);
 
   /*
     Serial.println("Create Task3");
@@ -99,7 +99,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   }
 }
 
-void TaskSimona(void *pvParameters) // This is a task.
+void TaskModes(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
   Serial.println("TaskSimona is running");
