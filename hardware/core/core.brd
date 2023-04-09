@@ -249,6 +249,8 @@ Enable</text>
 Lighting (1.5A)
 
 Main (1.5A)</text>
+<text x="97.79" y="1.905" size="1.778" layer="25">5v</text>
+<text x="107.95" y="1.905" size="1.778" layer="25">3v3</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
