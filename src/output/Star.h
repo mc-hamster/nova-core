@@ -18,10 +18,6 @@ class Star {
 
         void loop();
 
-        void emergencyStopExit();
-        void emergencyStopEnter();
-
-        bool isSystemEnabled();
 };
 
 extern Star *star;

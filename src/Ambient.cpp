@@ -32,11 +32,10 @@ void Ambient::loop()
             novaIO->mcpE_writeGPIOAB(0b0000000000000000);
             delay(2000);
             // Play ambient display
+        } else {
+            Serial.println("No ambient effects are running.");
+            yield();
         }
-        novaIO->mcp_a.digitalWrite(1, HIGH);
-        delay(1000);
-        novaIO->mcp_a.digitalWrite(1, LOW);
-        delay(1000);
     }
     else if (systemEnable == false && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
@@ -118,7 +117,7 @@ void Ambient::emergencyStopEnter()
 
 bool Ambient::isSystemEnabled(void)
 {
-    Serial.print("Is System Enabled? ");
-    Serial.println(systemEnable);
+    //Serial.print("Is System Enabled? ");
+    //Serial.println(systemEnable);
     return systemEnable;
 }

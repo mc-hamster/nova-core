@@ -1,23 +1,21 @@
 #include <Arduino.h>
-
 #include <Thread.h>
 #include <ThreadController.h>
 #include <Wire.h>
 
-#include "configuration.h"
+#include "OneButton.h"
 
+#include "configuration.h"
 #include "modes/Simona.h"
 #include "NovaIO.h"
 #include "main.h"
 #include "Ambient.h"
-
 #include "output/Star.h"
-
-Thread threadSimona = Thread();
+#include "Buttons.h"
 
 void TaskAmbient(void *pvParameters);
 void TaskModes(void *pvParameters);
-void Task3(void *pvParameters);
+void TaskButtons(void *pvParameters);
 
 void setup()
 {
@@ -29,8 +27,19 @@ void setup()
 
   Serial.setDebugOutput(true);
 
+  Serial.println("Setting up Serial2");
   Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
 
+  Serial.println("Pin Directions");
+  pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
+
+  pinMode(BUTTON_RED_OUT, OUTPUT);
+  pinMode(BUTTON_GREEN_OUT, OUTPUT);
+  pinMode(BUTTON_BLUE_OUT, OUTPUT);
+  pinMode(BUTTON_YELLOW_OUT, OUTPUT);
+  pinMode(BUTTON_WHITE_OUT, OUTPUT);
+
+  Serial.println("Set clock of I2C interface to 400khz");
   Wire.begin();
   Wire.setClock(400000UL);
 
@@ -43,37 +52,30 @@ void setup()
   Serial.println("new Ambient");
   ambient = new Ambient();
 
-  pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
+  Serial.println("new Star");
+  star = new Star();
 
-  pinMode(BUTTON_RED_OUT, OUTPUT);
-  pinMode(BUTTON_GREEN_OUT, OUTPUT);
-  pinMode(BUTTON_BLUE_OUT, OUTPUT);
-  pinMode(BUTTON_YELLOW_OUT, OUTPUT);
-  pinMode(BUTTON_WHITE_OUT, OUTPUT);
+  Serial.println("new Buttons");
+  buttons = new Buttons();
 
   /*
     Priorities:
       0 = Lowest
       configMAX_PRIORITIES = highest
   */
-  Serial.println("Create TaskAmbient");
-  xTaskCreate(&TaskAmbient, "TaskAmbient", 2048, NULL, 5, NULL);
+  // Serial.println("Create TaskAmbient");
+  // xTaskCreate(&TaskAmbient, "TaskAmbient", 8000, NULL, 5, NULL);
+  // Serial.println("Create TaskAmbient - Done");
 
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TasTaskModes", 2048, NULL, 5, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 8000, NULL, 5, NULL);
+  Serial.println("Create TaskModes - Done");
 
-  /*
-    Serial.println("Create Task3");
-    xTaskCreate(
-        Task3, "Task3" // A name just for humans
-        ,
-        1024 // This stack size can be checked & adjusted by reading the Stack Highwater
-        ,
-        NULL, 2 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-        ,
-        NULL);
+  Serial.println("Create TaskButtons");
+  xTaskCreate(&TaskButtons, "TaskButtons", 8000, NULL, 5, NULL);
+  Serial.println("Create TaskButtons - Done");
 
-        */
+  Serial.println("Setup Complete");
 }
 
 void loop()
@@ -104,36 +106,38 @@ void TaskAmbient(void *pvParameters) // This is a task.
 void TaskModes(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
-  Serial.println("TaskSimona is running");
+
+  Serial.println("TaskModes is running");
 
   while (1) // A Task shall never return or exit.
   {
-    // Serial.println("in TaskSimona while");
+    // Serial.println("in TaskModes while");
     if (ambient->isSystemEnabled())
     {
 
-      simona->loop();
+      // simona->loop();
+      star->loop();
     }
     else
     {
       Serial.println("system disabled");
       // Don't run the game.
     }
-    // Serial.println("in TaskSimona while 2");
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(10);
     //  Do something
   }
 }
 
-void Task3(void *pvParameters) // This is a task.
+void TaskButtons(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
-  Serial.println("Task3 is running");
+
+  Serial.println("TaskButtons is running");
 
   while (1) // A Task shall never return or exit.
   {
-    delay(10);
-    // Do something
+    buttons->loop();
+    // delay(1);
   }
 }
