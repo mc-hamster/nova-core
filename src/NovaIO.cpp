@@ -273,6 +273,128 @@ void NovaIO::mcpH_writeGPIOAB(uint16_t value)
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }
 
+void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_a.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+
+void NovaIO::mcpB_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_b.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+
+void NovaIO::mcpC_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_c.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpD_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_d.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpE_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_e.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpF_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_f.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpG_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_g.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
+void NovaIO::mcpH_digitalWrite(uint8_t pin, uint8_t value)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            mcp_h.digitalWrite(pin, value);
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
+
 /*
 direction is one of:
   0 - Receive
@@ -320,7 +442,6 @@ void NovaIO::ledRed(bool value)
     }
 }
 
-
 void NovaIO::ledGreen(bool value)
 {
     if (value)
@@ -333,7 +454,6 @@ void NovaIO::ledGreen(bool value)
     }
 }
 
-
 void NovaIO::ledBlue(bool value)
 {
     if (value)
@@ -345,7 +465,6 @@ void NovaIO::ledBlue(bool value)
         analogWrite(BUTTON_BLUE_OUT, 0);
     }
 }
-
 
 void NovaIO::ledYellow(bool value)
 {

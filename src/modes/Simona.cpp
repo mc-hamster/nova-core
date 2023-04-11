@@ -24,7 +24,7 @@ void Simona::main_menu()
   Serial.println("main_menu()");
   while (1 == 1)
   {
-  Serial.println("main_menu() - while");
+  //Serial.println("main_menu() - while");
 
     if (novaIO->expansionDigitalRead(BUTTON_RED_IN) == LOW)
     {

@@ -70,6 +70,8 @@ This will initilaize our system back to a safe spot after emergency stop is exit
 void Ambient::emergencyStopExit()
 {
 
+    Serial.println("System is returning from emergency stop. Rebooting...");
+
     // Set the brightness to 0.
     disabledBrightness = 0;
     analogWrite(BUTTON_RED_OUT, disabledBrightness);
@@ -79,7 +81,13 @@ void Ambient::emergencyStopExit()
 
     // Set pin modes back to output (disable analog)
 
-    systemEnable = true;
+    //systemEnable = true;
+
+    delay(100);
+    // When the emergency button is disabled (set to active) reboot the system.
+    ESP.restart();
+
+
 }
 
 /*
@@ -87,6 +95,8 @@ Emergency stop has been called. We need to begin shutdown.
 */
 void Ambient::emergencyStopEnter()
 {
+
+    Serial.println("Emergency Stop Activated. Entering fail safe.");
 
     // Turn off all the outputs a few times incase there is a problem in the i2c bus
 
@@ -108,6 +118,7 @@ void Ambient::emergencyStopEnter()
 
 bool Ambient::isSystemEnabled(void)
 {
-    Serial.println("Is Simona Disabled!");
+    Serial.print("Is System Enabled? ");
+    Serial.println(systemEnable);
     return systemEnable;
 }

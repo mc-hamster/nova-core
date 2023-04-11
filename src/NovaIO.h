@@ -59,10 +59,21 @@ public:
         void mcpG_writeGPIOAB(uint16_t value);
         void mcpH_writeGPIOAB(uint16_t value);
 
+        void mcpA_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpB_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpC_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpD_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpE_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpF_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpG_digitalWrite(uint8_t pin, uint8_t value);
+        void mcpH_digitalWrite(uint8_t pin, uint8_t value);
+
         void ledRed (bool value);
         void ledGreen (bool value);
         void ledBlue (bool value);
         void ledYellow (bool value);
+
+        
 
 /*
 Frame Buffer: Flame - For flame effects only. These effects work from the GPIO

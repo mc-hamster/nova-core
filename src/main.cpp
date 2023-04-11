@@ -11,6 +11,8 @@
 #include "main.h"
 #include "Ambient.h"
 
+#include "output/Star.h"
+
 Thread threadSimona = Thread();
 
 void TaskAmbient(void *pvParameters);
