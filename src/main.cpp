@@ -94,7 +94,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   {
     ambient->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(1);
+    delay(10);
   }
 }
 
@@ -133,6 +133,7 @@ void TaskButtons(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     buttons->loop();
-    delay(1);
+    yield();
+    delay(10);
   }
 }
