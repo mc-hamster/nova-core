@@ -58,14 +58,9 @@ void setup()
   Serial.println("new Buttons");
   buttons = new Buttons();
 
-  /*
-    Priorities:
-      0 = Lowest
-      configMAX_PRIORITIES = highest
-  */
-  // Serial.println("Create TaskAmbient");
-  // xTaskCreate(&TaskAmbient, "TaskAmbient", 8000, NULL, 5, NULL);
-  // Serial.println("Create TaskAmbient - Done");
+  Serial.println("Create TaskAmbient");
+  xTaskCreate(&TaskAmbient, "TaskAmbient", 8000, NULL, 5, NULL);
+  Serial.println("Create TaskAmbient - Done");
 
   Serial.println("Create TaskModes");
   xTaskCreate(&TaskModes, "TaskModes", 8000, NULL, 5, NULL);
@@ -99,7 +94,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   {
     ambient->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    // delay(50);
+    delay(1);
   }
 }
 
@@ -138,6 +133,6 @@ void TaskButtons(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     buttons->loop();
-    // delay(1);
+    delay(1);
   }
 }

@@ -33,7 +33,7 @@ void Ambient::loop()
             delay(2000);
             // Play ambient display
         } else {
-            Serial.println("No ambient effects are running.");
+            //Serial.println("No ambient effects are running.");
             yield();
         }
     }
