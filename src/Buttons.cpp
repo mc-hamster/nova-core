@@ -2,6 +2,9 @@
 #include <Arduino.h>
 #include "OneButton.h"
 
+#include "output/Star.h"
+
+
 OneButton *button_red = new OneButton();
 OneButton *button_green = new OneButton();
 OneButton *button_blue = new OneButton();
@@ -47,6 +50,8 @@ void Buttons::loop(void)
 void Buttons::red_click(void)
 {
     Serial.println("Red Click");
+    star->red(star->RED_POOF);
+    
 }
 void Buttons::red_doubleClick(void)
 {
@@ -66,6 +71,8 @@ void Buttons::red_longPressStop(void)
 void Buttons::green_click(void)
 {
     Serial.println("Green Click");
+    star->green(star->GREEN_POOF);
+
 }
 void Buttons::green_doubleClick(void)
 {
@@ -85,6 +92,7 @@ void Buttons::green_longPressStop(void)
 void Buttons::blue_click(void)
 {
     Serial.println("Blue Click");
+    star->blue(star->BLUE_POOF);
 }
 void Buttons::blue_doubleClick(void)
 {
@@ -104,6 +112,7 @@ void Buttons::blue_longPressStop(void)
 void Buttons::yellow_click(void)
 {
     Serial.println("Yellow Click");
+    star->yellow(star->YELLOW_POOF);
 }
 void Buttons::yellow_doubleClick(void)
 {
