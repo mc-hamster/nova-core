@@ -3,7 +3,7 @@
 #include "OneButton.h"
 
 #include "output/Star.h"
-
+#include "NovaIO.h"
 
 OneButton *button_red = new OneButton();
 OneButton *button_green = new OneButton();
@@ -45,17 +45,52 @@ void Buttons::loop(void)
     button_blue->tick(novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == LOW);
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
     button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
+
+    if (novaIO->expansionDigitalRead(BUTTON_RED_IN))
+    {
+        novaIO->ledRed(HIGH);
+    }
+    else
+    {
+        novaIO->ledRed(LOW);
+    }
+    if (novaIO->expansionDigitalRead(BUTTON_GREEN_IN))
+    {
+        novaIO->ledGreen(HIGH);
+    }
+    else
+    {
+        novaIO->ledGreen(LOW);
+    }
+
+    if (novaIO->expansionDigitalRead(BUTTON_BLUE_IN))
+    {
+        novaIO->ledBlue(HIGH);
+    }
+    else
+    {
+        novaIO->ledBlue(LOW);
+    }
+
+    if (novaIO->expansionDigitalRead(BUTTON_YELLOW_IN))
+    {
+        novaIO->ledYellow(HIGH);
+    }
+    else
+    {
+        novaIO->ledYellow(LOW);
+    }
 }
 
 void Buttons::red_click(void)
 {
     Serial.println("Red Click");
     star->red(star->RED_POOF);
-    
 }
 void Buttons::red_doubleClick(void)
 {
     Serial.println("Red Double Click");
+    star->red(star->RED_POOF_MULTI);
 }
 void Buttons::red_longPressStart(void)
 {
@@ -66,17 +101,15 @@ void Buttons::red_longPressStop(void)
     Serial.println("Red Long Stop");
 }
 
-
-
 void Buttons::green_click(void)
 {
     Serial.println("Green Click");
     star->green(star->GREEN_POOF);
-
 }
 void Buttons::green_doubleClick(void)
 {
     Serial.println("Green Double Click");
+    star->green(star->GREEN_POOF_MULTI);
 }
 void Buttons::green_longPressStart(void)
 {
@@ -87,8 +120,6 @@ void Buttons::green_longPressStop(void)
     Serial.println("Green Long Stop");
 }
 
-
-
 void Buttons::blue_click(void)
 {
     Serial.println("Blue Click");
@@ -97,6 +128,7 @@ void Buttons::blue_click(void)
 void Buttons::blue_doubleClick(void)
 {
     Serial.println("Blue Double Click");
+    star->blue(star->BLUE_POOF_MULTI);
 }
 void Buttons::blue_longPressStart(void)
 {
@@ -107,8 +139,6 @@ void Buttons::blue_longPressStop(void)
     Serial.println("Blue Long Stop");
 }
 
-
-
 void Buttons::yellow_click(void)
 {
     Serial.println("Yellow Click");
@@ -117,6 +147,7 @@ void Buttons::yellow_click(void)
 void Buttons::yellow_doubleClick(void)
 {
     Serial.println("Yellow Double Click");
+    star->yellow(star->YELLOW_POOF_MULTI);
 }
 void Buttons::yellow_longPressStart(void)
 {

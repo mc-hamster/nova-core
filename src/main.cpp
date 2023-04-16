@@ -39,6 +39,7 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
+
   Serial.println("Set clock of I2C interface to 400khz");
   Wire.begin();
   Wire.setClock(400000UL);
@@ -134,6 +135,6 @@ void TaskButtons(void *pvParameters) // This is a task.
   {
     buttons->loop();
     yield();
-    delay(10);
+    delay(15);
   }
 }

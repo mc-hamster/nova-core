@@ -15,6 +15,27 @@ private:
 
     uint32_t pooferInterval = 750;
 
+    struct star
+    {
+        uint32_t pooferPreviousMillis;
+        uint32_t pooferCountsRemaining;
+        uint8_t expander;
+        uint8_t blowerOutput;
+        uint8_t fuelOutput;
+        uint8_t igniterOutput;
+        uint8_t pooferOutput;
+        uint8_t blowerOutputDuty;
+        bool pooferOutputState;
+    };
+
+    struct starCluster
+    {
+        // char groupName[20];
+        //         int numSensors;
+        star stars[20]; // Array of stars structs
+    };
+
+    starCluster cluster;
 
     uint32_t redPreviousMillis = 0;
     bool redPooferOn = 0;
@@ -33,6 +54,7 @@ public:
     {
         RED_OFF,
         RED_POOF,
+        RED_POOF_MULTI,
         RED_BOOM
     };
 
@@ -40,6 +62,7 @@ public:
     {
         GREEN_OFF,
         GREEN_POOF,
+        GREEN_POOF_MULTI,
         GREEN_BOOM
     };
 
@@ -47,6 +70,7 @@ public:
     {
         BLUE_OFF,
         BLUE_POOF,
+        BLUE_POOF_MULTI,
         BLUE_BOOM
     };
 
@@ -54,6 +78,7 @@ public:
     {
         YELLOW_OFF,
         YELLOW_POOF,
+        YELLOW_POOF_MULTI,
         YELLOW_BOOM
     };
 
@@ -73,6 +98,10 @@ public:
     void blue(BlueButtonState state);
 
     void yellow(YellowButtonState state);
+
+    void setupStar(void);
+
+    bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
 
     uint8_t redState;
     uint8_t greenState;
