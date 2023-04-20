@@ -47,7 +47,7 @@ void Star::red_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 5;
+            cluster.stars[outputStar].pooferCountsRemaining = 10;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -81,7 +81,7 @@ void Star::green_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 5;
+            cluster.stars[outputStar].pooferCountsRemaining = 10;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -115,7 +115,7 @@ void Star::blue_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 5;
+            cluster.stars[outputStar].pooferCountsRemaining = 10;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -149,7 +149,7 @@ void Star::yellow_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 5;
+            cluster.stars[outputStar].pooferCountsRemaining = 10;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -237,36 +237,36 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 {
     uint32_t currentMillis = millis();
 
-    if (!cluster.stars[star].pooferOutputState && currentMillis - cluster.stars[star].pooferPreviousMillis >= intervalOn)
+    if (cluster.stars[star].pooferOutputState == POOF_ON)
     {
-
         Serial.println("goPoof: On");
-        // Serial.println(currentMillis);
-        // Serial.println(cluster.stars[star].pooferPreviousMillis);
-        // Serial.println(currentMillis - cluster.stars[star].pooferPreviousMillis);
-
         cluster.stars[star].pooferPreviousMillis = currentMillis;
-
-        // digitalWrite(BUTTON_RED_OUT, HIGH);
         novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
-        cluster.stars[star].pooferOutputState = 1;
+        cluster.stars[star].pooferOutputState = POOF_ON_IDLE;
     }
 
-    if (cluster.stars[star].pooferOutputState && currentMillis - cluster.stars[star].pooferPreviousMillis >= intervalOff)
+    if (cluster.stars[star].pooferOutputState == POOF_ON_IDLE)
     {
-        Serial.println("goPoof: Off");
-
-         Serial.println(intervalOff);
-        //  Serial.println(cluster.stars[star].pooferPreviousMillis);
-        //  Serial.println(currentMillis - cluster.stars[star].pooferPreviousMillis);
-
-        // digitalWrite(BUTTON_RED_OUT, LOW);
-        novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, LOW);
-        cluster.stars[star].pooferOutputState = 0;
-
-        return 1; // We are done with our task.
+        if (currentMillis - cluster.stars[star].pooferPreviousMillis >= intervalOn)
+        {
+            cluster.stars[star].pooferOutputState = POOF_OFF;
+        }
     }
-    
+
+    if (cluster.stars[star].pooferOutputState == POOF_OFF)
+    {
+        novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, LOW);
+        cluster.stars[star].pooferOutputState = POOF_OFF_IDLE;
+    }
+
+    if (cluster.stars[star].pooferOutputState == POOF_OFF_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].pooferPreviousMillis >= intervalOn + intervalOff)
+        {
+            cluster.stars[star].pooferOutputState = POOF_ON;
+            return 1;
+        }
+    }
 
     return 0; // We are not yet done with our task
 }

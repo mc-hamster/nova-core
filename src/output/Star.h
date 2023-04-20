@@ -13,7 +13,7 @@ private:
     uint8_t disabledBrightness = 0;
     uint8_t disabledBrightnessFade = 1; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
 
-    uint32_t pooferInterval = 750;
+    uint32_t pooferInterval = 500;
 
     struct star
     {
@@ -25,7 +25,7 @@ private:
         uint8_t igniterOutput;
         uint8_t pooferOutput;
         uint8_t blowerOutputDuty;
-        bool pooferOutputState;
+        uint8_t pooferOutputState;
     };
 
     struct starCluster
@@ -80,6 +80,35 @@ public:
         YELLOW_POOF,
         YELLOW_POOF_MULTI,
         YELLOW_BOOM
+    };
+
+    enum PooferStates
+    {
+        POOF_ON,
+        POOF_ON_IDLE,
+        POOF_OFF,
+        POOF_OFF_IDLE
+    };
+
+    enum BoomerStates
+    {
+        BOOMER_ACTIVE, // Boomer is ready for a Boom
+        BOOMER_DEACTIVATED, // Boomer is disabled. Here for administrative purposes.
+        BOOMER_ABORT, // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
+        BOOMER_BLOWER_ON, // Turn on the blower
+        BOOMER_BLOWER_ON_IDLE, // Wait for x-ms
+        BOOMER_BLOWER_ON_FUEL_ON, // Turn on the fuel fill
+        BOOMER_BLOWER_ON_FUEL_ON_IDLE, // Wait for x-ms
+        BOOMER_BLOWER_ON_FUEL_OFF, // Turn off the fuel fill
+        BOOMER_BLOWER_ON_FUEL_OFF_IDLE, // Wait for x-ms. Run this for maybe 50ms. This is just to clear the fill tube.
+        BOOMER_BLOWER_OFF, // Turn the blower off
+        BOOMER_BLOWER_OFF_IDLE, // Wait for x-ms. This will let the flap on the baffle close
+        BOOMER_ZAP_ON, // Turn on the igniter
+        BOOMER_ZAP_ON_IDLE, // Leave it on for a moment
+        BOOMER_ZAP_OFF, // Turn the zapper off
+        BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
+        BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
     };
 
     Star();
