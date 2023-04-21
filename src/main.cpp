@@ -39,7 +39,6 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
-
   Serial.println("Set clock of I2C interface to 400khz");
   Wire.begin();
   Wire.setClock(400000UL);
@@ -95,7 +94,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   {
     ambient->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10); 
+    delay(10);
   }
 }
 
@@ -133,8 +132,11 @@ void TaskButtons(void *pvParameters) // This is a task.
 
   while (1) // A Task shall never return or exit.
   {
-    buttons->loop();
-    yield();
-    delay(15);
+    if (ambient->isSystemEnabled())
+    {
+      buttons->loop();
+      yield(); // Should't do anything but it's here incase the watchdog needs it.
+      delay(15);
+    }
   }
 }
