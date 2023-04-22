@@ -94,7 +94,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   {
     ambient->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10);
+    delay(5);
   }
 }
 
@@ -116,6 +116,7 @@ void TaskModes(void *pvParameters) // This is a task.
     else
     {
       Serial.println("system disabled");
+      delay(1000);
       // Don't run the game.
     }
     yield(); // Should't do anything but it's here incase the watchdog needs it.
@@ -136,7 +137,7 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(15);
+      delay(10);
     }
   }
 }

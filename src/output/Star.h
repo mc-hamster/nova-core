@@ -13,10 +13,17 @@ private:
     uint8_t disabledBrightness = 0;
     uint8_t disabledBrightnessFade = 1; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
 
-    uint32_t pooferInterval = 500;
+    uint32_t pooferIntervalMin = 200;
+    uint32_t pooferIntervalMax = 1000;
+
+    struct boomerData
+    {
+        uint32_t boomerPreviousMillis;
+    };
 
     struct star
     {
+        boomerData boomer;
         uint32_t pooferPreviousMillis;
         uint32_t pooferCountsRemaining;
         uint8_t expander;
@@ -84,6 +91,8 @@ public:
 
     enum PooferStates
     {
+//        POOF_ACTIVE,
+//        POOF_DEACTIVATED,
         POOF_ON,
         POOF_ON_IDLE,
         POOF_OFF,
@@ -132,10 +141,10 @@ public:
 
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
 
-    uint8_t redState;
-    uint8_t greenState;
-    uint8_t blueState;
-    uint8_t yellowState;
+    uint8_t redState = 0;
+    uint8_t greenState = 0;
+    uint8_t blueState = 0;
+    uint8_t yellowState = 0;
 };
 
 extern Star *star;

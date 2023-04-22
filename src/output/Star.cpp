@@ -34,10 +34,12 @@ void Star::loop()
 void Star::red_loop(void)
 {
     uint8_t outputStar = 0;
+    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
+
+    //Serial.println(pooferInterval);
 
     if (redState == RED_POOF)
     {
-
         if (goPoof(0, pooferInterval, pooferInterval / 2))
         {
             redState = RED_OFF;
@@ -47,12 +49,12 @@ void Star::red_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 10;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -63,11 +65,15 @@ void Star::red_loop(void)
             redState = RED_OFF;
         }
     }
+    else if (redState == RED_BOOM)
+    {
+    }
 }
 
 void Star::green_loop(void)
 {
     uint8_t outputStar = 1;
+    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (greenState == GREEN_POOF)
     {
@@ -81,12 +87,12 @@ void Star::green_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 10;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -102,6 +108,7 @@ void Star::green_loop(void)
 void Star::blue_loop(void)
 {
     uint8_t outputStar = 2;
+    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (blueState == BLUE_POOF)
     {
@@ -115,12 +122,12 @@ void Star::blue_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 10;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -136,6 +143,7 @@ void Star::blue_loop(void)
 void Star::yellow_loop(void)
 {
     uint8_t outputStar = 3;
+    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (yellowState == YELLOW_POOF)
     {
@@ -149,12 +157,12 @@ void Star::yellow_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 10;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -230,16 +238,20 @@ void Star::setupStar(void)
     {
         cluster.stars[i].pooferCountsRemaining = 0;
         cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].pooferOutputState = 0;
     }
 }
 
 bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 {
     uint32_t currentMillis = millis();
-
+    //Serial.println("1");
     if (cluster.stars[star].pooferOutputState == POOF_ON)
     {
-        Serial.println("goPoof: On");
+        //Serial.println("2");
+        Serial.print("goPoof: On ");
+        Serial.print(star);
+        Serial.println();
         cluster.stars[star].pooferPreviousMillis = currentMillis;
         novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
         cluster.stars[star].pooferOutputState = POOF_ON_IDLE;

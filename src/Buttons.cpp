@@ -4,6 +4,7 @@
 
 #include "output/Star.h"
 #include "NovaIO.h"
+#include "Ambient.h"
 
 OneButton *button_red = new OneButton();
 OneButton *button_green = new OneButton();
@@ -46,6 +47,8 @@ void Buttons::loop(void)
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
     button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
+
+    
     if (novaIO->expansionDigitalRead(BUTTON_RED_IN))
     {
         novaIO->ledRed(HIGH);
@@ -95,6 +98,7 @@ void Buttons::red_doubleClick(void)
 void Buttons::red_longPressStart(void)
 {
     Serial.println("Red Long Start");
+    star->red(star->RED_BOOM);
 }
 void Buttons::red_longPressStop(void)
 {
