@@ -13,12 +13,13 @@ private:
     uint8_t disabledBrightness = 0;
     uint8_t disabledBrightnessFade = 1; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
 
-    uint32_t pooferIntervalMin = 200;
+    uint32_t pooferIntervalMin = 100;
     uint32_t pooferIntervalMax = 1000;
 
     struct boomerData
     {
-        uint32_t boomerPreviousMillis;
+        uint32_t previousMillis;
+        uint8_t outputState;
     };
 
     struct star
@@ -99,6 +100,12 @@ public:
         POOF_OFF_IDLE
     };
 
+    enum boomerButtonState {
+        BOOMER_ON,
+        BOOMER_OFF,
+        BOOMER_IDLE
+    };
+
     enum BoomerStates
     {
         BOOMER_ACTIVE, // Boomer is ready for a Boom
@@ -117,7 +124,7 @@ public:
         BOOMER_ZAP_OFF, // Turn the zapper off
         BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
         BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
-        BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_IDLE // Boomer exhausting. This can't be aborted.
     };
 
     Star();
@@ -129,22 +136,30 @@ public:
     void blue_loop(void);
     void yellow_loop(void);
 
-    void red(RedButtonState state);
+    void redPoof(RedButtonState state);
+    void redBoom(boomerButtonState state);
 
-    void green(GreenButtonState state);
+    void greenPoof(GreenButtonState state);
 
-    void blue(BlueButtonState state);
+    void bluePoof(BlueButtonState state);
 
-    void yellow(YellowButtonState state);
+    void yellowPoof(YellowButtonState state);
 
     void setupStar(void);
 
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
+    bool goBoom(uint8_t star);
 
-    uint8_t redState = 0;
-    uint8_t greenState = 0;
-    uint8_t blueState = 0;
-    uint8_t yellowState = 0;
+    uint8_t redPooferState;
+    uint8_t greenPooferState;
+    uint8_t bluePooferState;
+    uint8_t yellowPooferState;
+
+    uint8_t redBoomerState;
+    uint8_t greenBoomerState;
+    uint8_t blueBoomerState;
+    uint8_t yellowBoomerState;
+
 };
 
 extern Star *star;

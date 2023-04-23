@@ -36,16 +36,16 @@ void Star::red_loop(void)
     uint8_t outputStar = 0;
     uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
-    //Serial.println(pooferInterval);
+    // Serial.println(pooferInterval);
 
-    if (redState == RED_POOF)
+    if (redPooferState == RED_POOF)
     {
         if (goPoof(0, pooferInterval, pooferInterval / 2))
         {
-            redState = RED_OFF;
+            redPooferState = RED_OFF;
         }
     }
-    else if (redState == RED_POOF_MULTI)
+    else if (redPooferState == RED_POOF_MULTI)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
@@ -54,7 +54,7 @@ void Star::red_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 7))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -62,11 +62,32 @@ void Star::red_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            redState = RED_OFF;
+            redPooferState = RED_OFF;
         }
     }
-    else if (redState == RED_BOOM)
+
+    if (redBoomerState == BOOMER_ON)
     {
+        if (goBoom(outputStar))
+        {
+            Serial.println("Setting: BOOMER_OFF - Starting the boomer");
+            redBoomerState = BOOMER_OFF;
+        }
+    }
+    else if (redBoomerState == BOOMER_OFF)
+    {
+        // if (goBoom(outputStar))
+        //{
+        if (goBoom(outputStar))
+        {
+            redBoomerState = BOOMER_OFF;
+        }
+        else
+        {
+            Serial.println("Setting: BOOMER_ABORT - Aborting the boomer");
+            redBoomerState = BOOMER_ABORT;
+        }
+        //}
     }
 }
 
@@ -75,15 +96,15 @@ void Star::green_loop(void)
     uint8_t outputStar = 1;
     uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
-    if (greenState == GREEN_POOF)
+    if (greenPooferState == GREEN_POOF)
     {
 
         if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
         {
-            greenState = GREEN_OFF;
+            greenPooferState = GREEN_OFF;
         }
     }
-    else if (greenState == GREEN_POOF_MULTI)
+    else if (greenPooferState == GREEN_POOF_MULTI)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
@@ -92,7 +113,7 @@ void Star::green_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 7))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -100,7 +121,7 @@ void Star::green_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            greenState = GREEN_OFF;
+            greenPooferState = GREEN_OFF;
         }
     }
 }
@@ -110,15 +131,15 @@ void Star::blue_loop(void)
     uint8_t outputStar = 2;
     uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
-    if (blueState == BLUE_POOF)
+    if (bluePooferState == BLUE_POOF)
     {
 
         if (goPoof(2, pooferInterval, pooferInterval / 2))
         {
-            blueState = BLUE_OFF;
+            bluePooferState = BLUE_OFF;
         }
     }
-    else if (blueState == BLUE_POOF_MULTI)
+    else if (bluePooferState == BLUE_POOF_MULTI)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
@@ -127,7 +148,7 @@ void Star::blue_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 7))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -135,7 +156,7 @@ void Star::blue_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            blueState = BLUE_OFF;
+            bluePooferState = BLUE_OFF;
         }
     }
 }
@@ -145,15 +166,15 @@ void Star::yellow_loop(void)
     uint8_t outputStar = 3;
     uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
-    if (yellowState == YELLOW_POOF)
+    if (yellowPooferState == YELLOW_POOF)
     {
 
         if (goPoof(3, pooferInterval, pooferInterval / 2))
         {
-            yellowState = YELLOW_OFF;
+            yellowPooferState = YELLOW_OFF;
         }
     }
-    else if (yellowState == YELLOW_POOF_MULTI)
+    else if (yellowPooferState == YELLOW_POOF_MULTI)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
@@ -162,7 +183,7 @@ void Star::yellow_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 3))
+            if (goPoof(outputStar, pooferInterval, pooferInterval * 7))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -170,33 +191,39 @@ void Star::yellow_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            yellowState = YELLOW_OFF;
+            yellowPooferState = YELLOW_OFF;
         }
     }
 }
 
-void Star::red(RedButtonState state)
+void Star::redPoof(RedButtonState state)
 {
-    Serial.println("RED POOF");
-    redState = state;
+    // Serial.println("RED POOF");
+    redPooferState = state;
 }
 
-void Star::green(GreenButtonState state)
+void Star::redBoom(boomerButtonState state)
 {
-    Serial.println("GREEN POOF");
-    greenState = state;
+    // Serial.println("RED BOOM");
+    redBoomerState = state;
 }
 
-void Star::blue(BlueButtonState state)
+void Star::greenPoof(GreenButtonState state)
 {
-    Serial.println("BLUE POOF");
-    blueState = state;
+    // Serial.println("GREEN POOF");
+    greenPooferState = state;
 }
 
-void Star::yellow(YellowButtonState state)
+void Star::bluePoof(BlueButtonState state)
 {
-    Serial.println("YELLOW POOF");
-    yellowState = state;
+    // Serial.println("BLUE POOF");
+    bluePooferState = state;
+}
+
+void Star::yellowPoof(YellowButtonState state)
+{
+    // Serial.println("YELLOW POOF");
+    yellowPooferState = state;
 }
 
 /*
@@ -205,6 +232,16 @@ void Star::yellow(YellowButtonState state)
 */
 void Star::setupStar(void)
 {
+
+    redPooferState = POOF_ON;
+    greenPooferState = POOF_ON;
+    bluePooferState = POOF_ON;
+    yellowPooferState = POOF_ON;
+
+    redBoomerState = BOOMER_IDLE;
+    greenBoomerState = BOOMER_IDLE;
+    blueBoomerState = BOOMER_IDLE;
+    yellowBoomerState = BOOMER_IDLE;
 
     cluster.stars[0].expander = 0;
     cluster.stars[0].blowerOutput = 0;
@@ -239,16 +276,173 @@ void Star::setupStar(void)
         cluster.stars[i].pooferCountsRemaining = 0;
         cluster.stars[i].pooferOutputState = 0;
         cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].boomer.outputState = BOOMER_ACTIVE;
+        cluster.stars[i].boomer.previousMillis = 0;
     }
+}
+
+bool Star::goBoom(uint8_t star)
+{
+    uint32_t currentMillis = millis();
+
+    // Serial.println("asdf");
+
+    /*
+        enum BoomerStates
+        {
+            BOOMER_ACTIVE, // Boomer is ready for a Boom
+            BOOMER_DEACTIVATED, // Boomer is disabled. Here for administrative purposes.
+            BOOMER_ABORT, // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
+            BOOMER_BLOWER_ON, // Turn on the blower
+            BOOMER_BLOWER_ON_IDLE, // Wait for x-ms
+            BOOMER_BLOWER_ON_FUEL_ON, // Turn on the fuel fill
+            BOOMER_BLOWER_ON_FUEL_ON_IDLE, // Wait for x-ms
+            BOOMER_BLOWER_ON_FUEL_OFF, // Turn off the fuel fill
+            BOOMER_BLOWER_ON_FUEL_OFF_IDLE, // Wait for x-ms. Run this for maybe 50ms. This is just to clear the fill tube.
+            BOOMER_BLOWER_OFF, // Turn the blower off
+            BOOMER_BLOWER_OFF_IDLE, // Wait for x-ms. This will let the flap on the baffle close
+            BOOMER_ZAP_ON, // Turn on the igniter
+            BOOMER_ZAP_ON_IDLE, // Leave it on for a moment
+            BOOMER_ZAP_OFF, // Turn the zapper off
+            BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
+            BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
+            BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
+        };
+    */
+
+    if (cluster.stars[star].boomer.outputState == BOOMER_ABORT)
+    {
+        Serial.println("BOOMER_ABORT RECEIVED");
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_ACTIVE)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_ACTIVE");
+        Serial.println(millis());
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_BLOWER_ON");
+
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON_IDLE");
+            Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
+        }
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_ON)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_BLOWER_ON_FUEL_ON");
+
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, HIGH);
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_ON_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON_FUEL_ON_IDLE");
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF;
+        }
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_OFF)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_BLOWER_ON_FUEL_OFF");
+
+        // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_OFF_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON_FUEL_OFF_IDLE");
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF;
+        }
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_OFF)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_BLOWER_OFF");
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_OFF_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_OFF_IDLE");
+
+            cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON;
+        }
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_ZAP_ON)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_ZAP_ON");
+
+        novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, HIGH);
+        cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_ZAP_ON_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+
+            Serial.println("BOOMER_ZAP_ON_IDLE");
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
+        }
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST)
+    {
+        cluster.stars[star].boomer.previousMillis = millis();
+        Serial.println("BOOMER_BLOWER_EXHAUST");
+
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+        novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, LOW);
+        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_IDLE;
+    }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
+    {
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 10000)
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_EXHAUST_IDLE");
+
+            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+            cluster.stars[star].boomer.outputState = BOOMER_ACTIVE;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 {
     uint32_t currentMillis = millis();
-    //Serial.println("1");
+    // Serial.println("1");
     if (cluster.stars[star].pooferOutputState == POOF_ON)
     {
-        //Serial.println("2");
+        // Serial.println("2");
         Serial.print("goPoof: On ");
         Serial.print(star);
         Serial.println();

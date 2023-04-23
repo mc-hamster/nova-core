@@ -88,32 +88,33 @@ void Buttons::loop(void)
 void Buttons::red_click(void)
 {
     Serial.println("Red Click");
-    star->red(star->RED_POOF);
+    star->redPoof(star->RED_POOF);
 }
 void Buttons::red_doubleClick(void)
 {
     Serial.println("Red Double Click");
-    star->red(star->RED_POOF_MULTI);
+    star->redPoof(star->RED_POOF_MULTI);
 }
 void Buttons::red_longPressStart(void)
 {
     Serial.println("Red Long Start");
-    star->red(star->RED_BOOM);
+    star->redBoom(star->BOOMER_ON);
 }
 void Buttons::red_longPressStop(void)
 {
     Serial.println("Red Long Stop");
+    star->redBoom(star->BOOMER_OFF);
 }
 
 void Buttons::green_click(void)
 {
     Serial.println("Green Click");
-    star->green(star->GREEN_POOF);
+    star->greenPoof(star->GREEN_POOF);
 }
 void Buttons::green_doubleClick(void)
 {
     Serial.println("Green Double Click");
-    star->green(star->GREEN_POOF_MULTI);
+    star->greenPoof(star->GREEN_POOF_MULTI);
 }
 void Buttons::green_longPressStart(void)
 {
@@ -127,12 +128,12 @@ void Buttons::green_longPressStop(void)
 void Buttons::blue_click(void)
 {
     Serial.println("Blue Click");
-    star->blue(star->BLUE_POOF);
+    star->bluePoof(star->BLUE_POOF);
 }
 void Buttons::blue_doubleClick(void)
 {
     Serial.println("Blue Double Click");
-    star->blue(star->BLUE_POOF_MULTI);
+    star->bluePoof(star->BLUE_POOF_MULTI);
 }
 void Buttons::blue_longPressStart(void)
 {
@@ -146,12 +147,12 @@ void Buttons::blue_longPressStop(void)
 void Buttons::yellow_click(void)
 {
     Serial.println("Yellow Click");
-    star->yellow(star->YELLOW_POOF);
+    star->yellowPoof(star->YELLOW_POOF);
 }
 void Buttons::yellow_doubleClick(void)
 {
     Serial.println("Yellow Double Click");
-    star->yellow(star->YELLOW_POOF_MULTI);
+    star->yellowPoof(star->YELLOW_POOF_MULTI);
 }
 void Buttons::yellow_longPressStart(void)
 {
