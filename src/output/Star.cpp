@@ -309,6 +309,9 @@ void Star::setupStar(void)
 
 void Star::goBoomAbort(uint8_t star, bool abort)
 {
+    Serial.print("Star - ");
+    Serial.print(star);
+    Serial.println(" - ABORT!!!!");
     cluster.stars[star].boomer.abort = abort;
 }
 
@@ -318,6 +321,10 @@ bool Star::goBoom(uint8_t star)
 
     if (cluster.stars[star].boomer.outputState == BOOMER_ABORT)
     {
+        Serial.print("Star - ");
+        Serial.print(star);
+        Serial.print(" - ");
+
         Serial.println("BOOMER_ABORT RECEIVED");
         novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
         novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
@@ -333,6 +340,9 @@ bool Star::goBoom(uint8_t star)
         else
         {
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_ACTIVE");
             Serial.println(millis());
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
@@ -348,6 +358,9 @@ bool Star::goBoom(uint8_t star)
         {
 
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_ON");
 
             novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
@@ -365,6 +378,9 @@ bool Star::goBoom(uint8_t star)
             if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
+                Serial.print("Star - ");
+                Serial.print(star);
+                Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_ON_IDLE");
                 Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
@@ -381,6 +397,9 @@ bool Star::goBoom(uint8_t star)
         {
 
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_ON_FUEL_ON");
 
             novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
@@ -400,6 +419,9 @@ bool Star::goBoom(uint8_t star)
             if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
+                Serial.print("Star - ");
+                Serial.print(star);
+                Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_ON_FUEL_ON_IDLE");
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF;
             }
@@ -415,6 +437,9 @@ bool Star::goBoom(uint8_t star)
         {
 
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_ON_FUEL_OFF");
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
@@ -434,6 +459,9 @@ bool Star::goBoom(uint8_t star)
             if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
+                Serial.print("Star - ");
+                Serial.print(star);
+                Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_ON_FUEL_OFF_IDLE");
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF;
             }
@@ -449,6 +477,9 @@ bool Star::goBoom(uint8_t star)
         {
 
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_OFF");
             novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
 
@@ -467,6 +498,9 @@ bool Star::goBoom(uint8_t star)
             if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
+                Serial.print("Star - ");
+                Serial.print(star);
+                Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_OFF_IDLE");
 
                 cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON;
@@ -483,6 +517,9 @@ bool Star::goBoom(uint8_t star)
         {
 
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_ZAP_ON");
 
             novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, HIGH);
@@ -502,6 +539,9 @@ bool Star::goBoom(uint8_t star)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
 
+                Serial.print("Star - ");
+                Serial.print(star);
+                Serial.print(" - ");
                 Serial.println("BOOMER_ZAP_ON_IDLE");
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
             }
@@ -510,6 +550,9 @@ bool Star::goBoom(uint8_t star)
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST)
     {
         cluster.stars[star].boomer.previousMillis = millis();
+        Serial.print("Star - ");
+        Serial.print(star);
+        Serial.print(" - ");
         Serial.println("BOOMER_BLOWER_EXHAUST");
 
         novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
@@ -521,6 +564,9 @@ bool Star::goBoom(uint8_t star)
         if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
         {
             cluster.stars[star].boomer.previousMillis = millis();
+            Serial.print("Star - ");
+            Serial.print(star);
+            Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_EXHAUST_IDLE");
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
@@ -538,6 +584,9 @@ bool Star::goBoom(uint8_t star)
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_OFF)
     {
         novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+        Serial.print("Star - ");
+        Serial.print(star);
+        Serial.print(" - ");
         Serial.println("BOOMER_BLOWER_EXHAUST_OFF");
         cluster.stars[star].boomer.outputState = BOOMER_IDLE;
 
