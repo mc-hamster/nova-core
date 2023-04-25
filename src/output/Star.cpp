@@ -36,8 +36,6 @@ void Star::red_loop(void)
     uint8_t outputStar = 0;
     uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
-    // Serial.println(pooferInterval);
-
     if (redPooferState == RED_POOF)
     {
         if (goPoof(0, pooferInterval, pooferInterval / 2))
@@ -344,7 +342,7 @@ bool Star::goBoom(uint8_t star)
             Serial.print(star);
             Serial.print(" - ");
             Serial.println("BOOMER_ACTIVE");
-            Serial.println(millis());
+            //Serial.println(millis());
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
         }
     }
@@ -382,7 +380,7 @@ bool Star::goBoom(uint8_t star)
                 Serial.print(star);
                 Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_ON_IDLE");
-                Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
+                //Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
             }
         }
