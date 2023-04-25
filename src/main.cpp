@@ -2,8 +2,14 @@
 #include <Thread.h>
 #include <ThreadController.h>
 #include <Wire.h>
+#include <WiFi.h>
 
 #include "OneButton.h"
+
+#include <DNSServer.h>
+#include <WiFi.h>
+#include <AsyncTCP.h>
+#include "ESPAsyncWebServer.h"
 
 #include "configuration.h"
 #include "modes/Simona.h"
@@ -12,10 +18,15 @@
 #include "Ambient.h"
 #include "output/Star.h"
 #include "Buttons.h"
+#include "Web.h"
 
 void TaskAmbient(void *pvParameters);
+void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
 void TaskButtons(void *pvParameters);
+
+DNSServer dnsServer;
+AsyncWebServer webServer(80);
 
 void setup()
 {
@@ -67,15 +78,25 @@ void setup()
   Serial.println("Create TaskModes - Done");
 
   Serial.println("Create TaskButtons");
-  xTaskCreate(&TaskButtons, "TaskButtons", 8000, NULL, 5, NULL);
+  xTaskCreate(&TaskButtons, "TaskButtons", 2048, NULL, 5, NULL);
   Serial.println("Create TaskButtons - Done");
+
+  Serial.println("Create TaskMDNS");
+  xTaskCreate(&TaskButtons, "TaskMDNS", 4098, NULL, 5, NULL);
+  Serial.println("Create TaskMDNS - Done");
+
+  // your other setup stuff...
+  WiFi.softAP("NOVA", "scubadandy");
+  dnsServer.start(53, "*", WiFi.softAPIP());
+  webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
+  // more handlers...
+  webServer.begin();
 
   Serial.println("Setup Complete");
 }
 
 void loop()
 {
-
   /* Best not to have anything in this loop.
       Everything should be in freeRTOS tasks
   */
@@ -93,6 +114,19 @@ void TaskAmbient(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     ambient->loop();
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    delay(5);
+  }
+}
+
+void TaskMDNS(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+
+  Serial.println("TaskMDNS is running");
+  while (1) // A Task shall never return or exit.
+  {
+    dnsServer.processNextRequest();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(5);
   }
