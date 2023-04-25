@@ -70,24 +70,9 @@ void Star::red_loop(void)
     {
         if (goBoom(outputStar))
         {
-            Serial.println("Setting: BOOMER_OFF - Starting the boomer");
-            redBoomerState = BOOMER_OFF;
+            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+            redBoomerState = BOOMER_IDLE;
         }
-    }
-    else if (redBoomerState == BOOMER_OFF)
-    {
-        // if (goBoom(outputStar))
-        //{
-        if (goBoom(outputStar))
-        {
-            redBoomerState = BOOMER_OFF;
-        }
-        else
-        {
-            Serial.println("Setting: BOOMER_ABORT - Aborting the boomer");
-            redBoomerState = BOOMER_ABORT;
-        }
-        //}
     }
 }
 
@@ -122,6 +107,15 @@ void Star::green_loop(void)
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
             greenPooferState = GREEN_OFF;
+        }
+    }
+
+    if (greenBoomerState == BOOMER_ON)
+    {
+        if (goBoom(outputStar))
+        {
+            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+            greenBoomerState = BOOMER_IDLE;
         }
     }
 }
@@ -159,6 +153,14 @@ void Star::blue_loop(void)
             bluePooferState = BLUE_OFF;
         }
     }
+    if (blueBoomerState == BOOMER_ON)
+    {
+        if (goBoom(outputStar))
+        {
+            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+            blueBoomerState = BOOMER_IDLE;
+        }
+    }
 }
 
 void Star::yellow_loop(void)
@@ -194,6 +196,15 @@ void Star::yellow_loop(void)
             yellowPooferState = YELLOW_OFF;
         }
     }
+
+    if (yellowBoomerState == BOOMER_ON)
+    {
+        if (goBoom(outputStar))
+        {
+            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+            yellowBoomerState = BOOMER_IDLE;
+        }
+    }
 }
 
 void Star::redPoof(RedButtonState state)
@@ -204,7 +215,6 @@ void Star::redPoof(RedButtonState state)
 
 void Star::redBoom(boomerButtonState state)
 {
-    // Serial.println("RED BOOM");
     redBoomerState = state;
 }
 
@@ -214,16 +224,31 @@ void Star::greenPoof(GreenButtonState state)
     greenPooferState = state;
 }
 
+void Star::greenBoom(boomerButtonState state)
+{
+    greenBoomerState = state;
+}
+
 void Star::bluePoof(BlueButtonState state)
 {
     // Serial.println("BLUE POOF");
     bluePooferState = state;
 }
 
+void Star::blueBoom(boomerButtonState state)
+{
+    blueBoomerState = state;
+}
+
 void Star::yellowPoof(YellowButtonState state)
 {
     // Serial.println("YELLOW POOF");
     yellowPooferState = state;
+}
+
+void Star::yellowBoom(boomerButtonState state)
+{
+    yellowBoomerState = state;
 }
 
 /*
@@ -278,138 +303,208 @@ void Star::setupStar(void)
         cluster.stars[i].pooferOutputState = 0;
         cluster.stars[i].boomer.outputState = BOOMER_ACTIVE;
         cluster.stars[i].boomer.previousMillis = 0;
+        cluster.stars[i].boomer.abort = false;
     }
+}
+
+void Star::goBoomAbort(uint8_t star, bool abort)
+{
+    cluster.stars[star].boomer.abort = abort;
 }
 
 bool Star::goBoom(uint8_t star)
 {
     uint32_t currentMillis = millis();
 
-    // Serial.println("asdf");
-
-    /*
-        enum BoomerStates
-        {
-            BOOMER_ACTIVE, // Boomer is ready for a Boom
-            BOOMER_DEACTIVATED, // Boomer is disabled. Here for administrative purposes.
-            BOOMER_ABORT, // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
-            BOOMER_BLOWER_ON, // Turn on the blower
-            BOOMER_BLOWER_ON_IDLE, // Wait for x-ms
-            BOOMER_BLOWER_ON_FUEL_ON, // Turn on the fuel fill
-            BOOMER_BLOWER_ON_FUEL_ON_IDLE, // Wait for x-ms
-            BOOMER_BLOWER_ON_FUEL_OFF, // Turn off the fuel fill
-            BOOMER_BLOWER_ON_FUEL_OFF_IDLE, // Wait for x-ms. Run this for maybe 50ms. This is just to clear the fill tube.
-            BOOMER_BLOWER_OFF, // Turn the blower off
-            BOOMER_BLOWER_OFF_IDLE, // Wait for x-ms. This will let the flap on the baffle close
-            BOOMER_ZAP_ON, // Turn on the igniter
-            BOOMER_ZAP_ON_IDLE, // Leave it on for a moment
-            BOOMER_ZAP_OFF, // Turn the zapper off
-            BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
-            BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
-            BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
-        };
-    */
-
     if (cluster.stars[star].boomer.outputState == BOOMER_ABORT)
     {
         Serial.println("BOOMER_ABORT RECEIVED");
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
+
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_ACTIVE)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_ACTIVE");
-        Serial.println(millis());
-        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_ACTIVE");
+            Serial.println(millis());
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_BLOWER_ON");
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_IDLE;
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON");
+
+            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_IDLE;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+        if (cluster.stars[star].boomer.abort)
         {
-            cluster.stars[star].boomer.previousMillis = millis();
-            Serial.println("BOOMER_BLOWER_ON_IDLE");
-            Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
-            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+            {
+                cluster.stars[star].boomer.previousMillis = millis();
+                Serial.println("BOOMER_BLOWER_ON_IDLE");
+                Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
+                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
+            }
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_ON)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_BLOWER_ON_FUEL_ON");
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, HIGH);
-        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON_IDLE;
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON_FUEL_ON");
+
+            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+            novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, HIGH);
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON_IDLE;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_ON_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
+        if (cluster.stars[star].boomer.abort)
         {
-            cluster.stars[star].boomer.previousMillis = millis();
-            Serial.println("BOOMER_BLOWER_ON_FUEL_ON_IDLE");
-            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF;
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
+
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
+            {
+                cluster.stars[star].boomer.previousMillis = millis();
+                Serial.println("BOOMER_BLOWER_ON_FUEL_ON_IDLE");
+                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF;
+            }
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_OFF)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_BLOWER_ON_FUEL_OFF");
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-        // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
-        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF_IDLE;
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_ON_FUEL_OFF");
+
+            // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+            novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF_IDLE;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_ON_FUEL_OFF_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+        if (cluster.stars[star].boomer.abort)
         {
-            cluster.stars[star].boomer.previousMillis = millis();
-            Serial.println("BOOMER_BLOWER_ON_FUEL_OFF_IDLE");
-            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF;
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
+
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+            {
+                cluster.stars[star].boomer.previousMillis = millis();
+                Serial.println("BOOMER_BLOWER_ON_FUEL_OFF_IDLE");
+                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF;
+            }
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_OFF)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_BLOWER_OFF");
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-        cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF_IDLE;
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_BLOWER_OFF");
+            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF_IDLE;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_OFF_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
+        if (cluster.stars[star].boomer.abort)
         {
-            cluster.stars[star].boomer.previousMillis = millis();
-            Serial.println("BOOMER_BLOWER_OFF_IDLE");
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-            cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON;
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
+            {
+                cluster.stars[star].boomer.previousMillis = millis();
+                Serial.println("BOOMER_BLOWER_OFF_IDLE");
+
+                cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON;
+            }
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_ZAP_ON)
     {
-        cluster.stars[star].boomer.previousMillis = millis();
-        Serial.println("BOOMER_ZAP_ON");
+        if (cluster.stars[star].boomer.abort)
+        {
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-        novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, HIGH);
-        cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON_IDLE;
+            cluster.stars[star].boomer.previousMillis = millis();
+            Serial.println("BOOMER_ZAP_ON");
+
+            novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, HIGH);
+            cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON_IDLE;
+        }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_ZAP_ON_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
+        if (cluster.stars[star].boomer.abort)
         {
-            cluster.stars[star].boomer.previousMillis = millis();
+            cluster.stars[star].boomer.outputState = BOOMER_ABORT;
+        }
+        else
+        {
 
-            Serial.println("BOOMER_ZAP_ON_IDLE");
-            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
+            {
+                cluster.stars[star].boomer.previousMillis = millis();
+
+                Serial.println("BOOMER_ZAP_ON_IDLE");
+                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
+            }
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST)
@@ -423,16 +518,32 @@ bool Star::goBoom(uint8_t star)
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 10000)
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
         {
             cluster.stars[star].boomer.previousMillis = millis();
             Serial.println("BOOMER_BLOWER_EXHAUST_IDLE");
 
-            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
-            cluster.stars[star].boomer.outputState = BOOMER_ACTIVE;
-            return 1;
+            // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+            if (cluster.stars[star].boomer.abort)
+            {
+                cluster.stars[star].boomer.abort = false;
+                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
+            }
+            else
+            {
+                cluster.stars[star].boomer.outputState = BOOMER_ACTIVE;
+            }
         }
     }
+    else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_OFF)
+    {
+        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+        Serial.println("BOOMER_BLOWER_EXHAUST_OFF");
+        cluster.stars[star].boomer.outputState = BOOMER_IDLE;
+
+        return 1;
+    }
+
     return 0;
 }
 

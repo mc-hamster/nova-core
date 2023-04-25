@@ -47,8 +47,6 @@ void Buttons::loop(void)
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
     button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
-
-    
     if (novaIO->expansionDigitalRead(BUTTON_RED_IN))
     {
         novaIO->ledRed(HIGH);
@@ -103,7 +101,7 @@ void Buttons::red_longPressStart(void)
 void Buttons::red_longPressStop(void)
 {
     Serial.println("Red Long Stop");
-    star->redBoom(star->BOOMER_OFF);
+    star->goBoomAbort(0, true);
 }
 
 void Buttons::green_click(void)
@@ -119,10 +117,12 @@ void Buttons::green_doubleClick(void)
 void Buttons::green_longPressStart(void)
 {
     Serial.println("Green Long Start");
+    star->greenBoom(star->BOOMER_ON);
 }
 void Buttons::green_longPressStop(void)
 {
     Serial.println("Green Long Stop");
+    star->goBoomAbort(1, true);
 }
 
 void Buttons::blue_click(void)
@@ -138,10 +138,12 @@ void Buttons::blue_doubleClick(void)
 void Buttons::blue_longPressStart(void)
 {
     Serial.println("Blue Long Start");
+    star->blueBoom(star->BOOMER_ON);
 }
 void Buttons::blue_longPressStop(void)
 {
     Serial.println("Blue Long Stop");
+    star->goBoomAbort(2, true);
 }
 
 void Buttons::yellow_click(void)
@@ -157,8 +159,10 @@ void Buttons::yellow_doubleClick(void)
 void Buttons::yellow_longPressStart(void)
 {
     Serial.println("Yellow Long Start");
+    star->yellowBoom(star->BOOMER_ON);
 }
 void Buttons::yellow_longPressStop(void)
 {
     Serial.println("Yellow Long Stop");
+    star->goBoomAbort(3, true);
 }

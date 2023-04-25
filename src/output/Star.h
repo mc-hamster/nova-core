@@ -20,6 +20,7 @@ private:
     {
         uint32_t previousMillis;
         uint8_t outputState;
+        bool abort; // If true, abort the boomer sequence
     };
 
     struct star
@@ -124,7 +125,8 @@ public:
         BOOMER_ZAP_OFF, // Turn the zapper off
         BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
         BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
-        BOOMER_BLOWER_EXHAUST_IDLE // Boomer exhausting. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_OFF // Turn the exhaust off.
     };
 
     Star();
@@ -140,15 +142,19 @@ public:
     void redBoom(boomerButtonState state);
 
     void greenPoof(GreenButtonState state);
+    void greenBoom(boomerButtonState state);
 
     void bluePoof(BlueButtonState state);
+    void blueBoom(boomerButtonState state);
 
     void yellowPoof(YellowButtonState state);
+    void yellowBoom(boomerButtonState state);
 
     void setupStar(void);
 
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
     bool goBoom(uint8_t star);
+    void goBoomAbort(uint8_t star, bool abort);
 
     uint8_t redPooferState;
     uint8_t greenPooferState;
