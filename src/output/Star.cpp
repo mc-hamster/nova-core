@@ -454,7 +454,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -533,7 +533,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 250)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
 

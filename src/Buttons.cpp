@@ -53,7 +53,14 @@ void Buttons::loop(void)
     }
     else
     {
-        novaIO->ledRed(LOW);
+        if ((millis() / 100) % 2)
+        {
+            novaIO->ledRed(HIGH);
+        }
+        else
+        {
+            novaIO->ledRed(LOW);
+        }
     }
     if (novaIO->expansionDigitalRead(BUTTON_GREEN_IN))
     {
@@ -61,7 +68,14 @@ void Buttons::loop(void)
     }
     else
     {
-        novaIO->ledGreen(LOW);
+        if ((millis() / 100) % 2)
+        {
+            novaIO->ledGreen(HIGH);
+        }
+        else
+        {
+            novaIO->ledGreen(LOW);
+        }
     }
 
     if (novaIO->expansionDigitalRead(BUTTON_BLUE_IN))
@@ -70,7 +84,14 @@ void Buttons::loop(void)
     }
     else
     {
-        novaIO->ledBlue(LOW);
+        if ((millis() / 100) % 2)
+        {
+            novaIO->ledBlue(HIGH);
+        }
+        else
+        {
+            novaIO->ledBlue(LOW);
+        }
     }
 
     if (novaIO->expansionDigitalRead(BUTTON_YELLOW_IN))
@@ -79,7 +100,14 @@ void Buttons::loop(void)
     }
     else
     {
-        novaIO->ledYellow(LOW);
+        if ((millis() / 100) % 2)
+        {
+            novaIO->ledYellow(HIGH);
+        }
+        else
+        {
+            novaIO->ledYellow(LOW);
+        }
     }
 }
 
