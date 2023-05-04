@@ -87,13 +87,12 @@ void setup()
 
   // your other setup stuff...
   WiFi.softAP("NOVA", "scubadandy");
-  WiFi.setSleep(false); // Disable power saving on the wifi interface. 
+  WiFi.setSleep(false); // Disable power saving on the wifi interface.
 
   dnsServer.start(53, "*", WiFi.softAPIP());
   webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
   // more handlers...
   webServer.begin();
-
 
   Serial.println("Setup Complete");
 }
@@ -174,6 +173,10 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.
+      delay(10);
+    }
+    else
+    {
       delay(10);
     }
   }
