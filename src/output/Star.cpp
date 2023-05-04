@@ -569,7 +569,7 @@ bool Star::goBoom(uint8_t star)
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 4000)
         {
             cluster.stars[star].boomer.previousMillis = millis();
             Serial.print("Star - ");
