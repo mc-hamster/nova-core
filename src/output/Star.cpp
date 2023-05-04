@@ -334,8 +334,8 @@ bool Star::goBoom(uint8_t star)
         Serial.print(" - ");
 
         Serial.println("BOOMER_ABORT RECEIVED");
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-        novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
+        novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
+        novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, LOW, cluster.stars[star].expander);
 
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
     }
@@ -371,7 +371,7 @@ bool Star::goBoom(uint8_t star)
             Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_ON");
 
-            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
+            novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_IDLE;
         }
     }
@@ -410,8 +410,8 @@ bool Star::goBoom(uint8_t star)
             Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_ON_FUEL_ON");
 
-            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-            novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, HIGH);
+            novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
+            novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, HIGH, cluster.stars[star].expander);
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON_IDLE;
         }
     }
@@ -451,7 +451,7 @@ bool Star::goBoom(uint8_t star)
             Serial.println("BOOMER_BLOWER_ON_FUEL_OFF");
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-            novaIO->mcpA_digitalWrite(cluster.stars[star].fuelOutput, LOW);
+            novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, LOW, cluster.stars[star].expander);
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF_IDLE;
         }
     }
@@ -489,7 +489,7 @@ bool Star::goBoom(uint8_t star)
             Serial.print(star);
             Serial.print(" - ");
             Serial.println("BOOMER_BLOWER_OFF");
-            novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+            novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, LOW, cluster.stars[star].expander);
 
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_OFF_IDLE;
         }
@@ -530,7 +530,7 @@ bool Star::goBoom(uint8_t star)
             Serial.print(" - ");
             Serial.println("BOOMER_ZAP_ON");
 
-            novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, HIGH);
+            novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, HIGH, cluster.stars[star].expander);
             cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON_IDLE;
         }
     }
@@ -563,8 +563,8 @@ bool Star::goBoom(uint8_t star)
         Serial.print(" - ");
         Serial.println("BOOMER_BLOWER_EXHAUST");
 
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
-        novaIO->mcpA_digitalWrite(cluster.stars[star].igniterOutput, LOW);
+        novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
+        novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, LOW, cluster.stars[star].expander);
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_IDLE;
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
@@ -591,7 +591,7 @@ bool Star::goBoom(uint8_t star)
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_OFF)
     {
-        novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
+        novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, LOW, cluster.stars[star].expander);
         Serial.print("Star - ");
         Serial.print(star);
         Serial.print(" - ");
