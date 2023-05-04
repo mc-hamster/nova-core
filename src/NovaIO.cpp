@@ -288,6 +288,51 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }
 
+void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
+{
+    while (1) // After duration set Pins to end state
+    {
+        if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
+        {
+            if (expander == 0)
+            {
+                mcp_a.digitalWrite(pin, value);
+            }
+            else if (expander == 1)
+            {
+                mcp_b.digitalWrite(pin, value);
+            }
+            else if (expander == 2)
+            {
+                mcp_c.digitalWrite(pin, value);
+            }
+            else if (expander == 3)
+            {
+                mcp_d.digitalWrite(pin, value);
+            }
+            else if (expander == 4)
+            {
+                mcp_e.digitalWrite(pin, value);
+            }
+            else if (expander == 5)
+            {
+                mcp_f.digitalWrite(pin, value);
+            }
+            else if (expander == 6)
+            {
+                mcp_g.digitalWrite(pin, value);
+            }
+            else if (expander == 7)
+            {
+                mcp_h.digitalWrite(pin, value);
+            }
+            break;
+        }
+        yield(); // We yield to feed the watchdog.
+    }
+
+    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+}
 
 void NovaIO::mcpB_digitalWrite(uint8_t pin, uint8_t value)
 {
@@ -303,7 +348,6 @@ void NovaIO::mcpB_digitalWrite(uint8_t pin, uint8_t value)
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }
-
 
 void NovaIO::mcpC_digitalWrite(uint8_t pin, uint8_t value)
 {

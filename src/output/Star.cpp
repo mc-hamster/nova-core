@@ -287,12 +287,22 @@ void Star::setupStar(void)
     cluster.stars[2].pooferOutput = 11;
     cluster.stars[2].blowerOutputDuty = 255;
 
+/*
     cluster.stars[3].expander = 0;
     cluster.stars[3].blowerOutput = 12;
     cluster.stars[3].fuelOutput = 13;
     cluster.stars[3].igniterOutput = 14;
     cluster.stars[3].pooferOutput = 15;
     cluster.stars[3].blowerOutputDuty = 255;
+*/
+    cluster.stars[3].expander = 1;
+    cluster.stars[3].blowerOutput = 0;
+    cluster.stars[3].fuelOutput = 1;
+    cluster.stars[3].igniterOutput = 2;
+    cluster.stars[3].pooferOutput = 3;
+    cluster.stars[3].blowerOutputDuty = 255;
+
+
 
     for (uint32_t i = 0; i < 20; i++)
     {
@@ -605,7 +615,9 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
         Serial.print(star);
         Serial.println();
         cluster.stars[star].pooferPreviousMillis = currentMillis;
-        novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
+        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, HIGH, cluster.stars[star].expander);
+        //novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
+        
         cluster.stars[star].pooferOutputState = POOF_ON_IDLE;
     }
 
@@ -619,7 +631,7 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 
     if (cluster.stars[star].pooferOutputState == POOF_OFF)
     {
-        novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, LOW);
+        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].expander);
         cluster.stars[star].pooferOutputState = POOF_OFF_IDLE;
     }
 

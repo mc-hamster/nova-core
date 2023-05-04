@@ -68,6 +68,8 @@ public:
         void mcpG_digitalWrite(uint8_t pin, uint8_t value);
         void mcpH_digitalWrite(uint8_t pin, uint8_t value);
 
+        void mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander);
+
         void ledRed (bool value);
         void ledGreen (bool value);
         void ledBlue (bool value);
