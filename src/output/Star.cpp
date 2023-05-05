@@ -47,7 +47,7 @@ void Star::red_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
+            cluster.stars[outputStar].pooferCountsRemaining = 100;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -91,7 +91,7 @@ void Star::green_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
+            cluster.stars[outputStar].pooferCountsRemaining = 100;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -135,7 +135,7 @@ void Star::blue_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
+            cluster.stars[outputStar].pooferCountsRemaining = 100;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -178,7 +178,7 @@ void Star::yellow_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
+            cluster.stars[outputStar].pooferCountsRemaining = 100;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -272,12 +272,20 @@ void Star::setupStar(void)
     cluster.stars[0].igniterOutput = 2;
     cluster.stars[0].pooferOutput = 3;
     cluster.stars[0].blowerOutputDuty = 255;
-
+/*
     cluster.stars[1].expander = 0;
     cluster.stars[1].blowerOutput = 4;
     cluster.stars[1].fuelOutput = 5;
     cluster.stars[1].igniterOutput = 6;
     cluster.stars[1].pooferOutput = 7;
+    cluster.stars[1].blowerOutputDuty = 255;
+*/
+
+    cluster.stars[1].expander = 2;
+    cluster.stars[1].blowerOutput = 0;
+    cluster.stars[1].fuelOutput = 1;
+    cluster.stars[1].igniterOutput = 2;
+    cluster.stars[1].pooferOutput = 3;
     cluster.stars[1].blowerOutputDuty = 255;
 
     cluster.stars[2].expander = 0;
@@ -336,6 +344,7 @@ bool Star::goBoom(uint8_t star)
         Serial.println("BOOMER_ABORT RECEIVED");
         novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
         novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, LOW, cluster.stars[star].expander);
+        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].expander);
 
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
     }
@@ -452,6 +461,8 @@ bool Star::goBoom(uint8_t star)
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, HIGH);
             novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, LOW, cluster.stars[star].expander);
+            novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, HIGH, cluster.stars[star].expander);
+
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_OFF_IDLE;
         }
     }
@@ -531,6 +542,7 @@ bool Star::goBoom(uint8_t star)
             Serial.println("BOOMER_ZAP_ON");
 
             novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, HIGH, cluster.stars[star].expander);
+            novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, HIGH, cluster.stars[star].expander);
             cluster.stars[star].boomer.outputState = BOOMER_ZAP_ON_IDLE;
         }
     }
@@ -565,6 +577,8 @@ bool Star::goBoom(uint8_t star)
 
         novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, HIGH, cluster.stars[star].expander);
         novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, LOW, cluster.stars[star].expander);
+        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].expander);
+
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_IDLE;
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
