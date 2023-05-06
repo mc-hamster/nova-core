@@ -14,7 +14,7 @@ private:
     uint8_t disabledBrightnessFade = 1; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
 
     uint32_t pooferIntervalMin = 100;
-    uint32_t pooferIntervalMax = 1000;
+    uint32_t pooferIntervalMax = 250;
 
     struct boomerData
     {

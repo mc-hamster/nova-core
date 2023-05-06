@@ -16,26 +16,41 @@ Buttons *buttons = NULL;
 
 Buttons::Buttons()
 {
+    uint32_t ticksDebounce = 25; // setDebounceTicks; // Period of time in which to ignore additional level changes.
+    uint32_t ticksClicks = 150; // setClickTicks; // Timeout used to distinguish single clicks from double clicks.
+    uint32_t ticksPress = 500; // setPressTicks; // Duration to hold a button to trigger a long press
+
     Serial.println("Setting up buttons");
     button_red->attachClick(red_click);
     button_red->attachDoubleClick(red_doubleClick);
     button_red->attachLongPressStart(red_longPressStart);
     button_red->attachLongPressStop(red_longPressStop);
+    button_red->setDebounceTicks(ticksDebounce);
+    button_red->setClickTicks(ticksClicks);
+    button_red->setPressTicks(ticksPress);
 
     button_green->attachClick(green_click);
     button_green->attachDoubleClick(green_doubleClick);
     button_green->attachLongPressStart(green_longPressStart);
     button_green->attachLongPressStop(green_longPressStop);
+    button_green->setDebounceTicks(ticksDebounce);
+    button_green->setClickTicks(ticksClicks);
+    button_green->setPressTicks(ticksPress);
 
     button_blue->attachClick(blue_click);
     button_blue->attachDoubleClick(blue_doubleClick);
     button_blue->attachLongPressStart(blue_longPressStart);
     button_blue->attachLongPressStop(blue_longPressStop);
+    button_blue->setDebounceTicks(ticksDebounce);
+    button_blue->setClickTicks(ticksClicks);
+    button_blue->setPressTicks(ticksPress);
 
     button_yellow->attachClick(yellow_click);
     button_yellow->attachDoubleClick(yellow_doubleClick);
     button_yellow->attachLongPressStart(yellow_longPressStart);
     button_yellow->attachLongPressStop(yellow_longPressStop);
+    button_yellow->setDebounceTicks(ticksDebounce);
+    button_yellow->setClickTicks(ticksClicks);
 }
 
 void Buttons::loop(void)
