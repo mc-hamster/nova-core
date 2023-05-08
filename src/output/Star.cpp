@@ -47,7 +47,7 @@ void Star::red_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 100;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -91,7 +91,7 @@ void Star::green_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 100;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -178,7 +178,7 @@ void Star::yellow_loop(void)
     {
         if (cluster.stars[outputStar].pooferCountsRemaining == 0)
         {
-            cluster.stars[outputStar].pooferCountsRemaining = 100;
+            cluster.stars[outputStar].pooferCountsRemaining = 30;
         }
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
@@ -524,7 +524,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 30)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -567,7 +567,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 250)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
 
