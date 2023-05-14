@@ -26047,6 +26047,197 @@ CONN_05x2
 </deviceset>
 </devicesets>
 </library>
+<library name="ESP32-S3-DEVKITC-1-N8R2" urn="urn:adsk.eagle:library:40286648">
+<packages>
+<package name="XCVR_ESP32-S3-DEVKITC-1-N8R2" urn="urn:adsk.eagle:footprint:40286649/1" library_version="1">
+<wire x1="-12.7" y1="-31.37" x2="-12.7" y2="31.37" width="0.127" layer="51"/>
+<wire x1="-12.7" y1="31.37" x2="12.7" y2="31.37" width="0.127" layer="51"/>
+<wire x1="12.7" y1="31.37" x2="12.7" y2="-31.37" width="0.127" layer="51"/>
+<wire x1="12.7" y1="-31.37" x2="-12.7" y2="-31.37" width="0.127" layer="51"/>
+<wire x1="-12.7" y1="-31.37" x2="-12.7" y2="31.37" width="0.127" layer="21"/>
+<wire x1="-12.7" y1="31.37" x2="12.7" y2="31.37" width="0.127" layer="21"/>
+<wire x1="12.7" y1="31.37" x2="12.7" y2="-31.37" width="0.127" layer="21"/>
+<wire x1="12.7" y1="-31.37" x2="-12.7" y2="-31.37" width="0.127" layer="21"/>
+<wire x1="-12.95" y1="31.62" x2="-12.95" y2="-31.62" width="0.05" layer="39"/>
+<wire x1="-12.95" y1="-31.62" x2="12.95" y2="-31.62" width="0.05" layer="39"/>
+<wire x1="12.95" y1="-31.62" x2="12.95" y2="31.62" width="0.05" layer="39"/>
+<wire x1="12.95" y1="31.62" x2="-12.95" y2="31.62" width="0.05" layer="39"/>
+<text x="-12.95" y="32.62" size="1.27" layer="25">&gt;NAME</text>
+<text x="-12.95" y="-32.62" size="1.27" layer="27" align="top-left">&gt;VALUE</text>
+<circle x="-13.716" y="29.972" radius="0.1" width="0.2" layer="21"/>
+<circle x="-13.716" y="29.972" radius="0.1" width="0.2" layer="51"/>
+<pad name="J1_22" x="-11.43" y="-23.37" drill="1.02"/>
+<pad name="J3_22" x="11.43" y="-23.37" drill="1.02"/>
+<pad name="J1_21" x="-11.43" y="-20.83" drill="1.02"/>
+<pad name="J1_20" x="-11.43" y="-18.29" drill="1.02"/>
+<pad name="J1_19" x="-11.43" y="-15.75" drill="1.02"/>
+<pad name="J1_18" x="-11.43" y="-13.21" drill="1.02"/>
+<pad name="J1_17" x="-11.43" y="-10.67" drill="1.02"/>
+<pad name="J1_16" x="-11.43" y="-8.13" drill="1.02"/>
+<pad name="J1_15" x="-11.43" y="-5.59" drill="1.02"/>
+<pad name="J1_14" x="-11.43" y="-3.05" drill="1.02"/>
+<pad name="J1_13" x="-11.43" y="-0.51" drill="1.02"/>
+<pad name="J1_12" x="-11.43" y="2.03" drill="1.02"/>
+<pad name="J1_11" x="-11.43" y="4.57" drill="1.02"/>
+<pad name="J1_10" x="-11.43" y="7.11" drill="1.02"/>
+<pad name="J1_9" x="-11.43" y="9.65" drill="1.02"/>
+<pad name="J1_8" x="-11.43" y="12.19" drill="1.02"/>
+<pad name="J1_7" x="-11.43" y="14.73" drill="1.02"/>
+<pad name="J1_6" x="-11.43" y="17.27" drill="1.02"/>
+<pad name="J1_5" x="-11.43" y="19.81" drill="1.02"/>
+<pad name="J1_4" x="-11.43" y="22.35" drill="1.02"/>
+<pad name="J1_3" x="-11.43" y="24.89" drill="1.02"/>
+<pad name="J1_2" x="-11.43" y="27.43" drill="1.02"/>
+<pad name="J1_1" x="-11.43" y="29.97" drill="1.02" shape="square"/>
+<pad name="J3_21" x="11.43" y="-20.83" drill="1.02"/>
+<pad name="J3_20" x="11.43" y="-18.29" drill="1.02"/>
+<pad name="J3_19" x="11.43" y="-15.75" drill="1.02"/>
+<pad name="J3_18" x="11.43" y="-13.21" drill="1.02"/>
+<pad name="J3_17" x="11.43" y="-10.67" drill="1.02"/>
+<pad name="J3_16" x="11.43" y="-8.13" drill="1.02"/>
+<pad name="J3_15" x="11.43" y="-5.59" drill="1.02"/>
+<pad name="J3_14" x="11.43" y="-3.05" drill="1.02"/>
+<pad name="J3_13" x="11.43" y="-0.51" drill="1.02"/>
+<pad name="J3_12" x="11.43" y="2.03" drill="1.02"/>
+<pad name="J3_11" x="11.43" y="4.57" drill="1.02"/>
+<pad name="J3_10" x="11.43" y="7.11" drill="1.02"/>
+<pad name="J3_9" x="11.43" y="9.65" drill="1.02"/>
+<pad name="J3_8" x="11.43" y="12.19" drill="1.02"/>
+<pad name="J3_7" x="11.43" y="14.73" drill="1.02"/>
+<pad name="J3_6" x="11.43" y="17.27" drill="1.02"/>
+<pad name="J3_5" x="11.43" y="19.81" drill="1.02"/>
+<pad name="J3_4" x="11.43" y="22.35" drill="1.02"/>
+<pad name="J3_3" x="11.43" y="24.89" drill="1.02"/>
+<pad name="J3_2" x="11.43" y="27.43" drill="1.02"/>
+<pad name="J3_1" x="11.43" y="29.97" drill="1.02"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="XCVR_ESP32-S3-DEVKITC-1-N8R2" urn="urn:adsk.eagle:package:40286651/1" type="box" library_version="1">
+<packageinstances>
+<packageinstance name="XCVR_ESP32-S3-DEVKITC-1-N8R2"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="ESP32-S3-DEVKITC-1-N8R2" urn="urn:adsk.eagle:symbol:40286650/1" library_version="1">
+<wire x1="-17.78" y1="33.02" x2="17.78" y2="33.02" width="0.254" layer="94"/>
+<wire x1="17.78" y1="33.02" x2="17.78" y2="-33.02" width="0.254" layer="94"/>
+<wire x1="17.78" y1="-33.02" x2="-17.78" y2="-33.02" width="0.254" layer="94"/>
+<wire x1="-17.78" y1="-33.02" x2="-17.78" y2="33.02" width="0.254" layer="94"/>
+<text x="-17.78" y="35.56" size="1.778" layer="95" align="top-left">&gt;NAME</text>
+<text x="-17.78" y="-35.56" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="3V3" x="22.86" y="27.94" length="middle" direction="pwr" rot="R180"/>
+<pin name="RST" x="-22.86" y="25.4" length="middle" direction="in"/>
+<pin name="GPIO1" x="-22.86" y="17.78" length="middle"/>
+<pin name="GPIO2" x="-22.86" y="15.24" length="middle"/>
+<pin name="GPIO4" x="-22.86" y="10.16" length="middle"/>
+<pin name="GPIO3" x="-22.86" y="12.7" length="middle"/>
+<pin name="GPIO5" x="-22.86" y="7.62" length="middle"/>
+<pin name="GPIO6" x="-22.86" y="5.08" length="middle"/>
+<pin name="GPIO7" x="-22.86" y="2.54" length="middle"/>
+<pin name="GPIO8" x="-22.86" y="0" length="middle"/>
+<pin name="GPIO9" x="-22.86" y="-2.54" length="middle"/>
+<pin name="GPIO10" x="-22.86" y="-5.08" length="middle"/>
+<pin name="GPIO11" x="-22.86" y="-7.62" length="middle"/>
+<pin name="GPIO12" x="-22.86" y="-10.16" length="middle"/>
+<pin name="GPIO13" x="-22.86" y="-12.7" length="middle"/>
+<pin name="GPIO14" x="-22.86" y="-15.24" length="middle"/>
+<pin name="GPIO15" x="-22.86" y="-17.78" length="middle"/>
+<pin name="GPIO16" x="-22.86" y="-20.32" length="middle"/>
+<pin name="GPIO17" x="-22.86" y="-22.86" length="middle"/>
+<pin name="GPIO18" x="-22.86" y="-25.4" length="middle"/>
+<pin name="GPIO0" x="-22.86" y="20.32" length="middle"/>
+<pin name="GND" x="22.86" y="-30.48" length="middle" direction="pwr" rot="R180"/>
+<pin name="5V0" x="22.86" y="30.48" length="middle" direction="pwr" rot="R180"/>
+<pin name="GPIO48" x="22.86" y="2.54" length="middle" rot="R180"/>
+<pin name="GPIO47" x="22.86" y="5.08" length="middle" rot="R180"/>
+<pin name="GPIO46" x="22.86" y="7.62" length="middle" rot="R180"/>
+<pin name="GPIO45" x="22.86" y="10.16" length="middle" rot="R180"/>
+<pin name="GPIO21" x="-22.86" y="-27.94" length="middle"/>
+<pin name="USB_D+/GPIO20" x="22.86" y="-25.4" length="middle" rot="R180"/>
+<pin name="USB_D-/GPIO19" x="22.86" y="-22.86" length="middle" rot="R180"/>
+<pin name="U0RXD/GPIO44" x="22.86" y="-17.78" length="middle" rot="R180"/>
+<pin name="U0TXD/GPIO43" x="22.86" y="-15.24" length="middle" rot="R180"/>
+<pin name="MTMS/GPIO42" x="22.86" y="-10.16" length="middle" rot="R180"/>
+<pin name="MTDI/GPIO41" x="22.86" y="-7.62" length="middle" rot="R180"/>
+<pin name="MTDO/GPIO40" x="22.86" y="-5.08" length="middle" rot="R180"/>
+<pin name="MTCK/GPIO39" x="22.86" y="-2.54" length="middle" rot="R180"/>
+<pin name="GPIO38" x="22.86" y="12.7" length="middle" rot="R180"/>
+<pin name="GPIO37" x="22.86" y="15.24" length="middle" rot="R180"/>
+<pin name="GPIO36" x="22.86" y="17.78" length="middle" rot="R180"/>
+<pin name="GPIO35" x="22.86" y="20.32" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="ESP32-S3-DEVKITC-1-N8R2" urn="urn:adsk.eagle:component:40286652/1" prefix="U" library_version="1">
+<description> &lt;a href="https://pricing.snapeda.com/parts/ESP32-S3-DEVKITC-1-N8R2/Espressif%20Systems/view-part?ref=eda"&gt;Check availability&lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="ESP32-S3-DEVKITC-1-N8R2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="XCVR_ESP32-S3-DEVKITC-1-N8R2">
+<connects>
+<connect gate="G$1" pin="3V3" pad="J1_1 J1_2"/>
+<connect gate="G$1" pin="5V0" pad="J1_21"/>
+<connect gate="G$1" pin="GND" pad="J1_22 J3_1 J3_21 J3_22"/>
+<connect gate="G$1" pin="GPIO0" pad="J3_14"/>
+<connect gate="G$1" pin="GPIO1" pad="J3_4"/>
+<connect gate="G$1" pin="GPIO10" pad="J1_16"/>
+<connect gate="G$1" pin="GPIO11" pad="J1_17"/>
+<connect gate="G$1" pin="GPIO12" pad="J1_18"/>
+<connect gate="G$1" pin="GPIO13" pad="J1_19"/>
+<connect gate="G$1" pin="GPIO14" pad="J1_20"/>
+<connect gate="G$1" pin="GPIO15" pad="J1_8"/>
+<connect gate="G$1" pin="GPIO16" pad="J1_9"/>
+<connect gate="G$1" pin="GPIO17" pad="J1_10"/>
+<connect gate="G$1" pin="GPIO18" pad="J1_11"/>
+<connect gate="G$1" pin="GPIO2" pad="J3_5"/>
+<connect gate="G$1" pin="GPIO21" pad="J3_18"/>
+<connect gate="G$1" pin="GPIO3" pad="J1_13"/>
+<connect gate="G$1" pin="GPIO35" pad="J3_13"/>
+<connect gate="G$1" pin="GPIO36" pad="J3_12"/>
+<connect gate="G$1" pin="GPIO37" pad="J3_11"/>
+<connect gate="G$1" pin="GPIO38" pad="J3_10"/>
+<connect gate="G$1" pin="GPIO4" pad="J1_4"/>
+<connect gate="G$1" pin="GPIO45" pad="J3_15"/>
+<connect gate="G$1" pin="GPIO46" pad="J1_14"/>
+<connect gate="G$1" pin="GPIO47" pad="J3_17"/>
+<connect gate="G$1" pin="GPIO48" pad="J3_16"/>
+<connect gate="G$1" pin="GPIO5" pad="J1_5"/>
+<connect gate="G$1" pin="GPIO6" pad="J1_6"/>
+<connect gate="G$1" pin="GPIO7" pad="J1_7"/>
+<connect gate="G$1" pin="GPIO8" pad="J1_12"/>
+<connect gate="G$1" pin="GPIO9" pad="J1_15"/>
+<connect gate="G$1" pin="MTCK/GPIO39" pad="J3_9"/>
+<connect gate="G$1" pin="MTDI/GPIO41" pad="J3_7"/>
+<connect gate="G$1" pin="MTDO/GPIO40" pad="J3_8"/>
+<connect gate="G$1" pin="MTMS/GPIO42" pad="J3_6"/>
+<connect gate="G$1" pin="RST" pad="J1_3"/>
+<connect gate="G$1" pin="U0RXD/GPIO44" pad="J3_3"/>
+<connect gate="G$1" pin="U0TXD/GPIO43" pad="J3_2"/>
+<connect gate="G$1" pin="USB_D+/GPIO20" pad="J3_19"/>
+<connect gate="G$1" pin="USB_D-/GPIO19" pad="J3_20"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:40286651/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="AVAILABILITY" value="In Stock"/>
+<attribute name="DESCRIPTION" value=" WiFi Development Tools - 802.11 (Engineering Samples Only) ESP32-S3 General-Purpose Development Board, ESP32-S3-WROOM-1-N8R2, with Pin Header "/>
+<attribute name="MF" value="Espressif Systems"/>
+<attribute name="MP" value="ESP32-S3-DEVKITC-1-N8R2"/>
+<attribute name="PACKAGE" value="None"/>
+<attribute name="PRICE" value="None"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/ESP32-S3-DEVKITC-1-N8R2/?ref=eda"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -30836,6 +31027,7 @@ CONN_05x2
 <part name="GND108" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_05X2" device="SHD" package3d_urn="urn:adsk.eagle:package:38000/1"/>
 <part name="GND122" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="U2" library="ESP32-S3-DEVKITC-1-N8R2" library_urn="urn:adsk.eagle:library:40286648" deviceset="ESP32-S3-DEVKITC-1-N8R2" device="" package3d_urn="urn:adsk.eagle:package:40286651/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -34930,6 +35122,10 @@ CONN_05x2
 </instance>
 <instance part="GND122" gate="1" x="995.68" y="281.94" smashed="yes">
 <attribute name="VALUE" x="993.14" y="279.4" size="1.778" layer="96"/>
+</instance>
+<instance part="U2" gate="G$1" x="-43.18" y="190.5" smashed="yes">
+<attribute name="NAME" x="-60.96" y="226.06" size="1.778" layer="95" align="top-left"/>
+<attribute name="VALUE" x="-60.96" y="154.94" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
