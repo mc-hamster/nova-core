@@ -156,7 +156,7 @@ void TaskModes(void *pvParameters) // This is a task.
       // Don't run the game.
     }
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10);
+    delay(5);
     //  Do something
   }
 }
@@ -177,7 +177,7 @@ void TaskButtons(void *pvParameters) // This is a task.
     }
     else
     {
-      delay(10);
+      delay(5);
     }
   }
 }
