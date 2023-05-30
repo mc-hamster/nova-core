@@ -68,8 +68,13 @@ void Star::red_loop(void)
     {
         if (goBoom(outputStar))
         {
-            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-            redBoomerState = BOOMER_IDLE;
+
+            // Only set the state to IDLE if the button is high
+            if (novaIO->expansionDigitalRead(BUTTON_RED_IN) == HIGH)
+            {
+                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+                redBoomerState = BOOMER_IDLE;
+            }
         }
     }
 }
@@ -112,8 +117,12 @@ void Star::green_loop(void)
     {
         if (goBoom(outputStar))
         {
-            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-            greenBoomerState = BOOMER_IDLE;
+            // Only set the state to IDLE if the button is high
+            if (novaIO->expansionDigitalRead(BUTTON_GREEN_IN) == HIGH)
+            {
+                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+                greenBoomerState = BOOMER_IDLE;
+            }
         }
     }
 }
@@ -155,8 +164,12 @@ void Star::blue_loop(void)
     {
         if (goBoom(outputStar))
         {
-            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-            blueBoomerState = BOOMER_IDLE;
+            // Only set the state to IDLE if the button is high
+            if (novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == HIGH)
+            {
+                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+                blueBoomerState = BOOMER_IDLE;
+            }
         }
     }
 }
@@ -199,8 +212,12 @@ void Star::yellow_loop(void)
     {
         if (goBoom(outputStar))
         {
-            Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-            yellowBoomerState = BOOMER_IDLE;
+            // Only set the state to IDLE if the button is high
+            if (novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == HIGH)
+            {
+                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+                yellowBoomerState = BOOMER_IDLE;
+            }
         }
     }
 }
@@ -272,14 +289,14 @@ void Star::setupStar(void)
     cluster.stars[0].igniterOutput = 2;
     cluster.stars[0].pooferOutput = 3;
     cluster.stars[0].blowerOutputDuty = 255;
-/*
-    cluster.stars[1].expander = 0;
-    cluster.stars[1].blowerOutput = 4;
-    cluster.stars[1].fuelOutput = 5;
-    cluster.stars[1].igniterOutput = 6;
-    cluster.stars[1].pooferOutput = 7;
-    cluster.stars[1].blowerOutputDuty = 255;
-*/
+    /*
+        cluster.stars[1].expander = 0;
+        cluster.stars[1].blowerOutput = 4;
+        cluster.stars[1].fuelOutput = 5;
+        cluster.stars[1].igniterOutput = 6;
+        cluster.stars[1].pooferOutput = 7;
+        cluster.stars[1].blowerOutputDuty = 255;
+    */
 
     cluster.stars[1].expander = 2;
     cluster.stars[1].blowerOutput = 0;
@@ -295,22 +312,20 @@ void Star::setupStar(void)
     cluster.stars[2].pooferOutput = 11;
     cluster.stars[2].blowerOutputDuty = 255;
 
-/*
-    cluster.stars[3].expander = 0;
-    cluster.stars[3].blowerOutput = 12;
-    cluster.stars[3].fuelOutput = 13;
-    cluster.stars[3].igniterOutput = 14;
-    cluster.stars[3].pooferOutput = 15;
-    cluster.stars[3].blowerOutputDuty = 255;
-*/
+    /*
+        cluster.stars[3].expander = 0;
+        cluster.stars[3].blowerOutput = 12;
+        cluster.stars[3].fuelOutput = 13;
+        cluster.stars[3].igniterOutput = 14;
+        cluster.stars[3].pooferOutput = 15;
+        cluster.stars[3].blowerOutputDuty = 255;
+    */
     cluster.stars[3].expander = 1;
     cluster.stars[3].blowerOutput = 0;
     cluster.stars[3].fuelOutput = 1;
     cluster.stars[3].igniterOutput = 2;
     cluster.stars[3].pooferOutput = 3;
     cluster.stars[3].blowerOutputDuty = 255;
-
-
 
     for (uint32_t i = 0; i < 20; i++)
     {
@@ -348,6 +363,7 @@ bool Star::goBoom(uint8_t star)
         novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].expander);
 
         cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST;
+        cluster.stars[star].boomer.abort = false;
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_ACTIVE)
     {
@@ -363,7 +379,7 @@ bool Star::goBoom(uint8_t star)
             Serial.print(star);
             Serial.print(" - ");
             Serial.println("BOOMER_ACTIVE");
-            //Serial.println(millis());
+            // Serial.println(millis());
             cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON;
         }
     }
@@ -403,7 +419,7 @@ bool Star::goBoom(uint8_t star)
                 Serial.print(star);
                 Serial.print(" - ");
                 Serial.println("BOOMER_BLOWER_ON_IDLE");
-                //Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
+                // Serial.println(currentMillis - cluster.stars[star].boomer.previousMillis);
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_ON_FUEL_ON;
             }
         }
@@ -604,15 +620,16 @@ bool Star::goBoom(uint8_t star)
             Serial.println("BOOMER_BLOWER_EXHAUST_IDLE");
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
-            if (cluster.stars[star].boomer.abort)
-            {
-                cluster.stars[star].boomer.abort = false;
+            //if (cluster.stars[star].boomer.abort)
+            //{
+                // TODO: This if can be deleted if the loop is happening outside of this function.
+            //    cluster.stars[star].boomer.abort = false;
+            //    cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
+            //}
+            //else
+            //{
                 cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
-            }
-            else
-            {
-                cluster.stars[star].boomer.outputState = BOOMER_ACTIVE;
-            }
+            //}
         }
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_OFF)
@@ -623,13 +640,13 @@ bool Star::goBoom(uint8_t star)
         Serial.print(" - ");
         Serial.println("BOOMER_BLOWER_EXHAUST_OFF");
 
-
         cluster.stars[star].boomer.outputState = BOOMER_ACTIVE;
 
         Serial.print("Next state - ");
         Serial.println(cluster.stars[star].boomer.outputState);
 
-        //cluster.stars[star].boomer.abort = 0;
+        // Setting abort to false after the boomer is done.
+        cluster.stars[star].boomer.abort = false;
 
         return 1;
     }
@@ -649,8 +666,8 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
         Serial.println();
         cluster.stars[star].pooferPreviousMillis = currentMillis;
         novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, HIGH, cluster.stars[star].expander);
-        //novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
-        
+        // novaIO->mcpA_digitalWrite(cluster.stars[star].pooferOutput, HIGH);
+
         cluster.stars[star].pooferOutputState = POOF_ON_IDLE;
     }
 
