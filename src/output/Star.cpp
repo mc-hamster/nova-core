@@ -12,6 +12,78 @@ Star::Star()
     setupStar();
 }
 
+/*
+    Setup the mapping between stars and the outputs that control the star.
+    Note: We assume all devices are on the same GPIO Expansion chip.
+*/
+void Star::setupStar(void)
+{
+
+    redPooferState = POOF_ON;
+    greenPooferState = POOF_ON;
+    bluePooferState = POOF_ON;
+    yellowPooferState = POOF_ON;
+
+    redBoomerState = BOOMER_IDLE;
+    greenBoomerState = BOOMER_IDLE;
+    blueBoomerState = BOOMER_IDLE;
+    yellowBoomerState = BOOMER_IDLE;
+
+    cluster.stars[0].expander = 0;
+    cluster.stars[0].blowerOutput = 0;
+    cluster.stars[0].fuelOutput = 1;
+    cluster.stars[0].igniterOutput = 2;
+    cluster.stars[0].pooferOutput = 3;
+    cluster.stars[0].blowerOutputDuty = 255;
+    /*
+        cluster.stars[1].expander = 0;
+        cluster.stars[1].blowerOutput = 4;
+        cluster.stars[1].fuelOutput = 5;
+        cluster.stars[1].igniterOutput = 6;
+        cluster.stars[1].pooferOutput = 7;
+        cluster.stars[1].blowerOutputDuty = 255;
+    */
+
+    cluster.stars[1].expander = 2;
+    cluster.stars[1].blowerOutput = 0;
+    cluster.stars[1].fuelOutput = 1;
+    cluster.stars[1].igniterOutput = 2;
+    cluster.stars[1].pooferOutput = 3;
+    cluster.stars[1].blowerOutputDuty = 255;
+
+    cluster.stars[2].expander = 0;
+    cluster.stars[2].blowerOutput = 8;
+    cluster.stars[2].fuelOutput = 9;
+    cluster.stars[2].igniterOutput = 10;
+    cluster.stars[2].pooferOutput = 11;
+    cluster.stars[2].blowerOutputDuty = 255;
+
+    /*
+        cluster.stars[3].expander = 0;
+        cluster.stars[3].blowerOutput = 12;
+        cluster.stars[3].fuelOutput = 13;
+        cluster.stars[3].igniterOutput = 14;
+        cluster.stars[3].pooferOutput = 15;
+        cluster.stars[3].blowerOutputDuty = 255;
+    */
+    cluster.stars[3].expander = 1;
+    cluster.stars[3].blowerOutput = 0;
+    cluster.stars[3].fuelOutput = 1;
+    cluster.stars[3].igniterOutput = 2;
+    cluster.stars[3].pooferOutput = 3;
+    cluster.stars[3].blowerOutputDuty = 255;
+
+    for (uint32_t i = 0; i < 20; i++)
+    {
+        cluster.stars[i].pooferCountsRemaining = 0;
+        cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].boomer.outputState = BOOMER_ACTIVE;
+        cluster.stars[i].boomer.previousMillis = 0;
+        cluster.stars[i].boomer.abort = false;
+    }
+}
+
 void Star::loop()
 {
 
@@ -264,78 +336,6 @@ void Star::yellowPoof(YellowButtonState state)
 void Star::yellowBoom(boomerButtonState state)
 {
     yellowBoomerState = state;
-}
-
-/*
-    Setup the mapping between stars and the outputs that control the star.
-    Note: We assume all devices are on the same GPIO Expansion chip.
-*/
-void Star::setupStar(void)
-{
-
-    redPooferState = POOF_ON;
-    greenPooferState = POOF_ON;
-    bluePooferState = POOF_ON;
-    yellowPooferState = POOF_ON;
-
-    redBoomerState = BOOMER_IDLE;
-    greenBoomerState = BOOMER_IDLE;
-    blueBoomerState = BOOMER_IDLE;
-    yellowBoomerState = BOOMER_IDLE;
-
-    cluster.stars[0].expander = 0;
-    cluster.stars[0].blowerOutput = 0;
-    cluster.stars[0].fuelOutput = 1;
-    cluster.stars[0].igniterOutput = 2;
-    cluster.stars[0].pooferOutput = 3;
-    cluster.stars[0].blowerOutputDuty = 255;
-    /*
-        cluster.stars[1].expander = 0;
-        cluster.stars[1].blowerOutput = 4;
-        cluster.stars[1].fuelOutput = 5;
-        cluster.stars[1].igniterOutput = 6;
-        cluster.stars[1].pooferOutput = 7;
-        cluster.stars[1].blowerOutputDuty = 255;
-    */
-
-    cluster.stars[1].expander = 2;
-    cluster.stars[1].blowerOutput = 0;
-    cluster.stars[1].fuelOutput = 1;
-    cluster.stars[1].igniterOutput = 2;
-    cluster.stars[1].pooferOutput = 3;
-    cluster.stars[1].blowerOutputDuty = 255;
-
-    cluster.stars[2].expander = 0;
-    cluster.stars[2].blowerOutput = 8;
-    cluster.stars[2].fuelOutput = 9;
-    cluster.stars[2].igniterOutput = 10;
-    cluster.stars[2].pooferOutput = 11;
-    cluster.stars[2].blowerOutputDuty = 255;
-
-    /*
-        cluster.stars[3].expander = 0;
-        cluster.stars[3].blowerOutput = 12;
-        cluster.stars[3].fuelOutput = 13;
-        cluster.stars[3].igniterOutput = 14;
-        cluster.stars[3].pooferOutput = 15;
-        cluster.stars[3].blowerOutputDuty = 255;
-    */
-    cluster.stars[3].expander = 1;
-    cluster.stars[3].blowerOutput = 0;
-    cluster.stars[3].fuelOutput = 1;
-    cluster.stars[3].igniterOutput = 2;
-    cluster.stars[3].pooferOutput = 3;
-    cluster.stars[3].blowerOutputDuty = 255;
-
-    for (uint32_t i = 0; i < 20; i++)
-    {
-        cluster.stars[i].pooferCountsRemaining = 0;
-        cluster.stars[i].pooferOutputState = 0;
-        cluster.stars[i].pooferOutputState = 0;
-        cluster.stars[i].boomer.outputState = BOOMER_ACTIVE;
-        cluster.stars[i].boomer.previousMillis = 0;
-        cluster.stars[i].boomer.abort = false;
-    }
 }
 
 void Star::goBoomAbort(uint8_t star, bool abort)
@@ -620,15 +620,15 @@ bool Star::goBoom(uint8_t star)
             Serial.println("BOOMER_BLOWER_EXHAUST_IDLE");
 
             // novaIO->mcpA_digitalWrite(cluster.stars[star].blowerOutput, LOW);
-            //if (cluster.stars[star].boomer.abort)
+            // if (cluster.stars[star].boomer.abort)
             //{
-                // TODO: This if can be deleted if the loop is happening outside of this function.
+            // TODO: This if can be deleted if the loop is happening outside of this function.
             //    cluster.stars[star].boomer.abort = false;
             //    cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
             //}
-            //else
+            // else
             //{
-                cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
+            cluster.stars[star].boomer.outputState = BOOMER_BLOWER_EXHAUST_OFF;
             //}
         }
     }
