@@ -1,41 +1,23 @@
 #include <Arduino.h>
-#include "Ambient.h"
+#include "Enable.h"
 #include "configuration.h"
 #include "NovaIO.h"
 
-Ambient *ambient = NULL;
+Enable *enable = NULL;
 
-Ambient::Ambient()
+Enable::Enable()
 {
 
     // Setup goes in here
 }
 
-void Ambient::loop()
+void Enable::loop()
 {
 
     if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
-        if (0)
-        {
-            novaIO->mcpA_writeGPIOAB(0b1111111111111111);
-            novaIO->mcpB_writeGPIOAB(0b1111111111111111);
-            novaIO->mcpC_writeGPIOAB(0b1111111111111111);
-            novaIO->mcpD_writeGPIOAB(0b1111111111111111);
-            novaIO->mcpE_writeGPIOAB(0b1111111111111111);
-            delay(2000);
-
-            novaIO->mcpA_writeGPIOAB(0b0000000000000000);
-            novaIO->mcpB_writeGPIOAB(0b0000000000000000);
-            novaIO->mcpC_writeGPIOAB(0b0000000000000000);
-            novaIO->mcpD_writeGPIOAB(0b0000000000000000);
-            novaIO->mcpE_writeGPIOAB(0b0000000000000000);
-            delay(2000);
-            // Play ambient display
-        } else {
-            //Serial.println("No ambient effects are running.");
-            yield();
-        }
+        // Serial.println("No enabled effects are running.");
+        yield();
     }
     else if (systemEnable == false && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
@@ -57,8 +39,7 @@ void Ambient::loop()
         analogWrite(BUTTON_YELLOW_OUT, disabledBrightness);
 
         disabledBrightness = disabledBrightness + disabledBrightnessFade;
-        // Serial.println("Safety!");
-        // Serial.println(disabledBrightness);
+
         delay(2);
     }
 }
@@ -66,7 +47,7 @@ void Ambient::loop()
 /*
 This will initilaize our system back to a safe spot after emergency stop is exited.
 */
-void Ambient::emergencyStopExit()
+void Enable::emergencyStopExit()
 {
 
     Serial.println("System is returning from emergency stop. Rebooting...");
@@ -80,19 +61,15 @@ void Ambient::emergencyStopExit()
 
     // Set pin modes back to output (disable analog)
 
-    //systemEnable = true;
-
     delay(100);
     // When the emergency button is disabled (set to active) reboot the system.
     ESP.restart();
-
-
 }
 
 /*
 Emergency stop has been called. We need to begin shutdown.
 */
-void Ambient::emergencyStopEnter()
+void Enable::emergencyStopEnter()
 {
 
     Serial.println("Emergency Stop Activated. Entering fail safe.");
@@ -115,9 +92,9 @@ void Ambient::emergencyStopEnter()
     systemEnable = false;
 }
 
-bool Ambient::isSystemEnabled(void)
+bool Enable::isSystemEnabled(void)
 {
-    //Serial.print("Is System Enabled? ");
-    //Serial.println(systemEnable);
+    // Serial.print("Is System Enabled? ");
+    // Serial.println(systemEnable);
     return systemEnable;
 }

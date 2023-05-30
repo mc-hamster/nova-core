@@ -4,7 +4,7 @@
 
 #include "output/Star.h"
 #include "NovaIO.h"
-#include "Ambient.h"
+#include "Enable.h"
 
 OneButton *button_red = new OneButton();
 OneButton *button_green = new OneButton();

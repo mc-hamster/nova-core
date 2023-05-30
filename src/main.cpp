@@ -15,12 +15,12 @@
 #include "modes/Simona.h"
 #include "NovaIO.h"
 #include "main.h"
-#include "Ambient.h"
+#include "Enable.h"
 #include "output/Star.h"
 #include "Buttons.h"
 #include "Web.h"
 
-void TaskAmbient(void *pvParameters);
+void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
 void TaskButtons(void *pvParameters);
@@ -60,8 +60,8 @@ void setup()
   Serial.println("new Simona");
   simona = new Simona();
 
-  Serial.println("new Ambient");
-  ambient = new Ambient();
+  Serial.println("new Enable");
+  enable = new Enable();
 
   Serial.println("new Star");
   star = new Star();
@@ -69,9 +69,9 @@ void setup()
   Serial.println("new Buttons");
   buttons = new Buttons();
 
-  Serial.println("Create TaskAmbient");
-  xTaskCreate(&TaskAmbient, "TaskAmbient", 8000, NULL, 5, NULL);
-  Serial.println("Create TaskAmbient - Done");
+  Serial.println("Create TaskEnable");
+  xTaskCreate(&TaskEnable, "TaskEnable", 8000, NULL, 5, NULL);
+  Serial.println("Create TaskEnable - Done");
 
   Serial.println("Create TaskModes");
   xTaskCreate(&TaskModes, "TaskModes", 8000, NULL, 5, NULL);
@@ -108,14 +108,14 @@ void loop()
 /*---------------------- Tasks ---------------------*/
 /*--------------------------------------------------*/
 
-void TaskAmbient(void *pvParameters) // This is a task.
+void TaskEnable(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
 
-  Serial.println("TaskAmbient is running");
+  Serial.println("TaskEnable is running");
   while (1) // A Task shall never return or exit.
   {
-    ambient->loop();
+    enable->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(5);
   }
@@ -143,7 +143,7 @@ void TaskModes(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     // Serial.println("in TaskModes while");
-    if (ambient->isSystemEnabled())
+    if (enable->isSystemEnabled())
     {
 
       // simona->loop();
@@ -169,7 +169,7 @@ void TaskButtons(void *pvParameters) // This is a task.
 
   while (1) // A Task shall never return or exit.
   {
-    if (ambient->isSystemEnabled())
+    if (enable->isSystemEnabled())
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.

@@ -1,11 +1,11 @@
-#ifndef AMBIENT_H
-#define AMBIENT_H
+#ifndef ENABLE_H
+#define ENABLE_H
 
 #pragma once
 
 #include <Arduino.h>
 
-class Ambient {
+class Enable {
     private:
 
     bool systemEnable = 1;
@@ -16,7 +16,7 @@ class Ambient {
     uint8_t disabledBrightnessFade = 2; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
 
     public: 
-        Ambient();
+        Enable();
 
         void loop();
 
@@ -26,6 +26,6 @@ class Ambient {
         bool isSystemEnabled();
 };
 
-extern Ambient *ambient;
+extern Enable *enable;
 
 #endif
