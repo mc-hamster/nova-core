@@ -173,11 +173,12 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(10);
+      delay(5); 
     }
     else
     {
-      delay(5);
+      // If system is disabled, wait a long time before checking buttons again.
+      delay(100);
     }
   }
 }
