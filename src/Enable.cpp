@@ -3,6 +3,12 @@
 #include "configuration.h"
 #include "NovaIO.h"
 
+/*
+
+This is the Enable class. It is responsible for the emergency stop functionality.
+
+*/
+
 Enable *enable = NULL;
 
 Enable::Enable()
