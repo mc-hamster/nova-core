@@ -10,6 +10,7 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
+#include <ESPUI.h>
 
 #include "configuration.h"
 #include "modes/Simona.h"
@@ -24,6 +25,7 @@ void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
 void TaskButtons(void *pvParameters);
+void TaskWeb(void *pvParameters);
 
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
@@ -69,12 +71,29 @@ void setup()
   Serial.println("new Buttons");
   buttons = new Buttons();
 
+  // your other setup stuff...
+  WiFi.softAP("NOVA", "scubadandy");
+  WiFi.setSleep(false); // Disable power saving on the wifi interface.
+
+  dnsServer.start(53, "*", WiFi.softAPIP());
+  // webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
+  //  more handlers...
+  //  webServer.begin();
+
+  Serial.println("Setting up Webserver");
+  webSetup();
+  Serial.println("Setting up Webserver - Done");
+
   Serial.println("Create TaskEnable");
-  xTaskCreate(&TaskEnable, "TaskEnable", 8000, NULL, 5, NULL);
+  xTaskCreate(&TaskEnable, "TaskEnable", 2048, NULL, 5, NULL);
   Serial.println("Create TaskEnable - Done");
 
+  Serial.println("Create TaskWeb");
+  xTaskCreate(&TaskWeb, "TaskWeb", 4096, NULL, 5, NULL);
+  Serial.println("Create TaskWeb - Done");
+
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 8000, NULL, 5, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 4096, NULL, 5, NULL);
   Serial.println("Create TaskModes - Done");
 
   Serial.println("Create TaskButtons");
@@ -84,15 +103,6 @@ void setup()
   Serial.println("Create TaskMDNS");
   xTaskCreate(&TaskButtons, "TaskMDNS", 4098, NULL, 5, NULL);
   Serial.println("Create TaskMDNS - Done");
-
-  // your other setup stuff...
-  WiFi.softAP("NOVA", "scubadandy");
-  WiFi.setSleep(false); // Disable power saving on the wifi interface.
-
-  dnsServer.start(53, "*", WiFi.softAPIP());
-  webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
-  // more handlers...
-  webServer.begin();
 
   Serial.println("Setup Complete");
 }
@@ -116,6 +126,19 @@ void TaskEnable(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     enable->loop();
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    delay(5);
+  }
+}
+
+void TaskWeb(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+
+  Serial.println("TaskWeb is running");
+  while (1) // A Task shall never return or exit.
+  {
+    webLoop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(5);
   }
@@ -173,7 +196,7 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(5); 
+      delay(5);
     }
     else
     {

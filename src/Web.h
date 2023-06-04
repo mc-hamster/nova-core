@@ -9,6 +9,7 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
+#include <ESPUI.h>
 
 class CaptiveRequestHandler : public AsyncWebHandler
 {
@@ -21,7 +22,10 @@ public:
     // request->addInterestingHeader("ANY");
     return true;
   }
-
 };
+
+void webSetup(void);
+
+void webLoop(void);
 
 #endif
