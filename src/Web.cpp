@@ -243,7 +243,7 @@ void webLoop()
         ESPUI.updateControlValue(controlMillis, String(millis()));
 
         oldTime = millis();
-        Serial.print("Web oldTime: ");
-        Serial.println(oldTime);
+        //Serial.print("Web oldTime: ");
+        //Serial.println(oldTime);
     }
 }
