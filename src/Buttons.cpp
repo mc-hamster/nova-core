@@ -18,7 +18,7 @@ Buttons::Buttons()
 {
     uint32_t ticksDebounce = 25; // setDebounceTicks Period of time in which to ignore additional level changes.
     uint32_t ticksClicks = 60; // setClickTicks  Timeout used to distinguish single clicks from double clicks.
-    uint32_t ticksPress = 800; // setPressTicks Duration to hold a button to trigger a long press
+    uint32_t ticksPress = 500; // setPressTicks Duration to hold a button to trigger a long press
 
     Serial.println("Setting up buttons");
     button_red->attachClick(red_click);
