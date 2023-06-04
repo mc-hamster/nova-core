@@ -3,6 +3,8 @@
 #include <ThreadController.h>
 #include <Wire.h>
 #include <WiFi.h>
+#include <LittleFS.h>
+#include "FS.h"
 
 #include "OneButton.h"
 
@@ -20,6 +22,15 @@
 #include "output/Star.h"
 #include "Buttons.h"
 #include "Web.h"
+#include "PersistenceManager.h"
+#include "fileSystemHelper.h"
+
+#define FORMAT_LITTLEFS_IF_FAILED true
+
+#define CONFIG_FILE "/config.json"
+
+PersistenceManager persistenceManager(CONFIG_FILE);
+
 
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
@@ -30,6 +41,8 @@ void TaskWeb(void *pvParameters);
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
 
+
+
 void setup()
 {
   delay(1000);
@@ -39,6 +52,20 @@ void setup()
   Serial.println(xPortGetCoreID());
 
   Serial.setDebugOutput(true);
+
+  if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED))
+  {
+    Serial.println("LITTLEFS Mount Failed");
+    return;
+  }
+  else
+  {
+    Serial.println("LITTLEFS Mount Success");
+
+    listDir(LittleFS, "/", 0);
+  }
+
+  persistenceManager.begin();
 
   Serial.println("Setting up Serial2");
   Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
