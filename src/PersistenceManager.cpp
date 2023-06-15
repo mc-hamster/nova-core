@@ -7,6 +7,7 @@ PersistenceManager::PersistenceManager(const char *filename)
     _filename = filename;
 }
 
+// read the configuration from the file system
 Config PersistenceManager::readConfig()
 {
     Config cfg;
@@ -29,6 +30,7 @@ Config PersistenceManager::readConfig()
     return cfg;
 }
 
+// write the configuration to the file system
 void PersistenceManager::writeConfig(Config cfg)
 {
     LittleFS.remove(_filename);
@@ -47,18 +49,22 @@ void PersistenceManager::writeConfig(Config cfg)
     file.close();
 }
 
+
 void PersistenceManager::begin()
 {
+
+    /*
     if (!LittleFS.begin())
     {
         Serial.println("An Error has occurred while mounting LittleFS");
         return;
     }
+    */
 
     // write a test configuration if the file doesn't exist yet
     if (!LittleFS.exists(_filename))
     {
-        Config cfg;
+        static Config cfg;
 
         cfg.value1 = 10;
         cfg.value2 = 20;
