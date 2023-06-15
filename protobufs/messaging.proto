@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+// Package definition
+package messaging;
+
+// Enum for distinguishing the type of requests
+enum RequestType {
+  DMX = 0;
+  POWER = 1;
+  TELEMETRY = 2;
+  CONFIGURATION = 3;
+}
+
+message DmxRequest {
+  repeated uint32 values = 1;  // DMX universe state, an array of 512 values
+  bool ack = 2;  // If true, an acknowledgement from the device is requested
+}
+
+// Enum for power devices
+enum PowerDevices {
+  FOG_MACHINE_A = 0;
+  // Add other power devices as needed
+}
+
+// Enum for power request query
+enum PowerQuery {
+  UNDEFINED = 0;  // Query type is undefined
+  CURRENTLY_USED = 1;  // Query for currently used power devices
+  // Add other query types as needed
+}
+
+message PowerRequest {
+  repeated PowerDevices devices = 1;  // Instruct the responder to use these powered devices and no other
+  PowerQuery query = 2;  // The type of information about power devices requested
+}
+
+// Enum for telemetry request query
+enum TelemetryQuery {
+  ALL = 0;
+  TEMPERATURE = 1;
+  HUMIDITY = 2;
+  PEAK_BOOM = 3;
+  SYSTEM = 4;
+}
+
+message TelemetryRequest {
+  TelemetryQuery query = 1;  // Type of telemetry information requested
+}
+
+// Enum for configuration request query
+enum ConfigurationQuery {
+  ALL = 0;
+  BLOWER = 1;
+}
+
+message ConfigurationRequest {
+  ConfigurationQuery query = 1;  // Type of configuration information requested
+}
+
+message Request {
+  RequestType type = 1;  // Type of the request
+  oneof request_payload {  // Request payload, only one of the fields can be set
+    DmxRequest dmx_request = 2;
+    PowerRequest power_request = 3;
+    TelemetryRequest telemetry_request = 4;
+    ConfigurationRequest configuration_request = 5;
+  }
+}
+
+// Enum for distinguishing the type of responses
+enum ResponseType {
+  DMX = 0;
+  POWER = 1;
+  TELEMETRY = 2;
+  CONFIGURATION = 3;
+  ERROR = 4;  // Added new response type
+}
+
+// Enum for Response status
+enum ResponseStatus {
+  SUCCESS = 0;
+  ERROR = 1;
+}
+
+message DmxResponse {
+  ResponseStatus status = 1;  // This will only be returned if the request would like an acknowledgement
+}
+
+message PowerResponse {
+  repeated PowerDevices power_used = 1;  // Devices that used power
+  repeated PowerDevices power_requested = 2;  // Devices that requested power
+}
+
+message TelemetryResponse {
+  float temperature = 1;  // Device temperature
+  float humidity = 2;  // Device humidity
+  float peak_boom = 3;  // Device peak boom
+  string chip_model = 4;  // Device chip model
+  string chip_revision = 5;  // Device chip revision
+  uint32 chip_free_heap = 6;  // Device chip free heap
+  string sdk_version = 7;  // Device SDK version
+  string sketch_md5 = 8;  // Device sketch MD5
+  uint32 sketch_size = 9;  // Device sketch size
+}
+
+// Enum for device types in ConfigurationResponse
+enum ConfigurationDeviceType {
+  STAR = 0;
+  // Add other device types as needed
+}
+
+message ConfigurationResponse {
+  ConfigurationDeviceType device_type = 1;  // Type of the device
+  uint32 blower = 2;  // 8-bit value for blower
+}
+
+// Added new ErrorResponse
+message ErrorResponse {
+  string message = 1;  // Description of the error
+}
+
+message Response {
+  ResponseType type = 1;  // Type of the response
+  oneof response_payload {  // Response payload, only one of the fields can be set
+    DmxResponse dmx_response = 2;
+    PowerResponse power_response = 3;
+    TelemetryResponse telemetry_response = 4;
+    ConfigurationResponse configuration_response = 5;
+    ErrorResponse error_response = 6;  // Added ErrorResponse to the response payload
+  }
+}
