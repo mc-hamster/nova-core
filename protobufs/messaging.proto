@@ -5,14 +5,14 @@ package messaging;
 
 // Enum for distinguishing the type of requests
 enum RequestType {
-  DMX = 0;
-  POWER = 1;
-  TELEMETRY = 2;
-  CONFIGURATION = 3;
+  REQUEST_DMX = 0;
+  REQUEST_POWER = 1;
+  REQUEST_ELEMETRY = 2;
+  REQUEST_CONFIGURATION = 3;
 }
 
 message DmxRequest {
-  repeated uint32 values = 1;  // DMX universe state, an array of 512 values
+  bytes values = 1;  // Single sequence of DMX values, up to 512 values
   bool ack = 2;  // If true, an acknowledgement from the device is requested
 }
 
@@ -36,11 +36,11 @@ message PowerRequest {
 
 // Enum for telemetry request query
 enum TelemetryQuery {
-  ALL = 0;
-  TEMPERATURE = 1;
-  HUMIDITY = 2;
-  PEAK_BOOM = 3;
-  SYSTEM = 4;
+  TELEMETRY_ALL = 0;
+  TELEMETRY_TEMPERATURE = 1;
+  TELEMETRY_HUMIDITY = 2;
+  TELEMETRY_PEAK_BOOM = 3;
+  TELEMETRY_SYSTEM = 4;
 }
 
 message TelemetryRequest {
@@ -49,8 +49,8 @@ message TelemetryRequest {
 
 // Enum for configuration request query
 enum ConfigurationQuery {
-  ALL = 0;
-  BLOWER = 1;
+  CONFIG_ALL = 0;
+  CONFIG_BLOWER = 1;
 }
 
 message ConfigurationRequest {
@@ -69,11 +69,11 @@ message Request {
 
 // Enum for distinguishing the type of responses
 enum ResponseType {
-  DMX = 0;
-  POWER = 1;
-  TELEMETRY = 2;
-  CONFIGURATION = 3;
-  ERROR = 4;  // Added new response type
+  RESPONSE_DMX = 0;
+  RESPONSE_POWER = 1;
+  RESPONSE_TELEMETRY = 2;
+  RESPONSE_CONFIGURATION = 3;
+  RESPONSE_ERROR = 10;  // Added new response type
 }
 
 // Enum for Response status
