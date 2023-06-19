@@ -19,6 +19,7 @@
 #include "NovaIO.h"
 #include "main.h"
 #include "Enable.h"
+#include "Ambient.h"
 #include "output/Star.h"
 #include "Buttons.h"
 #include "Web.h"
@@ -40,7 +41,6 @@ void TaskWeb(void *pvParameters);
 
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
-
 
 
 void setup()
@@ -91,6 +91,9 @@ void setup()
 
   Serial.println("new Enable");
   enable = new Enable();
+
+  Serial.println("new Ambient");
+  ambient = new Ambient();
 
   Serial.println("new Star");
   star = new Star();

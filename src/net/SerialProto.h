@@ -4,6 +4,9 @@
 #include <pb_decode.h>
 #include <HardwareSerial.h>
 
+#include "messaging.pb.h"
+
+
 class SerialProto
 {
 public:
