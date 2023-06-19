@@ -137,6 +137,14 @@ typedef struct _messaging_Response {
     } response_payload;
 } messaging_Response;
 
+typedef struct _messaging_ReqRes {
+    pb_size_t which_RequestResponse;
+    union {
+        messaging_Request request;
+        messaging_Response response;
+    } RequestResponse;
+} messaging_ReqRes;
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -197,6 +205,7 @@ extern "C" {
 #define messaging_Response_type_ENUMTYPE messaging_ResponseType
 
 
+
 /* Initializer values for message structs */
 #define messaging_DmxRequest_init_default        {{{NULL}, NULL}, 0}
 #define messaging_PowerRequest_init_default      {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
@@ -209,6 +218,7 @@ extern "C" {
 #define messaging_ConfigurationResponse_init_default {_messaging_ConfigurationDeviceType_MIN, 0}
 #define messaging_ErrorResponse_init_default     {{{NULL}, NULL}}
 #define messaging_Response_init_default          {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_default}}
+#define messaging_ReqRes_init_default            {0, {messaging_Request_init_default}}
 #define messaging_DmxRequest_init_zero           {{{NULL}, NULL}, 0}
 #define messaging_PowerRequest_init_zero         {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_zero     {_messaging_TelemetryQuery_MIN}
@@ -220,6 +230,7 @@ extern "C" {
 #define messaging_ConfigurationResponse_init_zero {_messaging_ConfigurationDeviceType_MIN, 0}
 #define messaging_ErrorResponse_init_zero        {{{NULL}, NULL}}
 #define messaging_Response_init_zero             {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_zero}}
+#define messaging_ReqRes_init_zero               {0, {messaging_Request_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define messaging_DmxRequest_values_tag          1
@@ -254,6 +265,8 @@ extern "C" {
 #define messaging_Response_telemetry_response_tag 4
 #define messaging_Response_configuration_response_tag 5
 #define messaging_Response_error_response_tag    6
+#define messaging_ReqRes_request_tag             1
+#define messaging_ReqRes_response_tag            2
 
 /* Struct field encoding specification for nanopb */
 #define messaging_DmxRequest_FIELDLIST(X, a) \
@@ -341,6 +354,14 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (response_payload,error_response,response_pay
 #define messaging_Response_response_payload_configuration_response_MSGTYPE messaging_ConfigurationResponse
 #define messaging_Response_response_payload_error_response_MSGTYPE messaging_ErrorResponse
 
+#define messaging_ReqRes_FIELDLIST(X, a) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (RequestResponse,request,RequestResponse.request),   1) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (RequestResponse,response,RequestResponse.response),   2)
+#define messaging_ReqRes_CALLBACK NULL
+#define messaging_ReqRes_DEFAULT NULL
+#define messaging_ReqRes_RequestResponse_request_MSGTYPE messaging_Request
+#define messaging_ReqRes_RequestResponse_response_MSGTYPE messaging_Response
+
 extern const pb_msgdesc_t messaging_DmxRequest_msg;
 extern const pb_msgdesc_t messaging_PowerRequest_msg;
 extern const pb_msgdesc_t messaging_TelemetryRequest_msg;
@@ -352,6 +373,7 @@ extern const pb_msgdesc_t messaging_TelemetryResponse_msg;
 extern const pb_msgdesc_t messaging_ConfigurationResponse_msg;
 extern const pb_msgdesc_t messaging_ErrorResponse_msg;
 extern const pb_msgdesc_t messaging_Response_msg;
+extern const pb_msgdesc_t messaging_ReqRes_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define messaging_DmxRequest_fields &messaging_DmxRequest_msg
@@ -365,6 +387,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 #define messaging_ConfigurationResponse_fields &messaging_ConfigurationResponse_msg
 #define messaging_ErrorResponse_fields &messaging_ErrorResponse_msg
 #define messaging_Response_fields &messaging_Response_msg
+#define messaging_ReqRes_fields &messaging_ReqRes_msg
 
 /* Maximum encoded size of messages (where known) */
 /* messaging_DmxRequest_size depends on runtime parameters */
@@ -374,6 +397,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 /* messaging_TelemetryResponse_size depends on runtime parameters */
 /* messaging_ErrorResponse_size depends on runtime parameters */
 /* messaging_Response_size depends on runtime parameters */
+/* messaging_ReqRes_size depends on runtime parameters */
 #define messaging_ConfigurationRequest_size      2
 #define messaging_ConfigurationResponse_size     8
 #define messaging_DmxResponse_size               2

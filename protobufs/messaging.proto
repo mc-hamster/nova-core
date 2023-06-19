@@ -129,3 +129,10 @@ message Response {
     ErrorResponse error_response = 6;  // Added ErrorResponse to the response payload
   }
 }
+
+message ReqRes {
+    oneof RequestResponse {
+        Request request = 1;
+        Response response = 2;
+    }
+}
