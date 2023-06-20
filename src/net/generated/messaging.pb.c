@@ -39,9 +39,6 @@ PB_BIND(messaging_ErrorResponse, messaging_ErrorResponse, AUTO)
 PB_BIND(messaging_Response, messaging_Response, AUTO)
 
 
-PB_BIND(messaging_ReqRes, messaging_ReqRes, AUTO)
-
-
 
 
 
