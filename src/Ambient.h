@@ -4,6 +4,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "messaging.pb.h"
 
 class Ambient {
     private:
@@ -13,6 +14,9 @@ class Ambient {
         Ambient();
 
         void loop();
+
+        void sendProtobuf();
+
 
 };
 
