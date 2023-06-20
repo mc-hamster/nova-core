@@ -9,12 +9,7 @@ NovaIO *novaIO = NULL;
 
 NovaIO::NovaIO()
 {
-
-    /*
-    These should be initilized to 0 for us, but let's do it again
-    anyway just to be sure. We can't let an unitilized variable be a safety
-    problem.
-    */
+    // Initialize output ports to 0
     expOutPort_A = 0x00;
     expOutPort_B = 0x00;
     expOutPort_C = 0x00;
@@ -24,95 +19,55 @@ NovaIO::NovaIO()
     expOutPort_G = 0x00;
     expOutPort_H = 0x00;
 
-    /*
-    Create the mutex semaphore for the i2c bus
-    */
+    // Create mutex semaphore for I2C bus
     mutex_i2c = xSemaphoreCreateMutex();
 
-    /*
-    Initilize all the devices on the bus.
-    */
+    // Initialize all devices on the bus
     Serial.println("MCP23X17 interfaces setup.");
-    if (!mcp_a.begin_I2C(0x20))
+
+    // Create an array of all the MCP23X17 devices
+    Adafruit_MCP23X17 mcpDevices[] = {mcp_a, mcp_b, mcp_c, mcp_d, mcp_e, mcp_f, mcp_g, mcp_h};
+
+    // Get the number of devices in the array
+    const uint8_t numDevices = sizeof(mcpDevices) / sizeof(mcpDevices[0]);
+
+    // Initialize each device on the bus
+    for (uint8_t i = 0; i < numDevices; i++)
     {
-        Serial.println("Error - mcp_a");
-        while (1)
-            ;
-    }
-    if (!mcp_b.begin_I2C(0x21))
-    {
-        Serial.println("Error - mcp_b");
-        while (1)
-            ;
-    }
-    if (!mcp_c.begin_I2C(0x22))
-    {
-        Serial.println("Error - mcp_c");
-        while (1)
-            ;
-    }
-    if (!mcp_d.begin_I2C(0x23))
-    {
-        Serial.println("Error - mcp_d");
-        while (1)
-            ;
-    }
-    if (!mcp_e.begin_I2C(0x24))
-    {
-        Serial.println("Error - mcp_e");
-        while (1)
-            ;
-    }
-    if (!mcp_f.begin_I2C(0x25))
-    {
-        Serial.println("Error - mcp_f");
-        while (1)
-            ;
-    }
-    if (!mcp_g.begin_I2C(0x26))
-    {
-        Serial.println("Error - mcp_g");
-        while (1)
-            ;
+        // Initialize the device at the current index
+        if (!mcpDevices[i].begin_I2C(0x20 + i))
+        {
+            Serial.print("Error - mcp_");
+            Serial.println(i);
+            while (1)
+                ;
+        }
+
+        // Set the pin mode of each pin on the device to OUTPUT
+        for (uint8_t j = 0; j < 16; j++)
+        {
+            mcpDevices[i].pinMode(j, OUTPUT);
+        }
     }
 
-    // Note: mcp_h has the button inputs
-    if (!mcp_h.begin_I2C(0x27))
-    {
-        Serial.println("Error - mcp_h");
-        while (1)
-            ;
-    }
-
-    Serial.println("MCP23X17 interfaces setup. - DONE");
-
-    uint8_t i = 0;
-    for (i = 0; i <= 15; ++i)
-    {
-        mcp_a.pinMode(i, OUTPUT);
-        mcp_b.pinMode(i, OUTPUT);
-        mcp_c.pinMode(i, OUTPUT);
-        mcp_d.pinMode(i, OUTPUT);
-        mcp_e.pinMode(i, OUTPUT);
-        mcp_f.pinMode(i, OUTPUT);
-        mcp_g.pinMode(i, OUTPUT);
-    }
-
+    // Set the pin mode of the button inputs separately
     mcp_h.pinMode(BUTTON_RED_IN, INPUT);
     mcp_h.pinMode(BUTTON_GREEN_IN, INPUT);
     mcp_h.pinMode(BUTTON_BLUE_IN, INPUT);
     mcp_h.pinMode(BUTTON_YELLOW_IN, INPUT);
     mcp_h.pinMode(BUTTON_WHITE_IN, INPUT);
 
-    // Set all the outputs to the initilized state.
+    // Set all outputs to the initialized state
     mcp_a.writeGPIOAB(expOutPort_A);
     mcp_b.writeGPIOAB(expOutPort_B);
     mcp_c.writeGPIOAB(expOutPort_C);
     mcp_d.writeGPIOAB(expOutPort_D);
     mcp_e.writeGPIOAB(expOutPort_E);
-    mcp_e.writeGPIOAB(expOutPort_F);
-    mcp_e.writeGPIOAB(expOutPort_G);
-    Serial.println("MCP23X17 interfaces outputs set to initilized value.");
+    mcp_f.writeGPIOAB(expOutPort_F);
+    mcp_g.writeGPIOAB(expOutPort_G);
+
+    // Print a message to indicate that the MCP23X17 interfaces have been initialized
+    Serial.println("MCP23X17 interfaces outputs set to initialized value.");
 }
 
 void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
