@@ -6,18 +6,23 @@
 #include <Arduino.h>
 #include "messaging.pb.h"
 
-class Ambient {
-    private:
+bool encode_callback(pb_ostream_t *stream, const pb_field_t *field, void *const *arg);
 
+class Ambient
+{
+private:
+public:
+    Ambient();
 
-    public: 
-        Ambient();
+    void loop();
 
-        void loop();
+    void sendProtobuf();
 
-        void sendProtobuf();
+    //bool encode_callback(pb_ostream_t *stream, const pb_field_t *field, void *const *arg);
 
+    uint16_t crc16(const uint8_t* data_p, uint16_t length);
 
+    uint16_t crc16_ccitt(const uint8_t* data, uint16_t length);
 };
 
 extern Ambient *ambient;

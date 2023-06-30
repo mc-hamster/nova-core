@@ -6,7 +6,7 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(messaging_DmxRequest, messaging_DmxRequest, AUTO)
+PB_BIND(messaging_DmxRequest, messaging_DmxRequest, 2)
 
 
 PB_BIND(messaging_PowerRequest, messaging_PowerRequest, AUTO)
@@ -18,7 +18,7 @@ PB_BIND(messaging_TelemetryRequest, messaging_TelemetryRequest, AUTO)
 PB_BIND(messaging_ConfigurationRequest, messaging_ConfigurationRequest, AUTO)
 
 
-PB_BIND(messaging_Request, messaging_Request, AUTO)
+PB_BIND(messaging_Request, messaging_Request, 2)
 
 
 PB_BIND(messaging_DmxResponse, messaging_DmxResponse, AUTO)

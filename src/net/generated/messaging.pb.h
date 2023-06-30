@@ -65,8 +65,9 @@ typedef enum _messaging_ConfigurationDeviceType {
 } messaging_ConfigurationDeviceType;
 
 /* Struct definitions */
+typedef PB_BYTES_ARRAY_T(512) messaging_DmxRequest_values_t;
 typedef struct _messaging_DmxRequest {
-    pb_callback_t values; /* Single sequence of DMX values, up to 512 values */
+    messaging_DmxRequest_values_t values; /* Single sequence of DMX values, up to 512 values */
     bool ack; /* If true, an acknowledgement from the device is requested */
 } messaging_DmxRequest;
 
@@ -198,7 +199,7 @@ extern "C" {
 
 
 /* Initializer values for message structs */
-#define messaging_DmxRequest_init_default        {{{NULL}, NULL}, 0}
+#define messaging_DmxRequest_init_default        {{0, {0}}, 0}
 #define messaging_PowerRequest_init_default      {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_default  {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_default {_messaging_ConfigurationQuery_MIN}
@@ -209,7 +210,7 @@ extern "C" {
 #define messaging_ConfigurationResponse_init_default {_messaging_ConfigurationDeviceType_MIN, 0}
 #define messaging_ErrorResponse_init_default     {{{NULL}, NULL}}
 #define messaging_Response_init_default          {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_default}}
-#define messaging_DmxRequest_init_zero           {{{NULL}, NULL}, 0}
+#define messaging_DmxRequest_init_zero           {{0, {0}}, 0}
 #define messaging_PowerRequest_init_zero         {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_zero     {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_zero {_messaging_ConfigurationQuery_MIN}
@@ -257,9 +258,9 @@ extern "C" {
 
 /* Struct field encoding specification for nanopb */
 #define messaging_DmxRequest_FIELDLIST(X, a) \
-X(a, CALLBACK, SINGULAR, BYTES,    values,            1) \
+X(a, STATIC,   SINGULAR, BYTES,    values,            1) \
 X(a, STATIC,   SINGULAR, BOOL,     ack,               2)
-#define messaging_DmxRequest_CALLBACK pb_default_field_callback
+#define messaging_DmxRequest_CALLBACK NULL
 #define messaging_DmxRequest_DEFAULT NULL
 
 #define messaging_PowerRequest_FIELDLIST(X, a) \
@@ -367,7 +368,6 @@ extern const pb_msgdesc_t messaging_Response_msg;
 #define messaging_Response_fields &messaging_Response_msg
 
 /* Maximum encoded size of messages (where known) */
-/* messaging_DmxRequest_size depends on runtime parameters */
 /* messaging_PowerRequest_size depends on runtime parameters */
 /* messaging_Request_size depends on runtime parameters */
 /* messaging_PowerResponse_size depends on runtime parameters */
@@ -376,6 +376,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 /* messaging_Response_size depends on runtime parameters */
 #define messaging_ConfigurationRequest_size      2
 #define messaging_ConfigurationResponse_size     8
+#define messaging_DmxRequest_size                517
 #define messaging_DmxResponse_size               2
 #define messaging_TelemetryRequest_size          2
 

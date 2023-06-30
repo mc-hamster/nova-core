@@ -25,6 +25,7 @@
 #include "Web.h"
 #include "PersistenceManager.h"
 #include "fileSystemHelper.h"
+#include "Ambient.h"
 
 #define FORMAT_LITTLEFS_IF_FAILED true
 
@@ -33,6 +34,7 @@
 PersistenceManager persistenceManager(CONFIG_FILE);
 
 
+void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
@@ -45,7 +47,7 @@ AsyncWebServer webServer(80);
 
 void setup()
 {
-  delay(1000);
+  delay(500);
   Serial.begin(921600);
   Serial.println("NOVA: CORE");
   Serial.print("setup() is running on core ");
@@ -134,6 +136,10 @@ void setup()
   xTaskCreate(&TaskButtons, "TaskMDNS", 4098, NULL, 5, NULL);
   Serial.println("Create TaskMDNS - Done");
 
+  Serial.println("Create TaskAmbient");
+  xTaskCreate(&TaskAmbient, "TaskAmbient", 4098, NULL, 5, NULL);
+  Serial.println("Create TaskAmbient - Done");
+
   Serial.println("Setup Complete");
 }
 
@@ -147,6 +153,19 @@ void loop()
 /*--------------------------------------------------*/
 /*---------------------- Tasks ---------------------*/
 /*--------------------------------------------------*/
+
+void TaskAmbient(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+
+  Serial.println("TaskAmbient is running");
+  while (1) // A Task shall never return or exit.
+  {
+    ambient->loop();
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    delay(1);
+  }
+}
 
 void TaskEnable(void *pvParameters) // This is a task.
 {

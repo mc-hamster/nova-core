@@ -35,6 +35,7 @@ bool SerialProto::encode_callback(pb_ostream_t *stream, const uint8_t *buf, size
 {
     HardwareSerial *serial = reinterpret_cast<HardwareSerial *>(stream->state);
     serial->write(buf, count);
+    //Serial.println(count);
     return true;
 }
 
