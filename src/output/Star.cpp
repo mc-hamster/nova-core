@@ -35,21 +35,19 @@ void Star::setupStar(void)
     cluster.stars[0].igniterOutput = 2;
     cluster.stars[0].pooferOutput = 3;
     cluster.stars[0].blowerOutputDuty = 255;
-    /*
-        cluster.stars[1].expander = 0;
-        cluster.stars[1].blowerOutput = 4;
-        cluster.stars[1].fuelOutput = 5;
-        cluster.stars[1].igniterOutput = 6;
-        cluster.stars[1].pooferOutput = 7;
-        cluster.stars[1].blowerOutputDuty = 255;
-    */
+    cluster.stars[0].net.expander = 6;
+    cluster.stars[0].net.re = 0;
+    cluster.stars[0].net.de = 1;
 
-    cluster.stars[1].expander = 2;
-    cluster.stars[1].blowerOutput = 0;
-    cluster.stars[1].fuelOutput = 1;
-    cluster.stars[1].igniterOutput = 2;
-    cluster.stars[1].pooferOutput = 3;
+    cluster.stars[1].expander = 0;
+    cluster.stars[1].blowerOutput = 4;
+    cluster.stars[1].fuelOutput = 5;
+    cluster.stars[1].igniterOutput = 6;
+    cluster.stars[1].pooferOutput = 7;
     cluster.stars[1].blowerOutputDuty = 255;
+    cluster.stars[1].net.expander = 6;
+    cluster.stars[1].net.re = 2;
+    cluster.stars[1].net.de = 3;
 
     cluster.stars[2].expander = 0;
     cluster.stars[2].blowerOutput = 8;
@@ -57,21 +55,179 @@ void Star::setupStar(void)
     cluster.stars[2].igniterOutput = 10;
     cluster.stars[2].pooferOutput = 11;
     cluster.stars[2].blowerOutputDuty = 255;
+    cluster.stars[2].net.expander = 6;
+    cluster.stars[2].net.re = 4;
+    cluster.stars[2].net.de = 5;
 
-    /*
-        cluster.stars[3].expander = 0;
-        cluster.stars[3].blowerOutput = 12;
-        cluster.stars[3].fuelOutput = 13;
-        cluster.stars[3].igniterOutput = 14;
-        cluster.stars[3].pooferOutput = 15;
-        cluster.stars[3].blowerOutputDuty = 255;
-    */
-    cluster.stars[3].expander = 1;
-    cluster.stars[3].blowerOutput = 0;
-    cluster.stars[3].fuelOutput = 1;
-    cluster.stars[3].igniterOutput = 2;
-    cluster.stars[3].pooferOutput = 3;
+    cluster.stars[3].expander = 0;
+    cluster.stars[3].blowerOutput = 12;
+    cluster.stars[3].fuelOutput = 13;
+    cluster.stars[3].igniterOutput = 14;
+    cluster.stars[3].pooferOutput = 15;
     cluster.stars[3].blowerOutputDuty = 255;
+    cluster.stars[3].net.expander = 6;
+    cluster.stars[3].net.re = 6;
+    cluster.stars[3].net.de = 7;
+
+    cluster.stars[4].expander = 1;
+    cluster.stars[4].blowerOutput = 0;
+    cluster.stars[4].fuelOutput = 1;
+    cluster.stars[4].igniterOutput = 2;
+    cluster.stars[4].pooferOutput = 3;
+    cluster.stars[4].blowerOutputDuty = 255;
+    cluster.stars[4].net.expander = 6;
+    cluster.stars[4].net.re = 8;
+    cluster.stars[4].net.de = 9;
+
+    cluster.stars[5].expander = 1;
+    cluster.stars[5].blowerOutput = 4;
+    cluster.stars[5].fuelOutput = 5;
+    cluster.stars[5].igniterOutput = 6;
+    cluster.stars[5].pooferOutput = 7;
+    cluster.stars[5].blowerOutputDuty = 255;
+    cluster.stars[5].net.expander = 6;
+    cluster.stars[5].net.re = 10;
+    cluster.stars[5].net.de = 11;
+
+    cluster.stars[6].expander = 1;
+    cluster.stars[6].blowerOutput = 8;
+    cluster.stars[6].fuelOutput = 9;
+    cluster.stars[6].igniterOutput = 10;
+    cluster.stars[6].pooferOutput = 11;
+    cluster.stars[6].blowerOutputDuty = 255;
+    cluster.stars[6].net.expander = 6;
+    cluster.stars[6].net.re = 12;
+    cluster.stars[6].net.de = 13;
+
+    cluster.stars[7].expander = 1;
+    cluster.stars[7].blowerOutput = 12;
+    cluster.stars[7].fuelOutput = 13;
+    cluster.stars[7].igniterOutput = 14;
+    cluster.stars[7].pooferOutput = 15;
+    cluster.stars[7].blowerOutputDuty = 255;
+    cluster.stars[7].net.expander = 6;
+    cluster.stars[7].net.re = 14;
+    cluster.stars[7].net.de = 15;
+
+    cluster.stars[8].expander = 2;
+    cluster.stars[8].blowerOutput = 0;
+    cluster.stars[8].fuelOutput = 1;
+    cluster.stars[8].igniterOutput = 2;
+    cluster.stars[8].pooferOutput = 3;
+    cluster.stars[8].blowerOutputDuty = 255;
+    cluster.stars[8].net.expander = 7;
+    cluster.stars[8].net.re = 0;
+    cluster.stars[8].net.de = 1;
+
+    cluster.stars[9].expander = 2;
+    cluster.stars[9].blowerOutput = 4;
+    cluster.stars[9].fuelOutput = 5;
+    cluster.stars[9].igniterOutput = 6;
+    cluster.stars[9].pooferOutput = 7;
+    cluster.stars[9].blowerOutputDuty = 255;
+    cluster.stars[9].net.expander = 7;
+    cluster.stars[9].net.re = 2;
+    cluster.stars[9].net.de = 3;
+
+    cluster.stars[10].expander = 2;
+    cluster.stars[10].blowerOutput = 8;
+    cluster.stars[10].fuelOutput = 9;
+    cluster.stars[10].igniterOutput = 10;
+    cluster.stars[10].pooferOutput = 11;
+    cluster.stars[10].blowerOutputDuty = 255;
+    cluster.stars[10].net.expander = 7;
+    cluster.stars[10].net.re = 4;
+    cluster.stars[10].net.de = 5;
+
+    cluster.stars[11].expander = 2;
+    cluster.stars[11].blowerOutput = 12;
+    cluster.stars[11].fuelOutput = 13;
+    cluster.stars[11].igniterOutput = 14;
+    cluster.stars[11].pooferOutput = 15;
+    cluster.stars[11].blowerOutputDuty = 255;
+    cluster.stars[11].net.expander = 7;
+    cluster.stars[11].net.re = 6;
+    cluster.stars[11].net.de = 7;
+
+    cluster.stars[12].expander = 3;
+    cluster.stars[12].blowerOutput = 0;
+    cluster.stars[12].fuelOutput = 1;
+    cluster.stars[12].igniterOutput = 2;
+    cluster.stars[12].pooferOutput = 3;
+    cluster.stars[12].blowerOutputDuty = 255;
+    cluster.stars[12].net.expander = 7;
+    cluster.stars[12].net.re = 8;
+    cluster.stars[12].net.de = 9;
+
+    cluster.stars[13].expander = 3;
+    cluster.stars[13].blowerOutput = 4;
+    cluster.stars[13].fuelOutput = 5;
+    cluster.stars[13].igniterOutput = 6;
+    cluster.stars[13].pooferOutput = 7;
+    cluster.stars[13].blowerOutputDuty = 255;
+    cluster.stars[13].net.expander = 7;
+    cluster.stars[13].net.re = 10;
+    cluster.stars[13].net.de = 11;
+
+    cluster.stars[14].expander = 3;
+    cluster.stars[14].blowerOutput = 8;
+    cluster.stars[14].fuelOutput = 9;
+    cluster.stars[14].igniterOutput = 10;
+    cluster.stars[14].pooferOutput = 11;
+    cluster.stars[14].blowerOutputDuty = 255;
+    cluster.stars[14].net.expander = 7;
+    cluster.stars[14].net.re = 12;
+    cluster.stars[14].net.de = 13;
+
+    cluster.stars[15].expander = 3;
+    cluster.stars[15].blowerOutput = 12;
+    cluster.stars[15].fuelOutput = 13;
+    cluster.stars[15].igniterOutput = 14;
+    cluster.stars[15].pooferOutput = 15;
+    cluster.stars[15].blowerOutputDuty = 255;
+    cluster.stars[15].net.expander = 7;
+    cluster.stars[15].net.re = 14;
+    cluster.stars[15].net.de = 15;
+
+    cluster.stars[16].expander = 4;
+    cluster.stars[16].blowerOutput = 0;
+    cluster.stars[16].fuelOutput = 1;
+    cluster.stars[16].igniterOutput = 2;
+    cluster.stars[16].pooferOutput = 3;
+    cluster.stars[16].blowerOutputDuty = 255;
+    cluster.stars[16].net.expander = 8;
+    cluster.stars[16].net.re = 0;
+    cluster.stars[16].net.de = 1;
+
+    cluster.stars[17].expander = 4;
+    cluster.stars[17].blowerOutput = 4;
+    cluster.stars[17].fuelOutput = 5;
+    cluster.stars[17].igniterOutput = 6;
+    cluster.stars[17].pooferOutput = 7;
+    cluster.stars[17].blowerOutputDuty = 255;
+    cluster.stars[17].net.expander = 8;
+    cluster.stars[17].net.re = 2;
+    cluster.stars[17].net.de = 3;
+
+    cluster.stars[18].expander = 4;
+    cluster.stars[18].blowerOutput = 8;
+    cluster.stars[18].fuelOutput = 9;
+    cluster.stars[18].igniterOutput = 10;
+    cluster.stars[18].pooferOutput = 11;
+    cluster.stars[18].blowerOutputDuty = 255;
+    cluster.stars[18].net.expander = 8;
+    cluster.stars[18].net.re = 4;
+    cluster.stars[18].net.de = 5;
+
+    cluster.stars[19].expander = 4;
+    cluster.stars[19].blowerOutput = 12;
+    cluster.stars[19].fuelOutput = 13;
+    cluster.stars[19].igniterOutput = 14;
+    cluster.stars[19].pooferOutput = 15;
+    cluster.stars[19].blowerOutputDuty = 255;
+    cluster.stars[19].net.expander = 8;
+    cluster.stars[19].net.re = 6;
+    cluster.stars[19].net.de = 7;
 
     for (uint32_t i = 0; i < 20; i++)
     {
@@ -695,4 +851,21 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
     }
 
     return 0; // We are not yet done with our task
+}
+
+/*
+    Sets the output of the selected star to transmit.
+    The other stars will be set to high impedience.
+
+    If the star is 0xff, then sets all stars to transmit.
+
+    RE - Receiver Output Enable Active LOW
+    DE - Driver Output Enable Active HIGH
+*/
+bool Star::netOut(uint8_t star)
+{
+
+    novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].net.expander);
+
+    return 1; // Success
 }

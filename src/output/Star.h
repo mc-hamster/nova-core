@@ -23,9 +23,17 @@ private:
         bool abort; // If true, abort the boomer sequence
     };
 
+    struct novaNet
+    {
+        uint8_t expander;
+        uint8_t re;
+        uint8_t de;
+    };
+
     struct star
     {
         boomerData boomer;
+        novaNet net;
         uint32_t pooferPreviousMillis;
         uint32_t pooferCountsRemaining;
         uint8_t expander;
@@ -155,6 +163,9 @@ public:
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
     bool goBoom(uint8_t star);
     void goBoomAbort(uint8_t star, bool abort);
+
+    bool netOut(uint8_t star);
+    bool netIn(uint8_t star);
 
     uint8_t redPooferState;
     uint8_t greenPooferState;

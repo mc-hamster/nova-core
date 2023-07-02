@@ -16,8 +16,6 @@ This class manages the background tasks that control:
 
 */
 
-// SerialProto proto(Serial2);
-
 Ambient *ambient = NULL;
 
 Ambient::Ambient()
@@ -26,10 +24,6 @@ Ambient::Ambient()
     messaging_Request request = messaging_Request_init_zero;
     Serial.println("Ambient setup started");
 
-    /*
-        Baud rate options are:
-
-    */
     Serial2.begin(NOVANET_BAUD);
 
     // Setup goes in here
@@ -61,10 +55,7 @@ void Ambient::sendProtobuf()
 
     memcpy(dmxRequest.values.bytes, dmxValues, sizeof(dmxValues));
 
-    /*
-        Find out where the data ends. This will reduce the amount of time we spend
-        transmitting data.
-    */
+    // Find the last index with data
     int lastIndexWithData = 0;
     for (int i = DMX512_MAX; i >= 0; i--)
     {
