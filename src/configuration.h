@@ -25,7 +25,6 @@
 
 #define NOVABUF_MAX 1024 // Maximum size of the protocol buffer
 
-
 /*
     Options include:
         9600

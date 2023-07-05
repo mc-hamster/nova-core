@@ -864,8 +864,12 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 */
 bool Star::netOut(uint8_t star)
 {
+    for (uint32_t i = 0; i < 20; i++)
+    {
+        // Selected transceiver to output
 
-    novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].net.expander);
-
+        // Everything else to high impediance  
+        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].net.expander);
+    }
     return 1; // Success
 }

@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <Thread.h>
-#include <ThreadController.h>
+//#include <Thread.h>
+//#include <ThreadController.h>
 #include <Wire.h>
 #include <WiFi.h>
 #include <LittleFS.h>
