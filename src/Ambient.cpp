@@ -136,6 +136,7 @@ void Ambient::sendProtobuf()
     while (Serial2.available() < sizeof(received_header))
     {
         // Wait until the header has been received
+        yield();
     }
     Serial2.readBytes((char *)received_header, sizeof(received_header));
     if (memcmp(received_header, header, sizeof(header)) != 0)
@@ -149,6 +150,7 @@ void Ambient::sendProtobuf()
     while (Serial2.available() < sizeof(received_protobuf_crc))
     {
         // Wait until the CRC has been received
+        yield();
     }
     Serial2.readBytes((char *)&received_protobuf_crc, sizeof(received_protobuf_crc));
 
@@ -156,6 +158,7 @@ void Ambient::sendProtobuf()
     while (Serial2.available() < sizeof(msg_size))
     {
         // Wait until the size has been received
+        yield();
     }
     uint16_t received_size;
     Serial2.readBytes((char *)&received_size, sizeof(received_size));
@@ -164,10 +167,11 @@ void Ambient::sendProtobuf()
     while (Serial2.available() < received_size)
     {
         // Wait
+        yield();
     }
 
     // Now read the protobuf
-    uint8_t received_buffer[512];
+    uint8_t received_buffer[NOVABUF_MAX];
     Serial2.readBytes((char *)received_buffer, received_size);
 
     // Calculate the CRC of the received protobuf
