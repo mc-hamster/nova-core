@@ -96,6 +96,7 @@ NovaIO::NovaIO()
         mcp_e.pinMode(i, OUTPUT);
         mcp_f.pinMode(i, OUTPUT);
         mcp_g.pinMode(i, OUTPUT);
+        mcp_h.pinMode(i, OUTPUT);
     }
 
     mcp_h.pinMode(BUTTON_RED_IN, INPUT);
@@ -290,8 +291,10 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
 
 void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 {
+    
     while (1) // After duration set Pins to end state
     {
+        //return;
         if (xSemaphoreTake(mutex_i2c, 100) == pdTRUE)
         {
             if (expander == 0)
@@ -329,6 +332,7 @@ void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
             break;
         }
         yield(); // We yield to feed the watchdog.
+        //delay(1);
     }
 
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
