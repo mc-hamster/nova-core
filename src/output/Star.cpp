@@ -861,15 +861,56 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 
     RE - Receiver Output Enable Active LOW
     DE - Driver Output Enable Active HIGH
+
+    From SP3485EN-L_TR.pdf:
+
+    RE
+        A logic LOW on RE (pin 2) will enable the differential receiver. A logic HIGH on RE
+        (pin 2) of the SP3485 will disable the receiver.
+    DE
+        A logic HIGH on DE (pin 3) will enable the differential driver outputs. A logic LOW
+        on the DE (pin 3) will tri-state the driver outputs.
+
 */
 bool Star::netOut(uint8_t star)
 {
+
     for (uint32_t i = 0; i < 20; i++)
     {
-        // Selected transceiver to output
+        // delay(1);
+        if (star = 0xff)
+        {
+            if (0)
+            {
+                Serial.print("Setting all stars to transmit - re ");
+                Serial.print(cluster.stars[i].net.re);
+                Serial.print(" de ");
+                Serial.print(cluster.stars[i].net.de);
+                Serial.print(" expander ");
+                Serial.print(cluster.stars[i].net.expander);
+                Serial.print(" star ");
+                Serial.println(i);
+            }
+            // Selected transceiver to output
+            novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
+            novaIO->mcp_digitalWrite(cluster.stars[i].net.de, HIGH, cluster.stars[i].net.expander);
+        }
+        else
+        {
+            if (star == i)
+            {
+                // Selected transceiver to output
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.de, HIGH, cluster.stars[i].net.expander);
+            }
+            else
+            {
 
-        // Everything else to high impediance  
-        novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, LOW, cluster.stars[star].net.expander);
+                // Everything else to high impediance
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
+            }
+        }
     }
     return 1; // Success
 }
