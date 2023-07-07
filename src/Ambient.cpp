@@ -5,6 +5,7 @@
 // #include "SerialProto.h"
 #include "main.h"
 #include "pb_arduino.h"
+#include "output/Star.h"
 
 #include "messaging.pb.h"
 
@@ -38,6 +39,8 @@ void Ambient::loop()
 
 void Ambient::sendProtobuf()
 {
+
+    star->netOut(0xff);
 
     uint8_t dmxValues[DMX512_MAX] = {};
     dmxValues[0] = 0x00;
@@ -220,23 +223,27 @@ uint16_t Ambient::crc16(const uint8_t *data_p, uint16_t length)
 // CRC-16-CCITT function
 uint16_t Ambient::crc16_ccitt(const uint8_t *data, uint16_t length)
 {
-    uint16_t crc = 0xFFFF;
+    uint16_t crc = 0xFFFF; // Initialize CRC to 0xFFFF
 
+    // Iterate over the data
     for (uint16_t i = 0; i < length; i++)
     {
-        crc ^= data[i] << 8;
+        crc ^= data[i] << 8; // XOR the current byte with the CRC
+
+        // Iterate over the bits in the byte
         for (uint16_t j = 0; j < 8; j++)
         {
+            // If the MSB of the CRC is 1, XOR with the polynomial
             if (crc & 0x8000)
             {
                 crc = (crc << 1) ^ 0x1021; // Polynomial: x^16 + x^12 + x^5 + 1
             }
-            else
+            else // Otherwise, shift the CRC left by 1 bit
             {
                 crc <<= 1;
             }
         }
     }
 
-    return crc;
+    return crc; // Return the final CRC value
 }
