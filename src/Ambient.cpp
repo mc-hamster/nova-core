@@ -32,7 +32,7 @@ Ambient::Ambient()
 
 void Ambient::loop()
 {
-    Serial.println("Ambient loop");
+    //Serial.println("Ambient loop");
     sendProtobuf();
     delay(1000);
 }

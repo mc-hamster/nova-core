@@ -3,6 +3,9 @@
 #define UART2_RX 16
 #define UART2_TX 17
 
+#define APA102_CLOCK 18
+#define APA102_DATA 4
+
 #define ENABLE_DEVICE_PIN 13 // This is the "emergency stop" button. 
 
 #define BUTTON_RED_IN 8 // On expansion H

@@ -20,6 +20,7 @@
 #include "main.h"
 #include "Enable.h"
 #include "Ambient.h"
+#include "LightUtils.h"
 #include "output/Star.h"
 #include "Buttons.h"
 #include "Web.h"
@@ -33,6 +34,8 @@
 
 PersistenceManager persistenceManager(CONFIG_FILE);
 
+
+void TaskLightUtils(void *pvParameters);
 void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
@@ -98,6 +101,9 @@ void setup()
   Serial.println("new Ambient");
   ambient = new Ambient();
 
+  Serial.println("new LightUtils");
+  lightUtils = new LightUtils();
+
   Serial.println("new Buttons");
   buttons = new Buttons();
 
@@ -138,6 +144,10 @@ void setup()
   xTaskCreate(&TaskAmbient, "TaskAmbient", 6 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskAmbient - Done");
 
+  Serial.println("Create LightUtils");
+  xTaskCreate(&TaskLightUtils, "LightUtils", 6 * 4096, NULL, 5, NULL);
+  Serial.println("Create LightUtils - Done");
+
   Serial.println("Setup Complete");
 }
 
@@ -176,6 +186,33 @@ void TaskAmbient(void *pvParameters) // This is a task.
     }
   }
 }
+
+void TaskLightUtils(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+  UBaseType_t uxHighWaterMark;
+
+  Serial.println("TaskLightUtils is running");
+  while (1) // A Task shall never return or exit.
+  {
+    lightUtils->loop();
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    //delay(1);
+
+    // Set this to 'true' to print stack high watermark
+    if (0)
+    {
+      /* Calling the function will have used some stack space, we would
+          therefore now expect uxTaskGetStackHighWaterMark() to return a
+          value lower than when it was called on entering the task. */
+      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+      Serial.print("TaskLightUtils stack free - ");
+      Serial.println(uxHighWaterMark);
+    }
+  }
+}
+
 
 void TaskEnable(void *pvParameters) // This is a task.
 {

@@ -21,10 +21,12 @@ Config PersistenceManager::readConfig()
         cfg.value3 = doc["value3"];
         cfg.value4 = doc["value4"];
         cfg.masterSwitch = doc["masterSwitch"];
-        cfg.nested.nestedValue1 = doc["nested"]["nestedValue1"];
-        cfg.nested.nestedValue2 = doc["nested"]["nestedValue2"];
-        cfg.nested.nestedValue3 = doc["nested"]["nestedValue3"];
-        cfg.nested.nestedValue4 = doc["nested"]["nestedValue4"];
+
+        cfg.lightConfig.brightness = doc["lightConfig"]["brightness"];
+        cfg.lightConfig.program = doc["lightConfig"]["program"];
+        cfg.lightConfig.sin = doc["lightConfig"]["sin"];
+        cfg.lightConfig.updatesPerSecond = doc["lightConfig"]["updatesPerSecond"];
+
         file.close();
     }
     return cfg;
@@ -41,14 +43,14 @@ void PersistenceManager::writeConfig(Config cfg)
     doc["value3"] = cfg.value3;
     doc["value4"] = cfg.value4;
     doc["masterSwitch"] = cfg.masterSwitch;
-    doc["nested"]["nestedValue1"] = cfg.nested.nestedValue1;
-    doc["nested"]["nestedValue2"] = cfg.nested.nestedValue2;
-    doc["nested"]["nestedValue3"] = cfg.nested.nestedValue3;
-    doc["nested"]["nestedValue4"] = cfg.nested.nestedValue4;
+    doc["lightConfig"]["brightness"] = cfg.lightConfig.brightness;
+    doc["lightConfig"]["program"] = cfg.lightConfig.program;
+    doc["lightConfig"]["sin"] = cfg.lightConfig.sin;
+    doc["lightConfig"]["updatesPerSecond"] = cfg.lightConfig.updatesPerSecond;
+
     serializeJson(doc, file);
     file.close();
 }
-
 
 void PersistenceManager::begin()
 {
@@ -72,10 +74,10 @@ void PersistenceManager::begin()
         cfg.value4 = 40;
         cfg.masterSwitch = true;
 
-        cfg.nested.nestedValue1 = 100;
-        cfg.nested.nestedValue2 = 200;
-        cfg.nested.nestedValue3 = 300;
-        cfg.nested.nestedValue4 = 400;
+        cfg.lightConfig.brightness = 255;
+        cfg.lightConfig.program = 1;
+        cfg.lightConfig.sin = 0;
+        cfg.lightConfig.updatesPerSecond = 100;
 
         writeConfig(cfg);
         Serial.println("Configuration written.");

@@ -9,11 +9,11 @@
 
 #define CONFIG_FILE "/config.json"
 
-struct NestedConfig {
-  uint16_t nestedValue1;
-  uint16_t nestedValue2;
-  uint16_t nestedValue3;
-  uint16_t nestedValue4;
+struct LightConfig {
+  uint16_t brightness;
+  uint16_t program;
+  uint16_t sin;
+  uint16_t updatesPerSecond;
 };
 
 struct Config {
@@ -22,7 +22,7 @@ struct Config {
   uint32_t value3;
   uint32_t value4;
   bool masterSwitch;
-  NestedConfig nested;
+  LightConfig lightConfig;
 };
 
 class PersistenceManager {

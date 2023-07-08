@@ -22,6 +22,9 @@ public:
     // request->addInterestingHeader("ANY");
     return true;
   }
+
+private:
+
 };
 
 void webSetup(void);

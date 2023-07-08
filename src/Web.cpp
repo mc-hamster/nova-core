@@ -7,6 +7,7 @@
 #include "main.h"
 #include <ESPUI.h>
 #include <Arduino.h>
+#include "LightUtils.h"
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -24,6 +25,8 @@ uint16_t button1;
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
+
+uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider;
 
 void numberCall(Control *sender, int type)
 {
@@ -44,6 +47,19 @@ void slider(Control *sender, int type)
     Serial.print(sender->id);
     Serial.print(", Value: ");
     Serial.println(sender->value);
+
+    if (sender->id == lightingBrightnessSlider)
+    {
+        lightUtils->setCfgBrightness(sender->value.toInt());
+    }
+    if (sender->id == lightingSinSlider)
+    {
+        lightUtils->setCfgSin(sender->value.toInt());
+    }
+    if (sender->id == lightingUpdatesSlider)
+    {
+        lightUtils->setCfgUpdates(sender->value.toInt());
+    }
 }
 
 void buttonCallback(Control *sender, int type)
@@ -106,6 +122,11 @@ void selectExample(Control *sender, int value)
     Serial.print(sender->id);
     Serial.print(", Value: ");
     Serial.println(sender->value);
+
+    if (sender->id == lightingProgramSelect)
+    {
+        lightUtils->setCfgProgram(sender->value.toInt());
+    }
 }
 
 void otherSwitchExample(Control *sender, int value)
@@ -132,6 +153,7 @@ void webSetup()
     uint16_t settingsTab = ESPUI.addControl(ControlType::Tab, "Settings", "Settings");
     uint16_t sequencesTab = ESPUI.addControl(ControlType::Tab, "Sequences", "Sequences");
     uint16_t programsTab = ESPUI.addControl(ControlType::Tab, "Programs", "Programs");
+    uint16_t lightingTab = ESPUI.addControl(ControlType::Tab, "Lighting", "Lighting");
     uint16_t resetTab = ESPUI.addControl(ControlType::Tab, "Reset", "Reset");
 
     // Add status label above all tabs
@@ -151,6 +173,45 @@ void webSetup()
     ESPUI.addControl(ControlType::Button, "Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     ESPUI.addControl(ControlType::Button, "Boomers", "Left to Right", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     ESPUI.addControl(ControlType::Button, "Boomers", "Right to Left", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+
+    //---- Tab 4 (Lighting) -----
+    //    lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", "255", ControlColor::Alizarin, lightingTab, &slider);
+    //    lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", lightUtils->getCfgBrightness(), ControlColor::Alizarin, lightingTab, &slider);
+    lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", String(lightUtils->getCfgBrightness()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "0", None, lightingBrightnessSlider);
+    ESPUI.addControl(Max, "", "255", None, lightingBrightnessSlider);
+
+    lightingProgramSelect = ESPUI.addControl(ControlType::Select, "Select Program", String(lightUtils->getCfgProgram()), ControlColor::Alizarin, lightingTab, &selectExample);
+    ESPUI.addControl(ControlType::Option, "RainbowColors_p", "1", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "RainbowStripeColors_p", "2", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "CloudColors_p", "3", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "PartyColors_p", "4", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "myRedWhiteBluePalette_p", "5", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "Random", "6", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "BlackWhite Stripped", "7", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "quagga_gp", "8", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "purplefly_gp", "9", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "butterflytalker_gp", "10", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "carousel_gp", "11", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "autumnrose_gp", "12", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "Purple Gradient - bhw1_33_gp", "13", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "bhw1_22_gp", "14", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "heatmap_gp", "15", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "HeatColors_p", "16", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "LavaColors_p", "17", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "OceanColors_p", "18", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "ForestColors_p", "19", ControlColor::Alizarin, lightingProgramSelect);
+    ESPUI.addControl(ControlType::Option, "All White", "20", ControlColor::Alizarin, lightingProgramSelect);
+ 
+    //    lightingUpdatesSlider = ESPUI.addControl(ControlType::Slider, "Updates Per Second", "100", ControlColor::Alizarin, lightingTab, &slider);
+    lightingUpdatesSlider = ESPUI.addControl(ControlType::Slider, "Updates Per Second", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
+    ESPUI.addControl(Max, "", "255", None, lightingUpdatesSlider);
+
+    //    lightingSinSlider = ESPUI.addControl(ControlType::Slider, "Sin", "0", ControlColor::Alizarin, lightingTab, &slider);
+    lightingSinSlider = ESPUI.addControl(ControlType::Slider, "Sin", String(lightUtils->getCfgSin()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "0", None, lightingSinSlider);
+    ESPUI.addControl(Max, "", "32", None, lightingSinSlider);
 
     // Enable this option if you want sliders to be continuous (update during move) and not discrete (update on stop)
     // ESPUI.sliderContinuous = true;
