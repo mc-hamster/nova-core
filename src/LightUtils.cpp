@@ -137,37 +137,66 @@ void LightUtils::loop()
     uint8_t maxChanges = 12;
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
 
-    if (1)
+    if (getCfgFire())
+    {
+        Fire2012WithPalette();
+    }
+    else
     {
         static uint8_t startIndex = 0;
         startIndex = startIndex + 1; /* motion speed */
         FillLEDsFromPaletteColors(startIndex);
     }
-    else
-    {
-        Fire2012WithPalette();
-    }
 
     FastLED.setBrightness(cfgBrightness);
-    FastLED.show();
-    FastLED.delay(1000 / cfgUpdates);
+
+    if (!getCfgLocalDisable())
+    {
+        FastLED.show();
+        FastLED.delay(1000 / cfgUpdates);
+    }
+    else
+    {
+        // TODO: Set the output to all black before disabling
+        FastLED.clear(true);
+        delay(1000 / cfgUpdates);
+    }
 }
 
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
     uint8_t brightness = 255;
 
-    for (int i = 0; i < NUM_LEDS; i++)
+    if (!getCfgReverse())
     {
-        if (cfgSin == 0)
+        for (int i = 0; i < NUM_LEDS; i++)
         {
-            leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
-            colorIndex += 3;
+            if (cfgSin == 0)
+            {
+                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                colorIndex += 3;
+            }
+            else
+            {
+                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
+                colorIndex += 3;
+            }
         }
-        else
+    }
+    else
+    {
+        for (int i = NUM_LEDS - 1; i >= 0; i--)
         {
-            leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
-            colorIndex += 3;
+            if (cfgSin == 0)
+            {
+                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                colorIndex += 3;
+            }
+            else
+            {
+                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8((NUM_LEDS - 1 - i) * cfgSin), brightness);
+                colorIndex += 3;
+            }
         }
     }
 }
@@ -176,7 +205,7 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect)
 {
 
     cfgProgram = paletteSelect;
-    //Serial.println(paletteSelect);
+    // Serial.println(paletteSelect);
 
     switch (paletteSelect)
     {
@@ -315,7 +344,6 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect)
 
 void LightUtils::Fire2012WithPalette(void)
 {
-    bool gReverseDirection = false;
     // Array of temperature readings at each simulation cell
     static uint8_t heat[NUM_LEDS];
 
@@ -346,7 +374,7 @@ void LightUtils::Fire2012WithPalette(void)
         uint8_t colorindex = scale8(heat[j], 240);
         CRGB color = ColorFromPalette(targetPalette, colorindex);
         int pixelnumber;
-        if (gReverseDirection)
+        if (cfgReverse)
         {
             pixelnumber = (NUM_LEDS - 1) - j;
         }
@@ -378,6 +406,21 @@ void LightUtils::setCfgProgram(uint8_t program)
     getPalette(program);
 }
 
+void LightUtils::setCfgReverse(bool reverse)
+{
+    cfgReverse = reverse;
+}
+
+void LightUtils::setCfgFire(bool fire)
+{
+    cfgFire = fire;
+}
+
+void LightUtils::setCfgLocalDisable(bool localDisable)
+{
+    cfgLocalDisable = localDisable;
+}
+
 uint8_t LightUtils::getCfgBrightness(void)
 {
     return cfgBrightness;
@@ -396,4 +439,19 @@ uint8_t LightUtils::getCfgSin(void)
 uint8_t LightUtils::getCfgProgram(void)
 {
     return cfgProgram;
+}
+
+bool LightUtils::getCfgReverse(void)
+{
+    return cfgReverse;
+}
+
+bool LightUtils::getCfgFire(void)
+{
+    return cfgFire;
+}
+
+bool LightUtils::getCfgLocalDisable(void)
+{
+    return cfgLocalDisable;
 }

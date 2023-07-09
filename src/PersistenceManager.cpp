@@ -25,6 +25,8 @@ Config PersistenceManager::readConfig()
         cfg.lightConfig.brightness = doc["lightConfig"]["brightness"];
         cfg.lightConfig.program = doc["lightConfig"]["program"];
         cfg.lightConfig.sin = doc["lightConfig"]["sin"];
+        cfg.lightConfig.reverse = doc["lightConfig"]["reverse"];
+        cfg.lightConfig.fire = doc["lightConfig"]["fire"];
         cfg.lightConfig.updatesPerSecond = doc["lightConfig"]["updatesPerSecond"];
 
         file.close();
@@ -46,6 +48,8 @@ void PersistenceManager::writeConfig(Config cfg)
     doc["lightConfig"]["brightness"] = cfg.lightConfig.brightness;
     doc["lightConfig"]["program"] = cfg.lightConfig.program;
     doc["lightConfig"]["sin"] = cfg.lightConfig.sin;
+    doc["lightConfig"]["reverse"] = cfg.lightConfig.reverse;
+    doc["lightConfig"]["fire"] = cfg.lightConfig.fire;
     doc["lightConfig"]["updatesPerSecond"] = cfg.lightConfig.updatesPerSecond;
 
     serializeJson(doc, file);
@@ -77,6 +81,8 @@ void PersistenceManager::begin()
         cfg.lightConfig.brightness = 255;
         cfg.lightConfig.program = 1;
         cfg.lightConfig.sin = 0;
+        cfg.lightConfig.reverse = 0;
+        cfg.lightConfig.fire = 0;
         cfg.lightConfig.updatesPerSecond = 100;
 
         writeConfig(cfg);

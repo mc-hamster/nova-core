@@ -133,11 +133,11 @@ void setup()
   Serial.println("Create TaskModes - Done");
 
   Serial.println("Create TaskButtons");
-  xTaskCreate(&TaskButtons, "TaskButtons", 2048, NULL, 5, NULL);
+  xTaskCreate(&TaskButtons, "TaskButtons", 4096, NULL, 5, NULL);
   Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
-  xTaskCreate(&TaskButtons, "TaskMDNS", 4098, NULL, 5, NULL);
+  xTaskCreate(&TaskMDNS, "TaskMDNS", 4098, NULL, 5, NULL);
   Serial.println("Create TaskMDNS - Done");
 
   Serial.println("Create TaskAmbient");

@@ -14,6 +14,9 @@ struct LightConfig {
   uint16_t program;
   uint16_t sin;
   uint16_t updatesPerSecond;
+  bool reverse;
+  bool fire;
+  bool localDisable;
 };
 
 struct Config {

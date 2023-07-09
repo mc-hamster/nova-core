@@ -9,8 +9,8 @@
 
 // COOLING: How much does the air cool as it rises?
 // Less cooling = taller flames.  More cooling = shorter flames.
-// Default 55, suggested range 20-100 
-#define COOLING  55
+// Default 55, suggested range 20-100
+#define COOLING 55
 
 // SPARKING: What chance (out of 255) is there that a new spark will be lit?
 // Higher chance = more roaring fire.  Lower chance = more flickery fire.
@@ -28,6 +28,9 @@ private:
     uint8_t cfgProgram = 1;
     uint8_t cfgBrightness = 255;
     uint16_t cfgUpdates = 100;
+    bool cfgReverse = 0;
+    bool cfgFire = 0;
+    bool cfgLocalDisable = 0;
 
 public:
     LightUtils();
@@ -35,16 +38,23 @@ public:
     void loop();
 
     void setCfgSin(uint8_t sin);
+    void setCfgReverse(bool reverse);
+    void setCfgFire(bool fire);
+    void setCfgLocalDisable(bool localDisable);
     void setCfgProgram(uint8_t program);
     void setCfgBrightness(uint8_t brightness);
     void setCfgUpdates(uint16_t updates);
 
+    bool getCfgReverse(void);
+    bool getCfgFire(void);
+    bool getCfgLocalDisable(void);
     uint8_t getCfgSin(void);
     uint8_t getCfgProgram(void);
     uint8_t getCfgBrightness(void);
     uint16_t getCfgUpdates(void);
+
 };
 
-extern LightUtils *lightUtils;
+ extern LightUtils *lightUtils;
 
 #endif

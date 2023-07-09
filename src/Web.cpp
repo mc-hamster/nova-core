@@ -26,7 +26,7 @@ uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
 
-uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider;
+uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable;
 
 void numberCall(Control *sender, int type)
 {
@@ -101,6 +101,22 @@ void buttonExample(Control *sender, int type, void *param)
 
 void switchExample(Control *sender, int value)
 {
+
+    if (sender->id == lightingReverseSwitch)
+    {
+        lightUtils->setCfgReverse(sender->value.toInt());
+    }
+    else if (sender->id == lightingFireSwitch)
+    {
+
+        lightUtils->setCfgFire(sender->value.toInt());
+    }
+    else if (sender->id == lightingLocalDisable)
+    {
+
+        lightUtils->setCfgLocalDisable(sender->value.toInt());
+    }
+
     switch (value)
     {
     case S_ACTIVE:
@@ -129,23 +145,6 @@ void selectExample(Control *sender, int value)
     }
 }
 
-void otherSwitchExample(Control *sender, int value)
-{
-    switch (value)
-    {
-    case S_ACTIVE:
-        Serial.print("Active:");
-        break;
-
-    case S_INACTIVE:
-        Serial.print("Inactive");
-        break;
-    }
-
-    Serial.print(" ");
-    Serial.println(sender->id);
-}
-
 void webSetup()
 {
     // Add tabs
@@ -162,11 +161,11 @@ void webSetup()
     //----- Tab 1 (Main) -----
     uint16_t selectControl = ESPUI.addControl(ControlType::Select, "Select:", "", ControlColor::Alizarin, mainTab, &selectExample);
     controlMillis = ESPUI.addControl(ControlType::Label, "Millis:", "0", ControlColor::Emerald, mainTab);
-    ESPUI.addControl(ControlType::Switcher, "Drunktard", "", ControlColor::None, mainTab, &otherSwitchExample);
+    ESPUI.addControl(ControlType::Switcher, "Drunktard", "", ControlColor::None, mainTab, &switchExample);
     button1 = ESPUI.addControl(ControlType::Button, "Push Button", "Press", ControlColor::Peterriver, mainTab, &buttonCallback);
 
     //----- Tab 2 (Settings) -----
-    ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &otherSwitchExample);
+    ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
 
     //---- Tab 3 (Sequences) -----
     switchOne = ESPUI.addControl(ControlType::Switcher, "Switch one", "", ControlColor::Alizarin, sequencesTab, &switchExample);
@@ -174,9 +173,7 @@ void webSetup()
     ESPUI.addControl(ControlType::Button, "Boomers", "Left to Right", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     ESPUI.addControl(ControlType::Button, "Boomers", "Right to Left", ControlColor::Peterriver, sequencesTab, &buttonCallback);
 
-    //---- Tab 4 (Lighting) -----
-    //    lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", "255", ControlColor::Alizarin, lightingTab, &slider);
-    //    lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", lightUtils->getCfgBrightness(), ControlColor::Alizarin, lightingTab, &slider);
+    //---- Tab -- Lighting
     lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", String(lightUtils->getCfgBrightness()), ControlColor::Alizarin, lightingTab, &slider);
     ESPUI.addControl(Min, "", "0", None, lightingBrightnessSlider);
     ESPUI.addControl(Max, "", "255", None, lightingBrightnessSlider);
@@ -202,7 +199,7 @@ void webSetup()
     ESPUI.addControl(ControlType::Option, "OceanColors_p", "18", ControlColor::Alizarin, lightingProgramSelect);
     ESPUI.addControl(ControlType::Option, "ForestColors_p", "19", ControlColor::Alizarin, lightingProgramSelect);
     ESPUI.addControl(ControlType::Option, "All White", "20", ControlColor::Alizarin, lightingProgramSelect);
- 
+
     //    lightingUpdatesSlider = ESPUI.addControl(ControlType::Slider, "Updates Per Second", "100", ControlColor::Alizarin, lightingTab, &slider);
     lightingUpdatesSlider = ESPUI.addControl(ControlType::Slider, "Updates Per Second", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
     ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
@@ -212,6 +209,10 @@ void webSetup()
     lightingSinSlider = ESPUI.addControl(ControlType::Slider, "Sin", String(lightUtils->getCfgSin()), ControlColor::Alizarin, lightingTab, &slider);
     ESPUI.addControl(Min, "", "0", None, lightingSinSlider);
     ESPUI.addControl(Max, "", "32", None, lightingSinSlider);
+
+    lightingReverseSwitch = ESPUI.addControl(ControlType::Switcher, "Reverse", String(lightUtils->getCfgReverse()), ControlColor::Alizarin, lightingTab, &switchExample);
+    lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
+    lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
 
     // Enable this option if you want sliders to be continuous (update during move) and not discrete (update on stop)
     // ESPUI.sliderContinuous = true;
