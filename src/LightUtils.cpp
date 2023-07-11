@@ -1,6 +1,7 @@
 #include <FastLED.h>
 #include "LightUtils.h"
 #include "configuration.h"
+#include "main.h"
 
 #define NUM_LEDS 18
 #define LED_TYPE APA102
@@ -115,9 +116,9 @@ LightUtils::LightUtils()
 
     // delay( 1000 ); // power-up safety delay
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(2000)>(leds, NUM_LEDS);
-    FastLED.setBrightness(cfgBrightness);
+    FastLED.setBrightness(getCfgBrightness());
 
-    currentPalette = getPalette(1);
+    currentPalette = getPalette(manager.get("cfgProgram").as<uint8_t>() ? manager.get("cfgProgram").as<uint8_t>() : 1);
 
     // Setup goes in here
 }
@@ -165,7 +166,7 @@ void LightUtils::loop()
 
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
-    uint8_t brightness = 255;
+    uint8_t brightness = getCfgBrightness();
 
     if (!getCfgReverse())
     {
@@ -205,7 +206,16 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect)
 {
 
     cfgProgram = paletteSelect;
-    // Serial.println(paletteSelect);
+
+    manager.set("cfgProgram", cfgProgram);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 
     switch (paletteSelect)
     {
@@ -388,17 +398,48 @@ void LightUtils::Fire2012WithPalette(void)
 
 void LightUtils::setCfgBrightness(uint8_t brightness)
 {
+    Serial.println("set brightness");
     cfgBrightness = brightness;
+    manager.set("cfgBrightness", brightness);
+    manager.printFileContents();
+
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
+    manager.printFileContents();
 }
 
 void LightUtils::setCfgUpdates(uint16_t updates)
 {
     cfgUpdates = updates;
+    manager.set("cfgUpdates", updates);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 }
 
 void LightUtils::setCfgSin(uint8_t sin)
 {
     cfgSin = sin;
+    manager.set("cfgSin", sin);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 }
 
 void LightUtils::setCfgProgram(uint8_t program)
@@ -409,49 +450,76 @@ void LightUtils::setCfgProgram(uint8_t program)
 void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
+    manager.set("cfgReverse", reverse);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 }
 
 void LightUtils::setCfgFire(bool fire)
 {
     cfgFire = fire;
+    manager.set("cfgFire", fire);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 }
 
 void LightUtils::setCfgLocalDisable(bool localDisable)
 {
     cfgLocalDisable = localDisable;
+    manager.set("cfgLocalDisable", localDisable);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+    }
 }
 
 uint8_t LightUtils::getCfgBrightness(void)
 {
-    return cfgBrightness;
+    return manager.get("cfgBrightness").as<uint8_t>();
 }
 
 uint16_t LightUtils::getCfgUpdates(void)
 {
-    return cfgUpdates;
+    return manager.get("cfgUpdates").as<uint16_t>();
 }
 
 uint8_t LightUtils::getCfgSin(void)
 {
-    return cfgSin;
+    return manager.get("cfgSin").as<uint8_t>();
 }
 
 uint8_t LightUtils::getCfgProgram(void)
 {
-    return cfgProgram;
+    return manager.get("cfgProgram").as<uint8_t>();
 }
 
 bool LightUtils::getCfgReverse(void)
 {
-    return cfgReverse;
+    return manager.get("cfgReverse").as<bool>();
 }
 
 bool LightUtils::getCfgFire(void)
 {
-    return cfgFire;
+    return manager.get("cfgFire").as<bool>();
 }
 
 bool LightUtils::getCfgLocalDisable(void)
 {
-    return cfgLocalDisable;
+    return manager.get("cfgLocalDisable").as<bool>();
 }

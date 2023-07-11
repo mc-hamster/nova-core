@@ -93,7 +93,7 @@ void Ambient::sendProtobuf()
         Serial.println("PB_Encode Error!!!");
     }
 
-    if (1)
+    if (0)
     {
         // Print the size of the encoded message.
         Serial.println(stream.bytes_written);

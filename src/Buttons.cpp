@@ -17,8 +17,8 @@ Buttons *buttons = NULL;
 Buttons::Buttons()
 {
     uint32_t ticksDebounce = 25; // setDebounceTicks Period of time in which to ignore additional level changes.
-    uint32_t ticksClicks = 60; // setClickTicks  Timeout used to distinguish single clicks from double clicks.
-    uint32_t ticksPress = 500; // setPressTicks Duration to hold a button to trigger a long press
+    uint32_t ticksClicks = 60;   // setClickTicks  Timeout used to distinguish single clicks from double clicks.
+    uint32_t ticksPress = 500;   // setPressTicks Duration to hold a button to trigger a long press
 
     Serial.println("Setting up buttons");
     button_red->attachClick(red_click);
@@ -128,8 +128,11 @@ void Buttons::loop(void)
 
 void Buttons::red_click(void)
 {
-    Serial.println("Red Click");
-    star->redPoof(star->RED_POOF);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Red Click");
+        star->redPoof(star->RED_POOF);
+    }
 }
 void Buttons::red_doubleClick(void)
 {
@@ -138,19 +141,28 @@ void Buttons::red_doubleClick(void)
 }
 void Buttons::red_longPressStart(void)
 {
-    Serial.println("Red Long Start");
-    star->redBoom(star->BOOMER_ON);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Red Long Start");
+        star->redBoom(star->BOOMER_ON);
+    }
 }
 void Buttons::red_longPressStop(void)
 {
-    Serial.println("Red Long Stop");
-    star->goBoomAbort(0, true);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Red Long Stop");
+        star->goBoomAbort(0, true);
+    }
 }
 
 void Buttons::green_click(void)
 {
-    Serial.println("Green Click");
-    star->greenPoof(star->GREEN_POOF);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Green Click");
+        star->greenPoof(star->GREEN_POOF);
+    }
 }
 void Buttons::green_doubleClick(void)
 {
@@ -159,19 +171,28 @@ void Buttons::green_doubleClick(void)
 }
 void Buttons::green_longPressStart(void)
 {
-    Serial.println("Green Long Start");
-    star->greenBoom(star->BOOMER_ON);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Green Long Start");
+        star->greenBoom(star->BOOMER_ON);
+    }
 }
 void Buttons::green_longPressStop(void)
 {
-    Serial.println("Green Long Stop");
-    star->goBoomAbort(1, true);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Green Long Stop");
+        star->goBoomAbort(1, true);
+    }
 }
 
 void Buttons::blue_click(void)
 {
-    Serial.println("Blue Click");
-    star->bluePoof(star->BLUE_POOF);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Blue Click");
+        star->bluePoof(star->BLUE_POOF);
+    }
 }
 void Buttons::blue_doubleClick(void)
 {
@@ -180,19 +201,28 @@ void Buttons::blue_doubleClick(void)
 }
 void Buttons::blue_longPressStart(void)
 {
-    Serial.println("Blue Long Start");
-    star->blueBoom(star->BOOMER_ON);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Blue Long Start");
+        star->blueBoom(star->BOOMER_ON);
+    }
 }
 void Buttons::blue_longPressStop(void)
 {
-    Serial.println("Blue Long Stop");
-    star->goBoomAbort(2, true);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Blue Long Stop");
+        star->goBoomAbort(2, true);
+    }
 }
 
 void Buttons::yellow_click(void)
 {
-    Serial.println("Yellow Click");
-    star->yellowPoof(star->YELLOW_POOF);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Yellow Click");
+        star->yellowPoof(star->YELLOW_POOF);
+    }
 }
 void Buttons::yellow_doubleClick(void)
 {
@@ -201,11 +231,17 @@ void Buttons::yellow_doubleClick(void)
 }
 void Buttons::yellow_longPressStart(void)
 {
-    Serial.println("Yellow Long Start");
-    star->yellowBoom(star->BOOMER_ON);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Yellow Long Start");
+        star->yellowBoom(star->BOOMER_ON);
+    }
 }
 void Buttons::yellow_longPressStop(void)
 {
-    Serial.println("Yellow Long Stop");
-    star->goBoomAbort(3, true);
+    if (!enable->isDrunktard())
+    {
+        Serial.println("Yellow Long Stop");
+        star->goBoomAbort(3, true);
+    }
 }

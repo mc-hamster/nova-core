@@ -8,6 +8,7 @@
 #include <ESPUI.h>
 #include <Arduino.h>
 #include "LightUtils.h"
+#include "Enable.h"
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -21,12 +22,12 @@ void handleRequest(AsyncWebServerRequest *request)
     request->send(response);
 }
 
-uint16_t button1;
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
 
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable;
+uint16_t mainDrunktardSwitch;
 
 void numberCall(Control *sender, int type)
 {
@@ -79,24 +80,6 @@ void buttonCallback(Control *sender, int type)
 void buttonExample(Control *sender, int type, void *param)
 {
     Serial.println(String("param: ") + String(long(param)));
-    switch (type)
-    {
-    case B_DOWN:
-        Serial.println("Status: Start");
-        ESPUI.updateControlValue(status, "Start");
-
-        ESPUI.getControl(button1)->color = ControlColor::Carrot;
-        ESPUI.updateControl(button1);
-        break;
-
-    case B_UP:
-        Serial.println("Status: Stop");
-        ESPUI.updateControlValue(status, "Stop");
-
-        ESPUI.getControl(button1)->color = ControlColor::Peterriver;
-        ESPUI.updateControl(button1);
-        break;
-    }
 }
 
 void switchExample(Control *sender, int value)
@@ -115,6 +98,18 @@ void switchExample(Control *sender, int value)
     {
 
         lightUtils->setCfgLocalDisable(sender->value.toInt());
+    }
+    else if (sender->id == mainDrunktardSwitch)
+    {
+        manager.set("cfgDrunktard", sender->value.toInt());
+        if (manager.save())
+        {
+            Serial.println("cfgDrunktard Data saved successfully.");
+        }
+        else
+        {
+            Serial.println("cfgDrunktard Failed to save data.");
+        }
     }
 
     switch (value)
@@ -156,13 +151,11 @@ void webSetup()
     uint16_t resetTab = ESPUI.addControl(ControlType::Tab, "Reset", "Reset");
 
     // Add status label above all tabs
-    status = ESPUI.addControl(ControlType::Label, "Status:", "Stop", ControlColor::Turquoise);
+    status = ESPUI.addControl(ControlType::Label, "Status:", "Unknown Status", ControlColor::Turquoise);
 
     //----- Tab 1 (Main) -----
-    uint16_t selectControl = ESPUI.addControl(ControlType::Select, "Select:", "", ControlColor::Alizarin, mainTab, &selectExample);
-    controlMillis = ESPUI.addControl(ControlType::Label, "Millis:", "0", ControlColor::Emerald, mainTab);
-    ESPUI.addControl(ControlType::Switcher, "Drunktard", "", ControlColor::None, mainTab, &switchExample);
-    button1 = ESPUI.addControl(ControlType::Button, "Push Button", "Press", ControlColor::Peterriver, mainTab, &buttonCallback);
+    controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, mainTab);
+    mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(enable->isDrunktard()), ControlColor::None, mainTab, &switchExample);
 
     //----- Tab 2 (Settings) -----
     ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
@@ -228,7 +221,7 @@ void webSetup()
 }
 
 /**
- * Updates the web interface controls every second.
+ * Updates the web interface controls every n-second.
  */
 void webLoop()
 {
@@ -236,17 +229,48 @@ void webLoop()
     static long oldTime = 0;
     static bool switchState = false;
 
-    // Update controls every second
-    if (millis() - oldTime > 1000)
+    unsigned long currentMillis = millis();
+    unsigned long seconds = (currentMillis / 1000) % 60;
+    unsigned long minutes = (currentMillis / (1000 * 60)) % 60;
+    unsigned long hours = (currentMillis / (1000 * 60 * 60)) % 24;
+    unsigned long days = (currentMillis / (1000 * 60 * 60 * 24));
+
+    String formattedTime = String(days) + "d " + String(hours) + "h " + String(minutes) + "m " + String(seconds) + "s";
+
+    // Update controls every two second
+    if (millis() - oldTime > 2000)
     {
         // Toggle switch state
         switchState = !switchState;
 
         // Update switch and millis controls
-        ESPUI.updateControlValue(switchOne, switchState ? "1" : "0");
-        ESPUI.updateControlValue(controlMillis, String(millis()));
+        // ESPUI.updateControlValue(switchOne, switchState ? "1" : "0");
+        ESPUI.updateControlValue(controlMillis, formattedTime);
 
         // Update oldTime
         oldTime = millis();
+
+        if (enable->isSystemEnabled())
+        {
+            if (enable->isDrunktard())
+            {
+                ESPUI.updateControlValue(status, "Drunktard");
+            }
+            else
+            {
+                ESPUI.updateControlValue(status, "Enabled");
+            }
+        }
+        else
+        {
+            if (enable->isDrunktard())
+            {
+                ESPUI.updateControlValue(status, "System Disabled (Drunktard)");
+            }
+            else
+            {
+                ESPUI.updateControlValue(status, "System Disabled (Emergency Stop)");
+            }
+        }
     }
 }

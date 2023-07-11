@@ -1,95 +1,175 @@
 #include "PersistenceManager.h"
 
-#define CONFIG_FILE "/config.json"
-
-PersistenceManager::PersistenceManager(const char *filename)
+// Constructor initializes the member variables and loads the JSON document
+PersistenceManager::PersistenceManager(const char *filename, size_t maxJsonSize)
+    : _filename(filename), _maxJsonSize(maxJsonSize), _doc(maxJsonSize)
 {
-    _filename = filename;
+    _mutex = xSemaphoreCreateMutex();
+
+    load();
 }
 
-// read the configuration from the file system
-Config PersistenceManager::readConfig()
+// Get method to retrieve a value for a key
+JsonVariant PersistenceManager::get(const char *key)
 {
-    Config cfg;
-    if (LittleFS.exists(_filename))
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+    JsonVariant value = _doc[key];
+    xSemaphoreGive(_mutex);
+    return value;
+}
+
+// Remove method to delete a key-value pair
+bool PersistenceManager::remove(const char *key)
+{
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+    bool exists = _doc.containsKey(key);
+    if (exists)
     {
-        File file = LittleFS.open(_filename, "r");
-        StaticJsonDocument<200> doc;
-        deserializeJson(doc, file);
-        cfg.value1 = doc["value1"];
-        cfg.value2 = doc["value2"];
-        cfg.value3 = doc["value3"];
-        cfg.value4 = doc["value4"];
-        cfg.masterSwitch = doc["masterSwitch"];
-
-        cfg.lightConfig.brightness = doc["lightConfig"]["brightness"];
-        cfg.lightConfig.program = doc["lightConfig"]["program"];
-        cfg.lightConfig.sin = doc["lightConfig"]["sin"];
-        cfg.lightConfig.reverse = doc["lightConfig"]["reverse"];
-        cfg.lightConfig.fire = doc["lightConfig"]["fire"];
-        cfg.lightConfig.updatesPerSecond = doc["lightConfig"]["updatesPerSecond"];
-
-        file.close();
+        _doc.remove(key);
     }
-    return cfg;
+    xSemaphoreGive(_mutex);
+    return exists;
 }
 
-// write the configuration to the file system
-void PersistenceManager::writeConfig(Config cfg)
+// Exists method to check if a key exists
+bool PersistenceManager::exists(const char *key)
 {
-    LittleFS.remove(_filename);
-    File file = LittleFS.open(_filename, "w");
-    StaticJsonDocument<200> doc;
-    doc["value1"] = cfg.value1;
-    doc["value2"] = cfg.value2;
-    doc["value3"] = cfg.value3;
-    doc["value4"] = cfg.value4;
-    doc["masterSwitch"] = cfg.masterSwitch;
-    doc["lightConfig"]["brightness"] = cfg.lightConfig.brightness;
-    doc["lightConfig"]["program"] = cfg.lightConfig.program;
-    doc["lightConfig"]["sin"] = cfg.lightConfig.sin;
-    doc["lightConfig"]["reverse"] = cfg.lightConfig.reverse;
-    doc["lightConfig"]["fire"] = cfg.lightConfig.fire;
-    doc["lightConfig"]["updatesPerSecond"] = cfg.lightConfig.updatesPerSecond;
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+    bool result = _doc.containsKey(key);
+    xSemaphoreGive(_mutex);
+    return result;
+}
 
-    serializeJson(doc, file);
+// Method to list all keys
+String PersistenceManager::listKeys()
+{
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+    String keys = "";
+    for (JsonPair kv : _doc.as<JsonObject>())
+    {
+        keys += kv.key().c_str();
+        keys += "\n";
+    }
+    xSemaphoreGive(_mutex);
+    return keys;
+}
+
+// Save method to persist the JSON document to the file
+bool PersistenceManager::save()
+{
+    if (_checkAvailableSpace())
+    {
+        if (_beginTransaction())
+        {
+            File file = LittleFS.open(_filename, "w");
+            if (!file)
+            {
+                Serial.println("Failed to open file for writing");
+                return false;
+            }
+            serializeJson(_doc, file);
+            file.close();
+            _endTransaction();
+            return true;
+        }
+    }
+    return false;
+}
+
+// Clear method to delete all key-value pairs
+bool PersistenceManager::clear()
+{
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+    _doc.clear();
+    xSemaphoreGive(_mutex);
+    return save();
+}
+
+// Method to create a backup of the data file
+bool PersistenceManager::backup(const char *backupFilename)
+{
+    return LittleFS.rename(_filename, backupFilename);
+}
+
+// Load method to load the JSON document from the file
+bool PersistenceManager::load()
+{
+    File file = LittleFS.open(_filename, "r");
+    if (!file)
+    {
+        Serial.println("Failed to open file for reading 1");
+        return false;
+    }
+    deserializeJson(_doc, file);
     file.close();
+    return true;
 }
 
-void PersistenceManager::begin()
+// Check if there's enough available space on the file system
+bool PersistenceManager::_checkAvailableSpace()
 {
+    // FSInfo fs_info;
+    // LittleFS.info(fs_info);
+    // return fs_info.totalBytes - fs_info.usedBytes > _maxJsonSize;
 
-    /*
-    if (!LittleFS.begin())
+    // TODO: Estiamte available space
+
+    // For now, always return true.
+    return true;
+}
+
+// Begin a transaction by taking the mutex
+bool PersistenceManager::_beginTransaction()
+{
+    return xSemaphoreTake(_mutex, portMAX_DELAY) == pdTRUE;
+}
+
+// End a transaction by giving the mutex back
+void PersistenceManager::_endTransaction()
+{
+    xSemaphoreGive(_mutex);
+}
+
+size_t PersistenceManager::getFileSize()
+{
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+
+    File file = LittleFS.open(_filename, "r");
+    if (!file)
     {
-        Serial.println("An Error has occurred while mounting LittleFS");
-        return;
+        Serial.println("Failed to open file for reading 2");
+        return 0;
     }
-    */
 
-    // write a test configuration if the file doesn't exist yet
-    if (!LittleFS.exists(_filename))
+    size_t fileSize = file.size();
+    file.close();
+
+    xSemaphoreGive(_mutex);
+    return fileSize;
+}
+
+void PersistenceManager::printFileContents()
+{
+    // Obtain the lock
+    xSemaphoreTake(_mutex, portMAX_DELAY);
+
+    // Open the file
+    File file = LittleFS.open(_filename, "r");
+    if (!file)
     {
-        static Config cfg;
-
-        cfg.value1 = 10;
-        cfg.value2 = 20;
-        cfg.value3 = 30;
-        cfg.value4 = 40;
-        cfg.masterSwitch = true;
-
-        cfg.lightConfig.brightness = 255;
-        cfg.lightConfig.program = 1;
-        cfg.lightConfig.sin = 0;
-        cfg.lightConfig.reverse = 0;
-        cfg.lightConfig.fire = 0;
-        cfg.lightConfig.updatesPerSecond = 100;
-
-        writeConfig(cfg);
-        Serial.println("Configuration written.");
+        Serial.println("Failed to open file for reading");
     }
-    else
+
+    // Read from the file and print each line
+    while (file.available())
     {
-        Serial.println("Configuration file already exists. Skipping write.");
+        String line = file.readStringUntil('\n');
+        Serial.println(line);
     }
+
+    // Close the file
+    file.close();
+
+    // Release the lock
+    xSemaphoreGive(_mutex);
 }

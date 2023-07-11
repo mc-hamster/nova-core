@@ -32,8 +32,8 @@
 
 #define CONFIG_FILE "/config.json"
 
-PersistenceManager persistenceManager(CONFIG_FILE);
-
+// PersistenceManager persistenceManager(CONFIG_FILE);
+PersistenceManager manager("/data.json", 4096);
 
 void TaskLightUtils(void *pvParameters);
 void TaskAmbient(void *pvParameters);
@@ -67,8 +67,28 @@ void setup()
 
     listDir(LittleFS, "/", 0);
   }
+  manager.printFileContents();
+  manager.load();
 
-  persistenceManager.begin();
+  if (manager.save())
+  {
+    Serial.println("Data saved successfully.");
+  }
+  else
+  {
+    Serial.println("Failed to save data.");
+  }
+
+  // Print all keys.
+  //Serial.println("All keys:");
+  //Serial.println(manager.listKeys());
+
+  //manager.printFileContents();
+
+  // Get and print the size of the JSON file
+  size_t fileSize = manager.getFileSize();
+  Serial.print("Size of the JSON file: ");
+  Serial.println(fileSize);
 
   Serial.println("Setting up Serial2");
   Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
@@ -198,7 +218,7 @@ void TaskLightUtils(void *pvParameters) // This is a task.
     lightUtils->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    //delay(1);
+    // delay(1);
 
     // Set this to 'true' to print stack high watermark
     if (0)
@@ -212,7 +232,6 @@ void TaskLightUtils(void *pvParameters) // This is a task.
     }
   }
 }
-
 
 void TaskEnable(void *pvParameters) // This is a task.
 {

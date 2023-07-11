@@ -7,6 +7,8 @@
 #include "configuration.h"
 #include <FastLED.h>
 
+extern PersistenceManager manager;
+
 // COOLING: How much does the air cool as it rises?
 // Less cooling = taller flames.  More cooling = shorter flames.
 // Default 55, suggested range 20-100

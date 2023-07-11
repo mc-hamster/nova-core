@@ -104,3 +104,13 @@ bool Enable::isSystemEnabled(void)
     // Serial.println(systemEnable);
     return systemEnable;
 }
+
+bool Enable::isDrunktard(void)
+{
+    if (manager.exists("cfgDrunktard")) {
+        return manager.get("cfgDrunktard").as<bool>();
+    } else {
+        return 0;
+    }
+    return false;
+}

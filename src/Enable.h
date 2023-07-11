@@ -4,6 +4,10 @@
 #pragma once
 
 #include <Arduino.h>
+#include "main.h"
+
+extern PersistenceManager manager;
+
 
 class Enable {
     private:
@@ -24,6 +28,7 @@ class Enable {
         void emergencyStopEnter();
 
         bool isSystemEnabled();
+        bool isDrunktard();
 };
 
 extern Enable *enable;
