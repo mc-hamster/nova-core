@@ -8,6 +8,8 @@
 #include <Adafruit_MCP23X17.h>
 #include <Arduino.h>
 
+#define BLOCK_TIME 200
+
 enum expansionIO
 {
         expA,
