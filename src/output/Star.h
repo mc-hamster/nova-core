@@ -28,6 +28,8 @@ private:
         uint8_t expander;
         uint8_t re;
         uint8_t de;
+        uint8_t cache_re;
+        uint8_t cache_de;
     };
 
     struct star
