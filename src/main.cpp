@@ -80,10 +80,10 @@ void setup()
   }
 
   // Print all keys.
-  //Serial.println("All keys:");
-  //Serial.println(manager.listKeys());
+  // Serial.println("All keys:");
+  // Serial.println(manager.listKeys());
 
-  //manager.printFileContents();
+  // manager.printFileContents();
 
   // Get and print the size of the JSON file
   size_t fileSize = manager.getFileSize();
@@ -102,9 +102,10 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
-  Serial.println("Set clock of I2C interface to 400khz");
+  Serial.println("Set clock of I2C interface to 1mhz");
   Wire.begin();
-  Wire.setClock(400000UL);
+  Wire.setClock(400000UL); // 400khz
+  // Wire.setClock(1000000UL); // 1mhz
 
   Serial.println("new NovaIO");
   novaIO = new NovaIO();
@@ -127,8 +128,19 @@ void setup()
   Serial.println("new Buttons");
   buttons = new Buttons();
 
+  String macAddress = WiFi.macAddress();
+  String AP_String = "";
+
+  for (int i = 0; i < 6; i++)
+  {
+    uint8_t byteValue = strtoul(macAddress.substring(i * 3, i * 3 + 2).c_str(), NULL, 16);
+    AP_String += String(byteValue, HEX);
+  }
+
+  AP_String = "NOVA_" + AP_String.substring(0, 4);
+
   // your other setup stuff...
-  WiFi.softAP("NOVA", "scubadandy");
+  WiFi.softAP(AP_String, "scubadandy");
   WiFi.setSleep(false); // Disable power saving on the wifi interface.
 
   dnsServer.start(53, "*", WiFi.softAPIP());
