@@ -19,6 +19,10 @@ extern PersistenceManager manager;
 // Default 120, suggested range 50-200.
 #define SPARKING 120
 
+#define NUM_LEDS 18
+#define LED_TYPE APA102
+#define COLOR_ORDER BGR
+
 class LightUtils
 {
 private:
@@ -33,6 +37,7 @@ private:
     bool cfgReverse = 0;
     bool cfgFire = 0;
     bool cfgLocalDisable = 0;
+    CRGB leds[NUM_LEDS];
 
 public:
     LightUtils();
@@ -55,8 +60,11 @@ public:
     uint8_t getCfgBrightness(void);
     uint16_t getCfgUpdates(void);
 
+    CRGB* getLeds(void);
+    uint16_t getNumberOfLeds(void);
+
 };
 
- extern LightUtils *lightUtils;
+extern LightUtils *lightUtils;
 
 #endif

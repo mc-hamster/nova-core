@@ -6,6 +6,7 @@
 #include "main.h"
 #include "pb_arduino.h"
 #include "output/Star.h"
+#include "LightUtils.h"
 
 #include "messaging.pb.h"
 
@@ -32,45 +33,107 @@ Ambient::Ambient()
 
 void Ambient::loop()
 {
-    //Serial.println("Ambient loop");
-    sendProtobuf();
-    delay(1000);
+    uint32_t currentTime = millis();
+
+    // Serial.println("Ambient loop");
+    // sendProtobuf();
+
+    CRGB *leds = lightUtils->getLeds();
+
+    for (int i = 0; i < lightUtils->getNumberOfLeds(); i++)
+    {
+        CRGB color = leds[i];
+        uint8_t redValue = color.r;
+        uint8_t greenValue = color.g;
+        uint8_t blueValue = color.b;
+        // Do something with the color
+    }
+
+    uint32_t frameTime = micros();
+    for (int i = 0; i < 12; i++)
+    {
+        uint8_t dmxValues[DMX512_MAX] = {};
+
+        dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
+
+        dmxValues[1] = 0xff;      // Brightness
+        dmxValues[2] = leds[i].r; // red
+        dmxValues[3] = leds[i].g; // green
+        dmxValues[4] = leds[i].b; // blue
+        dmxValues[5] = 0x00;      // null
+        dmxValues[6] = 0x00;      // null
+        dmxValues[7] = 0x00;      // null
+
+        // Set the selected star to transmit.
+        star->netOut(i);
+
+        sendDmxMessage(dmxValues, DMX512_MAX);
+    }
+
+    if (currentTime - lastExecutionTime >= 5000)
+    {
+        // Calculate average frame time
+        unsigned long avgFrameTime = totalFrameTime / numFrames;
+
+        // Print statistics
+        Serial.printf("Average frame time: %d (microseconds) %d (milliseconds) %d (fps) \n", avgFrameTime, avgFrameTime / 1000, 1000 / (avgFrameTime / 1000));
+
+        // Reset statistics
+        totalFrameTime = 0;
+        numFrames = 0;
+
+        // Update last execution time
+        lastExecutionTime = currentTime;
+    }
+
+    totalFrameTime += micros() - frameTime;
+    numFrames++;
 }
 
-void Ambient::sendProtobuf()
+
+/**
+ * Sends a DMX message with the given DMX values over NovaNet.
+ *
+ * Think of this as the display driver. It takes the DMX values 
+ * and sends them to the display.
+ * 
+ * @param dmxValues The DMX values to send.
+ * @param dmxValuesSize The size of the DMX values array.
+ */
+void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
 {
 
-    star->netOut(0xff);
-
-    uint8_t dmxValues[DMX512_MAX] = {};
-    dmxValues[0] = 0x00;
-    dmxValues[1] = 0xff; // Brightness
-    dmxValues[2] = 0xff; // red
-    dmxValues[3] = 0x00; // green
-    dmxValues[4] = 0xff; // blue
-
-    dmxValues[5] = 0x01; // blue
-    dmxValues[6] = 0x02; // blue
-    dmxValues[7] = 0x03; // blue
+    uint8_t newDmxValues[dmxValuesSize] = {};
+    memcpy(newDmxValues, dmxValues, dmxValuesSize - 1);
 
     // Create a DmxRequest object
     messaging_DmxRequest dmxRequest = messaging_DmxRequest_init_zero;
 
-    memcpy(dmxRequest.values.bytes, dmxValues, sizeof(dmxValues));
+    memcpy(dmxRequest.values.bytes, newDmxValues, dmxValuesSize);
 
     // Find the last index with data
     int lastIndexWithData = 0;
-    for (int i = DMX512_MAX; i >= 0; i--)
+    for (int i = DMX512_MAX - 1; i >= 0; i--)
     {
-        if (dmxValues[i] != 0)
+        if (newDmxValues[i] != 0)
         {
             lastIndexWithData = i + 1;
             break;
         }
     }
 
-    Serial.print("lastIndexWithData ");
-    Serial.println(lastIndexWithData);
+    if (0)
+    {
+        Serial.println(lastIndexWithData);
+        for (int i = 0; i < lastIndexWithData; i++)
+        {
+            Serial.print("newDmxValues[");
+            Serial.print(i);
+            Serial.print("] = ");
+            Serial.println((int)newDmxValues[i]);
+        }
+        delay(10000);
+    }
 
     dmxRequest.values.size = lastIndexWithData;
 
@@ -129,70 +192,84 @@ void Ambient::sendProtobuf()
     // Then send the protobuf
     Serial2.write(buffer, msg_size);
 
-    Serial.println("Written");
+    // TODO: Cleanup the magic numbers.
+    //  8 microseconds for each byte
+    //
+    //  8 bytes in the header before the message
+    //  sizeof(msg_size) for the message.
+    delayMicroseconds(8 * (8 + sizeof(msg_size)));
 
-    delay(100); // Wait a bit before reading
+    // Wait for to make sure that the serial buffer is empty
+    Serial2.flush(true);
+
+    // Serial.println("Written");
+
+    // delay(100); // Wait a bit before reading
     return;
 
-    // Read and check the header
-    uint8_t received_header[4];
-    while (Serial2.available() < sizeof(received_header))
+    if (0)
     {
-        // Wait until the header has been received
-        yield();
-    }
-    Serial2.readBytes((char *)received_header, sizeof(received_header));
-    if (memcmp(received_header, header, sizeof(header)) != 0)
-    {
-        // Handle the error: invalid header
-        return;
-    }
 
-    // Read the CRC of the protobuf
-    uint16_t received_protobuf_crc;
-    while (Serial2.available() < sizeof(received_protobuf_crc))
-    {
-        // Wait until the CRC has been received
-        yield();
-    }
-    Serial2.readBytes((char *)&received_protobuf_crc, sizeof(received_protobuf_crc));
+        // Read and check the header
+        uint8_t received_header[4];
+        while (Serial2.available() < sizeof(received_header))
+        {
+            // Wait until the header has been received
+            yield();
+        }
+        Serial2.readBytes((char *)received_header, sizeof(received_header));
+        if (memcmp(received_header, header, sizeof(header)) != 0)
+        {
+            // Handle the error: invalid header
+            return;
+        }
 
-    // Read the size of the received protobuf
-    while (Serial2.available() < sizeof(msg_size))
-    {
-        // Wait until the size has been received
-        yield();
-    }
-    uint16_t received_size;
-    Serial2.readBytes((char *)&received_size, sizeof(received_size));
+        // Read the CRC of the protobuf
+        uint16_t received_protobuf_crc;
+        while (Serial2.available() < sizeof(received_protobuf_crc))
+        {
+            // Wait until the CRC has been received
+            yield();
+        }
+        Serial2.readBytes((char *)&received_protobuf_crc, sizeof(received_protobuf_crc));
 
-    // Wait until the entire protobuf has been received
-    while (Serial2.available() < received_size)
-    {
-        // Wait
-        yield();
-    }
+        // Read the size of the received protobuf
+        while (Serial2.available() < sizeof(msg_size))
+        {
+            // Wait until the size has been received
+            yield();
+        }
+        uint16_t received_size;
+        Serial2.readBytes((char *)&received_size, sizeof(received_size));
 
-    // Now read the protobuf
-    uint8_t received_buffer[NOVABUF_MAX];
-    Serial2.readBytes((char *)received_buffer, received_size);
+        // Wait until the entire protobuf has been received
+        while (Serial2.available() < received_size)
+        {
+            // Wait
+            yield();
+        }
 
-    // Calculate the CRC of the received protobuf
-    uint16_t calculated_protobuf_crc = crc16_ccitt(received_buffer, received_size);
-    if (received_protobuf_crc != calculated_protobuf_crc)
-    {
-        // Handle the error: invalid CRC
-        return;
-    }
+        // Now read the protobuf
+        uint8_t received_buffer[NOVABUF_MAX];
+        Serial2.readBytes((char *)received_buffer, received_size);
 
-    // Initialize a protobuf input stream
-    pb_istream_t pb_istream = pb_istream_from_buffer(received_buffer, received_size);
+        // Calculate the CRC of the received protobuf
+        uint16_t calculated_protobuf_crc = crc16_ccitt(received_buffer, received_size);
+        if (received_protobuf_crc != calculated_protobuf_crc)
+        {
+            // Handle the error: invalid CRC
+            return;
+        }
 
-    // Decode the received protobuf
-    messaging_Request received_msg = messaging_Request_init_zero;
-    if (!pb_decode(&pb_istream, messaging_Request_fields, &received_msg))
-    {
-        // Handle the decoding error
+        // Initialize a protobuf input stream
+        pb_istream_t pb_istream = pb_istream_from_buffer(received_buffer, received_size);
+
+        // Decode the received protobuf
+        messaging_Request received_msg = messaging_Request_init_zero;
+        if (!pb_decode(&pb_istream, messaging_Request_fields, &received_msg))
+        {
+            // Handle the decoding error
+        }
     }
 }
 

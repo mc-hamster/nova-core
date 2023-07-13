@@ -3,10 +3,6 @@
 #include "configuration.h"
 #include "main.h"
 
-#define NUM_LEDS 18
-#define LED_TYPE APA102
-#define COLOR_ORDER BGR
-CRGB leds[NUM_LEDS];
 
 CRGBPalette16 currentPalette(CRGB::Black);
 
@@ -125,6 +121,7 @@ LightUtils::LightUtils()
 
 void LightUtils::loop()
 {
+//    Serial.println("LightUtils::loop");
     yield();
     // Crossfade current palette slowly toward the target palette
     //
@@ -522,4 +519,25 @@ bool LightUtils::getCfgFire(void)
 bool LightUtils::getCfgLocalDisable(void)
 {
     return manager.get("cfgLocalDisable").as<bool>();
+}
+
+
+/**
+ * Returns a pointer to the array of CRGB objects representing the LED strip.
+ * 
+ * @return A pointer to the array of CRGB objects representing the LED strip.
+ */
+CRGB* LightUtils::getLeds(void) {
+
+    return leds;
+}
+
+/**
+ * Returns the number of LEDs in the LED strip.
+ * 
+ * @return The number of LEDs in the LED strip.
+ */
+uint16_t LightUtils::getNumberOfLeds(void) {
+
+    return NUM_LEDS;
 }
