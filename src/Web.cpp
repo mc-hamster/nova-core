@@ -28,6 +28,7 @@ uint16_t controlMillis;
 
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable;
 uint16_t mainDrunktardSwitch;
+uint16_t resetConfigSwitch, resetRebootSwitch;
 
 void numberCall(Control *sender, int type)
 {
@@ -109,6 +110,28 @@ void switchExample(Control *sender, int value)
         else
         {
             Serial.println("cfgDrunktard Failed to save data.");
+        }
+    }
+    else if (sender->id == resetConfigSwitch)
+    {
+        // TODO:
+        //    - Give the user a chance to cancel the config reset.
+        if (sender->value.toInt())
+        {
+            manager.clear();
+            manager.save();
+            delay(50);
+            ESP.restart();
+        }
+    }
+    else if (sender->id == resetRebootSwitch)
+    {
+        if (sender->value.toInt())
+        {
+            // Todo:
+            //    - Give the user a chance to cancel the reboot.
+            Serial.println("Rebooting device from switch...");
+            ESP.restart();
         }
     }
 
@@ -206,6 +229,11 @@ void webSetup()
     lightingReverseSwitch = ESPUI.addControl(ControlType::Switcher, "Reverse", String(lightUtils->getCfgReverse()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
+
+    // Reset tab
+    ESPUI.addControl(ControlType::Label, "**WARNING**", "Don't even think of doing anything in this tab unless you want to break something!!", ControlColor::Sunflower, resetTab);
+    resetConfigSwitch = ESPUI.addControl(ControlType::Switcher, "Reset Configurations", "0", ControlColor::Sunflower, resetTab, &switchExample);
+    resetRebootSwitch = ESPUI.addControl(ControlType::Switcher, "Reboot", "0", ControlColor::Sunflower, resetTab, &switchExample);
 
     // Enable this option if you want sliders to be continuous (update during move) and not discrete (update on stop)
     // ESPUI.sliderContinuous = true;
