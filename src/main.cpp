@@ -48,7 +48,7 @@ AsyncWebServer webServer(80);
 
 void setup()
 {
-  delay(500);
+  delay(100);
   Serial.begin(921600);
   Serial.println("NOVA: CORE");
   Serial.print("setup() is running on core ");
