@@ -261,7 +261,7 @@ void Star::red_loop(void)
 
     if (redPooferState == RED_POOF)
     {
-        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
         {
             redPooferState = RED_OFF;
         }
@@ -275,7 +275,7 @@ void Star::red_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 10))
+            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -309,7 +309,7 @@ void Star::green_loop(void)
     if (greenPooferState == GREEN_POOF)
     {
 
-        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
         {
             greenPooferState = GREEN_OFF;
         }
@@ -323,7 +323,7 @@ void Star::green_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 10))
+            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -356,7 +356,7 @@ void Star::blue_loop(void)
     if (bluePooferState == BLUE_POOF)
     {
 
-        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
         {
             bluePooferState = BLUE_OFF;
         }
@@ -370,7 +370,7 @@ void Star::blue_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 10))
+            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }
@@ -402,7 +402,7 @@ void Star::yellow_loop(void)
     if (yellowPooferState == YELLOW_POOF)
     {
 
-        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
         {
             yellowPooferState = YELLOW_OFF;
         }
@@ -416,7 +416,7 @@ void Star::yellow_loop(void)
 
         if (cluster.stars[outputStar].pooferCountsRemaining)
         {
-            if (goPoof(outputStar, pooferInterval, pooferInterval * 10))
+            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
             {
                 cluster.stars[outputStar].pooferCountsRemaining--;
             }

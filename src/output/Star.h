@@ -8,12 +8,7 @@
 class Star
 {
 private:
-    bool systemEnable = 1;
-
-    uint8_t disabledBrightness = 0;
-    uint8_t disabledBrightnessFade = 1; // This should be powers of two (1, 2, 4, 8, 16, 32, 64, etc)
-
-    uint32_t pooferInterval = 100;
+    uint32_t pooferDuration = 100;
 
     struct boomerData
     {
@@ -54,18 +49,6 @@ private:
     };
 
     starCluster cluster;
-
-    uint32_t redPreviousMillis = 0;
-    bool redPooferOn = 0;
-
-    uint32_t greenPreviousMillis = 0;
-    bool greenPooferOn = 0;
-
-    uint32_t bluePreviousMillis = 0;
-    bool bluePooferOn = 0;
-
-    uint32_t yellowPreviousMillis = 0;
-    bool yellowPooferOn = 0;
 
 public:
     enum RedButtonState
