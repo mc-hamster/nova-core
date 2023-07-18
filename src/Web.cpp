@@ -9,6 +9,7 @@
 #include <Arduino.h>
 #include "LightUtils.h"
 #include "Enable.h"
+#include "output/Star.h"
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -29,6 +30,16 @@ uint16_t controlMillis;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable;
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
+
+uint16_t pooferA1, pooferA2, pooferA3;
+uint16_t pooferB1, pooferB2, pooferB3;
+uint16_t pooferC1, pooferC2, pooferC3;
+uint16_t pooferD1, pooferD2, pooferD3;
+
+uint16_t boomerA1, boomerA2, boomerA3;
+uint16_t boomerB1, boomerB2, boomerB3;
+uint16_t boomerC1, boomerC2, boomerC3;
+uint16_t boomerD1, boomerD2, boomerD3;
 
 void numberCall(Control *sender, int type)
 {
@@ -66,6 +77,41 @@ void slider(Control *sender, int type)
 
 void buttonCallback(Control *sender, int type)
 {
+
+    if (sender->id == pooferA1)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            //star->redPoof(star->RED_POOF);
+            star->goPoof(1, 100, 100);
+            // star->greenPoof(star->GREEN_POOF);
+            // star->bluePoof(star->BLUE_POOF);
+            // star->yellowPoof(star->YELLOW_POOF);
+            // star->redBoom(star->BOOMER_ON);
+            // star->goBoomAbort(0, true);
+
+            break;
+        }
+    }
+
+    if (sender->id == boomerA1)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            //star->redPoof(star->RED_POOF);
+            // star->greenPoof(star->GREEN_POOF);
+            // star->bluePoof(star->BLUE_POOF);
+            // star->yellowPoof(star->YELLOW_POOF);
+            //star->redBoom(star->BOOMER_ON);
+            star->goBoom(1);
+            // star->goBoomAbort(0, true);
+
+            break;
+        }
+    }
+
     switch (type)
     {
     case B_DOWN:
@@ -168,20 +214,54 @@ void webSetup()
     // Add tabs
     uint16_t mainTab = ESPUI.addControl(ControlType::Tab, "Main", "Main");
     uint16_t settingsTab = ESPUI.addControl(ControlType::Tab, "Settings", "Settings");
+    uint16_t manualTab = ESPUI.addControl(ControlType::Tab, "Manual", "Manual");
     uint16_t sequencesTab = ESPUI.addControl(ControlType::Tab, "Sequences", "Sequences");
-    uint16_t programsTab = ESPUI.addControl(ControlType::Tab, "Programs", "Programs");
     uint16_t lightingTab = ESPUI.addControl(ControlType::Tab, "Lighting", "Lighting");
     uint16_t resetTab = ESPUI.addControl(ControlType::Tab, "Reset", "Reset");
 
     // Add status label above all tabs
     status = ESPUI.addControl(ControlType::Label, "Status:", "Unknown Status", ControlColor::Turquoise);
 
-    //----- Tab 1 (Main) -----
+    //----- (Main) -----
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, mainTab);
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(enable->isDrunktard()), ControlColor::None, mainTab, &switchExample);
 
-    //----- Tab 2 (Settings) -----
+    //----- (Settings) -----
     ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
+
+    //----- (Manual) -----
+
+    pooferA1 = ESPUI.addControl(ControlType::Button, "Star Cluster - A", "Poof 1", ControlColor::Alizarin, manualTab, buttonCallback);
+    pooferA2 = ESPUI.addControl(ControlType::Button, "", "Poof 2", ControlColor::None, pooferA1, buttonCallback);
+    pooferA3 = ESPUI.addControl(ControlType::Button, "", "Poof 3", ControlColor::None, pooferA1, buttonCallback);
+
+    boomerA1 = ESPUI.addControl(ControlType::Button, "Star Cluster - A", "Boom 1", ControlColor::None, pooferA1, buttonCallback);
+    boomerA2 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferA1, buttonCallback);
+    boomerA3 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferA1, buttonCallback);
+
+    pooferB1 = ESPUI.addControl(ControlType::Button, "Star Cluster - B", "Poof 1", ControlColor::Emerald, manualTab, buttonCallback);
+    pooferB2 = ESPUI.addControl(ControlType::Button, "", "Poof 2", ControlColor::None, pooferB1, buttonCallback);
+    pooferB3 = ESPUI.addControl(ControlType::Button, "", "Poof 3", ControlColor::None, pooferB1, buttonCallback);
+
+    boomerB1 = ESPUI.addControl(ControlType::Button, "Star Cluster - B", "Boom 1", ControlColor::Emerald, pooferB1, buttonCallback);
+    boomerB2 = ESPUI.addControl(ControlType::Button, "", "Boom 2", ControlColor::None, pooferB1, buttonCallback);
+    boomerB3 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferB1, buttonCallback);
+
+    pooferC1 = ESPUI.addControl(ControlType::Button, "Star Cluster - C", "Poof 1", ControlColor::Peterriver, manualTab, buttonCallback);
+    pooferC2 = ESPUI.addControl(ControlType::Button, "", "Poof 2", ControlColor::None, pooferC1, buttonCallback);
+    pooferC3 = ESPUI.addControl(ControlType::Button, "", "Poof 3", ControlColor::None, pooferC1, buttonCallback);
+
+    boomerC1 = ESPUI.addControl(ControlType::Button, "Star Cluster - C", "Boom 1", ControlColor::Peterriver, pooferC1, buttonCallback);
+    boomerC2 = ESPUI.addControl(ControlType::Button, "", "Boom 2", ControlColor::None, pooferC1, buttonCallback);
+    boomerC3 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferC1, buttonCallback);
+
+    pooferD1 = ESPUI.addControl(ControlType::Button, "Star Cluster - D", "Poof 1", ControlColor::Carrot, manualTab, buttonCallback);
+    pooferD2 = ESPUI.addControl(ControlType::Button, "", "Poof 2", ControlColor::None, pooferD1, buttonCallback);
+    pooferD3 = ESPUI.addControl(ControlType::Button, "", "Poof 3", ControlColor::None, pooferD1, buttonCallback);
+
+    boomerD1 = ESPUI.addControl(ControlType::Button, "Star Cluster - D", "Boom 1", ControlColor::Carrot, pooferD1, buttonCallback);
+    boomerD2 = ESPUI.addControl(ControlType::Button, "", "Boom 2", ControlColor::None, pooferD1, buttonCallback);
+    boomerD3 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferD1, buttonCallback);
 
     //---- Tab 3 (Sequences) -----
     switchOne = ESPUI.addControl(ControlType::Switcher, "Switch one", "", ControlColor::Alizarin, sequencesTab, &switchExample);
@@ -309,4 +389,3 @@ void webLoop()
         }
     }
 }
-
