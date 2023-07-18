@@ -40,6 +40,7 @@ void Ambient::loop()
 
     CRGB *leds = lightUtils->getLeds();
 
+    /*
     for (int i = 0; i < lightUtils->getNumberOfLeds(); i++)
     {
         CRGB color = leds[i];
@@ -48,24 +49,70 @@ void Ambient::loop()
         uint8_t blueValue = color.b;
         // Do something with the color
     }
+    */
 
     uint32_t frameTime = micros();
-    for (int i = 0; i < 12; i++)
+
+    uint8_t lightsPre = 3;
+    uint8_t lightsPost = 3;
+
+    uint8_t dmxFixture = 0;
+    for (int starIndex = 0; starIndex < 12; starIndex++)
     {
         uint8_t dmxValues[DMX512_MAX] = {};
 
-        dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
-
-        dmxValues[1] = 0xff;      // Brightness
-        dmxValues[2] = leds[i].r; // red
-        dmxValues[3] = leds[i].g; // green
-        dmxValues[4] = leds[i].b; // blue
-        dmxValues[5] = 0x00;      // null
-        dmxValues[6] = 0x00;      // null
-        dmxValues[7] = 0x00;      // null
-
         // Set the selected star to transmit.
-        star->netOut(i);
+        star->netOut(starIndex);
+
+        if (starIndex == 0) // First Star
+        {
+
+            dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
+            for (int lightsPreIndex = 0; lightsPreIndex < lightsPre; lightsPreIndex++)
+            {
+                dmxValues[1 + (7 * lightsPreIndex)] = 0xff;               // Brightness
+                dmxValues[2 + (7 * lightsPreIndex)] = leds[dmxFixture].r; // red
+                dmxValues[3 + (7 * lightsPreIndex)] = leds[dmxFixture].g; // green
+                dmxValues[4 + (7 * lightsPreIndex)] = leds[dmxFixture].b; // blue
+                dmxValues[5 + (7 * lightsPreIndex)] = 0x00;               // null
+                dmxValues[6 + (7 * lightsPreIndex)] = 0x00;               // null
+                dmxValues[7 + (7 * lightsPreIndex)] = 0x00;               // null
+
+                dmxFixture++;
+            }
+        }
+        else if (starIndex == 11) // Last Star
+        {
+            dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
+            //for (int lightsPostIndex = 0; lightsPostIndex < lightsPost; lightsPostIndex++)
+            for (int lightsPostIndex = lightsPost - 1; lightsPostIndex >= 0; lightsPostIndex--)
+            {
+                dmxValues[1 + (7 * lightsPostIndex)] = 0xff;               // Brightness
+                dmxValues[2 + (7 * lightsPostIndex)] = leds[dmxFixture].r; // red
+                dmxValues[3 + (7 * lightsPostIndex)] = leds[dmxFixture].g; // green
+                dmxValues[4 + (7 * lightsPostIndex)] = leds[dmxFixture].b; // blue
+                dmxValues[5 + (7 * lightsPostIndex)] = 0x00;               // null
+                dmxValues[6 + (7 * lightsPostIndex)] = 0x00;               // null
+                dmxValues[7 + (7 * lightsPostIndex)] = 0x00;               // null
+
+                dmxFixture++;
+            }
+        }
+        else
+        {
+
+            dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
+
+            dmxValues[1] = 0xff;               // Brightness
+            dmxValues[2] = leds[dmxFixture].r; // red
+            dmxValues[3] = leds[dmxFixture].g; // green
+            dmxValues[4] = leds[dmxFixture].b; // blue
+            dmxValues[5] = 0x00;               // null
+            dmxValues[6] = 0x00;               // null
+            dmxValues[7] = 0x00;               // null
+
+            dmxFixture++;
+        }
 
         sendDmxMessage(dmxValues, DMX512_MAX);
     }
@@ -90,13 +137,12 @@ void Ambient::loop()
     numFrames++;
 }
 
-
 /**
  * Sends a DMX message with the given DMX values over NovaNet.
  *
- * Think of this as the display driver. It takes the DMX values 
+ * Think of this as the display driver. It takes the DMX values
  * and sends them to the display.
- * 
+ *
  * @param dmxValues The DMX values to send.
  * @param dmxValuesSize The size of the DMX values array.
  */
