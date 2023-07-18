@@ -247,12 +247,6 @@ void Star::loop()
 
     if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
-        /*
-        novaIO->mcpA_digitalWrite(1, HIGH);
-        delay(500);
-        novaIO->mcpA_digitalWrite(1, LOW);
-        delay(500);
-        */
 
         red_loop();
         green_loop();
@@ -264,11 +258,10 @@ void Star::loop()
 void Star::red_loop(void)
 {
     uint8_t outputStar = 0;
-    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (redPooferState == RED_POOF)
     {
-        if (goPoof(0, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
         {
             redPooferState = RED_OFF;
         }
@@ -312,7 +305,6 @@ void Star::red_loop(void)
 void Star::green_loop(void)
 {
     uint8_t outputStar = 1;
-    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (greenPooferState == GREEN_POOF)
     {
@@ -360,12 +352,11 @@ void Star::green_loop(void)
 void Star::blue_loop(void)
 {
     uint8_t outputStar = 2;
-    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (bluePooferState == BLUE_POOF)
     {
 
-        if (goPoof(2, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
         {
             bluePooferState = BLUE_OFF;
         }
@@ -407,12 +398,11 @@ void Star::blue_loop(void)
 void Star::yellow_loop(void)
 {
     uint8_t outputStar = 3;
-    uint16_t pooferInterval = random(pooferIntervalMin, pooferIntervalMax);
 
     if (yellowPooferState == YELLOW_POOF)
     {
 
-        if (goPoof(3, pooferInterval, pooferInterval / 2))
+        if (goPoof(outputStar, pooferInterval, pooferInterval / 2))
         {
             yellowPooferState = YELLOW_OFF;
         }
