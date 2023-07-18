@@ -56,20 +56,31 @@ This will initilaize our system back to a safe spot after emergency stop is exit
 void Enable::emergencyStopExit()
 {
 
-    Serial.println("System is returning from emergency stop. Rebooting...");
+    bool rebootOnEmergencyStopExit = false;
 
-    // Set the brightness to 0.
-    disabledBrightness = 0;
-    analogWrite(BUTTON_RED_OUT, disabledBrightness);
-    analogWrite(BUTTON_GREEN_OUT, disabledBrightness);
-    analogWrite(BUTTON_BLUE_OUT, disabledBrightness);
-    analogWrite(BUTTON_YELLOW_OUT, disabledBrightness);
+    if (rebootOnEmergencyStopExit)
+    {
+        Serial.println("System is returning from emergency stop. Rebooting...");
 
-    // Set pin modes back to output (disable analog)
+        // Set the brightness to 0.
+        disabledBrightness = 0;
 
-    delay(100);
-    // When the emergency button is disabled (set to active) reboot the system.
-    ESP.restart();
+        // Set pin modes back to output (disable analog)
+
+        analogWrite(BUTTON_RED_OUT, disabledBrightness);
+        analogWrite(BUTTON_GREEN_OUT, disabledBrightness);
+        analogWrite(BUTTON_BLUE_OUT, disabledBrightness);
+        analogWrite(BUTTON_YELLOW_OUT, disabledBrightness);
+        delay(100);
+
+        // When the emergency button is disabled (set to active) reboot the system.
+        ESP.restart();
+    }
+    else
+    {
+        Serial.println("System is returning from emergency stop. Not Rebooting...");
+        systemEnable = true;
+    }
 }
 
 /*
@@ -107,9 +118,12 @@ bool Enable::isSystemEnabled(void)
 
 bool Enable::isDrunktard(void)
 {
-    if (manager.exists("cfgDrunktard")) {
+    if (manager.exists("cfgDrunktard"))
+    {
         return manager.get("cfgDrunktard").as<bool>();
-    } else {
+    }
+    else
+    {
         return 0;
     }
     return false;
