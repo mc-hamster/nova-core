@@ -177,7 +177,7 @@ void setup()
   Serial.println("Create TaskAmbient - Done");
 
   Serial.println("Create LightUtils");
-  xTaskCreate(&TaskLightUtils, "LightUtils", 6 * 4096, NULL, 5, NULL);
+  xTaskCreate(&TaskLightUtils, "LightUtils", 2 * 1024, NULL, 5, NULL);
   Serial.println("Create LightUtils - Done");
 
   Serial.println("Setup Complete");
@@ -198,6 +198,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
   UBaseType_t uxHighWaterMark;
+  const uint32_t executionInterval = 10000; // 10 seconds in milliseconds
 
   Serial.println("TaskAmbient is running");
   while (1) // A Task shall never return or exit.
@@ -206,8 +207,8 @@ void TaskAmbient(void *pvParameters) // This is a task.
     yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(1);
 
-    // Set this to 'true' to print stack high watermark
-    if (0)
+    static uint32_t lastExecutionTime = 0;
+    if (millis() - lastExecutionTime >= executionInterval)
     {
       /* Calling the function will have used some stack space, we would
           therefore now expect uxTaskGetStackHighWaterMark() to return a
@@ -215,6 +216,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
       Serial.print("TaskAmbient stack free - ");
       Serial.println(uxHighWaterMark);
+      lastExecutionTime = millis();
     }
   }
 }
@@ -223,17 +225,18 @@ void TaskLightUtils(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
   UBaseType_t uxHighWaterMark;
+  const uint32_t executionInterval = 10000; // 10 seconds in milliseconds
 
   Serial.println("TaskLightUtils is running");
   while (1) // A Task shall never return or exit.
   {
     lightUtils->loop();
+    // yield(); // Should't do anything but it's here incase the watchdog needs it.
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    // delay(1);
+    delay(10);
 
-    // Set this to 'true' to print stack high watermark
-    if (0)
+    static uint32_t lastExecutionTime = 0;
+    if (millis() - lastExecutionTime >= executionInterval)
     {
       /* Calling the function will have used some stack space, we would
           therefore now expect uxTaskGetStackHighWaterMark() to return a
@@ -241,6 +244,7 @@ void TaskLightUtils(void *pvParameters) // This is a task.
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
       Serial.print("TaskLightUtils stack free - ");
       Serial.println(uxHighWaterMark);
+      lastExecutionTime = millis();
     }
   }
 }
@@ -254,7 +258,7 @@ void TaskEnable(void *pvParameters) // This is a task.
   {
     enable->loop();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(5);
+    delay(50);
   }
 }
 
@@ -280,7 +284,7 @@ void TaskMDNS(void *pvParameters) // This is a task.
   {
     dnsServer.processNextRequest();
     yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(5);
+    delay(10);
   }
 }
 
@@ -323,7 +327,7 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(5);
+      delay(1);
     }
     else
     {
