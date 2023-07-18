@@ -3,7 +3,6 @@
 #include "configuration.h"
 #include "main.h"
 
-
 CRGBPalette16 currentPalette(CRGB::Black);
 
 CRGBPalette16 targetPalette;
@@ -107,6 +106,13 @@ DEFINE_GRADIENT_PALETTE(bhw1_22_gp){
     188, 30, 10, 1,
     255, 1, 1, 1};
 
+// White dot
+// Used for testing Nova's LEDs
+DEFINE_GRADIENT_PALETTE(white_dot){
+    0, 255, 255, 255,
+    1, 0, 0, 0,
+    255, 0, 0, 0};
+
 LightUtils::LightUtils()
 {
 
@@ -121,7 +127,7 @@ LightUtils::LightUtils()
 
 void LightUtils::loop()
 {
-//    Serial.println("LightUtils::loop");
+    //    Serial.println("LightUtils::loop");
     yield();
     // Crossfade current palette slowly toward the target palette
     //
@@ -342,6 +348,47 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect)
 
         break;
 
+    case 21:
+
+        fill_solid(targetPalette, 16, CRGB::Red);
+
+        break;
+
+    case 22:
+
+        fill_solid(targetPalette, 16, CRGB::Green);
+
+        break;
+
+    case 23:
+
+        fill_solid(targetPalette, 16, CRGB::Blue);
+
+        break;
+
+    case 24:
+
+        fill_solid(targetPalette, 16, CRGB::Purple);
+
+        break;
+
+    case 25:
+
+        fill_solid(targetPalette, 16, CRGB::Cyan);
+
+        break;
+
+    case 26:
+
+        fill_solid(targetPalette, 16, CRGB::Yellow);
+
+        break;
+
+    case 50:
+
+        targetPalette = white_dot;
+        break;
+
     default:
         break;
     }
@@ -521,23 +568,24 @@ bool LightUtils::getCfgLocalDisable(void)
     return manager.get("cfgLocalDisable").as<bool>();
 }
 
-
 /**
  * Returns a pointer to the array of CRGB objects representing the LED strip.
- * 
+ *
  * @return A pointer to the array of CRGB objects representing the LED strip.
  */
-CRGB* LightUtils::getLeds(void) {
+CRGB *LightUtils::getLeds(void)
+{
 
     return leds;
 }
 
 /**
  * Returns the number of LEDs in the LED strip.
- * 
+ *
  * @return The number of LEDs in the LED strip.
  */
-uint16_t LightUtils::getNumberOfLeds(void) {
+uint16_t LightUtils::getNumberOfLeds(void)
+{
 
     return NUM_LEDS;
 }
