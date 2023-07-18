@@ -153,23 +153,23 @@ void setup()
   Serial.println("Setting up Webserver - Done");
 
   Serial.println("Create TaskEnable");
-  xTaskCreate(&TaskEnable, "TaskEnable", 2048, NULL, 5, NULL);
+  xTaskCreate(&TaskEnable, "TaskEnable", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskEnable - Done");
 
   Serial.println("Create TaskWeb");
-  xTaskCreate(&TaskWeb, "TaskWeb", 4096, NULL, 5, NULL);
+  xTaskCreate(&TaskWeb, "TaskWeb", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskWeb - Done");
 
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 4096, NULL, 5, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskModes - Done");
 
   Serial.println("Create TaskButtons");
-  xTaskCreate(&TaskButtons, "TaskButtons", 4096, NULL, 5, NULL);
+  xTaskCreate(&TaskButtons, "TaskButtons", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
-  xTaskCreate(&TaskMDNS, "TaskMDNS", 4098, NULL, 5, NULL);
+  xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskMDNS - Done");
 
   Serial.println("Create TaskAmbient");
