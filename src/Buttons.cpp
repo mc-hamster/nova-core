@@ -144,7 +144,8 @@ void Buttons::red_longPressStart(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Red Long Start");
-        star->redBoom(star->BOOMER_ON);
+        //star->redBoom(star->BOOMER_ON);
+        star->redBoom();
     }
 }
 void Buttons::red_longPressStop(void)
@@ -174,7 +175,7 @@ void Buttons::green_longPressStart(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Green Long Start");
-        star->greenBoom(star->BOOMER_ON);
+        //star->greenBoom(star->BOOMER_ON);
     }
 }
 void Buttons::green_longPressStop(void)
@@ -204,7 +205,7 @@ void Buttons::blue_longPressStart(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Blue Long Start");
-        star->blueBoom(star->BOOMER_ON);
+        //star->blueBoom(star->BOOMER_ON);
     }
 }
 void Buttons::blue_longPressStop(void)
@@ -234,7 +235,7 @@ void Buttons::yellow_longPressStart(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Yellow Long Start");
-        star->yellowBoom(star->BOOMER_ON);
+        //star->yellowBoom(star->BOOMER_ON);
     }
 }
 void Buttons::yellow_longPressStop(void)

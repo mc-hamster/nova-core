@@ -153,7 +153,7 @@ void setup()
   Serial.println("Setting up Webserver - Done");
 
   Serial.println("Create TaskEnable");
-  xTaskCreate(&TaskEnable, "TaskEnable", 4 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskEnable, "TaskEnable", 4 * 1024, NULL, 0, NULL);
   Serial.println("Create TaskEnable - Done");
 
   Serial.println("Create TaskWeb");
@@ -161,7 +161,7 @@ void setup()
   Serial.println("Create TaskWeb - Done");
 
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 10, NULL);
   Serial.println("Create TaskModes - Done");
 
   Serial.println("Create TaskButtons");
@@ -169,7 +169,7 @@ void setup()
   Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
-  xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 0, NULL);
   Serial.println("Create TaskMDNS - Done");
 
   Serial.println("Create TaskAmbient");
@@ -204,7 +204,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
   while (1) // A Task shall never return or exit.
   {
     ambient->loop();
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
+    //yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(1);
 
     static uint32_t lastExecutionTime = 0;
@@ -326,8 +326,8 @@ void TaskButtons(void *pvParameters) // This is a task.
     if (enable->isSystemEnabled())
     {
       buttons->loop();
-      yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(1);
+      //yield(); // Should't do anything but it's here incase the watchdog needs it.
+      delay(2);
     }
     else
     {

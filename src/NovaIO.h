@@ -50,8 +50,6 @@ public:
         Adafruit_MCP23X17 mcp_g;
         Adafruit_MCP23X17 mcp_h; // Button inputs are on h
 
-        //void digitalWrite(enum expansionIO, int pin, bool state);
-
         void mcpA_writeGPIOAB(uint16_t value);
         void mcpB_writeGPIOAB(uint16_t value);
         void mcpC_writeGPIOAB(uint16_t value);

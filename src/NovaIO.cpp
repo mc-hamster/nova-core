@@ -117,20 +117,6 @@ NovaIO::NovaIO()
     Serial.println("MCP23X17 interfaces outputs set to initilized value.");
 }
 
-/*
-void NovaIO::digitalWrite(enum expansionIO, int pin, bool state)
-{
-
-    mcp_a.writeGPIOAB(0b1111111111111111);
-
-    delay(100);
-
-    mcp_a.writeGPIOAB(0b0000000000000000);
-
-    delay(100);
-}
-*/
-
 bool NovaIO::expansionDigitalRead(int pin)
 {
     // return 0;

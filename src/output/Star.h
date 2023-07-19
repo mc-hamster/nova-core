@@ -26,8 +26,30 @@ private:
         uint8_t cache_de;
     };
 
+    enum PooferButtonState
+    {
+        POOFER_OFF,
+        POOFER_POOF,
+        POOFER_POOF_MULTI,
+        POOFER_BOOM
+    };
+
+    enum BoomerButtonState
+    {
+        BOOMER_ON,
+        BOOMER_OFF,
+        BOOMER_IDLE
+    };
+    struct starStates
+    {
+        //uint8_t cache_de;
+        PooferButtonState pooferButtonState;
+        BoomerButtonState boomerButtonState;
+    };
+
     struct star
     {
+        starStates starState;
         boomerData boomer;
         novaNet net;
         uint32_t pooferPreviousMillis;
@@ -51,6 +73,9 @@ private:
     starCluster cluster;
 
 public:
+
+
+
     enum RedButtonState
     {
         RED_OFF,
@@ -85,45 +110,43 @@ public:
 
     enum PooferStates
     {
-//        POOF_ACTIVE,
-//        POOF_DEACTIVATED,
+        //        POOF_ACTIVE,
+        //        POOF_DEACTIVATED,
         POOF_ON,
         POOF_ON_IDLE,
         POOF_OFF,
         POOF_OFF_IDLE
     };
 
-    enum boomerButtonState {
-        BOOMER_ON,
-        BOOMER_OFF,
-        BOOMER_IDLE
-    };
+
 
     enum BoomerStates
     {
-        BOOMER_ACTIVE, // Boomer is ready for a Boom
-        BOOMER_DEACTIVATED, // Boomer is disabled. Here for administrative purposes.
-        BOOMER_ABORT, // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
-        BOOMER_BLOWER_ON, // Turn on the blower
-        BOOMER_BLOWER_ON_IDLE, // Wait for x-ms
-        BOOMER_BLOWER_ON_FUEL_ON, // Turn on the fuel fill
-        BOOMER_BLOWER_ON_FUEL_ON_IDLE, // Wait for x-ms
-        BOOMER_BLOWER_ON_FUEL_OFF, // Turn off the fuel fill
+        BOOMER_ACTIVE,                  // Boomer is ready for a Boom
+        BOOMER_DEACTIVATED,             // Boomer is disabled. Here for administrative purposes.
+        BOOMER_ABORT,                   // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
+        BOOMER_BLOWER_ON,               // Turn on the blower
+        BOOMER_BLOWER_ON_IDLE,          // Wait for x-ms
+        BOOMER_BLOWER_ON_FUEL_ON,       // Turn on the fuel fill
+        BOOMER_BLOWER_ON_FUEL_ON_IDLE,  // Wait for x-ms
+        BOOMER_BLOWER_ON_FUEL_OFF,      // Turn off the fuel fill
         BOOMER_BLOWER_ON_FUEL_OFF_IDLE, // Wait for x-ms. Run this for maybe 50ms. This is just to clear the fill tube.
-        BOOMER_BLOWER_OFF, // Turn the blower off
-        BOOMER_BLOWER_OFF_IDLE, // Wait for x-ms. This will let the flap on the baffle close
-        BOOMER_ZAP_ON, // Turn on the igniter
-        BOOMER_ZAP_ON_IDLE, // Leave it on for a moment
-        BOOMER_ZAP_OFF, // Turn the zapper off
-        BOOMER_ZAP_OFF_IDLE, // Wait for a moment (Do we need this?)
-        BOOMER_BLOWER_EXHAUST, // Begin to exhaust the boomer. This can't be aborted.
-        BOOMER_BLOWER_EXHAUST_IDLE, // Boomer exhausting. This can't be aborted.
-        BOOMER_BLOWER_EXHAUST_OFF // Turn the exhaust off.
+        BOOMER_BLOWER_OFF,              // Turn the blower off
+        BOOMER_BLOWER_OFF_IDLE,         // Wait for x-ms. This will let the flap on the baffle close
+        BOOMER_ZAP_ON,                  // Turn on the igniter
+        BOOMER_ZAP_ON_IDLE,             // Leave it on for a moment
+        BOOMER_ZAP_OFF,                 // Turn the zapper off
+        BOOMER_ZAP_OFF_IDLE,            // Wait for a moment (Do we need this?)
+        BOOMER_BLOWER_EXHAUST,          // Begin to exhaust the boomer. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_IDLE,     // Boomer exhausting. This can't be aborted.
+        BOOMER_BLOWER_EXHAUST_OFF       // Turn the exhaust off.
     };
 
     Star();
 
     void loop(void);
+
+    void star_loop(void);
 
     void red_loop(void);
     void green_loop(void);
@@ -131,16 +154,16 @@ public:
     void yellow_loop(void);
 
     void redPoof(RedButtonState state);
-    void redBoom(boomerButtonState state);
+    void redBoom();
 
     void greenPoof(GreenButtonState state);
-    void greenBoom(boomerButtonState state);
+    void greenBoom();
 
     void bluePoof(BlueButtonState state);
-    void blueBoom(boomerButtonState state);
+    void blueBoom();
 
     void yellowPoof(YellowButtonState state);
-    void yellowBoom(boomerButtonState state);
+    void yellowBoom();
 
     void setupStar(void);
 
@@ -160,7 +183,6 @@ public:
     uint8_t greenBoomerState;
     uint8_t blueBoomerState;
     uint8_t yellowBoomerState;
-
 };
 
 extern Star *star;

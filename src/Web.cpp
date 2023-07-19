@@ -100,13 +100,7 @@ void buttonCallback(Control *sender, int type)
         switch (type)
         {
         case B_DOWN:
-            //star->redPoof(star->RED_POOF);
-            // star->greenPoof(star->GREEN_POOF);
-            // star->bluePoof(star->BLUE_POOF);
-            // star->yellowPoof(star->YELLOW_POOF);
-            //star->redBoom(star->BOOMER_ON);
             star->goBoom(1);
-            // star->goBoomAbort(0, true);
 
             break;
         }

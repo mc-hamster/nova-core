@@ -117,13 +117,13 @@ void Ambient::loop()
         sendDmxMessage(dmxValues, DMX512_MAX);
     }
 
-    if (currentTime - lastExecutionTime >= 5000)
+    if (currentTime - lastExecutionTime >= 10000)
     {
         // Calculate average frame time
         unsigned long avgFrameTime = totalFrameTime / numFrames;
 
         // Print statistics
-        Serial.printf("Average frame time: %d (microseconds) %d (milliseconds) %d (fps) \n", avgFrameTime, avgFrameTime / 1000, 1000 / (avgFrameTime / 1000));
+        Serial.printf("Average frame time: %d (milliseconds) %d (fps) \n", avgFrameTime / 1000, 1000 / (avgFrameTime / 1000));
 
         // Reset statistics
         totalFrameTime = 0;
@@ -168,6 +168,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
         }
     }
 
+/*
     if (0)
     {
         Serial.println(lastIndexWithData);
@@ -180,6 +181,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
         }
         delay(10000);
     }
+*/
 
     dmxRequest.values.size = lastIndexWithData;
 
@@ -201,7 +203,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
         // Encode error. Maybe the buffer isn't big enough?
         Serial.println("PB_Encode Error!!!");
     }
-
+/*
     if (0)
     {
         // Print the size of the encoded message.
@@ -218,7 +220,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
         }
         Serial.println();
     }
-
+*/
     // Calculate the CRC of the protobuf
     uint16_t protobuf_crc = crc16_ccitt(buffer, stream.bytes_written);
 
@@ -252,7 +254,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
 
     // delay(100); // Wait a bit before reading
     return;
-
+/*
     if (0)
     {
 
@@ -317,6 +319,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
             // Handle the decoding error
         }
     }
+    */
 }
 
 bool encode_callback(pb_ostream_t *stream, const pb_field_t *field, void *const *arg)
@@ -327,20 +330,6 @@ bool encode_callback(pb_ostream_t *stream, const pb_field_t *field, void *const 
         return false;
     }
     return pb_encode_string(stream, dmxValues, 512);
-}
-
-uint16_t Ambient::crc16(const uint8_t *data_p, uint16_t length)
-{
-    uint8_t x;
-    uint16_t crc = 0xFFFF;
-
-    while (length--)
-    {
-        x = crc >> 8 ^ *data_p++;
-        x ^= x >> 4;
-        crc = (crc << 8) ^ ((uint16_t)(x << 12)) ^ ((uint16_t)(x << 5)) ^ ((uint16_t)x);
-    }
-    return crc;
 }
 
 // CRC-16-CCITT function

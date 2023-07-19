@@ -2,6 +2,7 @@
 #include "Star.h"
 #include "configuration.h"
 #include "NovaIO.h"
+#include "Enable.h"
 
 Star *star = NULL;
 
@@ -229,7 +230,7 @@ void Star::setupStar(void)
     cluster.stars[19].net.re = 6;
     cluster.stars[19].net.de = 7;
 
-    for (uint32_t i = 0; i < 20; i++)
+    for (uint32_t i = 0; i < 12; i++)
     {
         cluster.stars[i].pooferCountsRemaining = 0;
         cluster.stars[i].pooferOutputState = 0;
@@ -245,198 +246,72 @@ void Star::setupStar(void)
 void Star::loop()
 {
 
-    if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
+    // if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
+    if (enable->isSystemEnabled())
     {
+        star_loop();
 
-        red_loop();
-        green_loop();
-        blue_loop();
-        yellow_loop();
+        // red_loop();
+        // green_loop();
+        // blue_loop();
+        // yellow_loop();
     }
 }
 
-void Star::red_loop(void)
+void Star::star_loop(void)
 {
-    uint8_t outputStar = 0;
+    /*
+    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+    const char *pcTaskName = pcTaskGetName(xTaskHandle);
 
-    if (redPooferState == RED_POOF)
-    {
-        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
-        {
-            redPooferState = RED_OFF;
-        }
-    }
-    else if (redPooferState == RED_POOF_MULTI)
-    {
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
-        }
+    Serial.print("Currently executing task: ");
+    Serial.println(pcTaskName);
+*/
 
-        if (cluster.stars[outputStar].pooferCountsRemaining)
+    for (uint32_t outputStar = 0; outputStar < 20; outputStar++)
+    {
+
+        if (cluster.stars[outputStar].starState.pooferButtonState == POOFER_POOF)
         {
-            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
+            if (goPoof(outputStar, pooferDuration, pooferDuration / 4))
             {
-                cluster.stars[outputStar].pooferCountsRemaining--;
+                cluster.stars[outputStar].starState.pooferButtonState = POOFER_OFF;
+                // redPooferState = RED_OFF;
+            }
+        }
+        else if (cluster.stars[outputStar].starState.pooferButtonState == POOFER_POOF_MULTI)
+        {
+            if (cluster.stars[outputStar].pooferCountsRemaining == 0)
+            {
+                cluster.stars[outputStar].pooferCountsRemaining = 30;
+            }
+
+            if (cluster.stars[outputStar].pooferCountsRemaining)
+            {
+                if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
+                {
+                    cluster.stars[outputStar].pooferCountsRemaining--;
+                }
+            }
+
+            if (cluster.stars[outputStar].pooferCountsRemaining == 0)
+            {
+                cluster.stars[outputStar].starState.pooferButtonState = POOFER_OFF;
+                // redPooferState = RED_OFF;
             }
         }
 
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
+        if (cluster.stars[outputStar].starState.boomerButtonState == BOOMER_ON)
         {
-            redPooferState = RED_OFF;
-        }
-    }
-
-    if (redBoomerState == BOOMER_ON)
-    {
-        if (goBoom(outputStar))
-        {
-
-            // Only set the state to IDLE if the button is high
-            if (novaIO->expansionDigitalRead(BUTTON_RED_IN) == HIGH)
+            if (goBoom(outputStar))
             {
-                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-                redBoomerState = BOOMER_IDLE;
-            }
-        }
-    }
-}
 
-void Star::green_loop(void)
-{
-    uint8_t outputStar = 1;
-
-    if (greenPooferState == GREEN_POOF)
-    {
-
-        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
-        {
-            greenPooferState = GREEN_OFF;
-        }
-    }
-    else if (greenPooferState == GREEN_POOF_MULTI)
-    {
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining)
-        {
-            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
-            {
-                cluster.stars[outputStar].pooferCountsRemaining--;
-            }
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            greenPooferState = GREEN_OFF;
-        }
-    }
-
-    if (greenBoomerState == BOOMER_ON)
-    {
-        if (goBoom(outputStar))
-        {
-            // Only set the state to IDLE if the button is high
-            if (novaIO->expansionDigitalRead(BUTTON_GREEN_IN) == HIGH)
-            {
-                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-                greenBoomerState = BOOMER_IDLE;
-            }
-        }
-    }
-}
-
-void Star::blue_loop(void)
-{
-    uint8_t outputStar = 2;
-
-    if (bluePooferState == BLUE_POOF)
-    {
-
-        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
-        {
-            bluePooferState = BLUE_OFF;
-        }
-    }
-    else if (bluePooferState == BLUE_POOF_MULTI)
-    {
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            cluster.stars[outputStar].pooferCountsRemaining = 100;
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining)
-        {
-            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
-            {
-                cluster.stars[outputStar].pooferCountsRemaining--;
-            }
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            bluePooferState = BLUE_OFF;
-        }
-    }
-    if (blueBoomerState == BOOMER_ON)
-    {
-        if (goBoom(outputStar))
-        {
-            // Only set the state to IDLE if the button is high
-            if (novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == HIGH)
-            {
-                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-                blueBoomerState = BOOMER_IDLE;
-            }
-        }
-    }
-}
-
-void Star::yellow_loop(void)
-{
-    uint8_t outputStar = 3;
-
-    if (yellowPooferState == YELLOW_POOF)
-    {
-
-        if (goPoof(outputStar, pooferDuration, pooferDuration / 2))
-        {
-            yellowPooferState = YELLOW_OFF;
-        }
-    }
-    else if (yellowPooferState == YELLOW_POOF_MULTI)
-    {
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            cluster.stars[outputStar].pooferCountsRemaining = 30;
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining)
-        {
-            if (goPoof(outputStar, pooferDuration, pooferDuration * 10))
-            {
-                cluster.stars[outputStar].pooferCountsRemaining--;
-            }
-        }
-
-        if (cluster.stars[outputStar].pooferCountsRemaining == 0)
-        {
-            yellowPooferState = YELLOW_OFF;
-        }
-    }
-
-    if (yellowBoomerState == BOOMER_ON)
-    {
-        if (goBoom(outputStar))
-        {
-            // Only set the state to IDLE if the button is high
-            if (novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == HIGH)
-            {
-                Serial.println("Setting: BOOMER_OFF - Turning off boomer");
-                yellowBoomerState = BOOMER_IDLE;
+                // Only set the state to IDLE if the button is high
+                if (novaIO->expansionDigitalRead(BUTTON_RED_IN) == HIGH)
+                {
+                    Serial.println("Setting: BOOMER_OFF - Turning off boomer");
+                    cluster.stars[outputStar].starState.boomerButtonState = BOOMER_IDLE;
+                }
             }
         }
     }
@@ -445,45 +320,52 @@ void Star::yellow_loop(void)
 void Star::redPoof(RedButtonState state)
 {
     // Serial.println("RED POOF");
-    redPooferState = state;
+    // redPooferState = state;
+
+    cluster.stars[0].starState.pooferButtonState = POOFER_POOF;
 }
 
-void Star::redBoom(boomerButtonState state)
+void Star::redBoom()
 {
-    redBoomerState = state;
+    // redBoomerState = state;
+    //cluster.stars[0].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[1].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[2].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[3].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[4].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[5].starState.boomerButtonState = BOOMER_ON;
+    //cluster.stars[6].starState.boomerButtonState = BOOMER_ON;
+    cluster.stars[1].starState.boomerButtonState = BOOMER_ON;
 }
 
 void Star::greenPoof(GreenButtonState state)
 {
-    // Serial.println("GREEN POOF");
-    greenPooferState = state;
+    cluster.stars[1].starState.pooferButtonState = POOFER_POOF;
 }
 
-void Star::greenBoom(boomerButtonState state)
+void Star::greenBoom()
 {
-    greenBoomerState = state;
+    cluster.stars[1].starState.boomerButtonState = BOOMER_ON;
 }
 
 void Star::bluePoof(BlueButtonState state)
 {
-    // Serial.println("BLUE POOF");
-    bluePooferState = state;
+    cluster.stars[2].starState.pooferButtonState = POOFER_POOF;
 }
 
-void Star::blueBoom(boomerButtonState state)
+void Star::blueBoom()
 {
-    blueBoomerState = state;
+    cluster.stars[2].starState.boomerButtonState = BOOMER_ON;
 }
 
 void Star::yellowPoof(YellowButtonState state)
 {
-    // Serial.println("YELLOW POOF");
-    yellowPooferState = state;
+    cluster.stars[3].starState.pooferButtonState = POOFER_POOF;
 }
 
-void Star::yellowBoom(boomerButtonState state)
+void Star::yellowBoom()
 {
-    yellowBoomerState = state;
+    cluster.stars[3].starState.boomerButtonState = BOOMER_ON;
 }
 
 void Star::goBoomAbort(uint8_t star, bool abort)
