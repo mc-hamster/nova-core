@@ -173,11 +173,11 @@ void setup()
   Serial.println("Create TaskMDNS - Done");
 
   Serial.println("Create TaskAmbient");
-  xTaskCreate(&TaskAmbient, "TaskAmbient", 6 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskAmbient, "TaskAmbient", 7 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskAmbient - Done");
 
   Serial.println("Create LightUtils");
-  xTaskCreate(&TaskLightUtils, "LightUtils", 2 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskLightUtils, "LightUtils", 3 * 1024, NULL, 5, NULL);
   Serial.println("Create LightUtils - Done");
 
   Serial.println("Setup Complete");
