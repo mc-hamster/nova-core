@@ -258,6 +258,74 @@ void Star::loop()
         // blue_loop();
         // yellow_loop();
     }
+
+}
+
+bool Star::isBoomerRedActive()
+{
+
+    // Red
+    if (
+        cluster.stars[0].boomer.outputState == BOOMER_READY && cluster.stars[1].boomer.outputState == BOOMER_READY && cluster.stars[2].boomer.outputState == BOOMER_READY
+
+    )
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Star::isBoomerGreenActive()
+{
+
+    // Green
+    if (
+        cluster.stars[3].boomer.outputState == BOOMER_READY && cluster.stars[4].boomer.outputState == BOOMER_READY && cluster.stars[5].boomer.outputState == BOOMER_READY
+
+    )
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Star::isBoomerBlueActive()
+{
+
+    // Blue
+    if (
+        cluster.stars[6].boomer.outputState == BOOMER_READY && cluster.stars[7].boomer.outputState == BOOMER_READY && cluster.stars[8].boomer.outputState == BOOMER_READY
+
+    )
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Star::isBoomerYellowActive()
+{
+    // Yellow
+    if (
+        cluster.stars[9].boomer.outputState == BOOMER_READY && cluster.stars[10].boomer.outputState == BOOMER_READY && cluster.stars[11].boomer.outputState == BOOMER_READY
+
+    )
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 // Called by the modes task
@@ -361,7 +429,68 @@ void Star::redPoof()
 
 void Star::redBoom()
 {
-    cluster.stars[0].starState.boomerButtonState = BOOMER_ON;
+    switch (sequenceRed)
+    {
+    case 0:
+        boom(0);
+        break;
+    case 1:
+        boom(1);
+        break;
+    case 2:
+        boom(2);
+        break;
+    case 3:
+        boom(2);
+        break;
+    case 4:
+        boom(1);
+        break;
+    case 5:
+        boom(0);
+        break;
+    case 6:
+        boom(0);
+        break;
+    case 7:
+        boom(1);
+        break;
+    case 8:
+        boom(2);
+        break;
+    case 9:
+        boom(2);
+        break;
+    case 10:
+        boom(1);
+        break;
+    case 11:
+        boom(0);
+        break;
+    case 12:
+        boom(0);
+        boom(2);
+        break;
+    case 13:
+        boom(1);
+        break;
+    case 14:
+        boom(0);
+        boom(1);
+        boom(2);
+        break;
+    case 15:
+        boom(0);
+        boom(1);
+        boom(2);
+        break;
+    }
+
+    sequenceRed++;
+    if (sequenceRed == 16)
+    {
+        sequenceRed = 0;
+    }
 }
 
 void Star::greenPoof()
@@ -433,7 +562,69 @@ void Star::greenPoof()
 
 void Star::greenBoom()
 {
-    cluster.stars[1].starState.boomerButtonState = BOOMER_ON;
+
+    switch (sequenceGreen)
+    {
+    case 0:
+        boom(3);
+        break;
+    case 1:
+        boom(4);
+        break;
+    case 2:
+        boom(5);
+        break;
+    case 3:
+        boom(5);
+        break;
+    case 4:
+        boom(4);
+        break;
+    case 5:
+        boom(3);
+        break;
+    case 6:
+        boom(3);
+        break;
+    case 7:
+        boom(4);
+        break;
+    case 8:
+        boom(5);
+        break;
+    case 9:
+        boom(5);
+        break;
+    case 10:
+        boom(4);
+        break;
+    case 11:
+        boom(3);
+        break;
+    case 12:
+        boom(3);
+        boom(5);
+        break;
+    case 13:
+        boom(4);
+        break;
+    case 14:
+        boom(3);
+        boom(4);
+        boom(5);
+        break;
+    case 15:
+        boom(3);
+        boom(4);
+        boom(5);
+        break;
+    }
+
+    sequenceGreen++;
+    if (sequenceGreen == 16)
+    {
+        sequenceGreen = 0;
+    }
 }
 
 void Star::bluePoof()
@@ -504,7 +695,69 @@ void Star::bluePoof()
 
 void Star::blueBoom()
 {
-    cluster.stars[2].starState.boomerButtonState = BOOMER_ON;
+
+    switch (sequenceBlue)
+    {
+    case 0:
+        boom(6);
+        break;
+    case 1:
+        boom(7);
+        break;
+    case 2:
+        boom(8);
+        break;
+    case 3:
+        boom(8);
+        break;
+    case 4:
+        boom(7);
+        break;
+    case 5:
+        boom(6);
+        break;
+    case 6:
+        boom(6);
+        break;
+    case 7:
+        boom(7);
+        break;
+    case 8:
+        boom(8);
+        break;
+    case 9:
+        boom(8);
+        break;
+    case 10:
+        boom(7);
+        break;
+    case 11:
+        boom(6);
+        break;
+    case 12:
+        boom(6);
+        boom(8);
+        break;
+    case 13:
+        boom(7);
+        break;
+    case 14:
+        boom(6);
+        boom(7);
+        boom(8);
+        break;
+    case 15:
+        boom(6);
+        boom(7);
+        boom(8);
+        break;
+    }
+
+    sequenceBlue++;
+    if (sequenceBlue == 16)
+    {
+        sequenceBlue = 0;
+    }
 }
 
 void Star::yellowPoof()
@@ -575,7 +828,69 @@ void Star::yellowPoof()
 
 void Star::yellowBoom()
 {
-    cluster.stars[3].starState.boomerButtonState = BOOMER_ON;
+
+    switch (sequenceYellow)
+    {
+    case 0:
+        boom(9);
+        break;
+    case 1:
+        boom(10);
+        break;
+    case 2:
+        boom(11);
+        break;
+    case 3:
+        boom(11);
+        break;
+    case 4:
+        boom(10);
+        break;
+    case 5:
+        boom(9);
+        break;
+    case 6:
+        boom(9);
+        break;
+    case 7:
+        boom(10);
+        break;
+    case 8:
+        boom(11);
+        break;
+    case 9:
+        boom(11);
+        break;
+    case 10:
+        boom(10);
+        break;
+    case 11:
+        boom(9);
+        break;
+    case 12:
+        boom(9);
+        boom(11);
+        break;
+    case 13:
+        boom(10);
+        break;
+    case 14:
+        boom(9);
+        boom(10);
+        boom(11);
+        break;
+    case 15:
+        boom(9);
+        boom(10);
+        boom(11);
+        break;
+    }
+
+    sequenceYellow++;
+    if (sequenceYellow == 16)
+    {
+        sequenceYellow = 0;
+    }
 }
 
 void Star::goBoomAbort(uint8_t star, bool abort)
@@ -1061,4 +1376,10 @@ bool Star::netOut(uint8_t star)
 void Star::poof(uint8_t star)
 {
     cluster.stars[star].starState.pooferButtonState = POOFER_POOF;
+}
+
+void Star::boom(uint8_t star)
+{
+    cluster.stars[star].starState.boomerButtonState = BOOMER_ON;
+    // cluster.stars[star].starState.pooferButtonState = POOFER_POOF;
 }

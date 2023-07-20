@@ -152,6 +152,7 @@ public:
     void star_loop(void);
 
     void poof(uint8_t star);
+    void boom(uint8_t star);
 
     void red_loop(void);
     void green_loop(void);
@@ -178,6 +179,11 @@ public:
 
     bool netOut(uint8_t star);
     bool netIn(uint8_t star);
+
+    bool isBoomerRedActive();
+    bool isBoomerGreenActive();
+    bool isBoomerBlueActive();
+    bool isBoomerYellowActive();
 
     uint8_t redPooferState;
     uint8_t greenPooferState;
