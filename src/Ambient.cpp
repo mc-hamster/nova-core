@@ -123,7 +123,7 @@ void Ambient::loop()
         unsigned long avgFrameTime = totalFrameTime / numFrames;
 
         // Print statistics
-        Serial.printf("Average frame time: %d (milliseconds) %d (fps) \n", avgFrameTime / 1000, 1000 / (avgFrameTime / 1000));
+        Serial.printf("Average network frame time: %d (milliseconds) %d (fps) \n", avgFrameTime / 1000, 1000 / (avgFrameTime / 1000));
 
         // Reset statistics
         totalFrameTime = 0;
