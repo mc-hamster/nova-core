@@ -9,7 +9,6 @@ class Buttons
 {
 private:
 public:
-
     enum TheButtons
     {
         BUTTON_RED,
@@ -42,6 +41,7 @@ public:
     static void yellow_longPressStart(void);
     static void yellow_longPressStop(void);
 };
+
 
 extern Buttons *buttons;
 

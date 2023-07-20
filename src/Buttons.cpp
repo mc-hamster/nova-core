@@ -62,11 +62,7 @@ void Buttons::loop(void)
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
     button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
-    if (novaIO->expansionDigitalRead(BUTTON_RED_IN))
-    {
-        novaIO->ledRed(HIGH);
-    }
-    else
+    if (star->isBoomerRedActive())
     {
         if ((millis() / 100) % 2)
         {
@@ -77,12 +73,12 @@ void Buttons::loop(void)
             novaIO->ledRed(LOW);
         }
     }
-
-    if (novaIO->expansionDigitalRead(BUTTON_GREEN_IN))
-    {
-        novaIO->ledGreen(HIGH);
-    }
     else
+    {
+        novaIO->ledRed(HIGH);
+    }
+
+    if (star->isBoomerGreenActive())
     {
         if ((millis() / 100) % 2)
         {
@@ -93,12 +89,12 @@ void Buttons::loop(void)
             novaIO->ledGreen(LOW);
         }
     }
-
-    if (novaIO->expansionDigitalRead(BUTTON_BLUE_IN))
-    {
-        novaIO->ledBlue(HIGH);
-    }
     else
+    {
+        novaIO->ledGreen(HIGH);
+    }
+
+    if (star->isBoomerBlueActive())
     {
         if ((millis() / 100) % 2)
         {
@@ -109,12 +105,12 @@ void Buttons::loop(void)
             novaIO->ledBlue(LOW);
         }
     }
-
-    if (novaIO->expansionDigitalRead(BUTTON_YELLOW_IN))
-    {
-        novaIO->ledYellow(HIGH);
-    }
     else
+    {
+        novaIO->ledBlue(HIGH);
+    }
+
+    if (star->isBoomerYellowActive())
     {
         if ((millis() / 100) % 2)
         {
@@ -124,6 +120,10 @@ void Buttons::loop(void)
         {
             novaIO->ledYellow(LOW);
         }
+    }
+    else
+    {
+        novaIO->ledYellow(HIGH);
     }
 }
 
