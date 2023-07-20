@@ -28,6 +28,8 @@
 
 #define NOVABUF_MAX 1024 // Maximum size of the protocol buffer
 
+#define REPORT_TASK_INTERVAL 30000 // How often to report task status in milliseconds
+
 /*
     Options include:
         9600
