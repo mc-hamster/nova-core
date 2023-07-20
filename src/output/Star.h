@@ -4,6 +4,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "buttons.h"
 
 class Star
 {
@@ -29,9 +30,7 @@ private:
     enum PooferButtonState
     {
         POOFER_OFF,
-        POOFER_POOF,
-        POOFER_POOF_MULTI,
-        POOFER_BOOM
+        POOFER_POOF
     };
 
     enum BoomerButtonState
@@ -74,6 +73,10 @@ private:
 
 public:
 
+    uint8_t sequenceRed = 0;
+    uint8_t sequenceGreen = 0;
+    uint8_t sequenceBlue = 0;
+    uint8_t sequenceYellow = 0;
 
 
     enum RedButtonState
@@ -122,7 +125,7 @@ public:
 
     enum BoomerStates
     {
-        BOOMER_ACTIVE,                  // Boomer is ready for a Boom
+        BOOMER_READY,                   // Boomer is ready for a Boom
         BOOMER_DEACTIVATED,             // Boomer is disabled. Here for administrative purposes.
         BOOMER_ABORT,                   // Begin the abort sequence. (Turn off fuel, turn off igniter, enter BOOMER_BLOWER_EXHAUST)
         BOOMER_BLOWER_ON,               // Turn on the blower
@@ -148,21 +151,23 @@ public:
 
     void star_loop(void);
 
+    void poof(uint8_t star);
+
     void red_loop(void);
     void green_loop(void);
     void blue_loop(void);
     void yellow_loop(void);
 
-    void redPoof(RedButtonState state);
+    void redPoof();
     void redBoom();
 
-    void greenPoof(GreenButtonState state);
+    void greenPoof();
     void greenBoom();
 
-    void bluePoof(BlueButtonState state);
+    void bluePoof();
     void blueBoom();
 
-    void yellowPoof(YellowButtonState state);
+    void yellowPoof();
     void yellowBoom();
 
     void setupStar(void);

@@ -9,6 +9,15 @@ class Buttons
 {
 private:
 public:
+
+    enum TheButtons
+    {
+        BUTTON_RED,
+        BUTTON_GREEN,
+        BUTTON_BLUE,
+        BUTTON_YELLOW
+    };
+
     Buttons();
 
     void loop();

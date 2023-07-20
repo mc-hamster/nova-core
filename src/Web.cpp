@@ -84,7 +84,8 @@ void buttonCallback(Control *sender, int type)
         {
         case B_DOWN:
             //star->redPoof(star->RED_POOF);
-            star->goPoof(1, 100, 100);
+            //star->goPoof(1, 100, 100);
+            star->poof(0);
             // star->greenPoof(star->GREEN_POOF);
             // star->bluePoof(star->BLUE_POOF);
             // star->yellowPoof(star->YELLOW_POOF);
