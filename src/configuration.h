@@ -23,12 +23,11 @@
 #define BUTTON_WHITE_IN 12 // On expansion H
 #define BUTTON_WHITE_OUT 32 // On esp32
 
-
 #define DMX512_MAX 512 // Maximum number of channels on a DMX512 universe.
 
 #define NOVABUF_MAX 1024 // Maximum size of the protocol buffer
 
-#define REPORT_TASK_INTERVAL 30000 // How often to report task status in milliseconds
+#define REPORT_TASK_INTERVAL 120 * 1000 // How often to report task status in milliseconds
 
 /*
     Options include:
@@ -44,4 +43,5 @@
         576000
         921600
 */
+
 #define NOVANET_BAUD 921600
