@@ -68,7 +68,8 @@ void Ambient::loop()
         {
 
             dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
-            for (int lightsPreIndex = 0; lightsPreIndex < lightsPre; lightsPreIndex++)
+            //for (int lightsPreIndex = 0; lightsPreIndex < lightsPre; lightsPreIndex++)
+            for (int lightsPreIndex = lightsPre; lightsPreIndex >= 0; lightsPreIndex--)
             {
                 dmxValues[1 + (7 * lightsPreIndex)] = 0xff;               // Brightness
                 dmxValues[2 + (7 * lightsPreIndex)] = leds[dmxFixture].r; // red
@@ -84,8 +85,8 @@ void Ambient::loop()
         else if (starIndex == 11) // Last Star
         {
             dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
-            //for (int lightsPostIndex = 0; lightsPostIndex < lightsPost; lightsPostIndex++)
-            for (int lightsPostIndex = lightsPost - 1; lightsPostIndex >= 0; lightsPostIndex--)
+            for (int lightsPostIndex = 0; lightsPostIndex <= lightsPost; lightsPostIndex++)
+            //for (int lightsPostIndex = lightsPost - 1; lightsPostIndex >= 0; lightsPostIndex--)
             {
                 dmxValues[1 + (7 * lightsPostIndex)] = 0xff;               // Brightness
                 dmxValues[2 + (7 * lightsPostIndex)] = leds[dmxFixture].r; // red
@@ -96,6 +97,7 @@ void Ambient::loop()
                 dmxValues[7 + (7 * lightsPostIndex)] = 0x00;               // null
 
                 dmxFixture++;
+                //Serial.println("dmxFixture");
             }
         }
         else
