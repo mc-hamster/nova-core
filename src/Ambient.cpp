@@ -119,7 +119,7 @@ void Ambient::loop()
         sendDmxMessage(dmxValues, DMX512_MAX);
     }
 
-    if (currentTime - lastExecutionTime >= 10000)
+    if (currentTime - lastExecutionTime >= 60 * 1000)
     {
         // Calculate average frame time
         unsigned long avgFrameTime = totalFrameTime / numFrames;
