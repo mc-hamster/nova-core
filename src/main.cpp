@@ -215,11 +215,7 @@ void TaskAmbient(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
   }
@@ -247,11 +243,7 @@ void TaskLightUtils(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
   }
@@ -278,11 +270,7 @@ void TaskEnable(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
   }
@@ -309,11 +297,7 @@ void TaskWeb(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
   }
@@ -340,11 +324,7 @@ void TaskMDNS(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
   }
@@ -383,11 +363,8 @@ void TaskModes(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
+
       lastExecutionTime = millis();
     }
   }
@@ -399,8 +376,6 @@ void TaskButtons(void *pvParameters) // This is a task.
   UBaseType_t uxHighWaterMark;
   TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
   const char *pcTaskName = pcTaskGetName(xTaskHandle);
-  Serial.println("TaskModes is running");
-
   Serial.println("TaskButtons is running");
 
   while (1) // A Task shall never return or exit.
@@ -424,11 +399,8 @@ void TaskButtons(void *pvParameters) // This is a task.
           therefore now expect uxTaskGetStackHighWaterMark() to return a
           value lower than when it was called on entering the task. */
       uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.print(pcTaskName);
-      Serial.print(" stack free - ");
-      Serial.print(uxHighWaterMark);
-      Serial.print(" running on core ");
-      Serial.println(xPortGetCoreID());
+      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
+
       lastExecutionTime = millis();
     }
   }
