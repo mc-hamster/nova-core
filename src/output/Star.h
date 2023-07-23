@@ -145,6 +145,13 @@ public:
         BOOMER_BLOWER_EXHAUST_OFF       // Turn the exhaust off.
     };
 
+    enum StarColors {
+        STAR_RED,
+        STAR_GREEN,
+        STAR_BLUE,
+        STAR_YELLOW
+    };
+
     Star();
 
     void loop(void);
@@ -175,7 +182,8 @@ public:
 
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
     bool goBoom(uint8_t star);
-    void goBoomAbort(uint8_t star, bool abort);
+    void goBoomAbort(StarColors color, bool abort);
+    void boomAbort(uint8_t star);
 
     bool netOut(uint8_t star);
     bool netIn(uint8_t star);
@@ -194,6 +202,8 @@ public:
     uint8_t greenBoomerState;
     uint8_t blueBoomerState;
     uint8_t yellowBoomerState;
+
+
 };
 
 extern Star *star;

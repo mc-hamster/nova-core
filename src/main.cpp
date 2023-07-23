@@ -409,7 +409,7 @@ void TaskButtons(void *pvParameters) // This is a task.
     {
       buttons->loop();
       // yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(2);
+      delay(2); // Don't go above 2. Buttons need to be responsive.
     }
     else
     {

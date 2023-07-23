@@ -120,7 +120,13 @@ LightUtils::LightUtils()
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(2000)>(leds, NUM_LEDS);
     FastLED.setBrightness(getCfgBrightness());
 
+    // Load the light configuration
     currentPalette = getPalette(manager.get("cfgProgram").as<uint8_t>() ? manager.get("cfgProgram").as<uint8_t>() : 1);
+    cfgSin = getCfgSin();
+    cfgUpdates = getCfgUpdates();
+    cfgFire = getCfgFire();
+    cfgReverse = getCfgReverse();
+    
 
     // Setup goes in here
 }

@@ -16,9 +16,9 @@ Buttons *buttons = NULL;
 
 Buttons::Buttons()
 {
-    uint32_t ticksDebounce = 25; // setDebounceTicks Period of time in which to ignore additional level changes.
-    uint32_t ticksClicks = 25;   // setClickTicks  Timeout used to distinguish single clicks from double clicks.
-    uint32_t ticksPress = 500;   // setPressTicks Duration to hold a button to trigger a long press
+    uint32_t ticksDebounce = 25; // setDebounceTicks Period of time in which to ignore additional level changes. (Default: 25)
+    uint32_t ticksClicks = 50;   // setClickTicks  Timeout used to distinguish single clicks from double clicks. (Default: 400)
+    uint32_t ticksPress = 800;   // setPressTicks Duration to hold a button to trigger a long press (Default: 800)
 
     Serial.println("Setting up buttons");
     button_red->attachClick(red_click);
@@ -60,7 +60,7 @@ void Buttons::loop(void)
     button_green->tick(novaIO->expansionDigitalRead(BUTTON_GREEN_IN) == LOW);
     button_blue->tick(novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == LOW);
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
-    button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
+    //button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
     if (star->isBoomerRedActive())
     {
@@ -153,7 +153,7 @@ void Buttons::red_longPressStop(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Red Long Stop");
-        star->goBoomAbort(0, true);
+        star->goBoomAbort(Star::STAR_RED, true);
     }
 }
 
@@ -183,7 +183,7 @@ void Buttons::green_longPressStop(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Green Long Stop");
-        star->goBoomAbort(1, true);
+        star->goBoomAbort(Star::STAR_GREEN, true);
     }
 }
 
@@ -213,7 +213,7 @@ void Buttons::blue_longPressStop(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Blue Long Stop");
-        star->goBoomAbort(2, true);
+        star->goBoomAbort(Star::STAR_BLUE, true);
     }
 }
 
@@ -243,6 +243,6 @@ void Buttons::yellow_longPressStop(void)
     if (!enable->isDrunktard())
     {
         Serial.println("Yellow Long Stop");
-        star->goBoomAbort(3, true);
+        star->goBoomAbort(Star::STAR_YELLOW, true);
     }
 }

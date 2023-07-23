@@ -258,7 +258,6 @@ void Star::loop()
         // blue_loop();
         // yellow_loop();
     }
-
 }
 
 bool Star::isBoomerRedActive()
@@ -362,6 +361,8 @@ void Star::star_loop(void)
 */
 void Star::redPoof()
 {
+    Serial.print("Red Sequence - ");
+    Serial.println(sequenceRed);
 
     switch (sequenceRed)
     {
@@ -429,6 +430,18 @@ void Star::redPoof()
 
 void Star::redBoom()
 {
+
+    if (isBoomerRedActive())
+    {
+        Serial.println("Red Boom - Boomer is active. Aborting");
+        return;
+    }
+    else
+    {
+        Serial.print("Red Sequence - ");
+        Serial.println(sequenceRed);
+    }
+
     switch (sequenceRed)
     {
     case 0:
@@ -495,6 +508,9 @@ void Star::redBoom()
 
 void Star::greenPoof()
 {
+
+    Serial.print("Green Sequence - ");
+    Serial.println(sequenceGreen);
 
     switch (sequenceGreen)
     {
@@ -563,6 +579,17 @@ void Star::greenPoof()
 void Star::greenBoom()
 {
 
+    if (isBoomerGreenActive())
+    {
+        Serial.println("Green Boom - Boomer is active. Aborting");
+        return;
+    }
+    else
+    {
+        Serial.print("Green Sequence - ");
+        Serial.println(sequenceGreen);
+    }
+
     switch (sequenceGreen)
     {
     case 0:
@@ -629,6 +656,10 @@ void Star::greenBoom()
 
 void Star::bluePoof()
 {
+
+    Serial.print("Blue Sequence - ");
+    Serial.println(sequenceBlue);
+
     switch (sequenceBlue)
     {
     case 0:
@@ -696,6 +727,17 @@ void Star::bluePoof()
 void Star::blueBoom()
 {
 
+    if (isBoomerBlueActive())
+    {
+        Serial.println("Blue Boom - Boomer is active. Aborting");
+        return;
+    }
+    else
+    {
+        Serial.print("Blue Sequence - ");
+        Serial.println(sequenceBlue);
+    }
+
     switch (sequenceBlue)
     {
     case 0:
@@ -762,6 +804,10 @@ void Star::blueBoom()
 
 void Star::yellowPoof()
 {
+
+    Serial.print("Yellow Sequence - ");
+    Serial.println(sequenceYellow);
+
     switch (sequenceYellow)
     {
     case 0:
@@ -829,6 +875,17 @@ void Star::yellowPoof()
 void Star::yellowBoom()
 {
 
+    if (isBoomerYellowActive())
+    {
+        Serial.println("Yellow Boom - Boomer is active. Aborting");
+        return;
+    }
+    else
+    {
+        Serial.print("Yellow Sequence - ");
+        Serial.println(sequenceYellow);
+    }
+
     switch (sequenceYellow)
     {
     case 0:
@@ -893,7 +950,36 @@ void Star::yellowBoom()
     }
 }
 
-void Star::goBoomAbort(uint8_t star, bool abort)
+void Star::goBoomAbort(StarColors color, bool abort)
+{
+
+    if (color == STAR_RED)
+    {
+        boomAbort(0);
+        boomAbort(1);
+        boomAbort(2);
+    }
+    else if (color == STAR_GREEN)
+    {
+        boomAbort(3);
+        boomAbort(4);
+        boomAbort(5);
+    }
+    else if (color == STAR_BLUE)
+    {
+        boomAbort(6);
+        boomAbort(7);
+        boomAbort(8);
+    }
+    else if (color == STAR_YELLOW)
+    {
+        boomAbort(9);
+        boomAbort(10);
+        boomAbort(11);
+    }
+}
+
+void Star::boomAbort(uint8_t star)
 {
     if (cluster.stars[star].boomer.outputState != BOOMER_READY)
     {
