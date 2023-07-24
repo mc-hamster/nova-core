@@ -11,6 +11,13 @@ class Star
 private:
     uint32_t pooferDuration = 100;
 
+    uint32_t boomerTimeBlowerOn = 50;
+    uint32_t boomerTimeFuelOn = 2000;
+    uint32_t boomerTimeFuelOff = 200;
+    uint32_t boomerTimeBomerBlowerOff = 30;
+    uint32_t boomerTimeBomerZap = 100;
+    uint32_t boomerTimeExhaust = 4000;
+
     struct boomerData
     {
         uint32_t previousMillis;
@@ -113,15 +120,11 @@ public:
 
     enum PooferStates
     {
-        //        POOF_ACTIVE,
-        //        POOF_DEACTIVATED,
         POOF_ON,
         POOF_ON_IDLE,
         POOF_OFF,
         POOF_OFF_IDLE
     };
-
-
 
     enum BoomerStates
     {
@@ -192,17 +195,6 @@ public:
     bool isBoomerGreenActive();
     bool isBoomerBlueActive();
     bool isBoomerYellowActive();
-
-    uint8_t redPooferState;
-    uint8_t greenPooferState;
-    uint8_t bluePooferState;
-    uint8_t yellowPooferState;
-
-    uint8_t redBoomerState;
-    uint8_t greenBoomerState;
-    uint8_t blueBoomerState;
-    uint8_t yellowBoomerState;
-
 
 };
 

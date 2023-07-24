@@ -43,6 +43,8 @@ uint16_t boomerD1, boomerD2, boomerD3;
 
 uint16_t sysInfoSeqIndex;
 
+uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
+
 void numberCall(Control *sender, int type)
 {
     Serial.println(sender->value);
@@ -79,10 +81,10 @@ void slider(Control *sender, int type)
 
 void buttonCallback(Control *sender, int type)
 {
-    
+
     /*
-    * Poofers
-    */
+     * Poofers
+     */
     if (sender->id == pooferA1)
     {
         if (type == B_DOWN)
@@ -169,9 +171,9 @@ void buttonCallback(Control *sender, int type)
     }
 
     /*
-    * Boomers
-    */
-   if (sender->id == boomerA1)
+     * Boomers
+     */
+    if (sender->id == boomerA1)
     {
         if (type == B_DOWN)
         {
@@ -253,6 +255,39 @@ void buttonCallback(Control *sender, int type)
         if (type == B_DOWN)
         {
             star->boom(11);
+        }
+    }
+
+    if (sender->id == seqBoomAll)
+    {
+        if (type == B_DOWN)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                star->boom(i);
+            }
+        }
+    }
+    else if (sender->id == seqBoomLeftRight)
+    {
+        if (type == B_DOWN)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                star->boom(i);
+                delay(100);
+            }
+        }
+    }
+    else if (sender->id == seqBoomRightLeft)
+    {
+        if (type == B_DOWN)
+        {
+            for (int i = 11; i >= 0; i--)
+            {
+                star->boom(i);
+                delay(100);
+            }
         }
     }
 
@@ -407,9 +442,9 @@ void webSetup()
 
     //---- Tab 3 (Sequences) -----
     switchOne = ESPUI.addControl(ControlType::Switcher, "Switch one", "", ControlColor::Alizarin, sequencesTab, &switchExample);
-    ESPUI.addControl(ControlType::Button, "Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
-    ESPUI.addControl(ControlType::Button, "Boomers", "Left to Right", ControlColor::Peterriver, sequencesTab, &buttonCallback);
-    ESPUI.addControl(ControlType::Button, "Boomers", "Right to Left", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    seqBoomAll = ESPUI.addControl(ControlType::Button, "Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    seqBoomLeftRight = ESPUI.addControl(ControlType::Button, "Boomers", "L to R (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
+    seqBoomRightLeft = ESPUI.addControl(ControlType::Button, "Boomers", "R to L (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
 
     //---- Tab -- Lighting
     lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", String(lightUtils->getCfgBrightness()), ControlColor::Alizarin, lightingTab, &slider);

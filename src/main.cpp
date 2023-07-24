@@ -188,6 +188,7 @@ void loop()
   /* Best not to have anything in this loop.
       Everything should be in freeRTOS tasks
   */
+  delay(1);
 }
 
 /*--------------------------------------------------*/

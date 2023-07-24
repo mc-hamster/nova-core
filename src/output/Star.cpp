@@ -21,16 +21,6 @@ Star::Star()
 void Star::setupStar(void)
 {
 
-    redPooferState = POOF_ON;
-    greenPooferState = POOF_ON;
-    bluePooferState = POOF_ON;
-    yellowPooferState = POOF_ON;
-
-    redBoomerState = BOOMER_IDLE;
-    greenBoomerState = BOOMER_IDLE;
-    blueBoomerState = BOOMER_IDLE;
-    yellowBoomerState = BOOMER_IDLE;
-
     cluster.stars[0].expander = 0;
     cluster.stars[0].blowerOutput = 0;
     cluster.stars[0].fuelOutput = 1;
@@ -1069,7 +1059,7 @@ bool Star::goBoom(uint8_t star)
         }
         else
         {
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 50)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeBlowerOn)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -1112,7 +1102,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 2000)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeFuelOn)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -1155,7 +1145,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 200)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeFuelOff)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -1196,7 +1186,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 30)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeBomerBlowerOff)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
                 Serial.print("Star - ");
@@ -1239,7 +1229,7 @@ bool Star::goBoom(uint8_t star)
         else
         {
 
-            if (currentMillis - cluster.stars[star].boomer.previousMillis >= 100)
+            if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeBomerZap)
             {
                 cluster.stars[star].boomer.previousMillis = millis();
 
@@ -1267,7 +1257,7 @@ bool Star::goBoom(uint8_t star)
     }
     else if (cluster.stars[star].boomer.outputState == BOOMER_BLOWER_EXHAUST_IDLE)
     {
-        if (currentMillis - cluster.stars[star].boomer.previousMillis >= 4000)
+        if (currentMillis - cluster.stars[star].boomer.previousMillis >= boomerTimeExhaust)
         {
             cluster.stars[star].boomer.previousMillis = millis();
             Serial.print("Star - ");
@@ -1288,8 +1278,7 @@ bool Star::goBoom(uint8_t star)
 
         cluster.stars[star].boomer.outputState = BOOMER_READY;
 
-        Serial.print("Next state - ");
-        Serial.println(cluster.stars[star].boomer.outputState);
+        // Serial.printf("Next state - %d\n", cluster.stars[star].boomer.outputState);
 
         // Setting abort to false after the boomer is done.
         if (cluster.stars[star].boomer.abort)
