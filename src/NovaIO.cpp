@@ -117,6 +117,12 @@ NovaIO::NovaIO()
     Serial.println("MCP23X17 interfaces outputs set to initilized value.");
 }
 
+/**
+ * Reads the digital value of the specified pin on the MCP23017H expander.
+ * 
+ * @param pin The pin number to read.
+ * @return The digital value of the pin (HIGH or LOW).
+ */
 bool NovaIO::expansionDigitalRead(int pin)
 {
     // return 0;
@@ -278,6 +284,13 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
     xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }
 
+/**
+ * Writes a digital value to the specified pin on the selected MCP23017 expander.
+ * 
+ * @param pin The pin number to write to.
+ * @param value The digital value to write (HIGH or LOW).
+ * @param expander The expander number to write to (0-7).
+ */
 void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 {
     
@@ -467,6 +480,10 @@ void NovaIO::setStarlink(u_int8_t direction, uint8_t star)
     */
 }
 
+/**
+ * Sets the value of the red LED.
+ * @param value The value to set the LED to. True for on, false for off.
+ */
 void NovaIO::ledRed(bool value)
 {
     if (value)
@@ -479,6 +496,10 @@ void NovaIO::ledRed(bool value)
     }
 }
 
+/**
+ * Sets the value of the green LED.
+ * @param value The value to set the LED to. True for on, false for off.
+ */
 void NovaIO::ledGreen(bool value)
 {
     if (value)
@@ -491,6 +512,10 @@ void NovaIO::ledGreen(bool value)
     }
 }
 
+/**
+ * Sets the value of the blue LED.
+ * @param value The value to set the LED to. True for on, false for off.
+ */
 void NovaIO::ledBlue(bool value)
 {
     if (value)
@@ -503,6 +528,10 @@ void NovaIO::ledBlue(bool value)
     }
 }
 
+/**
+ * Sets the value of the yellow LED.
+ * @param value The value to set the LED to. True for on, false for off.
+ */
 void NovaIO::ledYellow(bool value)
 {
     if (value)
