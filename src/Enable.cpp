@@ -50,8 +50,12 @@ void Enable::loop()
     }
 }
 
+
 /*
-This will initilaize our system back to a safe spot after emergency stop is exited.
+This function is called when the emergency stop is exited. It checks if the system should reboot or not. If rebootOnEmergencyStopExit is true, the system will reboot. Otherwise, the system will be enabled and the disabledBrightness will be set to 0.
+
+@param None
+@return None
 */
 void Enable::emergencyStopExit()
 {
@@ -84,7 +88,10 @@ void Enable::emergencyStopExit()
 }
 
 /*
-Emergency stop has been called. We need to begin shutdown.
+This function is called when the emergency stop is entered. It turns off all the outputs and sets the systemEnable to false.
+
+@param None
+@return None
 */
 void Enable::emergencyStopEnter()
 {
@@ -109,6 +116,12 @@ void Enable::emergencyStopEnter()
     systemEnable = false;
 }
 
+/*
+This function returns the current state of the systemEnable variable.
+
+@param None
+@return bool - The current state of the systemEnable variable.
+*/
 bool Enable::isSystemEnabled(void)
 {
     // Serial.print("Is System Enabled? ");
@@ -116,6 +129,12 @@ bool Enable::isSystemEnabled(void)
     return systemEnable;
 }
 
+/*
+This function returns the current state of the cfgDrunktard variable.
+
+@param None
+@return bool - The current state of the cfgDrunktard variable.
+*/
 bool Enable::isDrunktard(void)
 {
     if (manager.exists("cfgDrunktard"))

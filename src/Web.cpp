@@ -69,11 +69,11 @@ void slider(Control *sender, int type)
     {
         lightUtils->setCfgBrightness(sender->value.toInt());
     }
-    if (sender->id == lightingSinSlider)
+    else if (sender->id == lightingSinSlider)
     {
         lightUtils->setCfgSin(sender->value.toInt());
     }
-    if (sender->id == lightingUpdatesSlider)
+    else if (sender->id == lightingUpdatesSlider)
     {
         lightUtils->setCfgUpdates(sender->value.toInt());
     }
@@ -352,7 +352,8 @@ void switchExample(Control *sender, int value)
         {
             // Todo:
             //    - Give the user a chance to cancel the reboot.
-            Serial.println("Rebooting device from switch...");
+            Serial.println("Rebooting device from web switch...");
+            delay(50);
             ESP.restart();
         }
     }
@@ -393,6 +394,7 @@ void webSetup()
     uint16_t manualTab = ESPUI.addControl(ControlType::Tab, "Manual", "Manual");
     uint16_t sequencesTab = ESPUI.addControl(ControlType::Tab, "Sequences", "Sequences");
     uint16_t lightingTab = ESPUI.addControl(ControlType::Tab, "Lighting", "Lighting");
+    uint16_t fogTab = ESPUI.addControl(ControlType::Tab, "Fog", "Fog");
     uint16_t sysInfoTab = ESPUI.addControl(ControlType::Tab, "System Info", "System Info");
     uint16_t resetTab = ESPUI.addControl(ControlType::Tab, "Reset", "Reset");
 
@@ -493,6 +495,25 @@ void webSetup()
     lightingReverseSwitch = ESPUI.addControl(ControlType::Switcher, "Reverse", String(lightUtils->getCfgReverse()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
+
+/*
+    //--- Fog Tab ---
+    ESPUI.addControl(ControlType::Slider, "Off Min Sec (default: 5)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
+    ESPUI.addControl(Max, "", "120", None, lightingUpdatesSlider);
+
+    ESPUI.addControl(ControlType::Slider, "Off Max Sec (default: 20)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
+    ESPUI.addControl(Max, "", "120", None, lightingUpdatesSlider);
+
+    ESPUI.addControl(ControlType::Slider, "On Min MSec (default: 200)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "200", None, lightingUpdatesSlider);
+    ESPUI.addControl(Max, "", "2000", None, lightingUpdatesSlider);
+
+    ESPUI.addControl(ControlType::Slider, "On Max MSec (default: 1000)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
+    ESPUI.addControl(Min, "", "200", None, lightingUpdatesSlider);
+    ESPUI.addControl(Max, "", "2000", None, lightingUpdatesSlider);
+*/
 
     // System Info Tab
     sysInfoSeqIndex = ESPUI.addControl(ControlType::Label, "Button Sequence Index", "Red: 0, Green: 0, Blue: 0, Yellow: 0", ControlColor::Sunflower, sysInfoTab);

@@ -1,6 +1,17 @@
 #include <LittleFS.h>
 #include "FS.h"
 
+/**
+ * Lists the contents of a directory recursively.
+ *
+ * @param fs The file system to list the directory from.
+ * @param dirname The name of the directory to list.
+ * @param levels The number of levels of subdirectories to list.
+ *
+ * Usage example:
+ *
+ * listDirRecursive(SPIFFS, "/", 2);
+ */
 void listDir(fs::FS &fs, const char *dirname, uint8_t levels)
 {
   Serial.printf("Listing directory: %s\r\n", dirname);

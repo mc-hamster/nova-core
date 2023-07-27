@@ -135,11 +135,13 @@ void Buttons::red_click(void)
         star->redPoof();
     }
 }
+
 void Buttons::red_doubleClick(void)
 {
     Serial.println("Red Double Click");
     // star->redPoof(star->RED_POOF_MULTI);
 }
+
 void Buttons::red_longPressStart(void)
 {
     if (!enable->isDrunktard())
@@ -148,6 +150,7 @@ void Buttons::red_longPressStart(void)
         star->redBoom();
     }
 }
+
 void Buttons::red_longPressStop(void)
 {
     if (!enable->isDrunktard())
@@ -157,6 +160,7 @@ void Buttons::red_longPressStop(void)
     }
 }
 
+
 void Buttons::green_click(void)
 {
     if (!enable->isDrunktard())
@@ -165,11 +169,13 @@ void Buttons::green_click(void)
         star->greenPoof();
     }
 }
+
 void Buttons::green_doubleClick(void)
 {
     Serial.println("Green Double Click");
     // star->greenPoof(star->GREEN_POOF_MULTI);
 }
+
 void Buttons::green_longPressStart(void)
 {
     if (!enable->isDrunktard())
@@ -178,6 +184,7 @@ void Buttons::green_longPressStart(void)
         star->greenBoom();
     }
 }
+
 void Buttons::green_longPressStop(void)
 {
     if (!enable->isDrunktard())
@@ -195,11 +202,13 @@ void Buttons::blue_click(void)
         star->bluePoof();
     }
 }
+
 void Buttons::blue_doubleClick(void)
 {
     Serial.println("Blue Double Click");
     // star->bluePoof(star->BLUE_POOF_MULTI);
 }
+
 void Buttons::blue_longPressStart(void)
 {
     if (!enable->isDrunktard())
@@ -208,6 +217,7 @@ void Buttons::blue_longPressStart(void)
         star->blueBoom();
     }
 }
+
 void Buttons::blue_longPressStop(void)
 {
     if (!enable->isDrunktard())
@@ -225,11 +235,13 @@ void Buttons::yellow_click(void)
         star->yellowPoof();
     }
 }
+
 void Buttons::yellow_doubleClick(void)
 {
     Serial.println("Yellow Double Click");
     // star->yellowPoof(star->YELLOW_POOF_MULTI);
 }
+
 void Buttons::yellow_longPressStart(void)
 {
     if (!enable->isDrunktard())
@@ -238,6 +250,7 @@ void Buttons::yellow_longPressStart(void)
         star->yellowBoom();
     }
 }
+
 void Buttons::yellow_longPressStop(void)
 {
     if (!enable->isDrunktard())

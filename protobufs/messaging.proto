@@ -16,6 +16,15 @@ message DmxRequest {
   bool ack = 2;  // If true, an acknowledgement from the device is requested
 }
 
+// These are settings that it's ok for the star to forget if it reboots.
+message ConfigAmnesia {
+  uint32 fogOutputOnMinTime = 1; // When the fog outputs, how many ms will it output?
+  uint32 fogOutputOnMaxTime = 2; // When the fog outputs, how many ms will it output?
+  uint32 fogOutputOffMinTime = 3; // For the random output, what's the minumim value?
+  uint32 fogOutputOffMaxTime = 4; // For the random output, what's the minumim value?
+  uint32 fogActivateTime = 5; // Turn on the fog for this duration.
+}
+
 // Enum for power devices
 enum PowerDevices {
   FOG_MACHINE_A = 0;
@@ -64,7 +73,8 @@ message Request {
     PowerRequest power_request = 3;
     TelemetryRequest telemetry_request = 4;
     ConfigurationRequest configuration_request = 5;
-  }
+  };
+  ConfigAmnesia configAmnesia = 10;
 }
 
 // Enum for distinguishing the type of responses

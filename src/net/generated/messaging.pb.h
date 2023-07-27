@@ -71,6 +71,15 @@ typedef struct _messaging_DmxRequest {
     bool ack; /* If true, an acknowledgement from the device is requested */
 } messaging_DmxRequest;
 
+/* These are settings that it's ok for the star to forget if it reboots. */
+typedef struct _messaging_ConfigAmnesia {
+    uint32_t fogOutputOnMinTime; /* When the fog outputs, how many ms will it output? */
+    uint32_t fogOutputOnMaxTime; /* When the fog outputs, how many ms will it output? */
+    uint32_t fogOutputOffMinTime; /* For the random output, what's the minumim value? */
+    uint32_t fogOutputOffMaxTime; /* For the random output, what's the minumim value? */
+    uint32_t fogActivateTime; /* Turn on the fog for this duration. */
+} messaging_ConfigAmnesia;
+
 typedef struct _messaging_PowerRequest {
     pb_callback_t devices; /* Instruct the responder to use these powered devices and no other */
     messaging_PowerQuery query; /* The type of information about power devices requested */
@@ -93,6 +102,8 @@ typedef struct _messaging_Request {
         messaging_TelemetryRequest telemetry_request;
         messaging_ConfigurationRequest configuration_request;
     } request_payload;
+    bool has_configAmnesia;
+    messaging_ConfigAmnesia configAmnesia;
 } messaging_Request;
 
 typedef struct _messaging_DmxResponse {
@@ -177,6 +188,7 @@ extern "C" {
 #define _messaging_ConfigurationDeviceType_ARRAYSIZE ((messaging_ConfigurationDeviceType)(messaging_ConfigurationDeviceType_STAR+1))
 
 
+
 #define messaging_PowerRequest_devices_ENUMTYPE messaging_PowerDevices
 #define messaging_PowerRequest_query_ENUMTYPE messaging_PowerQuery
 
@@ -200,10 +212,11 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define messaging_DmxRequest_init_default        {{0, {0}}, 0}
+#define messaging_ConfigAmnesia_init_default     {0, 0, 0, 0, 0}
 #define messaging_PowerRequest_init_default      {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_default  {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_default {_messaging_ConfigurationQuery_MIN}
-#define messaging_Request_init_default           {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_default}}
+#define messaging_Request_init_default           {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_default}, false, messaging_ConfigAmnesia_init_default}
 #define messaging_DmxResponse_init_default       {_messaging_ResponseStatus_MIN}
 #define messaging_PowerResponse_init_default     {{{NULL}, NULL}, {{NULL}, NULL}}
 #define messaging_TelemetryResponse_init_default {0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0}
@@ -211,10 +224,11 @@ extern "C" {
 #define messaging_ErrorResponse_init_default     {{{NULL}, NULL}}
 #define messaging_Response_init_default          {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_default}}
 #define messaging_DmxRequest_init_zero           {{0, {0}}, 0}
+#define messaging_ConfigAmnesia_init_zero        {0, 0, 0, 0, 0}
 #define messaging_PowerRequest_init_zero         {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_zero     {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_zero {_messaging_ConfigurationQuery_MIN}
-#define messaging_Request_init_zero              {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_zero}}
+#define messaging_Request_init_zero              {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_zero}, false, messaging_ConfigAmnesia_init_zero}
 #define messaging_DmxResponse_init_zero          {_messaging_ResponseStatus_MIN}
 #define messaging_PowerResponse_init_zero        {{{NULL}, NULL}, {{NULL}, NULL}}
 #define messaging_TelemetryResponse_init_zero    {0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0}
@@ -225,6 +239,11 @@ extern "C" {
 /* Field tags (for use in manual encoding/decoding) */
 #define messaging_DmxRequest_values_tag          1
 #define messaging_DmxRequest_ack_tag             2
+#define messaging_ConfigAmnesia_fogOutputOnMinTime_tag 1
+#define messaging_ConfigAmnesia_fogOutputOnMaxTime_tag 2
+#define messaging_ConfigAmnesia_fogOutputOffMinTime_tag 3
+#define messaging_ConfigAmnesia_fogOutputOffMaxTime_tag 4
+#define messaging_ConfigAmnesia_fogActivateTime_tag 5
 #define messaging_PowerRequest_devices_tag       1
 #define messaging_PowerRequest_query_tag         2
 #define messaging_TelemetryRequest_query_tag     1
@@ -234,6 +253,7 @@ extern "C" {
 #define messaging_Request_power_request_tag      3
 #define messaging_Request_telemetry_request_tag  4
 #define messaging_Request_configuration_request_tag 5
+#define messaging_Request_configAmnesia_tag      10
 #define messaging_DmxResponse_status_tag         1
 #define messaging_PowerResponse_power_used_tag   1
 #define messaging_PowerResponse_power_requested_tag 2
@@ -263,6 +283,15 @@ X(a, STATIC,   SINGULAR, BOOL,     ack,               2)
 #define messaging_DmxRequest_CALLBACK NULL
 #define messaging_DmxRequest_DEFAULT NULL
 
+#define messaging_ConfigAmnesia_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   fogOutputOnMinTime,   1) \
+X(a, STATIC,   SINGULAR, UINT32,   fogOutputOnMaxTime,   2) \
+X(a, STATIC,   SINGULAR, UINT32,   fogOutputOffMinTime,   3) \
+X(a, STATIC,   SINGULAR, UINT32,   fogOutputOffMaxTime,   4) \
+X(a, STATIC,   SINGULAR, UINT32,   fogActivateTime,   5)
+#define messaging_ConfigAmnesia_CALLBACK NULL
+#define messaging_ConfigAmnesia_DEFAULT NULL
+
 #define messaging_PowerRequest_FIELDLIST(X, a) \
 X(a, CALLBACK, REPEATED, UENUM,    devices,           1) \
 X(a, STATIC,   SINGULAR, UENUM,    query,             2)
@@ -284,13 +313,15 @@ X(a, STATIC,   SINGULAR, UENUM,    type,              1) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (request_payload,dmx_request,request_payload.dmx_request),   2) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (request_payload,power_request,request_payload.power_request),   3) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (request_payload,telemetry_request,request_payload.telemetry_request),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (request_payload,configuration_request,request_payload.configuration_request),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (request_payload,configuration_request,request_payload.configuration_request),   5) \
+X(a, STATIC,   OPTIONAL, MESSAGE,  configAmnesia,    10)
 #define messaging_Request_CALLBACK NULL
 #define messaging_Request_DEFAULT NULL
 #define messaging_Request_request_payload_dmx_request_MSGTYPE messaging_DmxRequest
 #define messaging_Request_request_payload_power_request_MSGTYPE messaging_PowerRequest
 #define messaging_Request_request_payload_telemetry_request_MSGTYPE messaging_TelemetryRequest
 #define messaging_Request_request_payload_configuration_request_MSGTYPE messaging_ConfigurationRequest
+#define messaging_Request_configAmnesia_MSGTYPE messaging_ConfigAmnesia
 
 #define messaging_DmxResponse_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    status,            1)
@@ -343,6 +374,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (response_payload,error_response,response_pay
 #define messaging_Response_response_payload_error_response_MSGTYPE messaging_ErrorResponse
 
 extern const pb_msgdesc_t messaging_DmxRequest_msg;
+extern const pb_msgdesc_t messaging_ConfigAmnesia_msg;
 extern const pb_msgdesc_t messaging_PowerRequest_msg;
 extern const pb_msgdesc_t messaging_TelemetryRequest_msg;
 extern const pb_msgdesc_t messaging_ConfigurationRequest_msg;
@@ -356,6 +388,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define messaging_DmxRequest_fields &messaging_DmxRequest_msg
+#define messaging_ConfigAmnesia_fields &messaging_ConfigAmnesia_msg
 #define messaging_PowerRequest_fields &messaging_PowerRequest_msg
 #define messaging_TelemetryRequest_fields &messaging_TelemetryRequest_msg
 #define messaging_ConfigurationRequest_fields &messaging_ConfigurationRequest_msg
@@ -374,6 +407,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 /* messaging_TelemetryResponse_size depends on runtime parameters */
 /* messaging_ErrorResponse_size depends on runtime parameters */
 /* messaging_Response_size depends on runtime parameters */
+#define messaging_ConfigAmnesia_size             30
 #define messaging_ConfigurationRequest_size      2
 #define messaging_ConfigurationResponse_size     8
 #define messaging_DmxRequest_size                517

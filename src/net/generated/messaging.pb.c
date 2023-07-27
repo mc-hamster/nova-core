@@ -9,6 +9,9 @@
 PB_BIND(messaging_DmxRequest, messaging_DmxRequest, 2)
 
 
+PB_BIND(messaging_ConfigAmnesia, messaging_ConfigAmnesia, AUTO)
+
+
 PB_BIND(messaging_PowerRequest, messaging_PowerRequest, AUTO)
 
 

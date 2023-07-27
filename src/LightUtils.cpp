@@ -116,9 +116,9 @@ DEFINE_GRADIENT_PALETTE(white_dot){
 LightUtils::LightUtils()
 {
 
-    // delay( 1000 ); // power-up safety delay
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(2000)>(leds, NUM_LEDS);
     FastLED.setBrightness(getCfgBrightness());
+    // FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it the DMX lights.
 
     // Load the light configuration
     currentPalette = getPalette(manager.get("cfgProgram").as<uint8_t>() ? manager.get("cfgProgram").as<uint8_t>() : 1);
@@ -126,7 +126,6 @@ LightUtils::LightUtils()
     cfgUpdates = getCfgUpdates();
     cfgFire = getCfgFire();
     cfgReverse = getCfgReverse();
-    
 
     // Setup goes in here
 }
@@ -134,7 +133,7 @@ LightUtils::LightUtils()
 void LightUtils::loop()
 {
     //    Serial.println("LightUtils::loop");
-    yield();
+    // yield();
     // Crossfade current palette slowly toward the target palette
     //
     // Each time that nblendPaletteTowardPalette is called, small changes
@@ -163,7 +162,8 @@ void LightUtils::loop()
     if (!getCfgLocalDisable())
     {
         FastLED.show();
-        FastLED.delay(1000 / cfgUpdates);
+        FastLED.delay(1000 / cfgUpdates); // Enables temporal dithering
+        //delay(1000 / cfgUpdates);
     }
     else
     {
@@ -173,6 +173,11 @@ void LightUtils::loop()
     }
 }
 
+/**
+ * Fills the LED strip with colors from the current palette starting at the given color index.
+ *
+ * @param colorIndex The starting index in the current palette.
+ */
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
     uint8_t brightness = getCfgBrightness();
@@ -446,6 +451,11 @@ void LightUtils::Fire2012WithPalette(void)
     }
 }
 
+/**
+ * Sets the brightness of the LED strip and saves the value to the configuration file.
+ *
+ * @param brightness The brightness value to set.
+ */
 void LightUtils::setCfgBrightness(uint8_t brightness)
 {
     Serial.println("set brightness");
@@ -464,6 +474,11 @@ void LightUtils::setCfgBrightness(uint8_t brightness)
     manager.printFileContents();
 }
 
+/**
+ * Sets the number of updates per second for the LED strip and saves the value to the configuration file.
+ *
+ * @param updates The number of updates per second to set.
+ */
 void LightUtils::setCfgUpdates(uint16_t updates)
 {
     cfgUpdates = updates;
@@ -478,6 +493,11 @@ void LightUtils::setCfgUpdates(uint16_t updates)
     }
 }
 
+/**
+ * Sets the sine value for the LED strip and saves the value to the configuration file.
+ *
+ * @param sin The sine value to set.
+ */
 void LightUtils::setCfgSin(uint8_t sin)
 {
     cfgSin = sin;
@@ -492,11 +512,21 @@ void LightUtils::setCfgSin(uint8_t sin)
     }
 }
 
+/**
+ * Sets the current LED program based on the given program index and retrieves the corresponding color palette.
+ *
+ * @param program The index of the LED program to set.
+ */
 void LightUtils::setCfgProgram(uint8_t program)
 {
     getPalette(program);
 }
 
+/**
+ * Sets the reverse flag for the LED strip and saves the value to the configuration file.
+ *
+ * @param reverse The reverse flag value to set.
+ */
 void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
@@ -511,6 +541,11 @@ void LightUtils::setCfgReverse(bool reverse)
     }
 }
 
+/**
+ * Sets the fire flag for the LED strip and saves the value to the configuration file.
+ *
+ * @param fire The fire flag value to set.
+ */
 void LightUtils::setCfgFire(bool fire)
 {
     cfgFire = fire;
@@ -525,6 +560,11 @@ void LightUtils::setCfgFire(bool fire)
     }
 }
 
+/**
+ * Sets the local disable flag for the LED strip and saves the value to the configuration file.
+ *
+ * @param localDisable The local disable flag value to set.
+ */
 void LightUtils::setCfgLocalDisable(bool localDisable)
 {
     cfgLocalDisable = localDisable;
@@ -539,36 +579,71 @@ void LightUtils::setCfgLocalDisable(bool localDisable)
     }
 }
 
+/**
+ * Retrieves the brightness value from the configuration file.
+ *
+ * @return The brightness value.
+ */
 uint8_t LightUtils::getCfgBrightness(void)
 {
     return manager.get("cfgBrightness").as<uint8_t>();
 }
 
+/**
+ * Retrieves the number of updates from the configuration file.
+ *
+ * @return The number of updates.
+ */
 uint16_t LightUtils::getCfgUpdates(void)
 {
     return manager.get("cfgUpdates").as<uint16_t>();
 }
 
+/**
+ * Retrieves the sine value from the configuration file.
+ *
+ * @return The sine value.
+ */
 uint8_t LightUtils::getCfgSin(void)
 {
     return manager.get("cfgSin").as<uint8_t>();
 }
 
+/**
+ * Retrieves the LED program index from the configuration file.
+ *
+ * @return The LED program index.
+ */
 uint8_t LightUtils::getCfgProgram(void)
 {
     return manager.get("cfgProgram").as<uint8_t>();
 }
 
+/**
+ * Retrieves the reverse flag from the configuration file.
+ *
+ * @return The reverse flag value.
+ */
 bool LightUtils::getCfgReverse(void)
 {
     return manager.get("cfgReverse").as<bool>();
 }
 
+/**
+ * Retrieves the fire flag from the configuration file.
+ *
+ * @return The fire flag value.
+ */
 bool LightUtils::getCfgFire(void)
 {
     return manager.get("cfgFire").as<bool>();
 }
 
+/**
+ * Retrieves the local disable flag from the configuration file.
+ *
+ * @return The local disable flag value.
+ */
 bool LightUtils::getCfgLocalDisable(void)
 {
     return manager.get("cfgLocalDisable").as<bool>();
