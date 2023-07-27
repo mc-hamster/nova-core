@@ -34,22 +34,23 @@ Ambient::Ambient()
 void Ambient::loop()
 {
     uint32_t currentTime = millis();
+    static uint32_t amnesiaLastTime = 0;
+    bool sendAmnesia = false;
+
+    if (currentTime - amnesiaLastTime >= 5 * 1000)
+    {
+        sendAmnesia = true;
+        amnesiaLastTime = currentTime;
+    }
+    else
+    {
+        sendAmnesia = false;
+    }
 
     // Serial.println("Ambient loop");
     // sendProtobuf();
 
     CRGB *leds = lightUtils->getLeds();
-
-    /*
-    for (int i = 0; i < lightUtils->getNumberOfLeds(); i++)
-    {
-        CRGB color = leds[i];
-        uint8_t redValue = color.r;
-        uint8_t greenValue = color.g;
-        uint8_t blueValue = color.b;
-        // Do something with the color
-    }
-    */
 
     uint32_t frameTime = micros();
 
@@ -116,7 +117,7 @@ void Ambient::loop()
             dmxFixture++;
         }
 
-        sendDmxMessage(dmxValues, DMX512_MAX);
+        sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia);
     }
 
     if (currentTime - lastExecutionTime >= 20 * 1000)
@@ -148,7 +149,7 @@ void Ambient::loop()
  * @param dmxValues The DMX values to send.
  * @param dmxValuesSize The size of the DMX values array.
  */
-void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
+void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool sendAmnesia)
 {
 
     uint8_t newDmxValues[dmxValuesSize] = {};
@@ -196,7 +197,10 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
     request.which_request_payload = messaging_Request_dmx_request_tag;
 
     // TODO: This shouldn't be here. Needs to be higher up in the stack.
-    runAmnesiaCode(request);
+    if (sendAmnesia)
+    {
+        runAmnesiaCode(request);
+    }
 
     // Initialize a buffer stream for the encoded message
     uint8_t buffer[NOVABUF_MAX];
@@ -385,48 +389,46 @@ uint16_t Ambient::crc16_ccitt(const uint8_t *data, uint16_t length)
  * TODO: This needs to run for the entire frame, not just every 200ms.
  *
  */
-void Ambient::runAmnesiaCode(messaging_Request& request) {
+void Ambient::runAmnesiaCode(messaging_Request &request)
+{
     uint32_t currentTime = millis();
-    static uint32_t amnesiaLastTime = 0;
 
     // Run this every 200ms
-    if (currentTime - amnesiaLastTime >= 200)
+    request.has_configAmnesia = true;
+
+    // Important: Ensure the min is not greater than max
+    uint32_t fogOffMin = getFogOutputOffMinTime() ? getFogOutputOffMinTime() : 5000;
+    uint32_t fogOffMax = getFogOutputOffMaxTime() ? getFogOutputOffMaxTime() : 20000;
+    uint32_t fogOnMin = getFogOutputOnMinTime() ? getFogOutputOnMinTime() : 200;
+    uint32_t fogOnMax = getFogOutputOnMaxTime() ? getFogOutputOnMaxTime() : 1000;
+
+    // Safety
+    if (fogOffMax < fogOffMin)
     {
-        request.has_configAmnesia = true;
-
-        uint32_t fogOffMin = getFogOutputOffMinTime() ? getFogOutputOffMinTime() : 5000;
-        uint32_t fogOffMax = getFogOutputOffMaxTime() ? getFogOutputOffMaxTime() : 20000;
-        uint32_t fogOnMin = getFogOutputOnMinTime() ? getFogOutputOnMinTime() : 200;
-        uint32_t fogOnMax = getFogOutputOnMaxTime() ? getFogOutputOnMaxTime() : 1000;
-
-        // Safety
-        if (fogOffMax < fogOffMin) {
-            fogOffMax = fogOffMin;
-        }
-
-        if (fogOnMax < fogOnMin) {
-            fogOnMax = fogOnMin;
-        }
-
-        request.configAmnesia.fogOutputOffMinTime = fogOffMin;
-        request.configAmnesia.fogOutputOffMaxTime = fogOffMax;
-
-        request.configAmnesia.fogOutputOnMinTime = fogOnMin;
-        request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
-
-        // request.configAmnesia.fogActivateTime = 123456;
-
-//        Serial.printf("fogOffMin: %lu\n", fogOffMin);
-//        Serial.printf("fogOffMax: %lu\n", fogOffMax);
-//        Serial.printf("fogOnMin: %lu\n", fogOnMin);
-//        Serial.printf("fogOnMax: %lu\n", fogOnMax);
-
-
-        amnesiaLastTime = currentTime;
-
-//        Serial.println("Sending amnesia code");
-
+        fogOffMax = fogOffMin;
     }
+
+    if (fogOnMax < fogOnMin)
+    {
+        fogOnMax = fogOnMin;
+    }
+
+    request.configAmnesia.fogOutputOffMinTime = fogOffMin;
+    request.configAmnesia.fogOutputOffMaxTime = fogOffMax;
+
+    request.configAmnesia.fogOutputOnMinTime = fogOnMin;
+    request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
+
+    // request.configAmnesia.fogActivateTime = 123456;
+
+    //        Serial.printf("fogOffMin: %lu\n", fogOffMin);
+    //        Serial.printf("fogOffMax: %lu\n", fogOffMax);
+    //        Serial.printf("fogOnMin: %lu\n", fogOnMin);
+    //        Serial.printf("fogOnMax: %lu\n", fogOnMax);
+
+    // amnesiaLastTime = currentTime;
+
+    //Serial.println("Including amnesia code");
 
     // Send the request here
 }

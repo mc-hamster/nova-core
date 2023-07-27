@@ -23,7 +23,7 @@ public:
 
     void loop();
 
-    void sendDmxMessage(uint8_t* dmxValues, size_t dmxValuesSize);
+    void sendDmxMessage(uint8_t* dmxValues, size_t dmxValuesSize, bool sendAmnesia);
 
     uint32_t getFogOutputOffMinTime(void);
     uint32_t getFogOutputOffMaxTime(void);
