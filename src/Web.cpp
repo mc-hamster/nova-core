@@ -10,6 +10,7 @@
 #include "LightUtils.h"
 #include "Enable.h"
 #include "output/Star.h"
+#include "Ambient.h"
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -45,6 +46,8 @@ uint16_t sysInfoSeqIndex;
 
 uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
 
+uint16_t fogOutputOffMinTime, fogOutputOffMaxTime, fogOutputOnMinTime, fogOutputOnMaxTime;
+
 void numberCall(Control *sender, int type)
 {
     Serial.println(sender->value);
@@ -76,6 +79,18 @@ void slider(Control *sender, int type)
     else if (sender->id == lightingUpdatesSlider)
     {
         lightUtils->setCfgUpdates(sender->value.toInt());
+    }
+    else if (sender->id == fogOutputOffMinTime) {
+        ambient->setFogOutputOffMinTime(sender->value.toInt());
+    }
+    else if (sender->id == fogOutputOffMaxTime) {
+        ambient->setFogOutputOffMaxTime(sender->value.toInt());
+    }
+    else if (sender->id == fogOutputOnMinTime) {
+        ambient->setFogOutputOnMinTime(sender->value.toInt());
+    }
+    else if (sender->id == fogOutputOnMaxTime) {
+        ambient->setFogOutputOnMaxTime(sender->value.toInt());
     }
 }
 
@@ -496,23 +511,24 @@ void webSetup()
     lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
 
-/*
     //--- Fog Tab ---
-    ESPUI.addControl(ControlType::Slider, "Off Min Sec (default: 5)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
-    ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
-    ESPUI.addControl(Max, "", "120", None, lightingUpdatesSlider);
 
-    ESPUI.addControl(ControlType::Slider, "Off Max Sec (default: 20)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
-    ESPUI.addControl(Min, "", "1", None, lightingUpdatesSlider);
-    ESPUI.addControl(Max, "", "120", None, lightingUpdatesSlider);
+    fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);
+    ESPUI.addControl(Min, "", "2000", None, fogOutputOffMinTime);
+    ESPUI.addControl(Max, "", "60000", None, fogOutputOffMinTime);
 
-    ESPUI.addControl(ControlType::Slider, "On Min MSec (default: 200)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
-    ESPUI.addControl(Min, "", "200", None, lightingUpdatesSlider);
-    ESPUI.addControl(Max, "", "2000", None, lightingUpdatesSlider);
+    fogOutputOffMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOffMaxTime() ? ambient->getFogOutputOffMaxTime() : 20000), ControlColor::Alizarin, fogOutputOffMinTime, &slider);
+    ESPUI.addControl(Min, "", "2000", None, fogOutputOffMaxTime);
+    ESPUI.addControl(Max, "", "60000", None, fogOutputOffMaxTime);
 
-    ESPUI.addControl(ControlType::Slider, "On Max MSec (default: 1000)", String(lightUtils->getCfgUpdates()), ControlColor::Alizarin, lightingTab, &slider);
-    ESPUI.addControl(Min, "", "200", None, lightingUpdatesSlider);
-    ESPUI.addControl(Max, "", "2000", None, lightingUpdatesSlider);
+    fogOutputOnMinTime = ESPUI.addControl(ControlType::Slider, "On Time (default: 200 / 1000)", String(ambient->getFogOutputOnMinTime() ? ambient->getFogOutputOnMinTime() : 200), ControlColor::Alizarin, fogTab, &slider);
+    ESPUI.addControl(Min, "", "200", None, fogOutputOnMinTime);
+    ESPUI.addControl(Max, "", "2000", None, fogOutputOnMinTime);
+
+    fogOutputOnMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOnMaxTime() ? ambient->getFogOutputOnMaxTime() : 1000), ControlColor::Alizarin, fogOutputOnMinTime, &slider);
+    ESPUI.addControl(Min, "", "200", None, fogOutputOnMaxTime);
+    ESPUI.addControl(Max, "", "2000", None, fogOutputOnMaxTime);
+/*
 */
 
     // System Info Tab

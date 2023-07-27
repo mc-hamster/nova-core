@@ -195,10 +195,8 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize)
     request.request_payload.dmx_request = dmxRequest;
     request.which_request_payload = messaging_Request_dmx_request_tag;
 
+    // TODO: This shouldn't be here. Needs to be higher up in the stack.
     runAmnesiaCode(request);
-
-    /*
-     */
 
     // Initialize a buffer stream for the encoded message
     uint8_t buffer[NOVABUF_MAX];
@@ -379,25 +377,136 @@ uint16_t Ambient::crc16_ccitt(const uint8_t *data, uint16_t length)
     return crc; // Return the final CRC value
 }
 
+/**
+ * Runs the amnesia code for the given messaging request.
+ *
+ * @param request The messaging request to run the amnesia code for.
+ *
+ * TODO: This needs to run for the entire frame, not just every 200ms.
+ *
+ */
 void Ambient::runAmnesiaCode(messaging_Request& request) {
     uint32_t currentTime = millis();
     static uint32_t amnesiaLastTime = 0;
-    if (currentTime - amnesiaLastTime >= 10 * 1000)
+
+    // Run this every 200ms
+    if (currentTime - amnesiaLastTime >= 200)
     {
         request.has_configAmnesia = true;
-        request.configAmnesia.fogOutputOffMinTime = 5 * 1000;
-        request.configAmnesia.fogOutputOffMaxTime = 20 * 1000;
 
-        request.configAmnesia.fogOutputOnMinTime = 200;
-        request.configAmnesia.fogOutputOnMaxTime = 1000;
+        uint32_t fogOffMin = getFogOutputOffMinTime() ? getFogOutputOffMinTime() : 5000;
+        uint32_t fogOffMax = getFogOutputOffMaxTime() ? getFogOutputOffMaxTime() : 20000;
+        uint32_t fogOnMin = getFogOutputOnMinTime() ? getFogOutputOnMinTime() : 200;
+        uint32_t fogOnMax = getFogOutputOnMaxTime() ? getFogOutputOnMaxTime() : 1000;
+
+        // Safety
+        if (fogOffMax < fogOffMin) {
+            fogOffMax = fogOffMin;
+        }
+
+        if (fogOnMax < fogOnMin) {
+            fogOnMax = fogOnMin;
+        }
+
+        request.configAmnesia.fogOutputOffMinTime = fogOffMin;
+        request.configAmnesia.fogOutputOffMaxTime = fogOffMax;
+
+        request.configAmnesia.fogOutputOnMinTime = fogOnMin;
+        request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
 
         // request.configAmnesia.fogActivateTime = 123456;
 
+//        Serial.printf("fogOffMin: %lu\n", fogOffMin);
+//        Serial.printf("fogOffMax: %lu\n", fogOffMax);
+//        Serial.printf("fogOnMin: %lu\n", fogOnMin);
+//        Serial.printf("fogOnMax: %lu\n", fogOnMax);
+
+
         amnesiaLastTime = currentTime;
 
-        Serial.println("Sending amnesia code");
+//        Serial.println("Sending amnesia code");
 
     }
 
     // Send the request here
+}
+
+bool Ambient::setFogOutputOffMinTime(uint32_t time)
+{
+    manager.set("fogOutputOffMinTime", time);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+        return 1;
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+        return 0;
+    }
+}
+
+bool Ambient::setFogOutputOffMaxTime(uint32_t time)
+{
+    manager.set("fogOutputOffMaxTime", time);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+        return 1;
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+        return 0;
+    }
+}
+
+bool Ambient::setFogOutputOnMinTime(uint32_t time)
+{
+    manager.set("fogOutputOnMinTime", time);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+        return 1;
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+        return 0;
+    }
+}
+
+bool Ambient::setFogOutputOnMaxTime(uint32_t time)
+{
+    manager.set("fogOutputOnMaxTime", time);
+    if (manager.save())
+    {
+        Serial.println("Data saved successfully.");
+        return 1;
+    }
+    else
+    {
+        Serial.println("Failed to save data.");
+        return 0;
+    }
+}
+
+uint32_t Ambient::getFogOutputOffMinTime(void)
+{
+    return manager.get("fogOutputOffMinTime").as<uint32_t>();
+}
+
+uint32_t Ambient::getFogOutputOffMaxTime(void)
+{
+    return manager.get("fogOutputOffMaxTime").as<uint32_t>();
+}
+
+uint32_t Ambient::getFogOutputOnMinTime(void)
+{
+    return manager.get("fogOutputOnMinTime").as<uint32_t>();
+}
+
+uint32_t Ambient::getFogOutputOnMaxTime(void)
+{
+    return manager.get("fogOutputOnMaxTime").as<uint32_t>();
 }
