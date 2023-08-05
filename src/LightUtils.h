@@ -26,7 +26,7 @@ extern PersistenceManager manager;
 class LightUtils
 {
 private:
-    CRGBPalette16 getPalette(uint32_t paletteSelect);
+    CRGBPalette16 getPalette(uint32_t paletteSelect, bool saveSelection);
     void FillLEDsFromPaletteColors(uint8_t colorIndex);
     void Fire2012WithPalette(void);
 
@@ -38,6 +38,8 @@ private:
     bool cfgFire = 0;
     bool cfgLocalDisable = 0;
     CRGB leds[NUM_LEDS];
+    uint32_t cfgAutoTime = 0;
+    bool cfgAuto = 0;
 
 public:
     LightUtils();
@@ -51,10 +53,14 @@ public:
     void setCfgProgram(uint8_t program);
     void setCfgBrightness(uint8_t brightness);
     void setCfgUpdates(uint16_t updates);
+    void setCfgAuto(bool autoLight);
+    void setCfgAutoTime(uint32_t updates);
 
     bool getCfgReverse(void);
     bool getCfgFire(void);
     bool getCfgLocalDisable(void);
+    bool getCfgAuto(void);
+    uint32_t getCfgAutoTime(void);
     uint8_t getCfgSin(void);
     uint8_t getCfgProgram(void);
     uint8_t getCfgBrightness(void);

@@ -28,7 +28,7 @@ uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
 
-uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable;
+uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime;
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
 
@@ -80,17 +80,27 @@ void slider(Control *sender, int type)
     {
         lightUtils->setCfgUpdates(sender->value.toInt());
     }
-    else if (sender->id == fogOutputOffMinTime) {
+    else if (sender->id == fogOutputOffMinTime)
+    {
         ambient->setFogOutputOffMinTime(sender->value.toInt());
     }
-    else if (sender->id == fogOutputOffMaxTime) {
+    else if (sender->id == fogOutputOffMaxTime)
+    {
         ambient->setFogOutputOffMaxTime(sender->value.toInt());
     }
-    else if (sender->id == fogOutputOnMinTime) {
+    else if (sender->id == fogOutputOnMinTime)
+    {
         ambient->setFogOutputOnMinTime(sender->value.toInt());
     }
-    else if (sender->id == fogOutputOnMaxTime) {
+    else if (sender->id == fogOutputOnMaxTime)
+    {
         ambient->setFogOutputOnMaxTime(sender->value.toInt());
+    }
+    else if (sender->id == lightingAutoTime)
+    {
+        lightUtils->setCfgAutoTime(sender->value.toInt());
+    } else {
+        Serial.println("Unknown slider");
     }
 }
 
@@ -337,6 +347,10 @@ void switchExample(Control *sender, int value)
 
         lightUtils->setCfgLocalDisable(sender->value.toInt());
     }
+    else if (sender->id == lightingAuto)
+    {
+        lightUtils->setCfgAuto(sender->value.toInt());
+    }
     else if (sender->id == mainDrunktardSwitch)
     {
         manager.set("cfgDrunktard", sender->value.toInt());
@@ -371,6 +385,10 @@ void switchExample(Control *sender, int value)
             delay(50);
             ESP.restart();
         }
+    }
+    else
+    {
+        Serial.println("Unknown Switch");
     }
 
     switch (value)
@@ -511,6 +529,11 @@ void webSetup()
     lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
 
+    lightingAuto = ESPUI.addControl(ControlType::Switcher, "Auto Light Program Selection", String(lightUtils->getCfgReverse()), ControlColor::Alizarin, lightingTab, &switchExample);
+    lightingAutoTime = ESPUI.addControl(ControlType::Slider, "Auto Time", String(lightUtils->getCfgAutoTime() ? lightUtils->getCfgAutoTime() : 30), ControlColor::Alizarin, lightingAuto, &slider);
+    ESPUI.addControl(Min, "", "1", None, fogOutputOffMinTime);
+    ESPUI.addControl(Max, "", "3600", None, fogOutputOffMinTime);
+
     //--- Fog Tab ---
 
     fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);
@@ -528,8 +551,8 @@ void webSetup()
     fogOutputOnMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOnMaxTime() ? ambient->getFogOutputOnMaxTime() : 1000), ControlColor::Alizarin, fogOutputOnMinTime, &slider);
     ESPUI.addControl(Min, "", "200", None, fogOutputOnMaxTime);
     ESPUI.addControl(Max, "", "2000", None, fogOutputOnMaxTime);
-/*
-*/
+    /*
+     */
 
     // System Info Tab
     sysInfoSeqIndex = ESPUI.addControl(ControlType::Label, "Button Sequence Index", "Red: 0, Green: 0, Blue: 0, Yellow: 0", ControlColor::Sunflower, sysInfoTab);
