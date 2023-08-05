@@ -60,7 +60,7 @@ void Buttons::loop(void)
     button_green->tick(novaIO->expansionDigitalRead(BUTTON_GREEN_IN) == LOW);
     button_blue->tick(novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == LOW);
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
-    //button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
+    // button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
     if (star->isBoomerRedActive())
     {
@@ -133,6 +133,9 @@ void Buttons::red_click(void)
     {
         Serial.println("Red Click");
         star->redPoof();
+        novaIO->ledRed(LOW);
+        delay(100);
+        novaIO->ledRed(HIGH);
     }
 }
 
@@ -160,13 +163,15 @@ void Buttons::red_longPressStop(void)
     }
 }
 
-
 void Buttons::green_click(void)
 {
     if (!enable->isDrunktard())
     {
         Serial.println("Green Click");
         star->greenPoof();
+        novaIO->ledGreen(LOW);
+        delay(100);
+        novaIO->ledGreen(HIGH);
     }
 }
 
@@ -200,6 +205,9 @@ void Buttons::blue_click(void)
     {
         Serial.println("Blue Click");
         star->bluePoof();
+        novaIO->ledBlue(LOW);
+        delay(100);
+        novaIO->ledBlue(HIGH);
     }
 }
 
@@ -233,6 +241,9 @@ void Buttons::yellow_click(void)
     {
         Serial.println("Yellow Click");
         star->yellowPoof();
+        novaIO->ledYellow(LOW);
+        delay(100);
+        novaIO->ledYellow(HIGH);
     }
 }
 
