@@ -196,6 +196,15 @@ public:
     bool isBoomerBlueActive();
     bool isBoomerYellowActive();
 
+    void manualPoof(uint8_t star, bool state);
+    void manualBlow(uint8_t star, bool state);
+    void manualBlowFuel(uint8_t star, bool state);
+    void manualFuel(uint8_t star, bool state);
+    void manualZap(uint8_t star, bool state);
+
+
+
+
 };
 
 extern Star *star;

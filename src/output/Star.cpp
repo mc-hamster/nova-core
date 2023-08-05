@@ -1458,3 +1458,30 @@ void Star::boom(uint8_t star)
     cluster.stars[star].starState.boomerButtonState = BOOMER_ON;
     // cluster.stars[star].starState.pooferButtonState = POOFER_POOF;
 }
+
+void Star::manualPoof(uint8_t star, bool state)
+{
+    //Serial.println("manual pooooooof");
+    novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, state, cluster.stars[star].expander);
+}
+
+void Star::manualBlow(uint8_t star, bool state)
+{
+    novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, state, cluster.stars[star].expander);
+}
+
+void Star::manualBlowFuel(uint8_t star, bool state)
+{
+    novaIO->mcp_digitalWrite(cluster.stars[star].blowerOutput, state, cluster.stars[star].expander);
+    novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, state, cluster.stars[star].expander);
+}
+
+void Star::manualFuel(uint8_t star, bool state)
+{
+    novaIO->mcp_digitalWrite(cluster.stars[star].fuelOutput, state, cluster.stars[star].expander);
+}
+
+void Star::manualZap(uint8_t star, bool state)
+{
+    novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, state, cluster.stars[star].expander);
+}

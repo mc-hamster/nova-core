@@ -42,6 +42,9 @@ uint16_t boomerB1, boomerB2, boomerB3;
 uint16_t boomerC1, boomerC2, boomerC3;
 uint16_t boomerD1, boomerD2, boomerD3;
 
+uint16_t starManualPoof, starManualBlow, starManuallowFuel, starManualFuel, starManualZap, starManualSelect;
+uint8_t starManualSelectValue = 0;
+
 uint16_t sysInfoSeqIndex;
 
 uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
@@ -99,7 +102,9 @@ void slider(Control *sender, int type)
     else if (sender->id == lightingAutoTime)
     {
         lightUtils->setCfgAutoTime(sender->value.toInt());
-    } else {
+    }
+    else
+    {
         Serial.println("Unknown slider");
     }
 }
@@ -316,18 +321,82 @@ void buttonCallback(Control *sender, int type)
         }
     }
 
-    /*
-    switch (type)
+    if (sender->id == starManualPoof)
     {
-    case B_DOWN:
-        Serial.println("Button DOWN");
-        break;
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("Poof DOWN");
+            // novaIO->mcp_digitalWrite(cluster.stars[20].blowerOutput, HIGH, cluster.stars[20].expander);
+            star->manualPoof(starManualSelectValue, HIGH);
+            break;
 
-    case B_UP:
-        Serial.println("Button UP");
-        break;
+        case B_UP:
+            Serial.println("Poof UP");
+            star->manualPoof(starManualSelectValue, LOW);
+            break;
+        }
     }
-    */
+    else if (sender->id == starManualBlow)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("Blow DOWN");
+            star->manualBlow(starManualSelectValue, HIGH);
+            break;
+
+        case B_UP:
+            Serial.println("Blow UP");
+            star->manualBlow(starManualSelectValue, LOW);
+            break;
+        }
+    }
+    else if (sender->id == starManuallowFuel)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("Blow DOWN");
+            star->manualBlowFuel(starManualSelectValue, HIGH);
+            break;
+
+        case B_UP:
+            Serial.println("Blow UP");
+            star->manualBlowFuel(starManualSelectValue, LOW);
+            break;
+        }
+    }
+    else if (sender->id == starManualFuel)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("Fuel DOWN");
+            star->manualFuel(starManualSelectValue, HIGH);
+            break;
+
+        case B_UP:
+            Serial.println("Fuel UP");
+            star->manualFuel(starManualSelectValue, LOW);
+            break;
+        }
+    }
+    else if (sender->id == starManualZap)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("Zap DOWN");
+            star->manualZap(starManualSelectValue, HIGH);
+            break;
+
+        case B_UP:
+            Serial.println("Zap UP");
+            star->manualZap(starManualSelectValue, LOW);
+            break;
+        }
+    }
 }
 
 void switchExample(Control *sender, int value)
@@ -417,6 +486,10 @@ void selectExample(Control *sender, int value)
     {
         lightUtils->setCfgProgram(sender->value.toInt());
     }
+    else if (sender->id == starManualSelect)
+    {
+        starManualSelectValue = sender->value.toInt();
+    }
 }
 
 void webSetup()
@@ -474,6 +547,34 @@ void webSetup()
     boomerD1 = ESPUI.addControl(ControlType::Button, "Star Cluster - D", "Boom 1", ControlColor::Carrot, pooferD1, buttonCallback);
     boomerD2 = ESPUI.addControl(ControlType::Button, "", "Boom 2", ControlColor::None, pooferD1, buttonCallback);
     boomerD3 = ESPUI.addControl(ControlType::Button, "", "Boom 3", ControlColor::None, pooferD1, buttonCallback);
+
+    starManualPoof = ESPUI.addControl(ControlType::Button, "Star Manual", "Poof", ControlColor::Carrot, manualTab, buttonCallback);
+    starManualBlow = ESPUI.addControl(ControlType::Button, "Star Manual", "Blow", ControlColor::Carrot, starManualPoof, buttonCallback);
+    starManualFuel = ESPUI.addControl(ControlType::Button, "Star Manual", "Fuel", ControlColor::Carrot, starManualPoof, buttonCallback);
+    starManuallowFuel = ESPUI.addControl(ControlType::Button, "Star Manual", "Blow & Fuel", ControlColor::Carrot, starManualPoof, buttonCallback);
+    starManualZap = ESPUI.addControl(ControlType::Button, "Star Manual", "Zap", ControlColor::Carrot, starManualPoof, buttonCallback);
+
+    starManualSelect = ESPUI.addControl(ControlType::Select, "Star 1", String(starManualSelectValue), ControlColor::Alizarin, starManualPoof, &selectExample);
+    ESPUI.addControl(ControlType::Option, "Star 1", "0", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 2", "1", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 3", "2", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 4", "3", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 5", "4", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 6", "5", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 7", "6", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 8", "7", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 9", "8", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 10", "9", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 11", "10", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 12", "11", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 13", "12", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 14", "13", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 15", "14", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 16", "15", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 17", "16", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 18", "17", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 19", "18", ControlColor::Alizarin, starManualSelect);
+    ESPUI.addControl(ControlType::Option, "Star 20", "19", ControlColor::Alizarin, starManualSelect);
 
     //---- Tab 3 (Sequences) -----
     switchOne = ESPUI.addControl(ControlType::Switcher, "Switch one", "", ControlColor::Alizarin, sequencesTab, &switchExample);
