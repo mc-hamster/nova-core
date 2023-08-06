@@ -12,7 +12,7 @@ private:
     uint32_t pooferDuration = 100;
 
     uint32_t boomerTimeBlowerOn = 50;
-    uint32_t boomerTimeFuelOn = 2000;
+    uint32_t boomerTimeFuelOn = 2500;
     uint32_t boomerTimeFuelOff = 200;
     uint32_t boomerTimeBomerBlowerOff = 30;
     uint32_t boomerTimeBomerZap = 100;
