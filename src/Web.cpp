@@ -496,7 +496,7 @@ void webSetup()
 {
     // Add tabs
     uint16_t mainTab = ESPUI.addControl(ControlType::Tab, "Main", "Main");
-    uint16_t settingsTab = ESPUI.addControl(ControlType::Tab, "Settings", "Settings");
+    // uint16_t settingsTab = ESPUI.addControl(ControlType::Tab, "Settings", "Settings");
     uint16_t manualTab = ESPUI.addControl(ControlType::Tab, "Manual", "Manual");
     uint16_t sequencesTab = ESPUI.addControl(ControlType::Tab, "Sequences", "Sequences");
     uint16_t lightingTab = ESPUI.addControl(ControlType::Tab, "Lighting", "Lighting");
@@ -512,7 +512,7 @@ void webSetup()
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(enable->isDrunktard()), ControlColor::None, mainTab, &switchExample);
 
     //----- (Settings) -----
-    ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
+    // ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
 
     //----- (Manual) -----
 
