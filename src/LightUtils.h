@@ -66,9 +66,8 @@ public:
     uint8_t getCfgBrightness(void);
     uint16_t getCfgUpdates(void);
 
-    CRGB* getLeds(void);
+    CRGB *getLeds(void);
     uint16_t getNumberOfLeds(void);
-
 };
 
 extern LightUtils *lightUtils;
