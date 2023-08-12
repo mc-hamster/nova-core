@@ -48,7 +48,7 @@ private:
     };
     struct starStates
     {
-        //uint8_t cache_de;
+        // uint8_t cache_de;
         PooferButtonState pooferButtonState;
         BoomerButtonState boomerButtonState;
     };
@@ -79,12 +79,10 @@ private:
     starCluster cluster;
 
 public:
-
     uint8_t sequenceRed = 0;
     uint8_t sequenceGreen = 0;
     uint8_t sequenceBlue = 0;
     uint8_t sequenceYellow = 0;
-
 
     enum RedButtonState
     {
@@ -148,7 +146,8 @@ public:
         BOOMER_BLOWER_EXHAUST_OFF       // Turn the exhaust off.
     };
 
-    enum StarColors {
+    enum StarColors
+    {
         STAR_RED,
         STAR_GREEN,
         STAR_BLUE,
@@ -202,9 +201,7 @@ public:
     void manualFuel(uint8_t star, bool state);
     void manualZap(uint8_t star, bool state);
 
-
-
-
+    uint32_t whatBoomerFullTime();
 };
 
 extern Star *star;
