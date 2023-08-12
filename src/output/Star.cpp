@@ -221,7 +221,7 @@ void Star::setupStar(void)
     cluster.stars[19].net.re = 6;
     cluster.stars[19].net.de = 7;
 
-    for (uint32_t i = 0; i < 12; i++)
+    for (uint32_t i = 0; i < 20; i++)
     {
         cluster.stars[i].starState.boomerButtonState = BOOMER_IDLE;
         cluster.stars[i].pooferCountsRemaining = 0;
@@ -1300,6 +1300,9 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 {
     uint32_t currentMillis = millis();
     // Serial.println("1");
+    // Serial.print("goPoof called: ");
+    // Serial.println(star);
+
     switch (cluster.stars[star].pooferOutputState)
     {
     case POOF_ON:
@@ -1450,18 +1453,28 @@ bool Star::netOut(uint8_t star)
 
 void Star::poof(uint8_t star)
 {
+    if (star >= 20)
+    {
+        Serial.println("Star::poof() - star is out of range");
+        return;
+    }
     cluster.stars[star].starState.pooferButtonState = POOFER_POOF;
 }
 
 void Star::boom(uint8_t star)
 {
+    if (star >= 20)
+    {
+        Serial.println("Star::boom() - star is out of range");
+        return;
+    }
     cluster.stars[star].starState.boomerButtonState = BOOMER_ON;
     // cluster.stars[star].starState.pooferButtonState = POOFER_POOF;
 }
 
 void Star::manualPoof(uint8_t star, bool state)
 {
-    //Serial.println("manual pooooooof");
+    // Serial.println("manual pooooooof");
     novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, state, cluster.stars[star].expander);
 }
 
@@ -1484,4 +1497,9 @@ void Star::manualFuel(uint8_t star, bool state)
 void Star::manualZap(uint8_t star, bool state)
 {
     novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, state, cluster.stars[star].expander);
+}
+
+uint32_t Star::whatBoomerFullTime()
+{
+    return (boomerTimeBlowerOn + boomerTimeFuelOn + boomerTimeFuelOff + boomerTimeBomerBlowerOff + boomerTimeBomerZap + boomerTimeExhaust);
 }
