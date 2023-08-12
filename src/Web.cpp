@@ -10,6 +10,7 @@
 #include "LightUtils.h"
 #include "Enable.h"
 #include "output/Star.h"
+#include "output/StarSequence.h"
 #include "Ambient.h"
 
 void handleRequest(AsyncWebServerRequest *request)
@@ -48,6 +49,8 @@ uint8_t starManualSelectValue = 0;
 uint16_t sysInfoSeqIndex;
 
 uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
+
+uint16_t starSeq_SEQ_POOF_END_TO_END, starSeq_SEQ_BOOMER_LEFT_TO_RIGHT, starSeq_SEQ_BOOMER_RIGHT_TO_LEFT, starSeq_SEQ_BOOM_FAST, starSeq_SEQ_BOOM_WAVE_IN, starSeq_SEQ_OFF;
 
 uint16_t fogOutputOffMinTime, fogOutputOffMaxTime, fogOutputOnMinTime, fogOutputOnMaxTime;
 
@@ -397,6 +400,84 @@ void buttonCallback(Control *sender, int type)
             break;
         }
     }
+
+    if (sender->id == starSeq_SEQ_POOF_END_TO_END)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("starSeq_SEQ_POOF_END_TO_END DOWN");
+            starSequence->setSequence(starSequence->SEQ_POOF_END_TO_END);
+            break;
+
+        case B_UP:
+            Serial.println("starSeq_SEQ_POOF_END_TO_END UP");
+            starSequence->setSequence(starSequence->SEQ_OFF);
+            break;
+        }
+    }
+    else if (sender->id == starSeq_SEQ_BOOM_FAST)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("starSeq_SEQ_BOOM_FAST DOWN");
+            starSequence->setSequence(starSequence->SEQ_BOOM_FAST);
+            break;
+
+        case B_UP:
+            Serial.println("starSeq_SEQ_BOOM_FAST UP");
+            starSequence->setSequence(starSequence->SEQ_OFF);
+            break;
+        }
+    }
+    else if (sender->id == starSeq_SEQ_BOOMER_LEFT_TO_RIGHT)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("starSeq_SEQ_BOOMER_LEFT_TO_RIGHT DOWN");
+            starSequence->setSequence(starSequence->SEQ_BOOMER_LEFT_TO_RIGHT);
+            break;
+
+        case B_UP:
+            Serial.println("starSeq_SEQ_BOOMER_LEFT_TO_RIGHT UP");
+            starSequence->setSequence(starSequence->SEQ_OFF);
+            break;
+        }
+    }
+    else if (sender->id == starSeq_SEQ_BOOMER_RIGHT_TO_LEFT)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("starSeq_SEQ_BOOMER_LEFT_TO_RIGHT DOWN");
+            starSequence->setSequence(starSequence->SEQ_BOOMER_RIGHT_TO_LEFT);
+            break;
+
+        case B_UP:
+            Serial.println("starSeq_SEQ_BOOMER_RIGHT_TO_LEFT UP");
+            starSequence->setSequence(starSequence->SEQ_OFF);
+            break;
+        }
+    }
+    else if (sender->id == starSeq_SEQ_BOOM_WAVE_IN)
+    {
+        switch (type)
+        {
+        case B_DOWN:
+            Serial.println("starSeq_SEQ_BOOM_WAVE_IN DOWN");
+            starSequence->setSequence(starSequence->SEQ_BOOM_WAVE_IN);
+            break;
+
+        case B_UP:
+            Serial.println("starSeq_SEQ_BOOM_WAVE_IN UP");
+            starSequence->setSequence(starSequence->SEQ_OFF);
+            break;
+        }
+    }
+
+
 }
 
 void switchExample(Control *sender, int value)
@@ -577,10 +658,17 @@ void webSetup()
     ESPUI.addControl(ControlType::Option, "Star 20", "19", ControlColor::Alizarin, starManualSelect);
 
     //---- Tab 3 (Sequences) -----
-    switchOne = ESPUI.addControl(ControlType::Switcher, "Switch one", "", ControlColor::Alizarin, sequencesTab, &switchExample);
-    seqBoomAll = ESPUI.addControl(ControlType::Button, "Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    seqBoomAll = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     seqBoomLeftRight = ESPUI.addControl(ControlType::Button, "Boomers", "L to R (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomRightLeft = ESPUI.addControl(ControlType::Button, "Boomers", "R to L (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
+
+    starSeq_SEQ_POOF_END_TO_END = ESPUI.addControl(ControlType::Button, "SEQ_POOF_END_TO_END", "SEQ_POOF_END_TO_END", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    starSeq_SEQ_BOOMER_LEFT_TO_RIGHT = ESPUI.addControl(ControlType::Button, "Boomers", "BOOMER_LEFT_TO_RIGHT", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
+    starSeq_SEQ_BOOMER_RIGHT_TO_LEFT = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOMER_RIGHT_TO_LEFT", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
+    starSeq_SEQ_BOOM_FAST = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOM_FAST", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
+    starSeq_SEQ_BOOM_WAVE_IN = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOM_WAVE_IN", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
+
+
 
     //---- Tab -- Lighting
     lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", String(lightUtils->getCfgBrightness()), ControlColor::Alizarin, lightingTab, &slider);

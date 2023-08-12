@@ -2,6 +2,7 @@
 #include "Enable.h"
 #include "configuration.h"
 #include "NovaIO.h"
+#include "output/StarSequence.h"
 
 /*
 
@@ -50,7 +51,6 @@ void Enable::loop()
     }
 }
 
-
 /*
 This function is called when the emergency stop is exited. It checks if the system should reboot or not. If rebootOnEmergencyStopExit is true, the system will reboot. Otherwise, the system will be enabled and the disabledBrightness will be set to 0.
 
@@ -83,6 +83,10 @@ void Enable::emergencyStopExit()
     else
     {
         Serial.println("System is returning from emergency stop. Not Rebooting...");
+
+        // Incase a sequence was running, turn it off.
+        starSequence->setSequence(starSequence->SEQ_OFF);
+
         systemEnable = true;
     }
 }
@@ -98,8 +102,10 @@ void Enable::emergencyStopEnter()
 
     Serial.println("Emergency Stop Activated. Entering fail safe.");
 
-    // Turn off all the outputs a few times incase there is a problem in the i2c bus
+    // Incase a sequence was running, turn it off.
+    starSequence->setSequence(starSequence->SEQ_OFF);
 
+    // Turn off all the outputs a few times incase there is a problem in the i2c bus
     for (int i = 0; i <= 4; i++)
     {
         // Turn off all the outputs.
