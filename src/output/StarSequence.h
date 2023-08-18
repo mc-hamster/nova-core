@@ -19,7 +19,8 @@ public:
         SEQ_BOOMER_LEFT_TO_RIGHT,
         SEQ_BOOMER_RIGHT_TO_LEFT,
         SEQ_BOOM_FAST,
-        SEQ_BOOM_WAVE_IN
+        SEQ_BOOM_WAVE_IN,
+        SEQ_BOOM_POOF
     };
 
     StarSequence();
