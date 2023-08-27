@@ -376,35 +376,17 @@ void Star::redPoof()
         break;
     case 6:
         poof(0);
+        poof(2);
         break;
     case 7:
         poof(1);
         break;
     case 8:
+        poof(0);
+        poof(1);
         poof(2);
         break;
     case 9:
-        poof(2);
-        break;
-    case 10:
-        poof(1);
-        break;
-    case 11:
-        poof(0);
-        break;
-    case 12:
-        poof(0);
-        poof(2);
-        break;
-    case 13:
-        poof(1);
-        break;
-    case 14:
-        poof(0);
-        poof(1);
-        poof(2);
-        break;
-    case 15:
         poof(0);
         poof(1);
         poof(2);
@@ -412,7 +394,7 @@ void Star::redPoof()
     }
 
     sequenceRed++;
-    if (sequenceRed == 16)
+    if (sequenceRed == 10)
     {
         sequenceRed = 0;
     }
@@ -434,6 +416,7 @@ void Star::redBoom()
 
     switch (sequenceRed)
     {
+
     case 0:
         boom(0);
         break;
@@ -454,35 +437,17 @@ void Star::redBoom()
         break;
     case 6:
         boom(0);
+        boom(2);
         break;
     case 7:
         boom(1);
         break;
     case 8:
+        boom(0);
+        boom(1);
         boom(2);
         break;
     case 9:
-        boom(2);
-        break;
-    case 10:
-        boom(1);
-        break;
-    case 11:
-        boom(0);
-        break;
-    case 12:
-        boom(0);
-        boom(2);
-        break;
-    case 13:
-        boom(1);
-        break;
-    case 14:
-        boom(0);
-        boom(1);
-        boom(2);
-        break;
-    case 15:
         boom(0);
         boom(1);
         boom(2);
@@ -490,7 +455,7 @@ void Star::redBoom()
     }
 
     sequenceRed++;
-    if (sequenceRed == 16)
+    if (sequenceRed == 10)
     {
         sequenceRed = 0;
     }
@@ -524,35 +489,17 @@ void Star::greenPoof()
         break;
     case 6:
         poof(3);
+        poof(5);
         break;
     case 7:
         poof(4);
         break;
     case 8:
+        poof(3);
+        poof(4);
         poof(5);
         break;
     case 9:
-        poof(5);
-        break;
-    case 10:
-        poof(4);
-        break;
-    case 11:
-        poof(3);
-        break;
-    case 12:
-        poof(3);
-        poof(5);
-        break;
-    case 13:
-        poof(4);
-        break;
-    case 14:
-        poof(3);
-        poof(4);
-        poof(5);
-        break;
-    case 15:
         poof(3);
         poof(4);
         poof(5);
@@ -560,7 +507,7 @@ void Star::greenPoof()
     }
 
     sequenceGreen++;
-    if (sequenceGreen == 16)
+    if (sequenceGreen == 10)
     {
         sequenceGreen = 0;
     }
@@ -582,6 +529,7 @@ void Star::greenBoom()
 
     switch (sequenceGreen)
     {
+
     case 0:
         boom(3);
         break;
@@ -602,35 +550,17 @@ void Star::greenBoom()
         break;
     case 6:
         boom(3);
+        boom(5);
         break;
     case 7:
         boom(4);
         break;
     case 8:
+        boom(3);
+        boom(4);
         boom(5);
         break;
     case 9:
-        boom(5);
-        break;
-    case 10:
-        boom(4);
-        break;
-    case 11:
-        boom(3);
-        break;
-    case 12:
-        boom(3);
-        boom(5);
-        break;
-    case 13:
-        boom(4);
-        break;
-    case 14:
-        boom(3);
-        boom(4);
-        boom(5);
-        break;
-    case 15:
         boom(3);
         boom(4);
         boom(5);
@@ -638,7 +568,7 @@ void Star::greenBoom()
     }
 
     sequenceGreen++;
-    if (sequenceGreen == 16)
+    if (sequenceGreen == 10)
     {
         sequenceGreen = 0;
     }
@@ -672,35 +602,17 @@ void Star::bluePoof()
         break;
     case 6:
         poof(6);
+        poof(8);
         break;
     case 7:
         poof(7);
         break;
     case 8:
+        poof(6);
+        poof(7);
         poof(8);
         break;
     case 9:
-        poof(8);
-        break;
-    case 10:
-        poof(7);
-        break;
-    case 11:
-        poof(6);
-        break;
-    case 12:
-        poof(6);
-        poof(8);
-        break;
-    case 13:
-        poof(7);
-        break;
-    case 14:
-        poof(6);
-        poof(7);
-        poof(8);
-        break;
-    case 15:
         poof(6);
         poof(7);
         poof(8);
@@ -708,7 +620,7 @@ void Star::bluePoof()
     }
 
     sequenceBlue++;
-    if (sequenceBlue == 16)
+    if (sequenceBlue == 10)
     {
         sequenceBlue = 0;
     }
@@ -750,35 +662,17 @@ void Star::blueBoom()
         break;
     case 6:
         boom(6);
+        boom(8);
         break;
     case 7:
         boom(7);
         break;
     case 8:
+        boom(6);
+        boom(7);
         boom(8);
         break;
     case 9:
-        boom(8);
-        break;
-    case 10:
-        boom(7);
-        break;
-    case 11:
-        boom(6);
-        break;
-    case 12:
-        boom(6);
-        boom(8);
-        break;
-    case 13:
-        boom(7);
-        break;
-    case 14:
-        boom(6);
-        boom(7);
-        boom(8);
-        break;
-    case 15:
         boom(6);
         boom(7);
         boom(8);
@@ -786,7 +680,7 @@ void Star::blueBoom()
     }
 
     sequenceBlue++;
-    if (sequenceBlue == 16)
+    if (sequenceBlue == 10)
     {
         sequenceBlue = 0;
     }
@@ -800,6 +694,7 @@ void Star::yellowPoof()
 
     switch (sequenceYellow)
     {
+
     case 0:
         poof(9);
         break;
@@ -820,35 +715,17 @@ void Star::yellowPoof()
         break;
     case 6:
         poof(9);
+        poof(11);
         break;
     case 7:
         poof(10);
         break;
     case 8:
+        poof(9);
+        poof(10);
         poof(11);
         break;
     case 9:
-        poof(11);
-        break;
-    case 10:
-        poof(10);
-        break;
-    case 11:
-        poof(9);
-        break;
-    case 12:
-        poof(9);
-        poof(11);
-        break;
-    case 13:
-        poof(10);
-        break;
-    case 14:
-        poof(9);
-        poof(10);
-        poof(11);
-        break;
-    case 15:
         poof(9);
         poof(10);
         poof(11);
@@ -856,7 +733,7 @@ void Star::yellowPoof()
     }
 
     sequenceYellow++;
-    if (sequenceYellow == 16)
+    if (sequenceYellow == 10)
     {
         sequenceYellow = 0;
     }
@@ -878,6 +755,7 @@ void Star::yellowBoom()
 
     switch (sequenceYellow)
     {
+
     case 0:
         boom(9);
         break;
@@ -898,35 +776,17 @@ void Star::yellowBoom()
         break;
     case 6:
         boom(9);
+        boom(11);
         break;
     case 7:
         boom(10);
         break;
     case 8:
+        boom(9);
+        boom(10);
         boom(11);
         break;
     case 9:
-        boom(11);
-        break;
-    case 10:
-        boom(10);
-        break;
-    case 11:
-        boom(9);
-        break;
-    case 12:
-        boom(9);
-        boom(11);
-        break;
-    case 13:
-        boom(10);
-        break;
-    case 14:
-        boom(9);
-        boom(10);
-        boom(11);
-        break;
-    case 15:
         boom(9);
         boom(10);
         boom(11);
@@ -934,7 +794,7 @@ void Star::yellowBoom()
     }
 
     sequenceYellow++;
-    if (sequenceYellow == 16)
+    if (sequenceYellow == 10)
     {
         sequenceYellow = 0;
     }
