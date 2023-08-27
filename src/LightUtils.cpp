@@ -121,7 +121,7 @@ LightUtils::LightUtils()
     Serial.println("Configuring FastLED");
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(2000)>(leds, NUM_LEDS);
     FastLED.setBrightness(getCfgBrightness());
-    // FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it the DMX lights.
+    FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it for the DMX lights.
 
 
     Serial.println("Loading light configuration - currentPalette");
@@ -189,8 +189,8 @@ void LightUtils::loop()
     if (!getCfgLocalDisable())
     {
         FastLED.show();
-        FastLED.delay(1000 / cfgUpdates); // Enables temporal dithering
-        // delay(1000 / cfgUpdates);
+        // FastLED.delay(1000 / cfgUpdates); // Enables temporal dithering
+        delay(1000 / cfgUpdates);
     }
     else
     {
