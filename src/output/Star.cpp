@@ -855,6 +855,12 @@ void Star::boomAbort(uint8_t star)
  */
 bool Star::goBoom(uint8_t star)
 {
+
+    if (star == 6) {
+        Serial.println("Star 6 - Skipping Boom.");
+        return 1;
+    }
+
     uint32_t currentMillis = millis();
     if (cluster.stars[star].boomer.outputState == BOOMER_ABORT)
     {
