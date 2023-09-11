@@ -21,6 +21,21 @@ Star::Star()
 void Star::setupStar(void)
 {
 
+    for (uint32_t i = 0; i < 20; i++)
+    {
+        cluster.stars[i].starState.boomerButtonState = BOOMER_IDLE;
+        cluster.stars[i].pooferCountsRemaining = 0;
+        cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].pooferOutputState = 0;
+        cluster.stars[i].boomer.outputState = BOOMER_READY;
+        cluster.stars[i].boomer.previousMillis = 0;
+        cluster.stars[i].boomer.abort = false;
+        cluster.stars[i].net.cache_re = 0;
+        cluster.stars[i].net.cache_de = 0;
+        cluster.stars[i].disableBoomer = false;
+        cluster.stars[i].disablePoofer = false;
+    }
+
     cluster.stars[0].expander = 0;
     cluster.stars[0].blowerOutput = 0;
     cluster.stars[0].fuelOutput = 1;
@@ -220,19 +235,6 @@ void Star::setupStar(void)
     cluster.stars[19].net.expander = 7;
     cluster.stars[19].net.re = 6;
     cluster.stars[19].net.de = 7;
-
-    for (uint32_t i = 0; i < 20; i++)
-    {
-        cluster.stars[i].starState.boomerButtonState = BOOMER_IDLE;
-        cluster.stars[i].pooferCountsRemaining = 0;
-        cluster.stars[i].pooferOutputState = 0;
-        cluster.stars[i].pooferOutputState = 0;
-        cluster.stars[i].boomer.outputState = BOOMER_READY;
-        cluster.stars[i].boomer.previousMillis = 0;
-        cluster.stars[i].boomer.abort = false;
-        cluster.stars[i].net.cache_re = 0;
-        cluster.stars[i].net.cache_de = 0;
-    }
 }
 
 void Star::loop()
@@ -856,8 +858,11 @@ void Star::boomAbort(uint8_t star)
 bool Star::goBoom(uint8_t star)
 {
 
-    if (star == 6) {
-        Serial.println("Star 6 - Skipping Boom.");
+    if (cluster.stars[star].disableBoomer)
+    {
+        Serial.print("Star - ");
+        Serial.print(star);
+        Serial.println(" - Boomer is disabled.");
         return 1;
     }
 
@@ -1164,6 +1169,15 @@ bool Star::goBoom(uint8_t star)
 
 bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 {
+
+    if (cluster.stars[star].disablePoofer)
+    {
+        Serial.print("Star - ");
+        Serial.print(star);
+        Serial.println(" - Poofer is disabled.");
+        return 1;
+    }
+
     uint32_t currentMillis = millis();
     // Serial.println("1");
     // Serial.print("goPoof called: ");

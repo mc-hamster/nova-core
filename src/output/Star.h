@@ -55,11 +55,12 @@ private:
 
     struct star
     {
+        bool disablePoofer;
+        bool disableBoomer;
         starStates starState;
         boomerData boomer;
         novaNet net;
         uint32_t pooferPreviousMillis;
-        uint32_t pooferCountsRemaining;
         uint8_t expander;
         uint8_t blowerOutput;
         uint8_t fuelOutput;
