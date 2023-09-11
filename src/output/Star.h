@@ -16,7 +16,7 @@ private:
     uint32_t boomerTimeFuelOff = 200;
     uint32_t boomerTimeBomerBlowerOff = 30;
     uint32_t boomerTimeBomerZap = 100;
-    uint32_t boomerTimeExhaust = 4000;
+    uint32_t boomerTimeExhaust = 7000;
 
     struct boomerData
     {
