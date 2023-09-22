@@ -148,6 +148,10 @@ LightUtils::LightUtils()
     // Setup goes in here
 }
 
+/**
+ * The loop function of the LightUtils class.
+ * This function is called repeatedly in the main loop of the program.
+ */
 void LightUtils::loop()
 {
 
@@ -170,6 +174,8 @@ void LightUtils::loop()
     }
 
     uint8_t maxChanges = 12;
+
+    // Run nbledPaletteTowardPalette() 2 times to speed up blending (it looks better)
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
 
