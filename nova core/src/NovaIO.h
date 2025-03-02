@@ -74,9 +74,8 @@ public:
         void ledGreen (bool value);
         void ledBlue (bool value);
         void ledYellow (bool value);
-
+        void ledWhite (bool value);
         
-
 /*
 Frame Buffer: Flame - For flame effects only. These effects work from the GPIO
   expanders. Write only.

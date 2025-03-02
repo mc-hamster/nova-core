@@ -60,7 +60,7 @@ void Buttons::loop(void)
     button_green->tick(novaIO->expansionDigitalRead(BUTTON_GREEN_IN) == LOW);
     button_blue->tick(novaIO->expansionDigitalRead(BUTTON_BLUE_IN) == LOW);
     button_yellow->tick(novaIO->expansionDigitalRead(BUTTON_YELLOW_IN) == LOW);
-    // button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
+    button_white->tick(novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW);
 
     if (star->isBoomerRedActive())
     {
@@ -125,6 +125,8 @@ void Buttons::loop(void)
     {
         novaIO->ledYellow(HIGH);
     }
+
+    novaIO->ledWhite(HIGH);
 }
 
 void Buttons::red_click(void)

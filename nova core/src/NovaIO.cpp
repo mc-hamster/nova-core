@@ -535,3 +535,19 @@ void NovaIO::ledYellow(bool value)
         analogWrite(BUTTON_YELLOW_OUT, 0);
     }
 }
+
+/**
+ * Sets the value of the white LED.
+ * @param value The value to set the LED to. True for on, false for off.
+ */
+void NovaIO::ledWhite(bool value)
+{
+    if (value)
+    {
+        analogWrite(BUTTON_WHITE_OUT, 255);
+    }
+    else
+    {
+        analogWrite(BUTTON_WHITE_OUT, 0);
+    }
+}
