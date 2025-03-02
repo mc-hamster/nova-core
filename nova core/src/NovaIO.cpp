@@ -143,7 +143,6 @@ bool NovaIO::expansionDigitalRead(int pin)
 
 void NovaIO::mcpA_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -159,7 +158,6 @@ void NovaIO::mcpA_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpB_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -175,7 +173,6 @@ void NovaIO::mcpB_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpC_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -191,7 +188,6 @@ void NovaIO::mcpC_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpD_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -207,7 +203,6 @@ void NovaIO::mcpD_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpE_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -223,7 +218,6 @@ void NovaIO::mcpE_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpF_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -239,7 +233,6 @@ void NovaIO::mcpF_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpG_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
@@ -255,7 +248,6 @@ void NovaIO::mcpG_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpH_writeGPIOAB(uint16_t value)
 {
-    bool readValue;
     while (1) // After duration set Pins to end state
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
