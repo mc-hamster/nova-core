@@ -3,6 +3,7 @@
 #include "configuration.h"
 #include "NovaIO.h"
 #include "output/StarSequence.h"
+#include "utilities/PreferencesManager.h"
 
 /*
 
@@ -143,13 +144,9 @@ This function returns the current state of the cfgDrunktard variable.
 */
 bool Enable::isDrunktard(void)
 {
-    if (manager.exists("cfgDrunktard"))
+    if (PreferencesManager::getBool("cfgDrunktard", false))
     {
-        return manager.get("cfgDrunktard").as<bool>();
-    }
-    else
-    {
-        return 0;
+        return true;
     }
     return false;
 }

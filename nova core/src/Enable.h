@@ -5,8 +5,9 @@
 
 #include <Arduino.h>
 #include "main.h"
+#include "utilities/PreferencesManager.h"
 
-extern PersistenceManager manager;
+extern PreferencesManager manager;
 
 class Enable
 {

@@ -24,16 +24,17 @@
 #include "output/StarSequence.h"
 #include "Buttons.h"
 #include "Web.h"
-#include "PersistenceManager.h"
+#include "utilities/PreferencesManager.h"
 #include "fileSystemHelper.h"
 #include "Ambient.h"
+#include "Tasks.h"
+#include "utilities.h"
 
 #define FORMAT_LITTLEFS_IF_FAILED true
 
 #define CONFIG_FILE "/config.json"
 
-// PersistenceManager persistenceManager(CONFIG_FILE);
-PersistenceManager manager("/data.json", 4096);
+// PersistenceManager manager("/data.json", 4096);
 
 void TaskLightUtils(void *pvParameters);
 void TaskAmbient(void *pvParameters);
@@ -47,10 +48,46 @@ void TaskStarSequence(void *pvParameters);
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
 
+// Add WiFi event handler function
+void WiFiEvent(WiFiEvent_t event)
+{
+    Serial.printf("[WiFi-event] event: %d\n", event);
+
+    switch (event)
+    {
+    case SYSTEM_EVENT_WIFI_READY:
+        Serial.println("WiFi interface ready");
+        break;
+    case SYSTEM_EVENT_SCAN_DONE:
+        Serial.println("Completed scan for access points");
+        break;
+    case SYSTEM_EVENT_STA_START:
+        Serial.println("WiFi client started");
+        break;
+    case SYSTEM_EVENT_AP_START:
+        Serial.println("WiFi AP started");
+        Serial.print("AP IP address: ");
+        Serial.println(WiFi.softAPIP());
+        Serial.print("AP MAC address: ");
+        Serial.println(WiFi.softAPmacAddress());
+        break;
+    case SYSTEM_EVENT_AP_STOP:
+        Serial.println("WiFi AP stopped");
+        break;
+    case SYSTEM_EVENT_AP_STACONNECTED:
+        Serial.println("Client connected");
+        break;
+    case SYSTEM_EVENT_AP_STADISCONNECTED:
+        Serial.println("Client disconnected");
+        break;
+    }
+}
+
 void setup()
 {
-  delay(100);
   Serial.begin(921600);
+  delay(2000); // Give serial interface time to connect
+  Serial.println("");
   Serial.println("NOVA: CORE");
   Serial.print("setup() is running on core ");
   Serial.println(xPortGetCoreID());
@@ -68,29 +105,7 @@ void setup()
 
     listDir(LittleFS, "/", 0);
   }
-  manager.printFileContents();
-  manager.load();
-
-  if (manager.save())
-  {
-    Serial.println("Data saved successfully.");
-  }
-  else
-  {
-    Serial.println("Failed to save data.");
-  }
-
-  // Print all keys.
-  // Serial.println("All keys:");
-  // Serial.println(manager.listKeys());
-
-  // manager.printFileContents();
-
-  // Get and print the size of the JSON file
-  size_t fileSize = manager.getFileSize();
-  Serial.print("Size of the JSON file: ");
-  Serial.println(fileSize);
-
+  
   Serial.println("Setting up Serial2");
   Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
 
@@ -103,9 +118,11 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
-  Serial.println("Set clock of I2C interface to 1mhz");
+  Serial.println("Set clock of I2C interface to 0.4mhz");
   Wire.begin();
   Wire.setClock(400000UL); // 400khz
+  // Wire.setClock(600000UL); // 600khz
+  // Wire.setClock(800000UL); // 800khz
   // Wire.setClock(1000000UL); // 1mhz
 
   Serial.println("new NovaIO");
@@ -129,20 +146,32 @@ void setup()
   Serial.println("new Star Sequence");
   starSequence = new StarSequence();
 
-  String macAddress = WiFi.macAddress();
-  String AP_String = "";
+  String apName = "NovaCore_" + getLastFourOfMac();
 
-  for (int i = 0; i < 6; i++)
-  {
-    uint8_t byteValue = strtoul(macAddress.substring(i * 3, i * 3 + 2).c_str(), NULL, 16);
-    AP_String += String(byteValue, HEX);
-  }
+  // Set WiFi mode to WIFI_AP_STA for simultaneous AP and STA mode
+  WiFi.mode(WIFI_AP_STA);
 
-  AP_String = "NOVA_" + AP_String.substring(0, 4);
-
-  // your other setup stuff...
-  WiFi.softAP(AP_String, "scubadandy");
+  WiFi.softAP(apName.c_str(), "scubadandy");
   WiFi.setSleep(false); // Disable power saving on the wifi interface.
+
+  WiFi.onEvent(WiFiEvent);
+
+  // Print network information
+  Serial.println("Device Information:");
+  Serial.print("MAC Address: ");
+  Serial.println(WiFi.macAddress());
+  Serial.print("AP Name: ");
+  Serial.println(apName);
+  Serial.print("AP IP Address: ");
+  Serial.println(WiFi.softAPIP());
+  Serial.print("STA IP Address: ");
+  Serial.println(WiFi.localIP());
+  Serial.print("Free Heap: ");
+  Serial.println(ESP.getFreeHeap());
+  Serial.print("CPU Frequency (MHz): ");
+  Serial.println(ESP.getCpuFreqMHz());
+  Serial.print("SDK Version: ");
+  Serial.println(ESP.getSdkVersion());
 
   dnsServer.start(53, "*", WiFi.softAPIP());
   // webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
@@ -185,6 +214,10 @@ void setup()
   xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 5, NULL);
   Serial.println("Create StarSequence - Done");
 
+  PreferencesManager::begin();
+  // ...existing code...
+  PreferencesManager::end();
+
   Serial.println("Setup Complete");
 }
 
@@ -194,254 +227,4 @@ void loop()
       Everything should be in freeRTOS tasks
   */
   delay(1);
-}
-
-/*--------------------------------------------------*/
-/*---------------------- Tasks ---------------------*/
-/*--------------------------------------------------*/
-
-void TaskAmbient(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-
-  Serial.println("TaskAmbient is running");
-  while (1) // A Task shall never return or exit.
-  {
-    ambient->loop();
-    // yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(1);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskLightUtils(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-
-  Serial.println("TaskLightUtils is running");
-  while (1) // A Task shall never return or exit.
-  {
-    lightUtils->loop();
-    // yield(); // Should't do anything but it's here incase the watchdog needs it.
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskEnable(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-
-  Serial.println("TaskEnable is running");
-  while (1) // A Task shall never return or exit.
-  {
-    enable->loop();
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(50);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskWeb(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-
-  Serial.println("TaskWeb is running");
-  while (1) // A Task shall never return or exit.
-  {
-    webLoop();
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(1);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskMDNS(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-
-  Serial.println("TaskMDNS is running");
-  while (1) // A Task shall never return or exit.
-  {
-    dnsServer.processNextRequest();
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskModes(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-  Serial.println("TaskModes is running");
-
-  while (1) // A Task shall never return or exit.
-  {
-    // Serial.println("in TaskModes while");
-    if (enable->isSystemEnabled())
-    {
-
-      star->loop();
-    }
-    else
-    {
-      Serial.println("system disabled");
-      delay(1000);
-      // Don't run the game.
-    }
-    yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(5);
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskButtons(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-  Serial.println("TaskButtons is running");
-
-  while (1) // A Task shall never return or exit.
-  {
-    if (enable->isSystemEnabled())
-    {
-      buttons->loop();
-      // yield(); // Should't do anything but it's here incase the watchdog needs it.
-      delay(2); // Don't go above 2. Buttons need to be responsive.
-    }
-    else
-    {
-      // If system is disabled, wait a long time before checking buttons again.
-      delay(100);
-    }
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-
-      lastExecutionTime = millis();
-    }
-  }
-}
-
-void TaskStarSequence(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-  Serial.println("TaskStarSequence is running");
-
-  while (1) // A Task shall never return or exit.
-  {
-    if (enable->isSystemEnabled())
-    {
-      starSequence->loop();
-      delay(2);
-    }
-    else
-    {
-      // If system is disabled, wait a long time before checking buttons again.
-      delay(10);
-    }
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      /* Calling the function will have used some stack space, we would
-          therefore now expect uxTaskGetStackHighWaterMark() to return a
-          value lower than when it was called on entering the task. */
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-
-      lastExecutionTime = millis();
-    }
-  }
 }

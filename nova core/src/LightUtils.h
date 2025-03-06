@@ -6,8 +6,9 @@
 #include "main.h"
 #include "configuration.h"
 #include <FastLED.h>
+#include "utilities/PreferencesManager.h"
 
-extern PersistenceManager manager;
+extern PreferencesManager manager;
 
 // COOLING: How much does the air cool as it rises?
 // Less cooling = taller flames.  More cooling = shorter flames.

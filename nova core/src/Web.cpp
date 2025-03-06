@@ -12,6 +12,7 @@
 #include "output/Star.h"
 #include "output/StarSequence.h"
 #include "Ambient.h"
+#include "utilities/PreferencesManager.h"
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -519,15 +520,7 @@ void switchExample(Control *sender, int value)
     }
     else if (sender->id == mainDrunktardSwitch)
     {
-        manager.set("cfgDrunktard", sender->value.toInt());
-        if (manager.save())
-        {
-            Serial.println("cfgDrunktard Data saved successfully.");
-        }
-        else
-        {
-            Serial.println("cfgDrunktard Failed to save data.");
-        }
+        PreferencesManager::setInt("cfgDrunktard", sender->value.toInt());
     }
     else if (sender->id == resetConfigSwitch)
     {
@@ -535,8 +528,8 @@ void switchExample(Control *sender, int value)
         //    - Give the user a chance to cancel the config reset.
         if (sender->value.toInt())
         {
-            manager.clear();
-            manager.save();
+            //PreferencesManager::clear();
+            //PreferencesManager::save();
             delay(50);
             ESP.restart();
         }
@@ -606,7 +599,7 @@ void webSetup()
 
     //----- (Main) -----
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, mainTab);
-    mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(enable->isDrunktard()), ControlColor::None, mainTab, &switchExample);
+    mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getInt("cfgDrunktard", 0)), ControlColor::None, mainTab, &switchExample);
 
     //----- (Settings) -----
     // ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);

@@ -2,6 +2,7 @@
 #include "LightUtils.h"
 #include "configuration.h"
 #include "main.h"
+#include "utilities/PreferencesManager.h"
 
 CRGBPalette16 currentPalette(CRGB::Black);
 
@@ -125,7 +126,7 @@ LightUtils::LightUtils()
 
 
     Serial.println("Loading light configuration - currentPalette");
-    currentPalette = getPalette((manager.get("cfgProgram").as<uint8_t>() ? manager.get("cfgProgram").as<uint8_t>() : 1), false);
+    currentPalette = getPalette((PreferencesManager::getInt("cfgProgram", 1)), false);
 
     Serial.println("Loading light configuration - cfgSin");
     cfgSin = getCfgSin();
@@ -256,15 +257,7 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect, bool saveSelection)
 
     if (saveSelection)
     {
-        manager.set("cfgProgram", cfgProgram);
-        if (manager.save())
-        {
-            Serial.println("Data saved successfully.");
-        }
-        else
-        {
-            Serial.println("Failed to save data.");
-        }
+        PreferencesManager::setInt("cfgProgram", paletteSelect);
     }
     else
     {
@@ -500,18 +493,7 @@ void LightUtils::setCfgBrightness(uint8_t brightness)
 {
     Serial.println("set brightness");
     cfgBrightness = brightness;
-    manager.set("cfgBrightness", brightness);
-    manager.printFileContents();
-
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
-    //manager.printFileContents();
+    PreferencesManager::setInt("cfgBrightness", brightness);
 }
 
 /**
@@ -522,29 +504,13 @@ void LightUtils::setCfgBrightness(uint8_t brightness)
 void LightUtils::setCfgUpdates(uint16_t updates)
 {
     cfgUpdates = updates;
-    manager.set("cfgUpdates", updates);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgUpdates", updates);
 }
 
 void LightUtils::setCfgAutoTime(uint32_t autoTime)
 {
     cfgAutoTime = autoTime;
-    manager.set("cfgAutoTime", autoTime);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgAutoTime", autoTime);
 }
 
 /**
@@ -555,15 +521,7 @@ void LightUtils::setCfgAutoTime(uint32_t autoTime)
 void LightUtils::setCfgSin(uint8_t sin)
 {
     cfgSin = sin;
-    manager.set("cfgSin", sin);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgSin", sin);
 }
 
 /**
@@ -584,29 +542,13 @@ void LightUtils::setCfgProgram(uint8_t program)
 void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
-    manager.set("cfgReverse", reverse);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgReverse", reverse);
 }
 
 void LightUtils::setCfgAuto(bool autoLight)
 {
     cfgAuto = autoLight;
-    manager.set("cfgAuto", autoLight);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgAuto", autoLight);
 }
 
 /**
@@ -617,15 +559,7 @@ void LightUtils::setCfgAuto(bool autoLight)
 void LightUtils::setCfgFire(bool fire)
 {
     cfgFire = fire;
-    manager.set("cfgFire", fire);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgFire", fire);
 }
 
 /**
@@ -636,15 +570,7 @@ void LightUtils::setCfgFire(bool fire)
 void LightUtils::setCfgLocalDisable(bool localDisable)
 {
     cfgLocalDisable = localDisable;
-    manager.set("cfgLocalDisable", localDisable);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-    }
+    PreferencesManager::setInt("cfgLocalDisable", localDisable);
 }
 
 /**
@@ -654,7 +580,7 @@ void LightUtils::setCfgLocalDisable(bool localDisable)
  */
 uint8_t LightUtils::getCfgBrightness(void)
 {
-    return manager.get("cfgBrightness").as<uint8_t>();
+    return PreferencesManager::getInt("cfgBrightness", 255);
 }
 
 /**
@@ -664,7 +590,7 @@ uint8_t LightUtils::getCfgBrightness(void)
  */
 uint16_t LightUtils::getCfgUpdates(void)
 {
-    return manager.get("cfgUpdates").as<uint16_t>();
+    return PreferencesManager::getInt("cfgUpdates", 100);
 }
 
 /**
@@ -674,7 +600,7 @@ uint16_t LightUtils::getCfgUpdates(void)
  */
 uint8_t LightUtils::getCfgSin(void)
 {
-    return manager.get("cfgSin").as<uint8_t>();
+    return PreferencesManager::getInt("cfgSin", 0);
 }
 
 /**
@@ -684,12 +610,12 @@ uint8_t LightUtils::getCfgSin(void)
  */
 uint8_t LightUtils::getCfgProgram(void)
 {
-    return manager.get("cfgProgram").as<uint8_t>();
+    return PreferencesManager::getInt("cfgProgram", 1);
 }
 
 uint32_t LightUtils::getCfgAutoTime(void)
 {
-    return manager.get("cfgAutoTime").as<uint32_t>();
+    return PreferencesManager::getInt("cfgAutoTime", 0);
 }
 
 /**
@@ -699,12 +625,12 @@ uint32_t LightUtils::getCfgAutoTime(void)
  */
 bool LightUtils::getCfgReverse(void)
 {
-    return manager.get("cfgReverse").as<bool>();
+    return PreferencesManager::getBool("cfgReverse", false);
 }
 
 bool LightUtils::getCfgAuto(void)
 {
-    return manager.get("cfgAuto").as<bool>();
+    return PreferencesManager::getBool("cfgAuto", false);
 }
 
 /**
@@ -714,7 +640,7 @@ bool LightUtils::getCfgAuto(void)
  */
 bool LightUtils::getCfgFire(void)
 {
-    return manager.get("cfgFire").as<bool>();
+    return PreferencesManager::getBool("cfgFire", false);
 }
 
 /**
@@ -724,7 +650,7 @@ bool LightUtils::getCfgFire(void)
  */
 bool LightUtils::getCfgLocalDisable(void)
 {
-    return manager.get("cfgLocalDisable").as<bool>();
+    return PreferencesManager::getBool("cfgLocalDisable", false);
 }
 
 /**

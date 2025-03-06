@@ -7,6 +7,7 @@
 #include "pb_arduino.h"
 #include "output/Star.h"
 #include "LightUtils.h"
+#include "utilities/PreferencesManager.h"
 
 #include "messaging.pb.h"
 
@@ -435,80 +436,44 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)
 {
-    manager.set("fogOutputOffMinTime", time);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-        return 1;
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-        return 0;
-    }
+    PreferencesManager::setInt("fogOutputOffMinTime", time);
+    return true;
 }
 
 bool Ambient::setFogOutputOffMaxTime(uint32_t time)
 {
-    manager.set("fogOutputOffMaxTime", time);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-        return 1;
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-        return 0;
-    }
+    PreferencesManager::setInt("fogOutputOffMaxTime", time);
+    return true;
 }
 
 bool Ambient::setFogOutputOnMinTime(uint32_t time)
 {
-    manager.set("fogOutputOnMinTime", time);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-        return 1;
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-        return 0;
-    }
+    PreferencesManager::setInt("fogOutputOnMinTime", time);
+    return true;
 }
 
 bool Ambient::setFogOutputOnMaxTime(uint32_t time)
 {
-    manager.set("fogOutputOnMaxTime", time);
-    if (manager.save())
-    {
-        Serial.println("Data saved successfully.");
-        return 1;
-    }
-    else
-    {
-        Serial.println("Failed to save data.");
-        return 0;
-    }
+    PreferencesManager::setInt("fogOutputOnMaxTime", time);
+    return true;
 }
 
 uint32_t Ambient::getFogOutputOffMinTime(void)
 {
-    return manager.get("fogOutputOffMinTime").as<uint32_t>();
+    return PreferencesManager::getInt("fogOutputOffMinTime", 5000);
 }
 
 uint32_t Ambient::getFogOutputOffMaxTime(void)
 {
-    return manager.get("fogOutputOffMaxTime").as<uint32_t>();
+    return PreferencesManager::getInt("fogOutputOffMaxTime", 20000);
 }
 
 uint32_t Ambient::getFogOutputOnMinTime(void)
 {
-    return manager.get("fogOutputOnMinTime").as<uint32_t>();
+    return PreferencesManager::getInt("fogOutputOnMinTime", 200);
 }
 
 uint32_t Ambient::getFogOutputOnMaxTime(void)
 {
-    return manager.get("fogOutputOnMaxTime").as<uint32_t>();
+    return PreferencesManager::getInt("fogOutputOnMaxTime", 1000);
 }
