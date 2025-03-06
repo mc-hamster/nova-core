@@ -120,7 +120,7 @@ LightUtils::LightUtils()
     Serial.println("LightUtils starting up...");
 
     Serial.println("Configuring FastLED");
-    FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(2000)>(leds, NUM_LEDS);
+    FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(4000)>(leds, NUM_LEDS);
     FastLED.setBrightness(getCfgBrightness());
     FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it for the DMX lights.
 
@@ -178,7 +178,7 @@ void LightUtils::loop()
 
     // Run nbledPaletteTowardPalette() 2 times to speed up blending (it looks better)
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
-    nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
+    //nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
 
     if (getCfgFire())
     {
