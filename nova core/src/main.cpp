@@ -15,7 +15,6 @@
 #include <ESPUI.h>
 
 #include "configuration.h"
-#include "modes/Simona.h"
 #include "NovaIO.h"
 #include "main.h"
 #include "Enable.h"
@@ -111,9 +110,6 @@ void setup()
 
   Serial.println("new NovaIO");
   novaIO = new NovaIO();
-
-  Serial.println("new Simona");
-  simona = new Simona();
 
   Serial.println("new Enable");
   enable = new Enable();
@@ -354,7 +350,6 @@ void TaskModes(void *pvParameters) // This is a task.
     if (enable->isSystemEnabled())
     {
 
-      // simona->loop();
       star->loop();
     }
     else
