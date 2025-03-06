@@ -5,7 +5,7 @@
 
 /*
 
-This is the Enable class. It is responsible for the emergency stop functionality.
+This is the StarSequence class. It is responsible for managing different star sequences.
 
 */
 
