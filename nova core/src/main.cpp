@@ -26,7 +26,7 @@
 #include "fileSystemHelper.h"
 #include "Ambient.h"
 #include "Tasks.h"
-#include "utilities.h"
+#include "utilities/utilities.h"
 
 #include "Simona.h"
 
@@ -259,17 +259,3 @@ void loop()
   */
   delay(1);
 }
-
-// LED control function that other code can call
-void setLedBrightness(uint8_t led, bool isOn) {
-    uint8_t channel;
-    switch(led) {
-      case BUTTON_RED_OUT: channel = LEDC_CHANNEL_RED; break;
-      case BUTTON_GREEN_OUT: channel = LEDC_CHANNEL_GREEN; break;
-      case BUTTON_BLUE_OUT: channel = LEDC_CHANNEL_BLUE; break;
-      case BUTTON_YELLOW_OUT: channel = LEDC_CHANNEL_YELLOW; break;
-      case BUTTON_WHITE_OUT: channel = LEDC_CHANNEL_RESET; break;
-      default: return;
-    }
-    ledcWrite(channel, isOn ? LEDC_FULL_DUTY : LEDC_DIM_DUTY);
-  }
