@@ -1,6 +1,4 @@
 #include <Arduino.h>
-// #include <Thread.h>
-// #include <ThreadController.h>
 #include <Wire.h>
 #include <WiFi.h>
 #include <LittleFS.h>
@@ -22,7 +20,7 @@
 #include "LightUtils.h"
 #include "output/Star.h"
 #include "output/StarSequence.h"
-#include "Buttons.h"
+#include "modes/Buttons.h"
 #include "Web.h"
 #include "utilities/PreferencesManager.h"
 #include "fileSystemHelper.h"

@@ -3,7 +3,7 @@
 //#include "modes/Simona.h"
 #include "NovaIO.h"
 
-#include "Buttons.h"
+#include "modes/Buttons.h"
 
 #include <DNSServer.h>
 #include <WiFi.h>

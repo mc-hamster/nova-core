@@ -4,7 +4,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "buttons.h"
+#include "modes/Buttons.h"
 
 class Star
 {

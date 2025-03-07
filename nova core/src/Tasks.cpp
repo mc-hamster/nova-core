@@ -2,7 +2,7 @@
 #include "Ambient.h"
 #include "LightUtils.h"
 #include "Enable.h"
-#include "Buttons.h"
+#include "modes/Buttons.h"
 #include "output/StarSequence.h"
 #include "Web.h"
 #include <DNSServer.h>
