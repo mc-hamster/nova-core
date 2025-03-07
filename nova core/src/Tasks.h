@@ -13,4 +13,7 @@ void TaskButtons(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
 
+void gameTask(void *pvParameters);
+void buttonTask(void *pvParameters);
+
 #endif // TASKS_H

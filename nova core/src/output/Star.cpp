@@ -3,7 +3,7 @@
 #include "configuration.h"
 #include "NovaIO.h"
 #include "Enable.h"
-#include "modes/Buttons.h"
+//#include "modes/Buttons.h"
 
 Star *star = NULL;
 

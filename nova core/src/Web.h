@@ -1,4 +1,3 @@
-
 #ifndef WEB_H
 #define WEB_H
 
@@ -10,6 +9,12 @@
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
 #include <ESPUI.h>
+
+// Runtime variables
+extern bool SIMONA_CHEAT_MODE;  // Managed by web interface
+extern bool GAME_ENABLED;
+
+extern DNSServer dnsServer;
 
 class CaptiveRequestHandler : public AsyncWebHandler
 {

@@ -20,7 +20,7 @@
 #include "LightUtils.h"
 #include "output/Star.h"
 #include "output/StarSequence.h"
-#include "modes/Buttons.h"
+//#include "modes/Buttons.h"
 #include "Web.h"
 #include "utilities/PreferencesManager.h"
 #include "fileSystemHelper.h"
@@ -28,9 +28,16 @@
 #include "Tasks.h"
 #include "utilities.h"
 
+#include "Simona.h"
+
 #define FORMAT_LITTLEFS_IF_FAILED true
 
 #define CONFIG_FILE "/config.json"
+
+uint8_t buttons[4] = {BUTTON_RED_IN, BUTTON_GREEN_IN, BUTTON_BLUE_IN, BUTTON_YELLOW_IN};
+uint8_t leds[4] = {BUTTON_RED_OUT, BUTTON_GREEN_OUT, BUTTON_BLUE_OUT, BUTTON_YELLOW_OUT};
+const char *buttonColors[4] = {"RED", "GREEN", "BLUE", "YELLOW"};
+const char *ledColors[4] = {"RED", "GREEN", "BLUE", "YELLOW"};
 
 // PersistenceManager manager("/data.json", 4096);
 
@@ -39,7 +46,7 @@ void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
-void TaskButtons(void *pvParameters);
+//void TaskButtons(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
 
@@ -81,6 +88,13 @@ void WiFiEvent(WiFiEvent_t event)
     }
 }
 
+// Function to initialize LED with PWM
+void initLedPWM(uint8_t pin, uint8_t channel) {
+    ledcSetup(channel, LEDC_FREQ_HZ, LEDC_RESOLUTION);
+    ledcAttachPin(pin, channel);
+    ledcWrite(channel, LEDC_FULL_DUTY); // Initialize to full brightness (on state)
+  }
+
 void setup()
 {
   Serial.begin(921600);
@@ -116,6 +130,13 @@ void setup()
   pinMode(BUTTON_YELLOW_OUT, OUTPUT);
   pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
+  initLedPWM(BUTTON_RED_OUT, LEDC_CHANNEL_RED);
+  initLedPWM(BUTTON_GREEN_OUT, LEDC_CHANNEL_GREEN);
+  initLedPWM(BUTTON_BLUE_OUT, LEDC_CHANNEL_BLUE);
+  initLedPWM(BUTTON_YELLOW_OUT, LEDC_CHANNEL_YELLOW);
+  initLedPWM(BUTTON_WHITE_OUT, LEDC_CHANNEL_RESET);
+
+
   Serial.println("Set clock of I2C interface to 0.4mhz");
   Wire.begin();
   Wire.setClock(400000UL); // 400khz
@@ -138,8 +159,8 @@ void setup()
   Serial.println("new LightUtils");
   lightUtils = new LightUtils();
 
-  Serial.println("new Buttons");
-  buttons = new Buttons();
+  //Serial.println("new Buttons");
+  //buttons = new Buttons();
 
   Serial.println("new Star Sequence");
   starSequence = new StarSequence();
@@ -180,6 +201,18 @@ void setup()
   webSetup();
   Serial.println("Setting up Webserver - Done");
 
+  // Initialize Simona singleton
+  Simona::initInstance(buttons, leds, buttonColors, ledColors);
+
+  Serial.println("Create gameTask");
+  xTaskCreate(gameTask, "Game Task", 4096, NULL, 1, NULL);
+  Serial.println("Create gameTask - Done");
+
+  Serial.println("Create buttonTask");
+  xTaskCreate(buttonTask, "Button Task", 4096, NULL, 1, NULL);
+  Serial.println("Create buttonTask - Done");
+
+
   Serial.println("Create TaskEnable");
   xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
   Serial.println("Create TaskEnable - Done");
@@ -192,9 +225,9 @@ void setup()
   xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 10, NULL);
   Serial.println("Create TaskModes - Done");
 
-  Serial.println("Create TaskButtons");
-  xTaskCreate(&TaskButtons, "TaskButtons", 4 * 1024, NULL, 5, NULL);
-  Serial.println("Create TaskButtons - Done");
+  //Serial.println("Create TaskButtons");
+  //xTaskCreate(&TaskButtons, "TaskButtons", 4 * 1024, NULL, 5, NULL);
+  //Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
   xTaskCreate(&TaskMDNS, "TaskMDNS", 3 * 1024, NULL, 1, NULL);
@@ -226,3 +259,17 @@ void loop()
   */
   delay(1);
 }
+
+// LED control function that other code can call
+void setLedBrightness(uint8_t led, bool isOn) {
+    uint8_t channel;
+    switch(led) {
+      case BUTTON_RED_OUT: channel = LEDC_CHANNEL_RED; break;
+      case BUTTON_GREEN_OUT: channel = LEDC_CHANNEL_GREEN; break;
+      case BUTTON_BLUE_OUT: channel = LEDC_CHANNEL_BLUE; break;
+      case BUTTON_YELLOW_OUT: channel = LEDC_CHANNEL_YELLOW; break;
+      case BUTTON_WHITE_OUT: channel = LEDC_CHANNEL_RESET; break;
+      default: return;
+    }
+    ledcWrite(channel, isOn ? LEDC_FULL_DUTY : LEDC_DIM_DUTY);
+  }

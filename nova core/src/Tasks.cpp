@@ -2,16 +2,18 @@
 #include "Ambient.h"
 #include "LightUtils.h"
 #include "Enable.h"
-#include "modes/Buttons.h"
+//#include "modes/Buttons.h"
 #include "output/StarSequence.h"
 #include "Web.h"
 #include <DNSServer.h>
 #include "output/Star.h"
+#include "Simona.h"
+
 
 extern Ambient *ambient;
 extern LightUtils *lightUtils;
 extern Enable *enable;
-extern Buttons *buttons;
+//extern Buttons *buttons;
 extern StarSequence *starSequence;
 extern DNSServer dnsServer;
 extern Star *star;
@@ -179,7 +181,7 @@ void TaskButtons(void *pvParameters) // This is a task.
   {
     if (enable->isSystemEnabled())
     {
-      buttons->loop();
+      //buttons->loop();
       delay(2);
     }
     else
@@ -224,5 +226,62 @@ void TaskStarSequence(void *pvParameters) // This is a task.
       Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
       lastExecutionTime = millis();
     }
+  }
+}
+
+// Task definitions
+void gameTask(void *pvParameters) {
+  UBaseType_t uxHighWaterMark;
+  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+  const char *pcTaskName = pcTaskGetName(xTaskHandle);
+  
+  //safeSerialPrintf("Game task is running on core %d\n", xPortGetCoreID());
+  
+  while (true) {
+      // Run the Simona game logic
+      Simona::getInstance()->runGameTask();
+      
+      // Allow other tasks to execute
+      yield();
+      delay(1);
+      
+      // Report task status periodically
+      static uint32_t lastExecutionTime = 0;
+      if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL) {
+          uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+          //safeSerialPrintf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
+          lastExecutionTime = millis();
+      }
+      
+      // Add a delay to prevent watchdog triggers
+      vTaskDelay(pdMS_TO_TICKS(10));
+  }
+}
+
+void buttonTask(void *pvParameters) {
+  UBaseType_t uxHighWaterMark;
+  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+  const char *pcTaskName = pcTaskGetName(xTaskHandle);
+  
+  //safeSerialPrintf("Button task is running on core %d\n", xPortGetCoreID());
+  
+  while (true) {
+      // Process button inputs for the Simona game
+      Simona::getInstance()->runButtonTask();
+      
+      // Allow other tasks to execute
+      yield();
+      delay(1);
+      
+      // Report task status periodically
+      static uint32_t lastExecutionTime = 0;
+      if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL) {
+          uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+          //safeSerialPrintf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
+          lastExecutionTime = millis();
+      }
+      
+      // Add a small delay to prevent watchdog triggers
+      vTaskDelay(pdMS_TO_TICKS(20));
   }
 }

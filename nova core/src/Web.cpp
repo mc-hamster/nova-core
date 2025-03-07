@@ -13,6 +13,13 @@
 #include "output/StarSequence.h"
 #include "Ambient.h"
 #include "utilities/PreferencesManager.h"
+#include "Simona.h"
+#include "freertos/semphr.h"
+#include <Preferences.h>
+
+// Global game control variables
+bool SIMONA_CHEAT_MODE = false;
+bool GAME_ENABLED = true;
 
 void handleRequest(AsyncWebServerRequest *request)
 {
