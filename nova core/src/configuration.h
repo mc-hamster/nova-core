@@ -61,4 +61,7 @@
 #define LEDC_CHANNEL_GREEN    1
 #define LEDC_CHANNEL_BLUE     2
 #define LEDC_CHANNEL_YELLOW   3
-#define LEDC_CHANNEL_RESET    4
+#define LEDC_CHANNEL_RESET     4
+
+// RMT MIDI Output Configuration
+#define RMT_BIT_DURATION_TICKS 2560  // Nova core-specific MIDI timing

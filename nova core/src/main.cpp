@@ -30,6 +30,9 @@
 
 #include "Simona.h"
 
+#include "midi/MIDIControl.hpp"  // Updated path to MIDI module
+#include <MIDI.h>
+
 #define FORMAT_LITTLEFS_IF_FAILED true
 
 #define CONFIG_FILE "/config.json"
@@ -136,9 +139,13 @@ void setup()
   initLedPWM(BUTTON_YELLOW_OUT, LEDC_CHANNEL_YELLOW);
   initLedPWM(BUTTON_WHITE_OUT, LEDC_CHANNEL_RESET);
 
+  randomSeed(esp_random()); // Seed the random number generator with more entropy
+
+  initializeMIDI();
 
   Serial.println("Set clock of I2C interface to 0.4mhz");
   Wire.begin();
+  
   Wire.setClock(400000UL); // 400khz
   // Wire.setClock(600000UL); // 600khz
   // Wire.setClock(800000UL); // 800khz
@@ -205,7 +212,7 @@ void setup()
   Simona::initInstance(buttons, leds, buttonColors, ledColors);
 
   Serial.println("Create gameTask");
-  xTaskCreate(gameTask, "Game Task", 4096, NULL, 1, NULL);
+  xTaskCreate(gameTask, "Game Task", 4096, NULL, 3, NULL);
   Serial.println("Create gameTask - Done");
 
   Serial.println("Create buttonTask");
@@ -222,7 +229,7 @@ void setup()
   Serial.println("Create TaskWeb - Done");
 
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 10, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 5, NULL);
   Serial.println("Create TaskModes - Done");
 
   //Serial.println("Create TaskButtons");

@@ -4,8 +4,9 @@
 #include <Arduino.h>
 //#include "EspNow.h"        // For ESP-NOW message transmission
 #include "SimonaTypes.h"   // Shared enum types and message structures
-//#include <ESPUI.h>         // Web UI components
+#include <ESPUI.h>         // Web UI components
 #include "configuration.h" // Pin definitions and game configuration
+#include "SimonaMessage.h" // Declaration of SimonaMessage
 #include "Web.h"           // For global game settings like SIMONA_CHEAT_MODE
 
 // External variables defined elsewhere
@@ -70,6 +71,12 @@ public:
      */
     Simona(uint8_t *buttons, uint8_t *leds, const char **buttonColors, const char **ledColors,
            LedControlCallback ledControl = nullptr, ButtonReadCallback buttonRead = nullptr);
+
+    /**
+     * @brief Update and send a SimonaMessage with current game state
+     * @param simMsg Reference to message object to be updated and sent
+     */
+    void updateAndSendSimMsg(SimonaMessage &simMsg);
 
     /**
      * @brief Reset the game to initial state
@@ -222,11 +229,6 @@ private:
      */
     bool readButton(uint8_t button);
 
-    /**
-     * @brief Update and send a SimonaMessage with current game state
-     * @param simMsg Reference to message object to be updated and sent
-     */
-    //void updateAndSendSimMsg(SimonaMessage &simMsg);
 };
 
 #endif // SIMONA_H

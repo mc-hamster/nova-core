@@ -242,8 +242,8 @@ void gameTask(void *pvParameters) {
       Simona::getInstance()->runGameTask();
       
       // Allow other tasks to execute
-      yield();
-      delay(1);
+      //yield();
+      //delay(1);
       
       // Report task status periodically
       static uint32_t lastExecutionTime = 0;

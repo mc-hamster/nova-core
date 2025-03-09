@@ -1,13 +1,12 @@
 #include "Simona.h"
-//#include "midi/MIDIControl.hpp" // Updated path to MIDI module
+#include "midi/MIDIControl.hpp" // Updated path to MIDI module
 #include "SimonaMessage.h"
 #include "configuration.h"
-//#include <ESPUI.h> // Added for ESPUI functions
 #include <Preferences.h>
 #include "utilities/PreferencesManager.h" // Updated path
-//#include "EspNow.h"
 #include "main.h" // Added for setLedBrightness
 #include "Web.h"
+
 
 /*
   Based on:
@@ -72,8 +71,30 @@ bool Simona::readButton(uint8_t button)
   }
   else
   {
-    return digitalRead(button) == LOW;
+    return novaIO->expansionDigitalRead(button) == LOW;
   }
+}
+
+/**
+ * @brief Updates the provided SimonaMessage object with the current state of the Simona instance
+ *        and prepares it for sending.
+ *
+ * This function updates the fields of the given SimonaMessage object with the current values
+ * of the Simona instance's stage, level, game play status, lost status, current round, maximum
+ * rounds, and levels in the current round. The updated message is then ready to be sent.
+ *
+ * @param simMsg A reference to the SimonaMessage object that will be updated with the current state.
+ */
+void Simona::updateAndSendSimMsg(SimonaMessage &simMsg)
+{
+  simMsg.stage = stage;
+  simMsg.level = level;
+  simMsg.gamePlay = game_play;
+  simMsg.lost = lost;
+  simMsg.currentRound = m_currentRound;
+  simMsg.maxRounds = MAX_ROUNDS;
+  simMsg.levelsInRound = m_levelsInRound;
+  //sendSimonaMessage(simMsg);
 }
 
 void Simona::loadPreferences()
@@ -95,7 +116,7 @@ void Simona::runGameTask()
     {
     case SIMONA_STAGE_WAITING:
       Serial.println("Press White Button for Start Game");
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
       inputStart = 0; // Reset timer when waiting
       while (stage == SIMONA_STAGE_WAITING)
       {
@@ -176,9 +197,9 @@ void Simona::runGameTask()
         simMsg.litButton = led_simonSaid[i];
         Serial.print(" ");
 
-        //updateAndSendSimMsg(simMsg);
+        updateAndSendSimMsg(simMsg);
 
-        //playBuzzer(60 + (led_simonSaid[i] - 7));
+        playBuzzer(60 + (led_simonSaid[i] - 7));
         vTaskDelay(50 / portTICK_PERIOD_MS); // Replaced delay(50)
 
         // Only control LEDs if sequence local echo is enabled
@@ -196,7 +217,7 @@ void Simona::runGameTask()
 
     case SIMONA_STAGE_TRANSITION: // 2
       // Transition to input collection.
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
       stage = SIMONA_STAGE_INPUT_COLLECTION;
       Serial.println("   -- SIMONA_STAGE_TRANSITION --   ");
       break;
@@ -257,18 +278,17 @@ void Simona::runGameTask()
             simMsg.lastPressedButton = i;
             bt_simonSaid[game_play] = i;
 
-            //updateAndSendSimMsg(simMsg);
+            updateAndSendSimMsg(simMsg);
 
             controlLed(leds[i], true);
             Serial.print("Button Pressed: ");
             Serial.println(buttonColors[i]);
-            //playBuzzer(60 + (i - 7));
+            playBuzzer(60 + (i - 7));
             if (bt_simonSaid[game_play] != led_simonSaid[game_play])
             {
               Serial.println("Incorrect button! Ending game play.");
               lost = 1;
               stage = SIMONA_STAGE_GAME_LOST;
-              // updateAndSendSimMsg(simMsg);
 
               while (readButton(buttons[i]))
               {
@@ -290,7 +310,6 @@ void Simona::runGameTask()
             {
               game_play = 1;
               stage = SIMONA_STAGE_VERIFICATION;
-              // updateAndSendSimMsg(simMsg);
               break;
             }
           }
@@ -300,7 +319,7 @@ void Simona::runGameTask()
       {
         // Game input disabled, but still send updates
         simMsg.lastPressedButton = -1; // No button pressed
-        //updateAndSendSimMsg(simMsg);
+        updateAndSendSimMsg(simMsg);
       }
 
       vTaskDelay(10 / portTICK_PERIOD_MS);
@@ -318,7 +337,7 @@ void Simona::runGameTask()
           break;
         }
       }
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
 
       vTaskDelay(400 / portTICK_PERIOD_MS); // Replaced delay(400)
 
@@ -335,7 +354,7 @@ void Simona::runGameTask()
       // Handle game lost.
       Serial.println(" !! You Lost !! ");
 
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
 
       //playLost();
       for (uint8_t i = 0; i <= 3; i++)
@@ -359,13 +378,13 @@ void Simona::runGameTask()
         if (m_currentRound == MAX_ROUNDS)
         {
           Serial.println("Congratulations!!! You have completed ALL rounds of the game!");
-          //updateAndSendSimMsg(simMsg);
+          updateAndSendSimMsg(simMsg);
 
           controlLed(BUTTON_RED_OUT, true);
           controlLed(BUTTON_GREEN_OUT, true);
           controlLed(BUTTON_BLUE_OUT, true);
           controlLed(BUTTON_YELLOW_OUT, true);
-          //playWin();
+          playWin();
           controlLed(BUTTON_RED_OUT, false);
           controlLed(BUTTON_GREEN_OUT, false);
           controlLed(BUTTON_BLUE_OUT, false);
@@ -399,9 +418,9 @@ void Simona::runGameTask()
 
     case SIMONA_STAGE_RESET: // 7
       Serial.println("Resetting game...");
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
 
-      //playGameIntro();
+      playGameIntro();
       // controlLed(LED_RESET, true);
       // vTaskDelay(500 / portTICK_PERIOD_MS);  // Replaced delay(500)
       // controlLed(LED_RESET, false);
@@ -417,10 +436,10 @@ void Simona::runGameTask()
     {
       Serial.println("   -- SIMONA_STAGE_ROUND_TRANSITION --   ");
       Serial.println("Round Complete! Starting next round with more levels!");
-      //updateAndSendSimMsg(simMsg);
+      updateAndSendSimMsg(simMsg);
 
       // Play round transition music before visual feedback
-      //playRoundTransitionMusic(m_currentRound);
+      playRoundTransitionMusic(m_currentRound);
 
       // Flash LEDs in sequence 20 times
       const uint8_t allLeds[] = {BUTTON_RED_OUT, BUTTON_GREEN_OUT, BUTTON_BLUE_OUT, BUTTON_YELLOW_OUT};
@@ -468,10 +487,10 @@ void Simona::runButtonTask()
       stage = SIMONA_STAGE_RESET; // Set the new reset stage.
       while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN))
       {
-        controlLed(BUTTON_WHITE_OUT, true);         // Turn on the reset LED.
+        controlLed(BUTTON_WHITE_OUT, false);         // Turn on the reset LED.
         vTaskDelay(10 / portTICK_PERIOD_MS); // wait for button release.
       }
-      controlLed(BUTTON_WHITE_OUT, false); // Turn on the reset LED.
+      controlLed(BUTTON_WHITE_OUT, true); // Turn on the reset LED.
       // Removed direct LED off call since reset logic handles it.
     }
     // ...existing code...
