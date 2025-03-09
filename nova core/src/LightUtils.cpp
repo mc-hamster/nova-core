@@ -542,13 +542,13 @@ void LightUtils::setCfgProgram(uint8_t program)
 void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
-    PreferencesManager::setInt("cfgReverse", reverse);
+    PreferencesManager::setBool("cfgReverse", reverse);
 }
 
 void LightUtils::setCfgAuto(bool autoLight)
 {
     cfgAuto = autoLight;
-    PreferencesManager::setInt("cfgAuto", autoLight);
+    PreferencesManager::setBool("cfgAuto", autoLight);
 }
 
 /**
@@ -559,7 +559,7 @@ void LightUtils::setCfgAuto(bool autoLight)
 void LightUtils::setCfgFire(bool fire)
 {
     cfgFire = fire;
-    PreferencesManager::setInt("cfgFire", fire);
+    PreferencesManager::setBool("cfgFire", fire);
 }
 
 /**
@@ -570,7 +570,7 @@ void LightUtils::setCfgFire(bool fire)
 void LightUtils::setCfgLocalDisable(bool localDisable)
 {
     cfgLocalDisable = localDisable;
-    PreferencesManager::setInt("cfgLocalDisable", localDisable);
+    PreferencesManager::setBool("cfgLocalDisable", localDisable);
 }
 
 /**

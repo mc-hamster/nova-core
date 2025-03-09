@@ -54,8 +54,6 @@ uint16_t boomerD1, boomerD2, boomerD3;
 uint16_t starManualPoof, starManualBlow, starManuallowFuel, starManualFuel, starManualZap, starManualSelect;
 uint8_t starManualSelectValue = 0;
 
-uint16_t sysInfoSeqIndex;
-
 uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
 
 uint16_t starSeq_SEQ_POOF_END_TO_END, starSeq_SEQ_BOOMER_LEFT_TO_RIGHT, starSeq_SEQ_BOOMER_RIGHT_TO_LEFT, starSeq_SEQ_BOOM_FAST, starSeq_SEQ_BOOM_WAVE_IN, starSeq_SEQ_OFF;
@@ -527,7 +525,9 @@ void switchExample(Control *sender, int value)
     }
     else if (sender->id == mainDrunktardSwitch)
     {
-        PreferencesManager::setInt("cfgDrunktard", sender->value.toInt());
+        PreferencesManager::setBool("cfgDrunktard", sender->value.toInt() == 1);
+        Serial.print("Drunktard Switch Value: ");
+        Serial.println(sender->value.toInt());
     }
     else if (sender->id == resetConfigSwitch)
     {
@@ -605,8 +605,15 @@ void webSetup()
     status = ESPUI.addControl(ControlType::Label, "Status:", "Unknown Status", ControlColor::Turquoise);
 
     //----- (Main) -----
-    controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, mainTab);
-    mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getInt("cfgDrunktard", 0)), ControlColor::None, mainTab, &switchExample);
+    // Remove uptime from main tab
+    mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getBool("cfgDrunktard", false)), ControlColor::None, mainTab, &switchExample);
+
+    // Add device info and uptime to System Info tab
+    String deviceInfo = "MAC: " + WiFi.macAddress() + ", IP: " + WiFi.softAPIP().toString();
+    uint16_t deviceInfoLabel = ESPUI.addControl(ControlType::Label, "Device Info", deviceInfo, ControlColor::None, sysInfoTab);
+
+    // Move uptime to System Info tab
+    controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, sysInfoTab);
 
     //----- (Settings) -----
     // ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
@@ -735,7 +742,7 @@ void webSetup()
     lightingFireSwitch = ESPUI.addControl(ControlType::Switcher, "Fire", String(lightUtils->getCfgFire()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingLocalDisable = ESPUI.addControl(ControlType::Switcher, "Local Disable", String(lightUtils->getCfgLocalDisable()), ControlColor::Alizarin, lightingTab, &switchExample);
 
-    lightingAuto = ESPUI.addControl(ControlType::Switcher, "Auto Light Program Selection", String(lightUtils->getCfgReverse()), ControlColor::Alizarin, lightingTab, &switchExample);
+    lightingAuto = ESPUI.addControl(ControlType::Switcher, "Auto Light Program Selection", String(lightUtils->getCfgAuto()), ControlColor::Alizarin, lightingTab, &switchExample);
     lightingAutoTime = ESPUI.addControl(ControlType::Slider, "Auto Time", String(lightUtils->getCfgAutoTime() ? lightUtils->getCfgAutoTime() : 30), ControlColor::Alizarin, lightingAuto, &slider);
     ESPUI.addControl(Min, "", "1", None, fogOutputOffMinTime);
     ESPUI.addControl(Max, "", "3600", None, fogOutputOffMinTime);
@@ -761,7 +768,6 @@ void webSetup()
      */
 
     // System Info Tab
-    sysInfoSeqIndex = ESPUI.addControl(ControlType::Label, "Button Sequence Index", "Red: 0, Green: 0, Blue: 0, Yellow: 0", ControlColor::Sunflower, sysInfoTab);
 
     // Reset tab
     ESPUI.addControl(ControlType::Label, "**WARNING**", "Don't even think of doing anything in this tab unless you want to break something!!", ControlColor::Sunflower, resetTab);
@@ -834,7 +840,5 @@ void webLoop()
             }
         }
 
-        String sequenceString = "Red: " + String(star->sequenceRed) + ", Green: " + String(star->sequenceGreen) + "<br>Blue: " + String(star->sequenceBlue) + ", Yellow: " + String(star->sequenceYellow);
-        ESPUI.updateControlValue(sysInfoSeqIndex, sequenceString);
     }
 }

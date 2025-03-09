@@ -144,9 +144,8 @@ This function returns the current state of the cfgDrunktard variable.
 */
 bool Enable::isDrunktard(void)
 {
-    if (PreferencesManager::getBool("cfgDrunktard", false))
-    {
-        return true;
-    }
-    return false;
+    bool result = PreferencesManager::getBool("cfgDrunktard", false);
+    //Serial.print("isDrunktard returning: ");
+    //Serial.println(result);
+    return result;
 }

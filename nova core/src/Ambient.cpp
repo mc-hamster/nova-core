@@ -436,44 +436,44 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)
 {
-    PreferencesManager::setInt("fogOutputOffMinTime", time);
+    PreferencesManager::setInt("fogOffMin", time);
     return true;
 }
 
 bool Ambient::setFogOutputOffMaxTime(uint32_t time)
 {
-    PreferencesManager::setInt("fogOutputOffMaxTime", time);
+    PreferencesManager::setInt("fogOffMax", time);
     return true;
 }
 
 bool Ambient::setFogOutputOnMinTime(uint32_t time)
 {
-    PreferencesManager::setInt("fogOutputOnMinTime", time);
+    PreferencesManager::setInt("fogOnMin", time);
     return true;
 }
 
 bool Ambient::setFogOutputOnMaxTime(uint32_t time)
 {
-    PreferencesManager::setInt("fogOutputOnMaxTime", time);
+    PreferencesManager::setInt("fogOnMax", time);
     return true;
 }
 
 uint32_t Ambient::getFogOutputOffMinTime(void)
 {
-    return PreferencesManager::getInt("fogOutputOffMinTime", 5000);
+    return PreferencesManager::getInt("fogOffMin", 5000);
 }
 
 uint32_t Ambient::getFogOutputOffMaxTime(void)
 {
-    return PreferencesManager::getInt("fogOutputOffMaxTime", 20000);
+    return PreferencesManager::getInt("fogOffMax", 20000);
 }
 
 uint32_t Ambient::getFogOutputOnMinTime(void)
 {
-    return PreferencesManager::getInt("fogOutputOnMinTime", 200);
+    return PreferencesManager::getInt("fogOnMin", 200);
 }
 
 uint32_t Ambient::getFogOutputOnMaxTime(void)
 {
-    return PreferencesManager::getInt("fogOutputOnMaxTime", 1000);
+    return PreferencesManager::getInt("fogOnMax", 1000);
 }
