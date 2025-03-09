@@ -607,9 +607,9 @@ void webSetup()
 
     //----- (Main) -----
     // Simona game status labels
-    simonaProgressLabel = ESPUI.addControl(ControlType::Label, "Simona Progress:", "0", ControlColor::Carrot, mainTab);
-    expectedColorLabel = ESPUI.addControl(ControlType::Label, "Expected Color:", "None", ControlColor::Carrot, mainTab);
-    timeRemainingLabel = ESPUI.addControl(ControlType::Label, "Time Remaining:", "0", ControlColor::Carrot, mainTab);
+    simonaProgressLabel = ESPUI.addControl(ControlType::Label, "Simona Progress:", "0", ControlColor::Emerald, mainTab);
+    expectedColorLabel = ESPUI.addControl(ControlType::Label, "Expected Color:", "None", ControlColor::Emerald, mainTab);
+    timeRemainingLabel = ESPUI.addControl(ControlType::Label, "Time Remaining:", "0", ControlColor::Emerald, mainTab);
 
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getBool("cfgDrunktard", false)), ControlColor::None, mainTab, &switchExample);
 
