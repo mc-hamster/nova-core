@@ -356,7 +356,7 @@ void Simona::runGameTask()
 
       updateAndSendSimMsg(simMsg);
 
-      //playLost();
+      playLost();
       for (uint8_t i = 0; i <= 3; i++)
       {
         controlLed(leds[i], true);
