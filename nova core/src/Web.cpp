@@ -37,6 +37,7 @@ uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
 
+uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime;
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
@@ -605,7 +606,11 @@ void webSetup()
     status = ESPUI.addControl(ControlType::Label, "Status:", "Unknown Status", ControlColor::Turquoise);
 
     //----- (Main) -----
-    // Remove uptime from main tab
+    // Simona game status labels
+    simonaProgressLabel = ESPUI.addControl(ControlType::Label, "Simona Progress:", "0", ControlColor::Carrot, mainTab);
+    expectedColorLabel = ESPUI.addControl(ControlType::Label, "Expected Color:", "None", ControlColor::Carrot, mainTab);
+    timeRemainingLabel = ESPUI.addControl(ControlType::Label, "Time Remaining:", "0", ControlColor::Carrot, mainTab);
+
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getBool("cfgDrunktard", false)), ControlColor::None, mainTab, &switchExample);
 
     // Add device info and uptime to System Info tab
@@ -790,6 +795,28 @@ void webSetup()
 /**
  * Updates the web interface controls every n-second.
  */
+ControlColor getColorForName(const char *colorName)
+{
+    if (!colorName)
+        return ControlColor::Dark;
+
+    String color = String(colorName);
+    color.toLowerCase();
+
+    if (color == "red")
+        return ControlColor::Alizarin; // Red
+    if (color == "green")
+        return ControlColor::Emerald; // Green 
+    if (color == "blue")
+        return ControlColor::Peterriver; // Blue
+    if (color == "yellow")
+        return ControlColor::Sunflower; // Yellow
+    if (color == "white")
+        return ControlColor::Wetasphalt; // White represented as gray
+
+    return ControlColor::Dark;
+}
+
 void webLoop()
 {
     // Initialize static variables
@@ -811,8 +838,26 @@ void webLoop()
         switchState = !switchState;
 
         // Update switch and millis controls
-        // ESPUI.updateControlValue(switchOne, switchState ? "1" : "0");
         ESPUI.updateControlValue(controlMillis, formattedTime);
+
+        // Get the Simona instance instead of using the global pointer
+        Simona* simona = Simona::getInstance();
+
+        // Update Simona game state
+        ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
+        
+        // Update expected color with dynamic color
+        const char *expectedColor = simona->getExpectedColorName();
+        ESPUI.updateControlValue(expectedColorLabel, expectedColor ? expectedColor : "None");
+        
+        // Update the color of the expected color label
+        Control *colorControl = ESPUI.getControl(expectedColorLabel);
+        if (colorControl) {
+            colorControl->color = getColorForName(expectedColor);
+            ESPUI.updateControl(colorControl);
+        }
+
+        ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
 
         // Update oldTime
         oldTime = millis();

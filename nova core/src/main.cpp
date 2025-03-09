@@ -98,6 +98,9 @@ void initLedPWM(uint8_t pin, uint8_t channel) {
     ledcWrite(channel, LEDC_FULL_DUTY); // Initialize to full brightness (on state)
   }
 
+// Global game objects
+Simona* simona = nullptr;
+
 void setup()
 {
   Serial.begin(921600);

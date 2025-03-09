@@ -181,6 +181,35 @@ public:
      */
     bool getSequenceLocalEcho() const { return m_sequenceLocalEcho; }
 
+    /**
+     * @brief Get the progress string showing current round and level
+     * @return String containing the current progress
+     */
+    String getProgress() const {
+        if (stage == SIMONA_STAGE_WAITING) {
+            return "Waiting...";
+        }
+        return "Round: " + String(m_currentRound) + "/" + String(MAX_ROUNDS) + 
+               " - Level: " + String(level) + "/" + String(m_levelsInRound);
+    }
+
+    /**
+     * @brief Get the name of the expected color during input collection
+     * @return String containing the expected color name or "None" if not in input collection
+     */
+    const char* getExpectedColorName() const {
+        const char* color = getExpectedColor();
+        return color ? color : "None";
+    }
+
+    /**
+     * @brief Get the remaining time during input collection
+     * @return Remaining time in seconds, or 0 if not in input collection stage
+     */
+    uint32_t getTimeRemaining() const {
+        return getInputTimeRemaining();
+    }
+
 private:
     static Simona *instance; // Singleton instance
 
