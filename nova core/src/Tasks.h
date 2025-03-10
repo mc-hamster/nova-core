@@ -9,7 +9,6 @@ void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
-void TaskButtons(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
 

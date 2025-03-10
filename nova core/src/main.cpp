@@ -42,8 +42,6 @@ uint8_t leds[4] = {BUTTON_RED_OUT, BUTTON_GREEN_OUT, BUTTON_BLUE_OUT, BUTTON_YEL
 const char *buttonColors[4] = {"RED", "GREEN", "BLUE", "YELLOW"};
 const char *ledColors[4] = {"RED", "GREEN", "BLUE", "YELLOW"};
 
-// PersistenceManager manager("/data.json", 4096);
-
 void TaskLightUtils(void *pvParameters);
 void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);

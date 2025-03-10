@@ -169,36 +169,6 @@ void TaskModes(void *pvParameters) // This is a task.
   }
 }
 
-void TaskButtons(void *pvParameters) // This is a task.
-{
-  (void)pvParameters;
-  UBaseType_t uxHighWaterMark;
-  TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-  const char *pcTaskName = pcTaskGetName(xTaskHandle);
-  Serial.println("TaskButtons is running");
-
-  while (1) // A Task shall never return or exit.
-  {
-    if (enable->isSystemEnabled())
-    {
-      //buttons->loop();
-      delay(2);
-    }
-    else
-    {
-      delay(100);
-    }
-
-    static uint32_t lastExecutionTime = 0;
-    if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-    {
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
-      lastExecutionTime = millis();
-    }
-  }
-}
-
 void TaskStarSequence(void *pvParameters) // This is a task.
 {
   (void)pvParameters;
