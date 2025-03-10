@@ -207,9 +207,6 @@ void setup()
   //  more handlers...
   //  webServer.begin();
 
-  Serial.println("Setting up Webserver");
-  webSetup();
-  Serial.println("Setting up Webserver - Done");
 
   // Initialize Simona singleton
   Simona::initInstance(buttons, leds, buttonColors, ledColors);
@@ -222,6 +219,9 @@ void setup()
   xTaskCreate(buttonTask, "Button Task", 4096, NULL, 1, NULL);
   Serial.println("Create buttonTask - Done");
 
+  Serial.println("Setting up Webserver");
+  webSetup();
+  Serial.println("Setting up Webserver - Done");
 
   Serial.println("Create TaskEnable");
   xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);

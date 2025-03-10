@@ -20,6 +20,7 @@
 // Global game control variables
 bool SIMONA_CHEAT_MODE = false;
 bool GAME_ENABLED = true;
+bool SEQUENCE_LOCAL_ECHO = true;
 
 void handleRequest(AsyncWebServerRequest *request)
 {
@@ -61,6 +62,11 @@ uint16_t starSeq_SEQ_POOF_END_TO_END, starSeq_SEQ_BOOMER_LEFT_TO_RIGHT, starSeq_
 uint16_t starSeq_SEQ_BOOM_POOF;
 
 uint16_t fogOutputOffMinTime, fogOutputOffMaxTime, fogOutputOnMinTime, fogOutputOnMaxTime;
+
+// Define new control IDs for Simona Settings
+uint16_t simonaCheatModeSwitch;
+uint16_t simonaGameEnabledSwitch;
+uint16_t simonaSequenceLocalEchoSwitch;
 
 void numberCall(Control *sender, int type)
 {
@@ -553,6 +559,39 @@ void switchExample(Control *sender, int value)
             ESP.restart();
         }
     }
+    // Add handlers for the new Simona Settings switches
+    else if (sender->id == simonaCheatModeSwitch)
+    {
+        SIMONA_CHEAT_MODE = (sender->value == "1");
+        PreferencesManager::setBool("simonaCheatMode", SIMONA_CHEAT_MODE);
+        
+        // Check if Simona instance exists before calling methods on it
+        Simona* simona = Simona::getInstance();
+        if (simona) {
+            simona->setCheatMode(SIMONA_CHEAT_MODE);
+        }
+        
+        Serial.printf("Cheat mode %s and saved to preferences\n", SIMONA_CHEAT_MODE ? "enabled" : "disabled");
+    }
+    else if (sender->id == simonaGameEnabledSwitch)
+    {
+        GAME_ENABLED = (sender->value == "1");
+        PreferencesManager::setBool("simonaGameEnabled", GAME_ENABLED);
+        Serial.printf("Game %s and saved to preferences\n", GAME_ENABLED ? "enabled" : "disabled");
+    }
+    else if (sender->id == simonaSequenceLocalEchoSwitch)
+    {
+        SEQUENCE_LOCAL_ECHO = (sender->value == "1");
+        PreferencesManager::setBool("simonaSequenceLocalEcho", SEQUENCE_LOCAL_ECHO);
+        
+        // Check if Simona instance exists before calling methods on it
+        Simona* simona = Simona::getInstance();
+        if (simona) {
+            simona->setSequenceLocalEcho(SEQUENCE_LOCAL_ECHO);
+        }
+        
+        Serial.printf("Sequence local echo %s and saved to preferences\n", SEQUENCE_LOCAL_ECHO ? "enabled" : "disabled");
+    }
     else
     {
         Serial.println("Unknown Switch");
@@ -592,9 +631,25 @@ void selectExample(Control *sender, int value)
 
 void webSetup()
 {
+    // Load saved preferences for Simona settings
+    SIMONA_CHEAT_MODE = PreferencesManager::getBool("simonaCheatMode", false);
+    GAME_ENABLED = PreferencesManager::getBool("simonaGameEnabled", true);
+    SEQUENCE_LOCAL_ECHO = PreferencesManager::getBool("simonaSequenceLocalEcho", true);
+    
+    // Safely check if Simona is initialized before calling methods
+    Simona* simona = Simona::getInstance();
+    if (simona) {
+        Serial.println("Initializing Simona with preferences");
+        simona->setCheatMode(SIMONA_CHEAT_MODE);
+        simona->setSequenceLocalEcho(SEQUENCE_LOCAL_ECHO);
+    } else {
+        Serial.println("Warning: Simona not initialized yet");
+    }
+
     // Add tabs
     uint16_t mainTab = ESPUI.addControl(ControlType::Tab, "Main", "Main");
     // uint16_t settingsTab = ESPUI.addControl(ControlType::Tab, "Settings", "Settings");
+    uint16_t simonaSettingsTab = ESPUI.addControl(ControlType::Tab, "Simona Settings", "Simona Settings");
     uint16_t manualTab = ESPUI.addControl(ControlType::Tab, "Manual", "Manual");
     uint16_t sequencesTab = ESPUI.addControl(ControlType::Tab, "Sequences", "Sequences");
     uint16_t lightingTab = ESPUI.addControl(ControlType::Tab, "Lighting", "Lighting");
@@ -612,6 +667,58 @@ void webSetup()
     timeRemainingLabel = ESPUI.addControl(ControlType::Label, "Time Remaining:", "0", ControlColor::Emerald, mainTab);
 
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getBool("cfgDrunktard", false)), ControlColor::None, mainTab, &switchExample);
+
+    //----- (Simona Settings) -----
+    // Add Simona settings to the new tab
+    simonaCheatModeSwitch = ESPUI.addControl(
+        ControlType::Switcher, 
+        "Cheat Mode",
+        SIMONA_CHEAT_MODE ? "1" : "0",
+        ControlColor::Carrot, 
+        simonaSettingsTab, 
+        &switchExample);
+    
+    // Add tooltip explaining cheat mode
+    ESPUI.addControl(
+        ControlType::Label, 
+        "",
+        "When enabled, the game sequence will be predictable",
+        ControlColor::None,
+        simonaCheatModeSwitch);
+        
+    // Add game enabled toggle
+    simonaGameEnabledSwitch = ESPUI.addControl(
+        ControlType::Switcher, 
+        "Game Enabled",
+        GAME_ENABLED ? "1" : "0",
+        ControlColor::Peterriver, 
+        simonaSettingsTab, 
+        &switchExample);
+    
+    // Add tooltip explaining game enabled
+    ESPUI.addControl(
+        ControlType::Label, 
+        "",
+        "When disabled, game inputs will be ignored",
+        ControlColor::None,
+        simonaGameEnabledSwitch);
+        
+    // Add sequence local echo toggle
+    simonaSequenceLocalEchoSwitch = ESPUI.addControl(
+        ControlType::Switcher, 
+        "Sequence Local Echo",
+        SEQUENCE_LOCAL_ECHO ? "1" : "0",
+        ControlColor::Peterriver, 
+        simonaSettingsTab, 
+        &switchExample);
+    
+    // Add tooltip explaining sequence local echo
+    ESPUI.addControl(
+        ControlType::Label, 
+        "",
+        "When disabled, LED sequences will only play on remotes, not locally",
+        ControlColor::None,
+        simonaSequenceLocalEchoSwitch);
 
     // Add device info and uptime to System Info tab
     String deviceInfo = "MAC: " + WiFi.macAddress() + ", IP: " + WiFi.softAPIP().toString();
@@ -842,27 +949,54 @@ void webLoop()
 
         // Get the Simona instance instead of using the global pointer
         Simona* simona = Simona::getInstance();
+        
+        // Only update Simona-related UI if Simona is initialized
+        if (simona) {
+            // Update Simona game state
+            ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
+            
+            // Update expected color with dynamic color
+            const char *expectedColor = simona->getExpectedColorName();
+            ESPUI.updateControlValue(expectedColorLabel, expectedColor ? expectedColor : "None");
+            
+            // Update the color of the expected color label
+            Control *colorControl = ESPUI.getControl(expectedColorLabel);
+            if (colorControl) {
+                colorControl->color = getColorForName(expectedColor);
+                ESPUI.updateControl(colorControl);
+            }
 
-        // Update Simona game state
-        ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
-        
-        // Update expected color with dynamic color
-        const char *expectedColor = simona->getExpectedColorName();
-        ESPUI.updateControlValue(expectedColorLabel, expectedColor ? expectedColor : "None");
-        
-        // Update the color of the expected color label
-        Control *colorControl = ESPUI.getControl(expectedColorLabel);
-        if (colorControl) {
-            colorControl->color = getColorForName(expectedColor);
-            ESPUI.updateControl(colorControl);
+            ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
+        } else {
+            // Set default values if Simona is not initialized
+            ESPUI.updateControlValue(simonaProgressLabel, "Initializing...");
+            ESPUI.updateControlValue(expectedColorLabel, "None");
+            ESPUI.updateControlValue(timeRemainingLabel, "0");
         }
-
-        ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
 
         // Update oldTime
         oldTime = millis();
 
-        if (enable->isSystemEnabled())
+        // Update status message based on Simona settings
+        if (!GAME_ENABLED)
+        {
+            ESPUI.updateControlValue(status, "⚠️ GAME DISABLED - Game inputs ignored");
+            Control *statusControl = ESPUI.getControl(status);
+            if (statusControl) {
+                statusControl->color = ControlColor::Alizarin; // Red
+                ESPUI.updateControl(statusControl);
+            }
+        }
+        else if (SIMONA_CHEAT_MODE)
+        {
+            ESPUI.updateControlValue(status, "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️");
+            Control *statusControl = ESPUI.getControl(status);
+            if (statusControl) {
+                statusControl->color = ControlColor::Sunflower; // Yellow
+                ESPUI.updateControl(statusControl);
+            }
+        }
+        else if (enable->isSystemEnabled())
         {
             if (enable->isDrunktard())
             {
