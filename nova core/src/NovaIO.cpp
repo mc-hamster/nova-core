@@ -113,7 +113,6 @@ NovaIO::NovaIO()
     mcp_e.writeGPIOAB(expOutPort_E);
     mcp_f.writeGPIOAB(expOutPort_F);
     mcp_g.writeGPIOAB(expOutPort_G);
-    //mcp_g.writeGPIOAB(expOutPort_G);
     Serial.println("MCP23X17 interfaces outputs set to initilized value.");
 }
 
@@ -125,20 +124,16 @@ NovaIO::NovaIO()
  */
 bool NovaIO::expansionDigitalRead(int pin)
 {
-    // return 0;
-    bool readValue;
-    while (1) // After duration set Pins to end state
-    {
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
-        {
+    bool readValue = false;
+    while (1) {
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
             readValue = mcp_h.digitalRead(pin);
-            break;
+            xSemaphoreGive(novaIO->mutex_i2c);
+            return readValue;
         }
-        yield(); // We yield to feed the watchdog.
+        yield(); // Feed the watchdog while waiting
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
-    return readValue;
+    return false; // Shouldn't reach here, but safe default
 }
 
 void NovaIO::mcpA_writeGPIOAB(uint16_t value)
@@ -285,51 +280,23 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
  */
 void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 {
-    
-    while (1) // After duration set Pins to end state
-    {
-        //return;
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
-        {
-            if (expander == 0)
-            {
-                mcp_a.digitalWrite(pin, value);
+    while (1) {
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
+            switch(expander) {
+                case 0: mcp_a.digitalWrite(pin, value); break;
+                case 1: mcp_b.digitalWrite(pin, value); break;
+                case 2: mcp_c.digitalWrite(pin, value); break;
+                case 3: mcp_d.digitalWrite(pin, value); break;
+                case 4: mcp_e.digitalWrite(pin, value); break;
+                case 5: mcp_f.digitalWrite(pin, value); break;
+                case 6: mcp_g.digitalWrite(pin, value); break;
+                case 7: mcp_h.digitalWrite(pin, value); break;
             }
-            else if (expander == 1)
-            {
-                mcp_b.digitalWrite(pin, value);
-            }
-            else if (expander == 2)
-            {
-                mcp_c.digitalWrite(pin, value);
-            }
-            else if (expander == 3)
-            {
-                mcp_d.digitalWrite(pin, value);
-            }
-            else if (expander == 4)
-            {
-                mcp_e.digitalWrite(pin, value);
-            }
-            else if (expander == 5)
-            {
-                mcp_f.digitalWrite(pin, value);
-            }
-            else if (expander == 6)
-            {
-                mcp_g.digitalWrite(pin, value);
-            }
-            else if (expander == 7)
-            {
-                mcp_h.digitalWrite(pin, value);
-            }
-            break;
+            xSemaphoreGive(novaIO->mutex_i2c);
+            return;
         }
-        yield(); // We yield to feed the watchdog.
-        //delay(1);
+        yield(); // Feed the watchdog while waiting
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
 }
 
 void NovaIO::mcpB_digitalWrite(uint8_t pin, uint8_t value)
