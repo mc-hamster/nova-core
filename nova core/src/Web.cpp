@@ -927,97 +927,116 @@ ControlColor getColorForName(const char *colorName)
 void webLoop()
 {
     // Initialize static variables
-    static long oldTime = 0;
+    static unsigned long oldTime = 0;
     static bool switchState = false;
+    static const unsigned long UPDATE_INTERVAL = 1000; // Update every 1 second
+    static bool isUpdating = false; // Guard against recursive updates
+    static SemaphoreHandle_t webMutex = xSemaphoreCreateMutex();
 
+    // Rate limit updates and prevent recursion
     unsigned long currentMillis = millis();
-    unsigned long seconds = (currentMillis / 1000) % 60;
-    unsigned long minutes = (currentMillis / (1000 * 60)) % 60;
-    unsigned long hours = (currentMillis / (1000 * 60 * 60)) % 24;
-    unsigned long days = (currentMillis / (1000 * 60 * 60 * 24));
+    if (currentMillis - oldTime < UPDATE_INTERVAL || isUpdating) {
+        return;
+    }
 
-    String formattedTime = String(days) + "d " + String(hours) + "h " + String(minutes) + "m " + String(seconds) + "s";
+    // Use RAII pattern for mutex
+    if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE) {
+        return;  // Couldn't get mutex, skip this update
+    }
 
-    // Update controls every second
-    if (millis() - oldTime > 1000)
-    {
+    // Set update guard
+    isUpdating = true;
+
+    // Wrap all UI updates in try-catch to prevent crashes
+    try {
+        // Update oldTime first to prevent re-entry
+        oldTime = currentMillis;
+
+        // Calculate time values
+        unsigned long seconds = (currentMillis / 1000) % 60;
+        unsigned long minutes = (currentMillis / (1000 * 60)) % 60;
+        unsigned long hours = (currentMillis / (1000 * 60 * 60)) % 24;
+        unsigned long days = (currentMillis / (1000 * 60 * 60 * 24));
+
+        // Pre-allocate the time string with enough capacity
+        String formattedTime;
+        formattedTime.reserve(32);
+        formattedTime = String(days) + "d " + String(hours) + "h " + String(minutes) + "m " + String(seconds) + "s";
+
         // Toggle switch state
         switchState = !switchState;
 
-        // Update switch and millis controls
-        ESPUI.updateControlValue(controlMillis, formattedTime);
+        // Update uptime display with null check
+        Control* millisControl = controlMillis ? ESPUI.getControl(controlMillis) : nullptr;
+        if (millisControl) {
+            ESPUI.updateControlValue(controlMillis, formattedTime);
+        }
 
-        // Get the Simona instance instead of using the global pointer
+        // Get the Simona instance with null check
         Simona* simona = Simona::getInstance();
+        bool validLabels = simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
+                          ESPUI.getControl(simonaProgressLabel) && 
+                          ESPUI.getControl(expectedColorLabel) && 
+                          ESPUI.getControl(timeRemainingLabel);
         
-        // Only update Simona-related UI if Simona is initialized
-        if (simona) {
-            // Update Simona game state
-            ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
+        // Only update Simona-related UI if Simona is initialized and labels exist
+        if (simona && validLabels) {
+            // Update game state with null checks
+            Control* progressControl = ESPUI.getControl(simonaProgressLabel);
+            if (progressControl) {
+                ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
+            }
             
-            // Update expected color with dynamic color
-            const char *expectedColor = simona->getExpectedColorName();
-            ESPUI.updateControlValue(expectedColorLabel, expectedColor ? expectedColor : "None");
-            
-            // Update the color of the expected color label
-            Control *colorControl = ESPUI.getControl(expectedColorLabel);
-            if (colorControl) {
+            const char* expectedColor = simona->getExpectedColorName();
+            Control* colorControl = ESPUI.getControl(expectedColorLabel);
+            if (expectedColor && colorControl) {
+                ESPUI.updateControlValue(expectedColorLabel, expectedColor);
                 colorControl->color = getColorForName(expectedColor);
                 ESPUI.updateControl(colorControl);
+            } else if (colorControl) {
+                ESPUI.updateControlValue(expectedColorLabel, "None");
             }
 
-            ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
-        } else {
-            // Set default values if Simona is not initialized
-            ESPUI.updateControlValue(simonaProgressLabel, "Initializing...");
-            ESPUI.updateControlValue(expectedColorLabel, "None");
-            ESPUI.updateControlValue(timeRemainingLabel, "0");
-        }
-
-        // Update oldTime
-        oldTime = millis();
-
-        // Update status message based on Simona settings
-        if (!GAME_ENABLED)
-        {
-            ESPUI.updateControlValue(status, "⚠️ GAME DISABLED - Game inputs ignored");
-            Control *statusControl = ESPUI.getControl(status);
-            if (statusControl) {
-                statusControl->color = ControlColor::Alizarin; // Red
-                ESPUI.updateControl(statusControl);
-            }
-        }
-        else if (SIMONA_CHEAT_MODE)
-        {
-            ESPUI.updateControlValue(status, "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️");
-            Control *statusControl = ESPUI.getControl(status);
-            if (statusControl) {
-                statusControl->color = ControlColor::Sunflower; // Yellow
-                ESPUI.updateControl(statusControl);
-            }
-        }
-        else if (enable->isSystemEnabled())
-        {
-            if (enable->isDrunktard())
-            {
-                ESPUI.updateControlValue(status, "Drunktard");
-            }
-            else
-            {
-                ESPUI.updateControlValue(status, "Enabled");
-            }
-        }
-        else
-        {
-            if (enable->isDrunktard())
-            {
-                ESPUI.updateControlValue(status, "System Disabled (Drunktard)");
-            }
-            else
-            {
-                ESPUI.updateControlValue(status, "System Disabled (Emergency Stop)");
+            Control* timeControl = ESPUI.getControl(timeRemainingLabel);
+            if (timeControl) {
+                ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
             }
         }
 
+        // Update status message based on system state
+        Control* statusControl = status ? ESPUI.getControl(status) : nullptr;
+        if (statusControl) {
+            const char* statusMsg;
+            ControlColor statusColor = ControlColor::Emerald;
+
+            if (!GAME_ENABLED) {
+                statusMsg = "⚠️ GAME DISABLED - Game inputs ignored";
+                statusColor = ControlColor::Alizarin;
+            }
+            else if (SIMONA_CHEAT_MODE) {
+                statusMsg = "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️";
+                statusColor = ControlColor::Sunflower;
+            }
+            else if (enable && enable->isSystemEnabled()) {
+                statusMsg = enable->isDrunktard() ? "Drunktard" : "Enabled";
+            }
+            else {
+                statusMsg = enable && enable->isDrunktard() ? 
+                    "System Disabled (Drunktard)" : "System Disabled (Emergency Stop)";
+            }
+
+            ESPUI.updateControlValue(status, statusMsg);
+            statusControl->color = statusColor;
+            ESPUI.updateControl(statusControl);
+        }
+
+    } catch (const std::exception& e) {
+        Serial.printf("Exception in webLoop: %s\n", e.what());
+    } catch (...) {
+        Serial.println("Unknown exception in webLoop");
     }
+
+    // Clear update guard and release mutex
+    isUpdating = false;
+    xSemaphoreGive(webMutex);
 }
