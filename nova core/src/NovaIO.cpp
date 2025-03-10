@@ -124,16 +124,16 @@ NovaIO::NovaIO()
  */
 bool NovaIO::expansionDigitalRead(int pin)
 {
+    static const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
     bool readValue = false;
-    while (1) {
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
-            readValue = mcp_h.digitalRead(pin);
-            xSemaphoreGive(novaIO->mutex_i2c);
-            return readValue;
-        }
-        yield(); // Feed the watchdog while waiting
+    
+    // Try to get mutex with timeout to prevent deadlock
+    if (xSemaphoreTake(mutex_i2c, xMaxBlockTime) == pdTRUE) {
+        readValue = mcp_h.digitalRead(pin);
+        xSemaphoreGive(mutex_i2c);
     }
-    return false; // Shouldn't reach here, but safe default
+    
+    return readValue;
 }
 
 void NovaIO::mcpA_writeGPIOAB(uint16_t value)
