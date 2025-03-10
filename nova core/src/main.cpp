@@ -49,7 +49,6 @@ void TaskAmbient(void *pvParameters);
 void TaskEnable(void *pvParameters);
 void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
-//void TaskButtons(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
 
@@ -234,10 +233,6 @@ void setup()
   Serial.println("Create TaskModes");
   xTaskCreate(&TaskModes, "TaskModes", 6 * 1024, NULL, 5, NULL); // Increased from 4*1024 to 6*1024
   Serial.println("Create TaskModes - Done");
-
-  //Serial.println("Create TaskButtons");
-  //xTaskCreate(&TaskButtons, "TaskButtons", 4 * 1024, NULL, 5, NULL);
-  //Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
   xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 1, NULL); // Increased from 3*1024 to 4*1024
