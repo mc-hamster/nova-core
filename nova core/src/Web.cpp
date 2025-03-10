@@ -801,7 +801,7 @@ void webSetup()
 
     //---- Tab 3 (Sequences) -----
     seqBoomAll = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
-    seqAllStarBoom = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All Star", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    seqAllStarBoom = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All (Virtual Star)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomLeftRight = ESPUI.addControl(ControlType::Button, "Boomers", "L to R (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomRightLeft = ESPUI.addControl(ControlType::Button, "Boomers", "R to L (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
 

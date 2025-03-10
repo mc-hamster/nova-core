@@ -164,37 +164,14 @@ public:
     void poof(uint8_t star);
     void boom(uint8_t star);
 
-    void red_loop(void);
-    void green_loop(void);
-    void blue_loop(void);
-    void yellow_loop(void);
-
-    void redPoof();
-    void redBoom();
-
-    void greenPoof();
-    void greenBoom();
-
-    void bluePoof();
-    void blueBoom();
-
-    void yellowPoof();
-    void yellowBoom();
-
     void setupStar(void);
 
     bool goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff);
     bool goBoom(uint8_t star);
-    void goBoomAbort(StarColors color, bool abort);
     void boomAbort(uint8_t star);
 
     bool netOut(uint8_t star);
     bool netIn(uint8_t star);
-
-    bool isBoomerRedActive();
-    bool isBoomerGreenActive();
-    bool isBoomerBlueActive();
-    bool isBoomerYellowActive();
 
     void manualPoof(uint8_t star, bool state);
     void manualBlow(uint8_t star, bool state);
