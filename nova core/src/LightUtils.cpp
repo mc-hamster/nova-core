@@ -163,12 +163,13 @@ void LightUtils::loop()
         if (millis() - lastAuto > cfgAutoTime * 1000)
         {
             uint32_t randomPalette = random(1, 19);
+            /*
             Serial.print("Auto changing palette to : ");
             Serial.println(randomPalette);
 
             Serial.print("Next palette change in : ");
             Serial.println(cfgAutoTime);
-
+            */
             lastAuto = millis();
             getPalette(randomPalette, false);
         }
@@ -261,7 +262,7 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect, bool saveSelection)
     }
     else
     {
-        Serial.println("Not saving palette selection");
+        //Serial.println("Not saving palette selection");
     }
 
     switch (paletteSelect)
