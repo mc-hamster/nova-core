@@ -9,6 +9,10 @@ NovaIO *novaIO = NULL;
 
 NovaIO::NovaIO()
 {
+    // Initialize I2C statistics
+    i2c_bytes_transferred = 0;
+    i2c_last_second = millis();
+    i2c_utilization = 0;
 
     /*
     These should be initilized to 0 for us, but let's do it again
@@ -150,6 +154,12 @@ bool NovaIO::expansionDigitalRead(int pin)
         bool readValue = false;
         if (xSemaphoreTake(mutex_i2c, xMaxBlockTime) == pdTRUE) {
             readValue = mcp_h.digitalRead(pin);
+            // Count actual I2C transaction bytes:
+            // - Device address + write bit (1 byte)
+            // - Register address (1 byte)
+            // - Device address + read bit (1 byte)
+            // - Data byte (1 byte)
+            trackI2CTransfer(4);
             xSemaphoreGive(mutex_i2c);
         }
         cachedValues[pin] = readValue;
@@ -190,6 +200,11 @@ void NovaIO::mcpA_writeGPIOAB(uint16_t value)
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_a.writeGPIOAB(value);
+            // Count actual I2C transaction bytes:
+            // - Device address + write bit (1 byte)
+            // - Register address (1 byte)
+            // - Data bytes (2 bytes for GPIOAB)
+            trackI2CTransfer(4);
             break;
         }
         yield(); // We yield to feed the watchdog.
@@ -200,107 +215,111 @@ void NovaIO::mcpA_writeGPIOAB(uint16_t value)
 
 void NovaIO::mcpB_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_b.writeGPIOAB(value);
+            // Count actual I2C transaction bytes:
+            // - Device address + write bit (1 byte)
+            // - Register address (1 byte)
+            // - Data bytes (2 bytes for GPIOAB)
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpC_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_c.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpD_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_d.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpE_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_e.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpF_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_f.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpG_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_g.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpH_writeGPIOAB(uint16_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_h.writeGPIOAB(value);
+            trackI2CTransfer(4);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
@@ -310,6 +329,11 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_a.digitalWrite(pin, value);
+            // Count actual I2C transaction bytes:
+            // - Device address + write bit (1 byte)
+            // - Register address (1 byte) 
+            // - Data byte (1 byte)
+            trackI2CTransfer(3);
             break;
         }
         yield(); // We yield to feed the watchdog.
@@ -339,6 +363,11 @@ void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
                 case 6: mcp_g.digitalWrite(pin, value); break;
                 case 7: mcp_h.digitalWrite(pin, value); break;
             }
+            // Count actual I2C transaction bytes:
+            // - Device address + write bit (1 byte)
+            // - Register address (1 byte) 
+            // - Data byte (1 byte)
+            trackI2CTransfer(3);
             xSemaphoreGive(novaIO->mutex_i2c);
             return;
         }
@@ -348,107 +377,107 @@ void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 
 void NovaIO::mcpB_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_b.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpC_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_c.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpD_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_d.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpE_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_e.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpF_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_f.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpG_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_g.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 void NovaIO::mcpH_digitalWrite(uint8_t pin, uint8_t value)
 {
-    while (1) // After duration set Pins to end state
+    while (1)
     {
         if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
         {
             mcp_h.digitalWrite(pin, value);
+            trackI2CTransfer(3);
             break;
         }
-        yield(); // We yield to feed the watchdog.
+        yield();
     }
-
-    xSemaphoreGive(novaIO->mutex_i2c); // Give back the mutex
+    xSemaphoreGive(novaIO->mutex_i2c);
 }
 
 /*
@@ -563,5 +592,31 @@ void NovaIO::ledWhite(bool value)
     else
     {
         analogWrite(BUTTON_WHITE_OUT, 0);
+    }
+}
+
+void NovaIO::trackI2CTransfer(size_t bytes) {
+    i2c_bytes_transferred += bytes;
+    updateI2CStats();
+}
+
+float NovaIO::getI2CUtilization() {
+    updateI2CStats();
+    return i2c_utilization;
+}
+
+void NovaIO::updateI2CStats() {
+    unsigned long current_time = millis();
+    if (current_time - i2c_last_second >= 1000) {
+        // Calculate utilization as percentage of theoretical maximum bandwidth
+        // Each byte takes 9 bits (8 data + 1 ack)
+        // Maximum bytes per second = clock_speed / 9
+        // Using fixed 400kHz speed
+        const float max_bytes_per_sec = 400000.0 / 9.0;
+        i2c_utilization = (i2c_bytes_transferred / max_bytes_per_sec) * 100.0;
+        
+        // Reset for next second
+        i2c_bytes_transferred = 0;
+        i2c_last_second = current_time;
     }
 }

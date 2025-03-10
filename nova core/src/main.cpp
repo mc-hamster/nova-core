@@ -49,6 +49,7 @@ void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
+void TaskI2CMonitor(void *pvParameters);
 
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
@@ -147,9 +148,6 @@ void setup()
   Wire.begin();
   
   Wire.setClock(400000UL); // 400khz
-  // Wire.setClock(600000UL); // 600khz
-  // Wire.setClock(800000UL); // 800khz
-  // Wire.setClock(1000000UL); // 1mhz
 
   PreferencesManager::begin();
   // ...existing code...
@@ -252,7 +250,9 @@ void setup()
   xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 5, NULL);
   Serial.println("Create StarSequence - Done");
 
-
+  Serial.println("Create TaskI2CMonitor");
+  xTaskCreate(&TaskI2CMonitor, "I2CMonitor", 2048, NULL, 1, NULL);
+  Serial.println("Create TaskI2CMonitor - Done");
 
   Serial.println("Setup Complete");
 }

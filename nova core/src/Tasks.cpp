@@ -8,6 +8,7 @@
 #include <DNSServer.h>
 #include "output/Star.h"
 #include "Simona.h"
+#include "NovaIO.h"
 
 
 extern Ambient *ambient;
@@ -17,6 +18,7 @@ extern Enable *enable;
 extern StarSequence *starSequence;
 extern DNSServer dnsServer;
 extern Star *star;
+extern NovaIO *novaIO;
 
 void TaskAmbient(void *pvParameters) // This is a task.
 {
@@ -254,4 +256,26 @@ void buttonTask(void *pvParameters) {
       // Add a small delay to prevent watchdog triggers
       vTaskDelay(pdMS_TO_TICKS(20));
   }
+}
+
+void TaskI2CMonitor(void *pvParameters) {
+    UBaseType_t uxHighWaterMark;
+    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+    const char *pcTaskName = pcTaskGetName(xTaskHandle);
+
+    Serial.println("TaskI2CMonitor is running");
+    while (1) {
+        novaIO->updateI2CStats();  // Update statistics before reading
+        float utilization = novaIO->getI2CUtilization();
+        Serial.printf("I2C Bus Utilization: %.2f%%\n", utilization);
+
+        static uint32_t lastExecutionTime = 0;
+        if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL) {
+            uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+            Serial.printf("%s stack free - %d running on core %d\n", pcTaskName, uxHighWaterMark, xPortGetCoreID());
+            lastExecutionTime = millis();
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(30000)); // 30 second delay
+    }
 }

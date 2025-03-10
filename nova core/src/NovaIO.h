@@ -38,6 +38,11 @@ private:
         uint16_t expOutPort_G;
         uint16_t expOutPort_H;
 
+        // I2C statistics
+        unsigned long i2c_bytes_transferred;
+        unsigned long i2c_last_second;
+        float i2c_utilization;
+
 public:
         NovaIO();
 
@@ -82,6 +87,11 @@ public:
         void setStarlink(u_int8_t u_int8_t, uint8_t star);
 
         xSemaphoreHandle mutex_i2c;
+
+        // I2C statistics methods
+        void trackI2CTransfer(size_t bytes);
+        float getI2CUtilization();
+        void updateI2CStats();
 };
 
 extern NovaIO *novaIO;

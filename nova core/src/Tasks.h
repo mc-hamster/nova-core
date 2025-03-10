@@ -11,6 +11,7 @@ void TaskMDNS(void *pvParameters);
 void TaskModes(void *pvParameters);
 void TaskWeb(void *pvParameters);
 void TaskStarSequence(void *pvParameters);
+void TaskI2CMonitor(void *pvParameters); // Added I2C monitoring task
 
 void gameTask(void *pvParameters);
 void buttonTask(void *pvParameters);
