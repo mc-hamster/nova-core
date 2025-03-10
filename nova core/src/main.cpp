@@ -212,7 +212,7 @@ void setup()
   Simona::initInstance(buttons, leds, buttonColors, ledColors);
 
   Serial.println("Create gameTask");
-  xTaskCreate(gameTask, "Game Task", 4096, NULL, 3, NULL);
+  xTaskCreate(gameTask, "Game Task", 8 * 1024, NULL, 3, NULL); // Increased from 4096 to 8192
   Serial.println("Create gameTask - Done");
 
   Serial.println("Create buttonTask");
@@ -228,11 +228,11 @@ void setup()
   Serial.println("Create TaskEnable - Done");
 
   Serial.println("Create TaskWeb");
-  xTaskCreate(&TaskWeb, "TaskWeb", 10 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskWeb, "TaskWeb", 16 * 1024, NULL, 5, NULL); // Increased from 10*1024 to 16*1024
   Serial.println("Create TaskWeb - Done");
 
   Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 4 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskModes, "TaskModes", 6 * 1024, NULL, 5, NULL); // Increased from 4*1024 to 6*1024
   Serial.println("Create TaskModes - Done");
 
   //Serial.println("Create TaskButtons");
@@ -240,11 +240,11 @@ void setup()
   //Serial.println("Create TaskButtons - Done");
 
   Serial.println("Create TaskMDNS");
-  xTaskCreate(&TaskMDNS, "TaskMDNS", 3 * 1024, NULL, 1, NULL);
+  xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 1, NULL); // Increased from 3*1024 to 4*1024
   Serial.println("Create TaskMDNS - Done");
 
   Serial.println("Create TaskAmbient");
-  xTaskCreate(&TaskAmbient, "TaskAmbient", 7 * 1024, NULL, 5, NULL);
+  xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 5, NULL); // Increased from 7*1024 to 8*1024
   Serial.println("Create TaskAmbient - Done");
 
   Serial.println("Create LightUtils");
