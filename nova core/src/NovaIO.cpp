@@ -119,21 +119,68 @@ NovaIO::NovaIO()
 /**
  * Reads the digital value of the specified pin on the MCP23017H expander.
  * 
+ * The function caches the pin reading for a configurable period (CACHE_DURATION).
+ * If the cached value is older than CACHE_DURATION, it is refreshed from hardware (cache miss);
+ * otherwise, the cached value is returned (cache hit).
+ * 
+ * Additionally, report logging can be enabled or disabled via REPORT_LOGGING_ENABLED.
+ *
  * @param pin The pin number to read.
  * @return The digital value of the pin (HIGH or LOW).
  */
 bool NovaIO::expansionDigitalRead(int pin)
 {
-    static const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
-    bool readValue = false;
+    // Configurable cache duration (in milliseconds) and report logging flag.
+    const unsigned long CACHE_DURATION = 40;  // Cache duration (ms). Change this value as needed.
+    const bool REPORT_LOGGING_ENABLED = false;   // Set to false to disable report logging.
+
+    static unsigned long lastReportTime = millis();
+    static int pollCounts[256] = {0};
+    static int cacheHits[256] = {0};
+    static int cacheMisses[256] = {0};
+    static bool cachedValues[256] = { false };
+    static unsigned long cachedTime[256] = { 0 };
     
-    // Try to get mutex with timeout to prevent deadlock
-    if (xSemaphoreTake(mutex_i2c, xMaxBlockTime) == pdTRUE) {
-        readValue = mcp_h.digitalRead(pin);
-        xSemaphoreGive(mutex_i2c);
+    pollCounts[pin]++; // Count poll for this pin
+    unsigned long currentMillis = millis();
+    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
+
+    if (currentMillis - cachedTime[pin] >= CACHE_DURATION) { // Cache miss: cache older than CACHE_DURATION
+        cacheMisses[pin]++;
+        bool readValue = false;
+        if (xSemaphoreTake(mutex_i2c, xMaxBlockTime) == pdTRUE) {
+            readValue = mcp_h.digitalRead(pin);
+            xSemaphoreGive(mutex_i2c);
+        }
+        cachedValues[pin] = readValue;
+        cachedTime[pin] = currentMillis;
+    } else {
+        cacheHits[pin]++;
+    }
+
+    if (REPORT_LOGGING_ENABLED && (currentMillis - lastReportTime >= 1000)) { // 1 second elapsed
+        Serial.println("Polling report:");
+        for (int i = 0; i < 256; i++) {
+            if (pollCounts[i] > 0) {
+                Serial.print("Pin ");
+                Serial.print(i);
+                Serial.print(": Hits = ");
+                Serial.print(cacheHits[i]);
+                Serial.print(", Misses = ");
+                Serial.print(cacheMisses[i]);
+                Serial.print(" (Total polls: ");
+                Serial.print(pollCounts[i]);
+                Serial.println(")");
+                // Reset counters
+                pollCounts[i] = 0;
+                cacheHits[i] = 0;
+                cacheMisses[i] = 0;
+            }
+        }
+        lastReportTime = currentMillis;
     }
     
-    return readValue;
+    return cachedValues[pin];
 }
 
 void NovaIO::mcpA_writeGPIOAB(uint16_t value)
