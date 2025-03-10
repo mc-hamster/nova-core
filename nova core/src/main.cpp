@@ -151,6 +151,10 @@ void setup()
   // Wire.setClock(800000UL); // 800khz
   // Wire.setClock(1000000UL); // 1mhz
 
+  PreferencesManager::begin();
+  // ...existing code...
+  PreferencesManager::end();
+
   Serial.println("new NovaIO");
   novaIO = new NovaIO();
 
@@ -248,9 +252,7 @@ void setup()
   xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 5, NULL);
   Serial.println("Create StarSequence - Done");
 
-  PreferencesManager::begin();
-  // ...existing code...
-  PreferencesManager::end();
+
 
   Serial.println("Setup Complete");
 }
