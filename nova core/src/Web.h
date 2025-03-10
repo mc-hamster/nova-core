@@ -30,7 +30,7 @@ public:
     CaptiveRequestHandler() {}
     virtual ~CaptiveRequestHandler() {}
 
-    bool canHandle(AsyncWebServerRequest *request) override {
+    bool canHandle(AsyncWebServerRequest *request) const override {
         // Only handle GET requests with a reasonable size
         return request->method() == HTTP_GET;
     }

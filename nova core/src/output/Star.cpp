@@ -21,7 +21,10 @@ Star::Star()
 void Star::setupStar(void)
 {
 
-    for (uint32_t i = 0; i < 20; i++)
+    /*
+        Star 20 is special. That's the "all" star. 
+    */
+    for (uint32_t i = 0; i < 21; i++)
     {
         cluster.stars[i].starState.boomerButtonState = BOOMER_IDLE;
         cluster.stars[i].pooferOutputState = 0;
@@ -234,6 +237,17 @@ void Star::setupStar(void)
     cluster.stars[19].net.expander = 7;
     cluster.stars[19].net.re = 6;
     cluster.stars[19].net.de = 7;
+/*
+    cluster.stars[20].expander = 255;
+    cluster.stars[20].blowerOutput = 255;
+    cluster.stars[20].fuelOutput = 255;
+    cluster.stars[20].igniterOutput = 255;
+    cluster.stars[20].pooferOutput = 255;
+    cluster.stars[20].blowerOutputDuty = 255;
+    //cluster.stars[20].net.expander = 7;
+    //cluster.stars[20].net.re = 6;
+    //cluster.stars[20].net.de = 7;
+*/
 }
 
 void Star::loop()

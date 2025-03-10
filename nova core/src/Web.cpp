@@ -56,7 +56,7 @@ uint16_t boomerD1, boomerD2, boomerD3;
 uint16_t starManualPoof, starManualBlow, starManuallowFuel, starManualFuel, starManualZap, starManualSelect;
 uint8_t starManualSelectValue = 0;
 
-uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
+uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft, seqAllStarBoom;
 
 uint16_t starSeq_SEQ_POOF_END_TO_END, starSeq_SEQ_BOOMER_LEFT_TO_RIGHT, starSeq_SEQ_BOOMER_RIGHT_TO_LEFT, starSeq_SEQ_BOOM_FAST, starSeq_SEQ_BOOM_WAVE_IN, starSeq_SEQ_OFF;
 uint16_t starSeq_SEQ_BOOM_POOF;
@@ -315,6 +315,10 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
+    else if (sender->id == seqAllStarBoom)
+    {
+        star->boom(20);
+    }
     else if (sender->id == seqBoomLeftRight)
     {
         if (type == B_DOWN)
@@ -505,8 +509,6 @@ void buttonCallback(Control *sender, int type)
             break;
         }
     }
-
-
 }
 
 void switchExample(Control *sender, int value)
@@ -542,8 +544,8 @@ void switchExample(Control *sender, int value)
         //    - Give the user a chance to cancel the config reset.
         if (sender->value.toInt())
         {
-            //PreferencesManager::clear();
-            //PreferencesManager::save();
+            // PreferencesManager::clear();
+            // PreferencesManager::save();
             delay(50);
             ESP.restart();
         }
@@ -564,13 +566,14 @@ void switchExample(Control *sender, int value)
     {
         SIMONA_CHEAT_MODE = (sender->value == "1");
         PreferencesManager::setBool("simonaCheatMode", SIMONA_CHEAT_MODE);
-        
+
         // Check if Simona instance exists before calling methods on it
-        Simona* simona = Simona::getInstance();
-        if (simona) {
+        Simona *simona = Simona::getInstance();
+        if (simona)
+        {
             simona->setCheatMode(SIMONA_CHEAT_MODE);
         }
-        
+
         Serial.printf("Cheat mode %s and saved to preferences\n", SIMONA_CHEAT_MODE ? "enabled" : "disabled");
     }
     else if (sender->id == simonaGameEnabledSwitch)
@@ -583,13 +586,14 @@ void switchExample(Control *sender, int value)
     {
         SEQUENCE_LOCAL_ECHO = (sender->value == "1");
         PreferencesManager::setBool("simonaSequenceLocalEcho", SEQUENCE_LOCAL_ECHO);
-        
+
         // Check if Simona instance exists before calling methods on it
-        Simona* simona = Simona::getInstance();
-        if (simona) {
+        Simona *simona = Simona::getInstance();
+        if (simona)
+        {
             simona->setSequenceLocalEcho(SEQUENCE_LOCAL_ECHO);
         }
-        
+
         Serial.printf("Sequence local echo %s and saved to preferences\n", SEQUENCE_LOCAL_ECHO ? "enabled" : "disabled");
     }
     else
@@ -635,14 +639,17 @@ void webSetup()
     SIMONA_CHEAT_MODE = PreferencesManager::getBool("simonaCheatMode", false);
     GAME_ENABLED = PreferencesManager::getBool("simonaGameEnabled", true);
     SEQUENCE_LOCAL_ECHO = PreferencesManager::getBool("simonaSequenceLocalEcho", true);
-    
+
     // Safely check if Simona is initialized before calling methods
-    Simona* simona = Simona::getInstance();
-    if (simona) {
+    Simona *simona = Simona::getInstance();
+    if (simona)
+    {
         Serial.println("Initializing Simona with preferences");
         simona->setCheatMode(SIMONA_CHEAT_MODE);
         simona->setSequenceLocalEcho(SEQUENCE_LOCAL_ECHO);
-    } else {
+    }
+    else
+    {
         Serial.println("Warning: Simona not initialized yet");
     }
 
@@ -671,50 +678,50 @@ void webSetup()
     //----- (Simona Settings) -----
     // Add Simona settings to the new tab
     simonaCheatModeSwitch = ESPUI.addControl(
-        ControlType::Switcher, 
+        ControlType::Switcher,
         "Cheat Mode",
         SIMONA_CHEAT_MODE ? "1" : "0",
-        ControlColor::Carrot, 
-        simonaSettingsTab, 
+        ControlColor::Carrot,
+        simonaSettingsTab,
         &switchExample);
-    
+
     // Add tooltip explaining cheat mode
     ESPUI.addControl(
-        ControlType::Label, 
+        ControlType::Label,
         "",
         "When enabled, the game sequence will be predictable",
         ControlColor::None,
         simonaCheatModeSwitch);
-        
+
     // Add game enabled toggle
     simonaGameEnabledSwitch = ESPUI.addControl(
-        ControlType::Switcher, 
+        ControlType::Switcher,
         "Game Enabled",
         GAME_ENABLED ? "1" : "0",
-        ControlColor::Peterriver, 
-        simonaSettingsTab, 
+        ControlColor::Peterriver,
+        simonaSettingsTab,
         &switchExample);
-    
+
     // Add tooltip explaining game enabled
     ESPUI.addControl(
-        ControlType::Label, 
+        ControlType::Label,
         "",
         "When disabled, game inputs will be ignored",
         ControlColor::None,
         simonaGameEnabledSwitch);
-        
+
     // Add sequence local echo toggle
     simonaSequenceLocalEchoSwitch = ESPUI.addControl(
-        ControlType::Switcher, 
+        ControlType::Switcher,
         "Sequence Local Echo",
         SEQUENCE_LOCAL_ECHO ? "1" : "0",
-        ControlColor::Peterriver, 
-        simonaSettingsTab, 
+        ControlColor::Peterriver,
+        simonaSettingsTab,
         &switchExample);
-    
+
     // Add tooltip explaining sequence local echo
     ESPUI.addControl(
-        ControlType::Label, 
+        ControlType::Label,
         "",
         "When disabled, LED sequences will only play on remotes, not locally",
         ControlColor::None,
@@ -794,6 +801,7 @@ void webSetup()
 
     //---- Tab 3 (Sequences) -----
     seqBoomAll = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
+    seqAllStarBoom = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All Star", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     seqBoomLeftRight = ESPUI.addControl(ControlType::Button, "Boomers", "L to R (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomRightLeft = ESPUI.addControl(ControlType::Button, "Boomers", "R to L (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
 
@@ -803,8 +811,6 @@ void webSetup()
     starSeq_SEQ_BOOM_FAST = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOM_FAST", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
     starSeq_SEQ_BOOM_WAVE_IN = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOM_WAVE_IN", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
     starSeq_SEQ_BOOM_POOF = ESPUI.addControl(ControlType::Button, "Boomers", "SEQ_BOOM_POOF", ControlColor::Peterriver, starSeq_SEQ_POOF_END_TO_END, &buttonCallback);
-
-
 
     //---- Tab -- Lighting
     lightingBrightnessSlider = ESPUI.addControl(ControlType::Slider, "Brightness", String(lightUtils->getCfgBrightness()), ControlColor::Alizarin, lightingTab, &slider);
@@ -913,7 +919,7 @@ ControlColor getColorForName(const char *colorName)
     if (color == "red")
         return ControlColor::Alizarin; // Red
     if (color == "green")
-        return ControlColor::Emerald; // Green 
+        return ControlColor::Emerald; // Green
     if (color == "blue")
         return ControlColor::Peterriver; // Blue
     if (color == "yellow")
@@ -930,25 +936,28 @@ void webLoop()
     static unsigned long oldTime = 0;
     static bool switchState = false;
     static const unsigned long UPDATE_INTERVAL = 1000; // Update every 1 second
-    static bool isUpdating = false; // Guard against recursive updates
+    static bool isUpdating = false;                    // Guard against recursive updates
     static SemaphoreHandle_t webMutex = xSemaphoreCreateMutex();
 
     // Rate limit updates and prevent recursion
     unsigned long currentMillis = millis();
-    if (currentMillis - oldTime < UPDATE_INTERVAL || isUpdating) {
+    if (currentMillis - oldTime < UPDATE_INTERVAL || isUpdating)
+    {
         return;
     }
 
     // Use RAII pattern for mutex
-    if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE) {
-        return;  // Couldn't get mutex, skip this update
+    if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE)
+    {
+        return; // Couldn't get mutex, skip this update
     }
 
     // Set update guard
     isUpdating = true;
 
     // Wrap all UI updates in try-catch to prevent crashes
-    try {
+    try
+    {
         // Update oldTime first to prevent re-entry
         oldTime = currentMillis;
 
@@ -967,72 +976,86 @@ void webLoop()
         switchState = !switchState;
 
         // Update uptime display with null check
-        Control* millisControl = controlMillis ? ESPUI.getControl(controlMillis) : nullptr;
-        if (millisControl) {
+        Control *millisControl = controlMillis ? ESPUI.getControl(controlMillis) : nullptr;
+        if (millisControl)
+        {
             ESPUI.updateControlValue(controlMillis, formattedTime);
         }
 
         // Get the Simona instance with null check
-        Simona* simona = Simona::getInstance();
+        Simona *simona = Simona::getInstance();
         bool validLabels = simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
-                          ESPUI.getControl(simonaProgressLabel) && 
-                          ESPUI.getControl(expectedColorLabel) && 
-                          ESPUI.getControl(timeRemainingLabel);
-        
+                           ESPUI.getControl(simonaProgressLabel) &&
+                           ESPUI.getControl(expectedColorLabel) &&
+                           ESPUI.getControl(timeRemainingLabel);
+
         // Only update Simona-related UI if Simona is initialized and labels exist
-        if (simona && validLabels) {
+        if (simona && validLabels)
+        {
             // Update game state with null checks
-            Control* progressControl = ESPUI.getControl(simonaProgressLabel);
-            if (progressControl) {
+            Control *progressControl = ESPUI.getControl(simonaProgressLabel);
+            if (progressControl)
+            {
                 ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
             }
-            
-            const char* expectedColor = simona->getExpectedColorName();
-            Control* colorControl = ESPUI.getControl(expectedColorLabel);
-            if (expectedColor && colorControl) {
+
+            const char *expectedColor = simona->getExpectedColorName();
+            Control *colorControl = ESPUI.getControl(expectedColorLabel);
+            if (expectedColor && colorControl)
+            {
                 ESPUI.updateControlValue(expectedColorLabel, expectedColor);
                 colorControl->color = getColorForName(expectedColor);
                 ESPUI.updateControl(colorControl);
-            } else if (colorControl) {
+            }
+            else if (colorControl)
+            {
                 ESPUI.updateControlValue(expectedColorLabel, "None");
             }
 
-            Control* timeControl = ESPUI.getControl(timeRemainingLabel);
-            if (timeControl) {
+            Control *timeControl = ESPUI.getControl(timeRemainingLabel);
+            if (timeControl)
+            {
                 ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
             }
         }
 
         // Update status message based on system state
-        Control* statusControl = status ? ESPUI.getControl(status) : nullptr;
-        if (statusControl) {
-            const char* statusMsg;
+        Control *statusControl = status ? ESPUI.getControl(status) : nullptr;
+        if (statusControl)
+        {
+            const char *statusMsg;
             ControlColor statusColor = ControlColor::Emerald;
 
-            if (!GAME_ENABLED) {
+            if (!GAME_ENABLED)
+            {
                 statusMsg = "⚠️ GAME DISABLED - Game inputs ignored";
                 statusColor = ControlColor::Alizarin;
             }
-            else if (SIMONA_CHEAT_MODE) {
+            else if (SIMONA_CHEAT_MODE)
+            {
                 statusMsg = "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️";
                 statusColor = ControlColor::Sunflower;
             }
-            else if (enable && enable->isSystemEnabled()) {
+            else if (enable && enable->isSystemEnabled())
+            {
                 statusMsg = enable->isDrunktard() ? "Drunktard" : "Enabled";
             }
-            else {
-                statusMsg = enable && enable->isDrunktard() ? 
-                    "System Disabled (Drunktard)" : "System Disabled (Emergency Stop)";
+            else
+            {
+                statusMsg = enable && enable->isDrunktard() ? "System Disabled (Drunktard)" : "System Disabled (Emergency Stop)";
             }
 
             ESPUI.updateControlValue(status, statusMsg);
             statusControl->color = statusColor;
             ESPUI.updateControl(statusControl);
         }
-
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         Serial.printf("Exception in webLoop: %s\n", e.what());
-    } catch (...) {
+    }
+    catch (...)
+    {
         Serial.println("Unknown exception in webLoop");
     }
 

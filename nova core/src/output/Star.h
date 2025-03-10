@@ -74,7 +74,7 @@ private:
     {
         // char groupName[20];
         //         int numSensors;
-        star stars[20]; // Array of stars structs
+        star stars[21]; // Array of stars structs
     };
 
     starCluster cluster;
