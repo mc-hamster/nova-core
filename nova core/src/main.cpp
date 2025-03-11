@@ -110,6 +110,8 @@ void setup()
 
   Serial.setDebugOutput(true);
 
+  PreferencesManager::begin(); // Move this to the start
+
   if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED))
   {
     Serial.println("LITTLEFS Mount Failed");
@@ -148,10 +150,6 @@ void setup()
   Wire.begin();
   
   Wire.setClock(400000UL); // 400khz
-
-  PreferencesManager::begin();
-  // ...existing code...
-  PreferencesManager::end();
 
   Serial.println("new NovaIO");
   novaIO = new NovaIO();

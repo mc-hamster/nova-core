@@ -119,9 +119,16 @@ LightUtils::LightUtils()
     // Load the light configuration
     Serial.println("LightUtils starting up...");
 
+    Serial.println("Loading stored brightness value...");
+    uint8_t storedBrightness = getCfgBrightness();
+    Serial.print("Loaded brightness value: ");
+    Serial.println(storedBrightness);
+
     Serial.println("Configuring FastLED");
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(4000)>(leds, NUM_LEDS);
-    FastLED.setBrightness(getCfgBrightness());
+    FastLED.setBrightness(storedBrightness);
+    Serial.print("FastLED brightness set to: ");
+    Serial.println(storedBrightness);
     FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it for the DMX lights.
 
 
@@ -581,7 +588,11 @@ void LightUtils::setCfgLocalDisable(bool localDisable)
  */
 uint8_t LightUtils::getCfgBrightness(void)
 {
-    return PreferencesManager::getInt("cfgBrightness", 255);
+    //Serial.println("getCfgBrightness called");
+    uint8_t brightness = PreferencesManager::getInt("cfgBrightness", 255);
+    //Serial.print("Preference value for cfgBrightness: ");
+    //Serial.println(brightness);
+    return brightness;
 }
 
 /**
