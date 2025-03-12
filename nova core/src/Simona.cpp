@@ -6,6 +6,7 @@
 #include "utilities/PreferencesManager.h" // Updated path
 #include "main.h" // Added for setLedBrightness
 #include "Web.h"
+#include "output/NovaNow.h" // Updated path to output directory
 
 
 /*
@@ -94,7 +95,7 @@ void Simona::updateAndSendSimMsg(SimonaMessage &simMsg)
   simMsg.currentRound = m_currentRound;
   simMsg.maxRounds = MAX_ROUNDS;
   simMsg.levelsInRound = m_levelsInRound;
-  //sendSimonaMessage(simMsg);
+  sendSimonaMessage(simMsg);
 }
 
 void Simona::loadPreferences()
