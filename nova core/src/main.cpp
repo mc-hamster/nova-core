@@ -20,7 +20,7 @@
 #include "LightUtils.h"
 #include "output/Star.h"
 #include "output/StarSequence.h"
-//#include "modes/Buttons.h"
+#include "output/NovaNow.h"  // Updated path
 #include "Web.h"
 #include "utilities/PreferencesManager.h"
 #include "fileSystemHelper.h"
@@ -29,7 +29,6 @@
 #include "utilities/utilities.h"
 
 #include "Simona.h"
-
 #include "midi/MIDIControl.hpp"  // Updated path to MIDI module
 #include <MIDI.h>
 
@@ -166,9 +165,6 @@ void setup()
   Serial.println("new LightUtils");
   lightUtils = new LightUtils();
 
-  //Serial.println("new Buttons");
-  //buttons = new Buttons();
-
   Serial.println("new Star Sequence");
   starSequence = new StarSequence();
 
@@ -200,57 +196,19 @@ void setup()
   Serial.println(ESP.getSdkVersion());
 
   dnsServer.start(53, "*", WiFi.softAPIP());
-  // webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
-  //  more handlers...
-  //  webServer.begin();
-
 
   // Initialize Simona singleton
   Simona::initInstance(buttons, leds, buttonColors, ledColors);
-
-  Serial.println("Create gameTask");
-  xTaskCreate(gameTask, "Game Task", 8 * 1024, NULL, 3, NULL); // Increased from 4096 to 8192
-  Serial.println("Create gameTask - Done");
-
-  Serial.println("Create buttonTask");
-  xTaskCreate(buttonTask, "Button Task", 4096, NULL, 1, NULL);
-  Serial.println("Create buttonTask - Done");
+  
+  // Initialize NovaNow for message handling
+  novaNowSetup();
 
   Serial.println("Setting up Webserver");
   webSetup();
   Serial.println("Setting up Webserver - Done");
 
-  Serial.println("Create TaskEnable");
-  xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
-  Serial.println("Create TaskEnable - Done");
-
-  Serial.println("Create TaskWeb");
-  xTaskCreate(&TaskWeb, "TaskWeb", 16 * 1024, NULL, 5, NULL); // Increased from 10*1024 to 16*1024
-  Serial.println("Create TaskWeb - Done");
-
-  Serial.println("Create TaskModes");
-  xTaskCreate(&TaskModes, "TaskModes", 6 * 1024, NULL, 5, NULL); // Increased from 4*1024 to 6*1024
-  Serial.println("Create TaskModes - Done");
-
-  Serial.println("Create TaskMDNS");
-  xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 1, NULL); // Increased from 3*1024 to 4*1024
-  Serial.println("Create TaskMDNS - Done");
-
-  Serial.println("Create TaskAmbient");
-  xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 5, NULL); // Increased from 7*1024 to 8*1024
-  Serial.println("Create TaskAmbient - Done");
-
-  Serial.println("Create LightUtils");
-  xTaskCreate(&TaskLightUtils, "LightUtils", 3 * 1024, NULL, 5, NULL);
-  Serial.println("Create LightUtils - Done");
-
-  Serial.println("Create StarSequence");
-  xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 5, NULL);
-  Serial.println("Create StarSequence - Done");
-
-  Serial.println("Create TaskI2CMonitor");
-  xTaskCreate(&TaskI2CMonitor, "I2CMonitor", 2048, NULL, 1, NULL);
-  Serial.println("Create TaskI2CMonitor - Done");
+  // Create all tasks
+  taskSetup();
 
   Serial.println("Setup Complete");
 }
