@@ -172,21 +172,6 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool send
         }
     }
 
-    /*
-        if (0)
-        {
-            Serial.println(lastIndexWithData);
-            for (int i = 0; i < lastIndexWithData; i++)
-            {
-                Serial.print("newDmxValues[");
-                Serial.print(i);
-                Serial.print("] = ");
-                Serial.println((int)newDmxValues[i]);
-            }
-            delay(10000);
-        }
-    */
-
     dmxRequest.values.size = lastIndexWithData;
 
     dmxRequest.ack = false; // Request acknoledgement
@@ -214,25 +199,6 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool send
         Serial.println("PB_Encode Error!!!");
     }
 
-    //        Serial.println(stream.bytes_written);
-
-    /*
-        if (0)
-        {
-            // Print the size of the encoded message.
-
-            // Print the encoded message in hexadecimal format.
-            for (size_t i = 0; i < stream.bytes_written; i++)
-            {
-                if (buffer[i] < 16)
-                {
-                    Serial.print('0'); // print leading zero for single-digit hex values
-                }
-                Serial.print(buffer[i], HEX);
-            }
-            Serial.println();
-        }
-    */
     // Calculate the CRC of the protobuf
     uint16_t protobuf_crc = crc16_ccitt(buffer, stream.bytes_written);
 
@@ -262,88 +228,9 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool send
     // Wait for to make sure that the serial buffer is empty
     Serial2.flush(true);
 
-    // Serial.println("Written");
-
-    // delay(100); // Wait a bit before reading
     return;
-    /*
-        if (0)
-        {
 
-            // Read and check the header
-            uint8_t received_header[4];
-            while (Serial2.available() < sizeof(received_header))
-            {
-                // Wait until the header has been received
-                yield();
-            }
-            Serial2.readBytes((char *)received_header, sizeof(received_header));
-            if (memcmp(received_header, header, sizeof(header)) != 0)
-            {
-                // Handle the error: invalid header
-                return;
-            }
-
-            // Read the CRC of the protobuf
-            uint16_t received_protobuf_crc;
-            while (Serial2.available() < sizeof(received_protobuf_crc))
-            {
-                // Wait until the CRC has been received
-                yield();
-            }
-            Serial2.readBytes((char *)&received_protobuf_crc, sizeof(received_protobuf_crc));
-
-            // Read the size of the received protobuf
-            while (Serial2.available() < sizeof(msg_size))
-            {
-                // Wait until the size has been received
-                yield();
-            }
-            uint16_t received_size;
-            Serial2.readBytes((char *)&received_size, sizeof(received_size));
-
-            // Wait until the entire protobuf has been received
-            while (Serial2.available() < received_size)
-            {
-                // Wait
-                yield();
-            }
-
-            // Now read the protobuf
-            uint8_t received_buffer[NOVABUF_MAX];
-            Serial2.readBytes((char *)received_buffer, received_size);
-
-            // Calculate the CRC of the received protobuf
-            uint16_t calculated_protobuf_crc = crc16_ccitt(received_buffer, received_size);
-            if (received_protobuf_crc != calculated_protobuf_crc)
-            {
-                // Handle the error: invalid CRC
-                return;
-            }
-
-            // Initialize a protobuf input stream
-            pb_istream_t pb_istream = pb_istream_from_buffer(received_buffer, received_size);
-
-            // Decode the received protobuf
-            messaging_Request received_msg = messaging_Request_init_zero;
-            if (!pb_decode(&pb_istream, messaging_Request_fields, &received_msg))
-            {
-                // Handle the decoding error
-            }
-        }
-        */
 }
-/*
-bool encode_callback(pb_ostream_t *stream, const pb_field_t *field, void *const *arg)
-{
-    uint8_t *dmxValues = (uint8_t *)(*arg);
-    if (!pb_encode_tag_for_field(stream, field))
-    {
-        return false;
-    }
-    return pb_encode_string(stream, dmxValues, 512);
-}
-*/
 
 /**
  * Calculates the CRC-16-CCITT checksum for the given data.
@@ -420,18 +307,6 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
     request.configAmnesia.fogOutputOnMinTime = fogOnMin;
     request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
 
-    // request.configAmnesia.fogActivateTime = 123456;
-
-    //        Serial.printf("fogOffMin: %lu\n", fogOffMin);
-    //        Serial.printf("fogOffMax: %lu\n", fogOffMax);
-    //        Serial.printf("fogOnMin: %lu\n", fogOnMin);
-    //        Serial.printf("fogOnMax: %lu\n", fogOnMax);
-
-    // amnesiaLastTime = currentTime;
-
-    //Serial.println("Including amnesia code");
-
-    // Send the request here
 }
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)
