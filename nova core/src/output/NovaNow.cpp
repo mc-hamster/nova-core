@@ -2,14 +2,19 @@
 #include <Arduino.h>
 #include "../utilities/PreferencesManager.h"
 #include "../configuration.h"
+#include <queue>
 
 static uint32_t currentMessageId = 0;
 static bool messageOutput = false;
 
+// Message queue for non-blocking processing
+static std::queue<SimonaMessage> messageQueue;
+static const size_t MAX_QUEUE_SIZE = 10; // Maximum number of messages to queue
+
 static void printSimonaMessage(const SimonaMessage &msg) {
     char buffer[256];
     const char* stageName;
-    
+
     switch (msg.stage) {
         case SIMONA_STAGE_WAITING:
             stageName = "SIMONA_STAGE_WAITING";
@@ -75,9 +80,50 @@ void novaNowSetup() {
     Serial.println("NovaNow initialized");
 }
 
+// Process a message based on its stage
+static void processMessage(const SimonaMessage &msg) {
+    // Print the message if output is enabled
+    if (messageOutput) {
+        printSimonaMessage(msg);
+    }
+
+    // Handle different stages with non-blocking actions
+    switch (msg.stage) {
+        case SIMONA_STAGE_WAITING:
+            // Actions for waiting stage
+            break;
+        case SIMONA_STAGE_SEQUENCE_GENERATION:
+            // Actions for sequence generation stage
+            break;
+        case SIMONA_STAGE_TRANSITION:
+            // Actions for transition stage
+            break;
+        case SIMONA_STAGE_INPUT_COLLECTION:
+            // Actions for input collection stage
+            break;
+        case SIMONA_STAGE_VERIFICATION:
+            // Actions for verification stage
+            break;
+        case SIMONA_STAGE_GAME_LOST:
+            // Actions for game lost stage
+            break;
+        case SIMONA_STAGE_GAME_WIN:
+            // Actions for game win stage
+            break;
+        case SIMONA_STAGE_RESET:
+            // Actions for reset stage
+            break;
+        case SIMONA_STAGE_ROUND_TRANSITION:
+            // Actions for round transition stage
+            break;
+        default:
+            // Unknown stage
+            break;
+    }
+}
+
 void novaNowLoop() {
     // Process any pending messages in the loop
-    // For now this just checks the preferences periodically
     static uint32_t lastPrefsCheck = 0;
     const uint32_t PREFS_CHECK_INTERVAL = 5000; // Check every 5 seconds
 
@@ -85,16 +131,24 @@ void novaNowLoop() {
         messageOutput = PreferencesManager::getBool("messageOutput", true);
         lastPrefsCheck = millis();
     }
+
+    // Process one message per loop cycle to avoid blocking for too long
+    if (!messageQueue.empty()) {
+        SimonaMessage msg = messageQueue.front();
+        messageQueue.pop();
+        processMessage(msg);
+    }
 }
 
 void sendSimonaMessage(const SimonaMessage &simMsg) {
-    if (!messageOutput) {
-        return;
-    }
-
     currentMessageId++;
     SimonaMessage msgToSend = simMsg;
     msgToSend.message_id = currentMessageId;
-    
-    printSimonaMessage(msgToSend);
+
+    // Add message to queue for processing in novaNowLoop
+    if (messageQueue.size() < MAX_QUEUE_SIZE) {
+        messageQueue.push(msgToSend);
+    } else {
+        Serial.println("NovaNow message queue full, dropping message");
+    }
 }
