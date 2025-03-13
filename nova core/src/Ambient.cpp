@@ -58,7 +58,6 @@ void Ambient::loop()
     uint8_t lightsPre = 3;
     uint8_t lightsPost = 3;
 
-    uint8_t dmxFixture = 0;
     for (int starIndex = 0; starIndex < 12; starIndex++)
     {
         uint8_t dmxValues[DMX512_MAX] = {};
@@ -69,34 +68,53 @@ void Ambient::loop()
         if (starIndex == 0) // First Star
         {
 
+            uint8_t dmxFixture = 0;
             dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
             // for (int lightsPreIndex = 0; lightsPreIndex < lightsPre; lightsPreIndex++)
             for (int lightsPreIndex = lightsPre; lightsPreIndex >= 0; lightsPreIndex--)
             {
-                dmxValues[1 + (7 * lightsPreIndex)] = 0xff;               // Brightness
-                dmxValues[2 + (7 * lightsPreIndex)] = leds[dmxFixture].r; // red
-                dmxValues[3 + (7 * lightsPreIndex)] = leds[dmxFixture].g; // green
-                dmxValues[4 + (7 * lightsPreIndex)] = leds[dmxFixture].b; // blue
-                dmxValues[5 + (7 * lightsPreIndex)] = 0x00;               // null
-                dmxValues[6 + (7 * lightsPreIndex)] = 0x00;               // null
-                dmxValues[7 + (7 * lightsPreIndex)] = 0x00;               // null
+
+                dmxValues[1 + (7 * lightsPreIndex)] = 0xff;              // Brightness
+                dmxValues[2 + (7 * lightsPreIndex)] = leds[starIndex].r; // red
+                dmxValues[3 + (7 * lightsPreIndex)] = leds[starIndex].g; // green
+                dmxValues[4 + (7 * lightsPreIndex)] = leds[starIndex].b; // blue
+                dmxValues[5 + (7 * lightsPreIndex)] = 0x00;              // null
+                dmxValues[6 + (7 * lightsPreIndex)] = 0x00;              // null
+                dmxValues[7 + (7 * lightsPreIndex)] = 0x00;              // null
+
+                dmxValues[8 + (7 * lightsPreIndex)] = 0xff;                                 // Brightness
+                dmxValues[9 + (7 * lightsPreIndex)] = leds[starIndex + dmxFixture + 15].r;  // red
+                dmxValues[10 + (7 * lightsPreIndex)] = leds[starIndex + dmxFixture + 15].g; // green
+                dmxValues[11 + (7 * lightsPreIndex)] = leds[starIndex + dmxFixture + 15].b; // blue
+                dmxValues[12] = 0x00;                                                       // null
+                dmxValues[13] = 0x00;                                                       // null
+                dmxValues[14] = 0x00;                                                       // null
 
                 dmxFixture++;
             }
         }
         else if (starIndex == 11) // Last Star
         {
+            uint8_t dmxFixture = 0;
             dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
             for (int lightsPostIndex = 0; lightsPostIndex <= lightsPost; lightsPostIndex++)
             // for (int lightsPostIndex = lightsPost - 1; lightsPostIndex >= 0; lightsPostIndex--)
             {
-                dmxValues[1 + (7 * lightsPostIndex)] = 0xff;               // Brightness
-                dmxValues[2 + (7 * lightsPostIndex)] = leds[dmxFixture].r; // red
-                dmxValues[3 + (7 * lightsPostIndex)] = leds[dmxFixture].g; // green
-                dmxValues[4 + (7 * lightsPostIndex)] = leds[dmxFixture].b; // blue
-                dmxValues[5 + (7 * lightsPostIndex)] = 0x00;               // null
-                dmxValues[6 + (7 * lightsPostIndex)] = 0x00;               // null
-                dmxValues[7 + (7 * lightsPostIndex)] = 0x00;               // null
+                dmxValues[1 + (7 * lightsPostIndex)] = 0xff;              // Brightness
+                dmxValues[2 + (7 * lightsPostIndex)] = leds[starIndex].r; // red
+                dmxValues[3 + (7 * lightsPostIndex)] = leds[starIndex].g; // green
+                dmxValues[4 + (7 * lightsPostIndex)] = leds[starIndex].b; // blue
+                dmxValues[5 + (7 * lightsPostIndex)] = 0x00;              // null
+                dmxValues[6 + (7 * lightsPostIndex)] = 0x00;              // null
+                dmxValues[7 + (7 * lightsPostIndex)] = 0x00;              // null
+
+                dmxValues[8 + (7 * lightsPostIndex)] = 0xff;                                 // Brightness
+                dmxValues[9 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].r;  // red
+                dmxValues[10 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].g; // green
+                dmxValues[11 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].b; // blue
+                dmxValues[12] = 0x00;                                                       // null
+                dmxValues[13] = 0x00;                                                       // null
+                dmxValues[14] = 0x00;                                                       // null
 
                 dmxFixture++;
                 // Serial.println("dmxFixture");
@@ -107,15 +125,21 @@ void Ambient::loop()
 
             dmxValues[0] = 0x00; // Always 0x00 (other values are reserved)
 
-            dmxValues[1] = 0xff;               // Brightness
-            dmxValues[2] = leds[dmxFixture].r; // red
-            dmxValues[3] = leds[dmxFixture].g; // green
-            dmxValues[4] = leds[dmxFixture].b; // blue
-            dmxValues[5] = 0x00;               // null
-            dmxValues[6] = 0x00;               // null
-            dmxValues[7] = 0x00;               // null
+            dmxValues[1] = 0xff;              // Brightness
+            dmxValues[2] = leds[starIndex].r; // red
+            dmxValues[3] = leds[starIndex].g; // green
+            dmxValues[4] = leds[starIndex].b; // blue
+            dmxValues[5] = 0x00;              // null
+            dmxValues[6] = 0x00;              // null
+            dmxValues[7] = 0x00;              // null
 
-            dmxFixture++;
+            dmxValues[8] = 0xff;                    // Brightness
+            dmxValues[9] = leds[starIndex + 15].r;  // red
+            dmxValues[10] = leds[starIndex + 15].g; // green
+            dmxValues[11] = leds[starIndex + 15].b; // blue
+            dmxValues[12] = 0x00;                   // null
+            dmxValues[13] = 0x00;                   // null
+            dmxValues[14] = 0x00;                   // null
         }
 
         sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia);
@@ -229,7 +253,6 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool send
     Serial2.flush(true);
 
     return;
-
 }
 
 /**
@@ -306,7 +329,6 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
 
     request.configAmnesia.fogOutputOnMinTime = fogOnMin;
     request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
-
 }
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)
