@@ -184,9 +184,7 @@ void LightUtils::loop()
 
     uint8_t maxChanges = 12;
 
-    // Run nbledPaletteTowardPalette() 2 times to speed up blending (it looks better)
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
-    //nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
 
     if (getCfgFire())
     {
