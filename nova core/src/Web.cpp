@@ -40,6 +40,7 @@ uint16_t controlMillis;
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
+uint16_t lightingCircularMode; // Added missing declaration here
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
 
@@ -513,14 +514,12 @@ void buttonCallback(Control *sender, int type)
 
 void switchExample(Control *sender, int value)
 {
-
     if (sender->id == lightingReverseSwitch)
     {
         lightUtils->setCfgReverse(sender->value.toInt());
     }
     else if (sender->id == lightingFireSwitch)
     {
-
         lightUtils->setCfgFire(sender->value.toInt());
     }
     else if (sender->id == lightingLocalDisable)
@@ -535,6 +534,11 @@ void switchExample(Control *sender, int value)
     else if (sender->id == lightingReverseSecondRow)
     {
         lightUtils->setCfgReverseSecondRow(sender->value.toInt());
+    }
+    // Add handler for circular mode toggle
+    else if (sender->id == lightingCircularMode)
+    {
+        lightUtils->setCfgCircularMode(sender->value.toInt());
     }
     else if (sender->id == mainDrunktardSwitch)
     {
@@ -871,6 +875,12 @@ void webSetup()
 
     // Add reverse second row toggle
     lightingReverseSecondRow = ESPUI.addControl(ControlType::Switcher, "Reverse Second Row", String(lightUtils->getCfgReverseSecondRow()), ControlColor::Alizarin, lightingTab, &switchExample);
+    
+    // Add circular mode toggle
+    lightingCircularMode = ESPUI.addControl(ControlType::Switcher, "Circular Animation", String(lightUtils->getCfgCircularMode()), ControlColor::Alizarin, lightingTab, &switchExample);
+    // Add tooltip explaining circular mode
+    ESPUI.addControl(ControlType::Label, "", "Treats LEDs as arranged in a circle for animations", ControlColor::None, lightingCircularMode);
+    
     //--- Fog Tab ---
 
     fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);
