@@ -32,6 +32,7 @@ private:
     bool cfgLocalDisable = 0;
     bool cfgCircularMode = 0; // New flag for circular animation mode
     CRGB leds[NUM_LEDS];
+    bool protectedLeds[NUM_LEDS] = {false}; // Track which LEDs are protected from pattern updates
     uint32_t cfgAutoTime = 0;
     bool cfgAuto = 0;
     bool cfgReverseSecondRow = false;
@@ -63,6 +64,11 @@ public:
     uint16_t getCfgUpdates(void);
     CRGB *getLeds(void);
     uint16_t getNumberOfLeds(void);
+    
+    // New methods for protected LEDs
+    void protectLedRange(uint16_t start, uint16_t end, CRGB color); // Protect LEDs and set them to a specific color
+    void unprotectAllLeds(); // Unprotect all LEDs
+    bool isLedProtected(uint16_t index); // Check if an LED is protected
 };
 extern LightUtils *lightUtils;
 #endif

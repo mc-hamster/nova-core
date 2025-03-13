@@ -248,7 +248,6 @@ uint16_t LightUtils::mapLedIndex(uint16_t index) {
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
     uint8_t brightness = getCfgBrightness();
-
     if (cfgCircularMode) {
         // Special handling for circular mode - imagine the LEDs are in a circle
         // We use sin/cos to create a circular effect instead of linear
@@ -257,6 +256,9 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
         
         for (int i = 0; i < NUM_LEDS; i++) {
             uint16_t mappedIndex = mapLedIndex(i);
+            
+            // Skip this LED if it's protected
+            if (protectedLeds[mappedIndex]) continue;
             
             // Calculate position in the circle
             float angle = i * angleStep + offset;
@@ -282,6 +284,10 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
             for (int i = 0; i < NUM_LEDS; i++)
             {
                 uint16_t mappedIndex = mapLedIndex(i);
+                
+                // Skip this LED if it's protected
+                if (protectedLeds[mappedIndex]) continue;
+                
                 if (cfgSin == 0)
                 {
                     leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
@@ -299,6 +305,10 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
             for (int i = NUM_LEDS - 1; i >= 0; i--)
             {
                 uint16_t mappedIndex = mapLedIndex(i);
+                
+                // Skip this LED if it's protected
+                if (protectedLeds[mappedIndex]) continue;
+                
                 if (cfgSin == 0)
                 {
                     leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
@@ -519,7 +529,6 @@ void LightUtils::Fire2012WithPalette(void)
 {
     // Array of temperature readings at each simulation cell
     static uint8_t heat[NUM_LEDS];
-
     // Step 1.  Cool down every cell a little
     for (int i = 0; i < NUM_LEDS; i++)
     {
@@ -555,7 +564,13 @@ void LightUtils::Fire2012WithPalette(void)
         {
             pixelnumber = j;
         }
-        leds[mapLedIndex(pixelnumber)] = color;
+        
+        uint16_t mappedIndex = mapLedIndex(pixelnumber);
+        
+        // Skip this LED if it's protected
+        if (!protectedLeds[mappedIndex]) {
+            leds[mappedIndex] = color;
+        }
     }
 }
 
@@ -761,4 +776,54 @@ uint16_t LightUtils::getNumberOfLeds(void)
 {
 
     return NUM_LEDS;
+}
+
+
+// New methods for protected LEDs
+
+/**
+ * Protect a range of LEDs from being updated by pattern generators
+ * and set them to a specific color.
+ * 
+ * @param start The starting index of the range (inclusive)
+ * @param end The ending index of the range (inclusive)
+ * @param color The color to set the protected LEDs to
+ */
+void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color) {
+    if (start >= NUM_LEDS || end >= NUM_LEDS || start > end) {
+        Serial.println("Invalid LED range specified for protection");
+        return;
+    }
+    
+    for (uint16_t i = start; i <= end; i++) {
+        protectedLeds[i] = true;
+        leds[i] = color;
+    }
+    
+    // Log the protection for debugging
+    Serial.print("Protected LEDs ");
+    Serial.print(start);
+    Serial.print(" through ");
+    Serial.println(end);
+}
+
+/**
+ * Unprotect all LEDs, allowing them to be updated by pattern generators
+ */
+void LightUtils::unprotectAllLeds() {
+    for (uint16_t i = 0; i < NUM_LEDS; i++) {
+        protectedLeds[i] = false;
+    }
+    Serial.println("Unprotected all LEDs");
+}
+
+/**
+ * Check if an LED is protected
+ * 
+ * @param index The index of the LED to check
+ * @return true if the LED is protected, false otherwise
+ */
+bool LightUtils::isLedProtected(uint16_t index) {
+    if (index >= NUM_LEDS) return false;
+    return protectedLeds[index];
 }
