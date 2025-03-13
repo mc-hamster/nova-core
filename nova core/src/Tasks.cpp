@@ -65,7 +65,7 @@ void updateTaskStats(const char* name, UBaseType_t watermark, BaseType_t coreId)
     else if (strcmp(name, "Game Task") == 0) initialStack = 8 * 1024;
     else if (strcmp(name, "Button Task") == 0) initialStack = 4 * 1024;
     else if (strcmp(name, "I2CMonitor") == 0) initialStack = 3 * 1024; // Updated to match new size
-    else if (strcmp(name, "NovaNow") == 0) initialStack = 2048;
+    else if (strcmp(name, "NovaNow") == 0) initialStack = 4 * 1024;
     else if (strcmp(name, "TaskMonitor") == 0) initialStack = 4096;
     
     registerTaskForMonitoring(name, watermark, coreId, initialStack);
@@ -322,7 +322,7 @@ void taskSetup() {
     Serial.println("Create TaskI2CMonitor - Done");
 
     Serial.println("Create TaskNovaNow");
-    xTaskCreate(&TaskNovaNow, "NovaNow", 2048, NULL, 1, NULL);
+    xTaskCreate(&TaskNovaNow, "NovaNow", 4 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskNovaNow - Done");
 
     Serial.println("Create TaskMonitor");
