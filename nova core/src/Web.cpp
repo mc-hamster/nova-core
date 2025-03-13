@@ -39,7 +39,7 @@ uint16_t status;
 uint16_t controlMillis;
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
-uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime;
+uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
 
@@ -525,12 +525,16 @@ void switchExample(Control *sender, int value)
     }
     else if (sender->id == lightingLocalDisable)
     {
-
         lightUtils->setCfgLocalDisable(sender->value.toInt());
     }
     else if (sender->id == lightingAuto)
     {
         lightUtils->setCfgAuto(sender->value.toInt());
+    }
+    // Add handler for reverse second row toggle
+    else if (sender->id == lightingReverseSecondRow)
+    {
+        lightUtils->setCfgReverseSecondRow(sender->value.toInt());
     }
     else if (sender->id == mainDrunktardSwitch)
     {
@@ -865,6 +869,8 @@ void webSetup()
     ESPUI.addControl(Min, "", "1", None, fogOutputOffMinTime);
     ESPUI.addControl(Max, "", "3600", None, fogOutputOffMinTime);
 
+    // Add reverse second row toggle
+    lightingReverseSecondRow = ESPUI.addControl(ControlType::Switcher, "Reverse Second Row", String(lightUtils->getCfgReverseSecondRow()), ControlColor::Alizarin, lightingTab, &switchExample);
     //--- Fog Tab ---
 
     fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);

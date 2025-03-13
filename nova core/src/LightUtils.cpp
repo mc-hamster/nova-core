@@ -153,6 +153,9 @@ LightUtils::LightUtils()
     Serial.println("Loading light configuration - cfgAutoTime");
     cfgAutoTime = getCfgAutoTime() ? getCfgAutoTime() : 30;
 
+    Serial.println("Loading light configuration - cfgReverseSecondRow");
+    cfgReverseSecondRow = getCfgReverseSecondRow();
+
     // Setup goes in here
 }
 
@@ -214,6 +217,20 @@ void LightUtils::loop()
 }
 
 /**
+ * Maps LED index based on strip configuration
+ */
+uint16_t LightUtils::mapLedIndex(uint16_t index) {
+    if (!cfgReverseSecondRow) return index;
+
+    // for a two-row setup where both rows start from right
+    if (index < 12) {
+        return index; // first row stays as is
+    } else {
+        return (35 - index); // second row gets reversed
+    }
+}
+
+/**
  * Fills the LED strip with colors from the current palette starting at the given color index.
  *
  * @param colorIndex The starting index in the current palette.
@@ -226,14 +243,15 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
     {
         for (int i = 0; i < NUM_LEDS; i++)
         {
+            uint16_t mappedIndex = mapLedIndex(i);
             if (cfgSin == 0)
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
                 colorIndex += 3;
             }
             else
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
+                leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
                 colorIndex += 3;
             }
         }
@@ -242,14 +260,15 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
     {
         for (int i = NUM_LEDS - 1; i >= 0; i--)
         {
+            uint16_t mappedIndex = mapLedIndex(i);
             if (cfgSin == 0)
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
                 colorIndex += 3;
             }
             else
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8((NUM_LEDS - 1 - i) * cfgSin), brightness);
+                leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex + sin8((NUM_LEDS - 1 - i) * cfgSin), brightness);
                 colorIndex += 3;
             }
         }
@@ -486,7 +505,7 @@ void LightUtils::Fire2012WithPalette(void)
         {
             pixelnumber = j;
         }
-        leds[pixelnumber] = color;
+        leds[mapLedIndex(pixelnumber)] = color;
     }
 }
 
@@ -549,6 +568,15 @@ void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
     PreferencesManager::setBool("cfgReverse", reverse);
+}
+
+void LightUtils::setCfgReverseSecondRow(bool reverse) {
+    cfgReverseSecondRow = reverse;
+    PreferencesManager::setBool("cfgReverseSecondRow", reverse);
+}
+
+bool LightUtils::getCfgReverseSecondRow(void) {
+    return PreferencesManager::getBool("cfgReverseSecondRow", false);
 }
 
 void LightUtils::setCfgAuto(bool autoLight)

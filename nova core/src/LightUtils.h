@@ -41,6 +41,8 @@ private:
     CRGB leds[NUM_LEDS];
     uint32_t cfgAutoTime = 0;
     bool cfgAuto = 0;
+    bool cfgReverseSecondRow = false;
+    uint16_t mapLedIndex(uint16_t index);
 
 public:
     LightUtils();
@@ -56,6 +58,9 @@ public:
     void setCfgUpdates(uint16_t updates);
     void setCfgAuto(bool autoLight);
     void setCfgAutoTime(uint32_t updates);
+
+    void setCfgReverseSecondRow(bool reverse);
+    bool getCfgReverseSecondRow(void);
 
     bool getCfgReverse(void);
     bool getCfgFire(void);
