@@ -801,10 +801,12 @@ void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color) {
     }
     
     // Log the protection for debugging
+    /*
     Serial.print("Protected LEDs ");
     Serial.print(start);
     Serial.print(" through ");
     Serial.println(end);
+    */
 }
 
 /**
