@@ -303,6 +303,7 @@ void novaNowSetup() {
     Serial.println("NovaNow initialized");
 }
 
+SimonaMessage msg;
 void novaNowLoop() {
     // Process any pending messages in the loop
     static uint32_t lastPrefsCheck = 0;
@@ -315,7 +316,7 @@ void novaNowLoop() {
 
     // Process one message per cycle to avoid blocking
     if (!messageQueue.empty()) {
-        SimonaMessage msg = messageQueue.front();
+        msg = messageQueue.front();
         messageQueue.pop();
         
         // Update current stage and button state when processing messages
@@ -333,11 +334,11 @@ void novaNowLoop() {
     }
     // Update sequence generation animation if in sequence generation stage
     else if (currentSimonaStage == SIMONA_STAGE_SEQUENCE_GENERATION) {
+        printSimonaMessage(msg);
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;
             int ledIndex = sequenceGenAnimation.currentLitButton;
-            
             switch (sequenceGenAnimation.currentLitButton) {
                 case 0:
                     targetColor = CRGB(255, 0, 0); // red
@@ -370,6 +371,7 @@ void novaNowLoop() {
     }
     // Update input collection animation if in input collection stage
     else if (currentSimonaStage == SIMONA_STAGE_INPUT_COLLECTION) {
+        printSimonaMessage(msg);
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;

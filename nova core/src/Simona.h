@@ -214,7 +214,7 @@ private:
     static Simona *instance; // Singleton instance
 
     // Game configuration constants
-    static const uint8_t MAX_ROUNDS = 4; // Maximum number of rounds to win the game
+    static const uint8_t MAX_ROUNDS = 12; // Maximum number of rounds to win the game
 
     // Game state variables
     uint8_t m_levelsInRound = 3; // Number of levels in current round (increases per round)
