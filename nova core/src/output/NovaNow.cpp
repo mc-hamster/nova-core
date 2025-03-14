@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "../utilities/PreferencesManager.h"
 #include "../configuration.h"
+#include "../output/Star.h"  // Add Star.h include
 #include <queue>
 #include "../LightUtils.h" // Include LightUtils for LED control
 
@@ -385,6 +386,7 @@ void novaNowLoop() {
             sequenceGenAnimation.currentLitButton = msg.litButton;
         } else if (msg.stage == SIMONA_STAGE_INPUT_COLLECTION) {
             inputCollectionAnimation.lastPressedButton = msg.lastPressedButton;
+
         }
     }
 
@@ -462,6 +464,9 @@ void novaNowLoop() {
 
             // Map button to LED position based on current round
             int ledIndex = mapButtonToLedPosition(inputCollectionAnimation.lastPressedButton, msg.currentRound);
+
+            // Poof that star
+            star->poof(ledIndex);
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);
@@ -590,7 +595,7 @@ void novaNowLoop() {
 
                 case 2: // Hold full brightness briefly
                     roundTransitionAnimation.animationStep = 3;
-                    delay(200);
+                    delay(50);
                     break;
 
                 case 3: { // Fade out LEDs
