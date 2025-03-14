@@ -79,11 +79,19 @@ static void printSimonaMessage(const SimonaMessage &msg) {
     Serial.print(buffer);  // Print to debug console
 }
 
-// Add LED sequence generation animation to match nova-mini implementation but without relay triggering
+// Track animation state for sequence generation
 static struct {
+    int currentLitButton = 0;
     const uint8_t offVal = 8; // 3% of 255 for dim white
     CRGB offWhite = CRGB(offVal, offVal, offVal);
 } sequenceGenAnimation;
+
+// Track animation state for input collection
+static struct {
+    int lastPressedButton = 0;
+    const uint8_t offVal = 8; // 3% of 255 for dim white
+    CRGB offWhite = CRGB(offVal, offVal, offVal);
+} inputCollectionAnimation;
 
 // Track previous stage to detect stage changes
 static SimonaStage previousStage = SIMONA_STAGE_WAITING;
@@ -96,147 +104,15 @@ static struct {
     const int delayMs = 30;
 } lostAnimation;
 
-// Process a message based on its stage
-static void processMessage(const SimonaMessage &msg) {
-    // Print the message if output is enabled
-    if (messageOutput) {
-        printSimonaMessage(msg);
-    }
-    
-    // Check if stage has changed
-    if (msg.stage != currentSimonaStage) {
-        // Log stage change
-        Serial.print("Simona stage changed from ");
-        Serial.print(previousStage);
-        Serial.print(" to ");
-        Serial.println(msg.stage);
-        
-        // Handle LED state based on stage transition
-        if (lightUtils) {
-            // If entering WAITING stage, protect LEDs 1-12 and set them to dim white (5% brightness)
-            if (msg.stage == SIMONA_STAGE_WAITING) {
-                // Create dim white color (5% of full white)
-                CRGB dimWhite = CRGB(13, 13, 13); // 13 is ~5% of 255
-                lightUtils->protectLedRange(0, 11, dimWhite); // 0-11 are LEDs 1-12
-                Serial.println("LEDs 1-12 protected and set to 5% white for WAITING stage");
-            } 
-            // If exiting WAITING stage, unprotect all LEDs
-            else if (previousStage == SIMONA_STAGE_WAITING) {
-                lightUtils->unprotectAllLeds();
-                Serial.println("Unprotected all LEDs for non-WAITING stage");
-            }
-        }
-
-        // Update stage tracking
-        previousStage = currentSimonaStage;
-        currentSimonaStage = msg.stage;
-    }
-
-    // Handle different stages with non-blocking actions
-    switch (msg.stage) {
-        case SIMONA_STAGE_WAITING:
-            // LED update will happen in loop to maintain state
-            break;
-        case SIMONA_STAGE_SEQUENCE_GENERATION:
-            if (lightUtils) {
-                // Protect all LEDs and set them to dim white first
-                lightUtils->protectLedRange(0, 11, sequenceGenAnimation.offWhite);
-                
-                // Map button number to color and light up corresponding LED
-                CRGB targetColor;
-                switch (msg.litButton) {
-                    case 0:
-                        targetColor = CRGB(255, 0, 0); // Red
-                        break;
-                    case 1:
-                        targetColor = CRGB(0, 255, 0); // Green
-                        break;
-                    case 2:
-                        targetColor = CRGB(0, 0, 255); // Blue
-                        break;
-                    case 3:
-                        targetColor = CRGB(255, 255, 0); // Yellow
-                        break;
-                    default:
-                        targetColor = sequenceGenAnimation.offWhite;
-                        break;
-                }
-                
-                if (msg.litButton >= 0 && msg.litButton < 4) {
-                    // Update just the one LED's color through the protected range
-                    lightUtils->protectLedRange(msg.litButton, msg.litButton, targetColor);
-                    delay(500); // Brief flash
-                    lightUtils->protectLedRange(msg.litButton, msg.litButton, sequenceGenAnimation.offWhite);
-                }
-            }
-            break;
-        case SIMONA_STAGE_TRANSITION:
-            // If coming from waiting stage, the default handler will handle LED reset
-            break;
-        case SIMONA_STAGE_INPUT_COLLECTION:
-            if (lightUtils) {
-                // Default dim white state for all LEDs (3% brightness)
-                CRGB offWhite = CRGB(8, 8, 8); // 3% of 255 ≈ 8
-                lightUtils->protectLedRange(0, 11, offWhite);
-
-                // If a button was pressed, light up its corresponding LED
-                if (msg.lastPressedButton >= 0 && msg.lastPressedButton < 4) {
-                    // Map button number to color
-                    CRGB targetColor;
-                    switch (msg.lastPressedButton) {
-                        case 0:
-                            targetColor = CRGB(255, 0, 0); // Red
-                            break;
-                        case 1:
-                            targetColor = CRGB(0, 255, 0); // Green
-                            break;
-                        case 2:
-                            targetColor = CRGB(0, 0, 255); // Blue
-                            break;
-                        case 3:
-                            targetColor = CRGB(255, 255, 0); // Yellow
-                            break;
-                        default:
-                            targetColor = offWhite;
-                            break;
-                    }
-                    
-                    if (msg.litButton >= 0 && msg.litButton < 4) {
-                        // Update just the one LED's color through the protected range
-                        lightUtils->protectLedRange(msg.lastPressedButton, msg.lastPressedButton, targetColor);
-                        delay(500); // Brief flash
-                        lightUtils->protectLedRange(msg.lastPressedButton, msg.lastPressedButton, sequenceGenAnimation.offWhite);
-                    }
-    
-                }
-            }
-            break;
-        case SIMONA_STAGE_VERIFICATION:
-            // If coming from waiting stage, the default handler will handle LED reset
-            break;
-        case SIMONA_STAGE_GAME_LOST:
-            if (lightUtils) {
-                // Start with white at 5% brightness
-                CRGB startColor = CRGB(lostAnimation.startVal, lostAnimation.startVal, lostAnimation.startVal);
-                lightUtils->protectLedRange(0, 11, startColor);
-                
-                // Reset animation state
-                lostAnimation.stepIndex = 0;
-            }
-            break;
-        case SIMONA_STAGE_GAME_WIN:
-            // If coming from waiting stage, the default handler will handle LED reset
-            break;
-        case SIMONA_STAGE_RESET:
-            // If coming from waiting stage, the default handler will handle LED reset
-            break;
-        case SIMONA_STAGE_ROUND_TRANSITION:
-            // If coming from waiting stage, the default handler will handle LED reset
-            break;
-        default:
-            break;
-    }
-}
+// Add transition animation state
+static struct {
+    int stepIndex = 0;
+    const int steps = 20;
+    const uint8_t lowVal = 5;   // ~2% brightness
+    const uint8_t highVal = 15; // ~6% brightness
+    bool fadeOut = false;
+    const int delayMs = 30;
+} transitionAnimation;
 
 // Track animation state for waiting mode
 static struct {
@@ -255,6 +131,62 @@ static struct {
         {CRGB(0, 0, 8), CRGB(0, 0, 255)}    // Blue
     };
 } waitingAnimation;
+
+// Add win animation state struct
+static struct {
+    int stepIndex = 0;
+    int pulseIndex = 0;
+    const int pulses = 4;
+    const int stepsPerPulse = 10;
+    const int delayMs = 50;
+    const CRGB winColor = CRGB(255, 100, 255); // Purple color for win animation
+} winAnimation;
+
+// Add round transition animation state
+static struct {
+    int currentLED = 0;
+    int animationStep = 0;
+    int currentPulse = 0;
+    const int pulseCount = 3;
+    const uint8_t dimVal = 8; // 3% brightness
+    // Celebration colors - complementary colors for interesting effect
+    const CRGB celebrationColors[4] = {
+        CRGB(255, 50, 50),  // Red-orange
+        CRGB(50, 255, 50),  // Green
+        CRGB(50, 50, 255),  // Blue
+        CRGB(255, 255, 50)  // Yellow
+    };
+} roundTransitionAnimation;
+
+// Add reset animation state
+static struct {
+    int currentStep = 0;
+    int currentColor = 0;
+    int animationPhase = 0;
+    const int steps = 10;
+    const uint8_t offVal = 8; // 3% brightness
+    const int delayMs = 50 / steps;
+    const int holdDelayMs = 150;
+    CRGB offWhite = CRGB(offVal, offVal, offVal);
+    struct ColorTransition {
+        CRGB base;
+        CRGB full;
+    } colorTransitions[3] = {
+        {CRGB(offVal, 0, 0), CRGB(255, 0, 0)},  // Red
+        {CRGB(0, offVal, 0), CRGB(0, 255, 0)},  // Green
+        {CRGB(0, 0, offVal), CRGB(0, 0, 255)}   // Blue
+    };
+} resetAnimation;
+
+// Add verification animation state
+static struct {
+    int stepIndex = 0;
+    const int steps = 20;
+    const uint8_t lowVal = 5;   // ~2% brightness
+    const uint8_t highVal = 15; // ~6% brightness
+    bool fadeOut = false;
+    const int delayMs = 30;
+} verificationAnimation;
 
 // Handle waiting stage LED animation
 static void updateWaitingAnimation() {
@@ -381,16 +313,97 @@ void novaNowLoop() {
         lastPrefsCheck = millis();
     }
 
-    // Process one message per loop cycle to avoid blocking for too long
+    // Process one message per cycle to avoid blocking
     if (!messageQueue.empty()) {
         SimonaMessage msg = messageQueue.front();
         messageQueue.pop();
-        processMessage(msg);
+        
+        // Update current stage and button state when processing messages
+        currentSimonaStage = msg.stage;
+        if (msg.stage == SIMONA_STAGE_SEQUENCE_GENERATION) {
+            sequenceGenAnimation.currentLitButton = msg.litButton;
+        } else if (msg.stage == SIMONA_STAGE_INPUT_COLLECTION) {
+            inputCollectionAnimation.lastPressedButton = msg.lastPressedButton;
+        }
     }
 
     // Update waiting animation if in waiting stage
     if (currentSimonaStage == SIMONA_STAGE_WAITING) {
         updateWaitingAnimation();
+    }
+    // Update sequence generation animation if in sequence generation stage
+    else if (currentSimonaStage == SIMONA_STAGE_SEQUENCE_GENERATION) {
+        if (lightUtils) {
+            // Map button to color
+            CRGB targetColor;
+            int ledIndex = sequenceGenAnimation.currentLitButton;
+            
+            switch (sequenceGenAnimation.currentLitButton) {
+                case 0:
+                    targetColor = CRGB(255, 0, 0); // red
+                    break;
+                case 1:
+                    targetColor = CRGB(0, 255, 0); // green
+                    break;
+                case 2:
+                    targetColor = CRGB(0, 0, 255); // blue
+                    break;
+                case 3:
+                    targetColor = CRGB(255, 255, 0); // yellow
+                    break;
+                default:
+                    targetColor = CRGB(255, 0, 0); // default red
+                    ledIndex = 0;
+                    break;
+            }
+
+            // Set all LEDs to dim white
+            lightUtils->protectLedRange(0, 11, sequenceGenAnimation.offWhite);
+            // Light up the target LED
+            if (ledIndex >= 0 && ledIndex < 12) {
+                lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
+            }
+            //delay(50);
+            // Turn the LED back to dim white
+            //lightUtils->protectLedRange(ledIndex, ledIndex, sequenceGenAnimation.offWhite);
+        }
+    }
+    // Update input collection animation if in input collection stage
+    else if (currentSimonaStage == SIMONA_STAGE_INPUT_COLLECTION) {
+        if (lightUtils) {
+            // Map button to color
+            CRGB targetColor;
+            int ledIndex = inputCollectionAnimation.lastPressedButton;
+            
+            switch (inputCollectionAnimation.lastPressedButton) {
+                case 0:
+                    targetColor = CRGB(255, 0, 0); // red
+                    break;
+                case 1:
+                    targetColor = CRGB(0, 255, 0); // green
+                    break;
+                case 2:
+                    targetColor = CRGB(0, 0, 255); // blue
+                    break;
+                case 3:
+                    targetColor = CRGB(255, 255, 0); // yellow
+                    break;
+                default:
+                    targetColor = CRGB(255, 0, 0); // default red
+                    ledIndex = 0;
+                    break;
+            }
+
+            // Set all LEDs to dim white
+            lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);
+            // Light up the target LED with its color
+            if (ledIndex >= 0 && ledIndex < 12) {
+                lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
+            }
+            //delay(50);
+            // Turn all LEDs back to dim white
+            //lightUtils->protectLedRange(ledIndex, ledIndex, inputCollectionAnimation.offWhite);
+        }
     }
     // Update lost animation if in game lost stage
     else if (currentSimonaStage == SIMONA_STAGE_GAME_LOST) {
@@ -404,6 +417,248 @@ void novaNowLoop() {
             // Move to next step 
             if (++lostAnimation.stepIndex > lostAnimation.steps) {
                 lostAnimation.stepIndex = 0; // Reset for next fade out cycle
+            }
+        }
+    }
+    // Handle verification stage
+    else if (currentSimonaStage == SIMONA_STAGE_VERIFICATION) {
+        if (lightUtils) {
+            float t = verificationAnimation.stepIndex / (float)verificationAnimation.steps;
+            uint8_t brightness;
+            
+            if (!verificationAnimation.fadeOut) {
+                // Fade up: 2% -> 6% (~5 to 15 in 8-bit values)
+                brightness = 5 + (uint8_t)(10.0f * t);
+            } else {
+                // Fade down: 6% -> 2%
+                brightness = 15 - (uint8_t)(10.0f * t);
+            }
+            
+            CRGB color(brightness, brightness, brightness);
+            lightUtils->protectLedRange(0, 11, color);
+            delay(30); // Match nova-mini 30ms delay
+            
+            if (++verificationAnimation.stepIndex > verificationAnimation.steps) {
+                verificationAnimation.stepIndex = 0;
+                verificationAnimation.fadeOut = !verificationAnimation.fadeOut; // Toggle fade direction
+            }
+        }
+    }
+    else if (currentSimonaStage == SIMONA_STAGE_TRANSITION) {
+        if (lightUtils) {
+            float t = transitionAnimation.stepIndex / (float)transitionAnimation.steps;
+            uint8_t brightness;
+            
+            if (!transitionAnimation.fadeOut) {
+                // Fade up: 2% -> 6% (~5 to 15 in 8-bit values)
+                brightness = 5 + (uint8_t)(10.0f * t);
+            } else {
+                // Fade down: 6% -> 2%
+                brightness = 15 - (uint8_t)(10.0f * t);
+            }
+            
+            CRGB color(brightness, brightness, brightness);
+            lightUtils->protectLedRange(0, 11, color);
+            delay(30); // Match nova-mini 30ms delay
+            
+            if (++transitionAnimation.stepIndex > transitionAnimation.steps) {
+                transitionAnimation.stepIndex = 0;
+                transitionAnimation.fadeOut = !transitionAnimation.fadeOut; // Toggle fade direction
+            }
+        }
+    }
+    // Handle game win state
+    else if (currentSimonaStage == SIMONA_STAGE_GAME_WIN) {
+        if (lightUtils) {
+            // Calculate sine-based brightness for smooth pulsing
+            float fraction = winAnimation.stepIndex / (float)winAnimation.stepsPerPulse;
+            float brightnessFactor = sinf(fraction * 3.14159f);
+            
+            // Apply brightness to win color
+            CRGB color = CRGB(
+                (uint8_t)(winAnimation.winColor.r * brightnessFactor),
+                (uint8_t)(winAnimation.winColor.g * brightnessFactor),
+                (uint8_t)(winAnimation.winColor.b * brightnessFactor)
+            );
+            
+            // Apply to all LEDs
+            lightUtils->protectLedRange(0, 11, color);
+            delay(winAnimation.delayMs);
+            
+            // Move to next step
+            if (++winAnimation.stepIndex >= winAnimation.stepsPerPulse) {
+                winAnimation.stepIndex = 0;
+                if (++winAnimation.pulseIndex >= winAnimation.pulses) {
+                    winAnimation.pulseIndex = 0;
+                }
+            }
+        }
+    }
+    // Handle round transition stage
+    else if (currentSimonaStage == SIMONA_STAGE_ROUND_TRANSITION) {
+        if (lightUtils) {
+            switch (roundTransitionAnimation.animationStep) {
+                case 0: // Skip relay trigger, move straight to fade in
+                    roundTransitionAnimation.currentLED = 0;
+                    roundTransitionAnimation.animationStep = 1;
+                    break;
+
+                case 1: { // Fade in LEDs
+                    float factor = roundTransitionAnimation.currentLED / 15.0f; // 15 steps for fade
+                    for (int i = 0; i < 12; i++) {
+                        CRGB color = roundTransitionAnimation.celebrationColors[i % 4];
+                        lightUtils->protectLedRange(i, i, CRGB(
+                            color.r * factor,
+                            color.g * factor,
+                            color.b * factor
+                        ));
+                    }
+                    delay(50);
+                    
+                    if (++roundTransitionAnimation.currentLED > 15) {
+                        roundTransitionAnimation.currentLED = 0;
+                        roundTransitionAnimation.animationStep = 2;
+                    }
+                    break;
+                }
+
+                case 2: // Hold full brightness briefly
+                    roundTransitionAnimation.animationStep = 3;
+                    delay(200);
+                    break;
+
+                case 3: { // Fade out LEDs
+                    float factor = 1.0f - (roundTransitionAnimation.currentLED / 15.0f);
+                    for (int i = 0; i < 12; i++) {
+                        CRGB color = roundTransitionAnimation.celebrationColors[i % 4];
+                        lightUtils->protectLedRange(i, i, CRGB(
+                            color.r * factor,
+                            color.g * factor,
+                            color.b * factor
+                        ));
+                    }
+                    delay(50);
+                    
+                    if (++roundTransitionAnimation.currentLED > 15) {
+                        roundTransitionAnimation.currentLED = 0;
+                        roundTransitionAnimation.currentPulse++;
+                        if (roundTransitionAnimation.currentPulse >= roundTransitionAnimation.pulseCount) {
+                            roundTransitionAnimation.animationStep = 4;
+                        } else {
+                            roundTransitionAnimation.animationStep = 0; // Loop back for next pulse
+                        }
+                    }
+                    break;
+                }
+
+                case 4: { // Set to dim white and finish
+                    CRGB dimWhite(roundTransitionAnimation.dimVal, roundTransitionAnimation.dimVal, roundTransitionAnimation.dimVal);
+                    lightUtils->protectLedRange(0, 11, dimWhite);
+                    
+                    // Reset state for next time
+                    roundTransitionAnimation.animationStep = 0;
+                    roundTransitionAnimation.currentPulse = 0;
+                    roundTransitionAnimation.currentLED = 0;
+                    break;
+                }
+            }
+        }
+    }
+    // Handle reset stage
+    else if (currentSimonaStage == SIMONA_STAGE_RESET) {
+        if (lightUtils) {
+            switch (resetAnimation.animationPhase) {
+                case 0: // Initialize
+                    lightUtils->protectLedRange(0, 11, resetAnimation.offWhite);
+                    resetAnimation.currentStep = 0;
+                    resetAnimation.currentColor = 0;
+                    resetAnimation.animationPhase = 1;
+                    break;
+
+                case 1: { // Transition from offWhite to 5% base color
+                    float t = resetAnimation.currentStep / (float)resetAnimation.steps;
+                    CRGB newColor;
+                    newColor.r = resetAnimation.offWhite.r + (resetAnimation.colorTransitions[resetAnimation.currentColor].base.r - resetAnimation.offWhite.r) * t;
+                    newColor.g = resetAnimation.offWhite.g + (resetAnimation.colorTransitions[resetAnimation.currentColor].base.g - resetAnimation.offWhite.g) * t;
+                    newColor.b = resetAnimation.offWhite.b + (resetAnimation.colorTransitions[resetAnimation.currentColor].base.b - resetAnimation.offWhite.b) * t;
+                    lightUtils->protectLedRange(0, 11, newColor);
+                    delay(resetAnimation.delayMs);
+
+                    if (++resetAnimation.currentStep > resetAnimation.steps) {
+                        resetAnimation.currentStep = 0;
+                        resetAnimation.animationPhase = 2;
+                    }
+                    break;
+                }
+
+                case 2: { // Ramp up from 5% base color to 100% full color
+                    float t = resetAnimation.currentStep / (float)resetAnimation.steps;
+                    CRGB newColor;
+                    newColor.r = resetAnimation.colorTransitions[resetAnimation.currentColor].base.r + 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.r - resetAnimation.colorTransitions[resetAnimation.currentColor].base.r) * t;
+                    newColor.g = resetAnimation.colorTransitions[resetAnimation.currentColor].base.g + 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.g - resetAnimation.colorTransitions[resetAnimation.currentColor].base.g) * t;
+                    newColor.b = resetAnimation.colorTransitions[resetAnimation.currentColor].base.b + 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.b - resetAnimation.colorTransitions[resetAnimation.currentColor].base.b) * t;
+                    lightUtils->protectLedRange(0, 11, newColor);
+                    delay(resetAnimation.delayMs);
+
+                    if (++resetAnimation.currentStep > resetAnimation.steps) {
+                        resetAnimation.currentStep = 0;
+                        resetAnimation.animationPhase = 3;
+                    }
+                    break;
+                }
+
+                case 3: // Hold at 100% full color
+                    lightUtils->protectLedRange(0, 11, resetAnimation.colorTransitions[resetAnimation.currentColor].full);
+                    delay(resetAnimation.holdDelayMs);
+                    resetAnimation.animationPhase = 4;
+                    break;
+
+                case 4: { // Ramp down from 100% full color to 5% base color
+                    float t = resetAnimation.currentStep / (float)resetAnimation.steps;
+                    CRGB newColor;
+                    newColor.r = resetAnimation.colorTransitions[resetAnimation.currentColor].full.r - 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.r - resetAnimation.colorTransitions[resetAnimation.currentColor].base.r) * t;
+                    newColor.g = resetAnimation.colorTransitions[resetAnimation.currentColor].full.g - 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.g - resetAnimation.colorTransitions[resetAnimation.currentColor].base.g) * t;
+                    newColor.b = resetAnimation.colorTransitions[resetAnimation.currentColor].full.b - 
+                                (resetAnimation.colorTransitions[resetAnimation.currentColor].full.b - resetAnimation.colorTransitions[resetAnimation.currentColor].base.b) * t;
+                    lightUtils->protectLedRange(0, 11, newColor);
+                    delay(resetAnimation.delayMs);
+
+                    if (++resetAnimation.currentStep > resetAnimation.steps) {
+                        resetAnimation.currentStep = 0;
+                        resetAnimation.animationPhase = 5;
+                    }
+                    break;
+                }
+
+                case 5: { // Transition from 5% base color back to offWhite
+                    float t = resetAnimation.currentStep / (float)resetAnimation.steps;
+                    CRGB newColor;
+                    newColor.r = resetAnimation.colorTransitions[resetAnimation.currentColor].base.r + 
+                                (resetAnimation.offWhite.r - resetAnimation.colorTransitions[resetAnimation.currentColor].base.r) * t;
+                    newColor.g = resetAnimation.colorTransitions[resetAnimation.currentColor].base.g + 
+                                (resetAnimation.offWhite.g - resetAnimation.colorTransitions[resetAnimation.currentColor].base.g) * t;
+                    newColor.b = resetAnimation.colorTransitions[resetAnimation.currentColor].base.b + 
+                                (resetAnimation.offWhite.b - resetAnimation.colorTransitions[resetAnimation.currentColor].base.b) * t;
+                    lightUtils->protectLedRange(0, 11, newColor);
+                    delay(resetAnimation.delayMs);
+
+                    if (++resetAnimation.currentStep > resetAnimation.steps) {
+                        resetAnimation.currentStep = 0;
+                        // Move to next color or finish
+                        if (++resetAnimation.currentColor >= 3) {
+                            resetAnimation.currentColor = 0;
+                            resetAnimation.animationPhase = 0; // Back to start for next time
+                        } else {
+                            resetAnimation.animationPhase = 1; // Move to next color
+                        }
+                    }
+                    break;
+                }
             }
         }
     }

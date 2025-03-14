@@ -390,7 +390,7 @@ void TaskI2CMonitor(void *pvParameters) {
             lastExecutionTime = millis();
         }
 
-        vTaskDelay(pdMS_TO_TICKS(30000));
+        vTaskDelay(pdMS_TO_TICKS(1200000));
     }
 }
 
