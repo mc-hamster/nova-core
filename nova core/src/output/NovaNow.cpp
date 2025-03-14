@@ -188,6 +188,66 @@ static struct {
     const int delayMs = 30;
 } verificationAnimation;
 
+// Store persistent button-to-LED mapping
+static int buttonToLedMapping[4] = {-1, -1, -1, -1};
+static int currentRoundForMapping = -1;
+
+// Helper function to map button index to LED position based on round
+static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetMapping = false) {
+    // Check if we need to reset the mapping (new round or explicitly requested)
+    if (currentRoundForMapping != currentRound || resetMapping) {
+        // Determine width based on round
+        int width;
+        if (currentRound <= 2) {
+            width = 4;  // Use center 4 LEDs
+        } else if (currentRound <= 4) {
+            width = 6;  // Use center 6 LEDs
+        } else if (currentRound <= 6) {
+            width = 8;  // Use center 8 LEDs
+        } else {
+            width = 12; // Use all 12 LEDs
+        }
+        
+        // Calculate the starting index to center the LEDs
+        int startIndex = (12 - width) / 2;
+        
+        // Create a list of all available positions
+        int availablePositions[12];
+        int numAvailable = 0;
+        
+        // Populate the list of available positions
+        for (int i = 0; i < width; i++) {
+            availablePositions[numAvailable++] = startIndex + i;
+        }
+        
+        // Shuffle the available positions (Fisher-Yates algorithm)
+        for (int i = numAvailable - 1; i > 0; i--) {
+            int j = random(i + 1);
+            // Swap positions i and j
+            int temp = availablePositions[i];
+            availablePositions[i] = availablePositions[j];
+            availablePositions[j] = temp;
+        }
+        
+        // Assign each button a unique position from the shuffled list
+        for (int i = 0; i < 4; i++) {
+            // For safety, ensure i is less than numAvailable
+            buttonToLedMapping[i] = availablePositions[i % numAvailable];
+        }
+        
+        // Store current round to detect changes
+        currentRoundForMapping = currentRound;
+    }
+    
+    // Return the pre-calculated mapping for this button
+    if (buttonIndex >= 0 && buttonIndex < 4) {
+        return buttonToLedMapping[buttonIndex];
+    }
+    
+    // Fallback for invalid button indices
+    return buttonIndex % 12;
+}
+
 // Handle waiting stage LED animation
 static void updateWaitingAnimation() {
     const CRGB offWhite(waitingAnimation.offVal, waitingAnimation.offVal, waitingAnimation.offVal);
@@ -334,11 +394,16 @@ void novaNowLoop() {
     }
     // Update sequence generation animation if in sequence generation stage
     else if (currentSimonaStage == SIMONA_STAGE_SEQUENCE_GENERATION) {
+        // Check for stage change to reset button mappings
+        if (previousStage != SIMONA_STAGE_SEQUENCE_GENERATION) {
+            mapButtonToLedPosition(0, msg.currentRound, true); // Reset mappings on stage change
+        }
+        
         printSimonaMessage(msg);
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;
-            int ledIndex = sequenceGenAnimation.currentLitButton;
+            
             switch (sequenceGenAnimation.currentLitButton) {
                 case 0:
                     targetColor = CRGB(255, 0, 0); // red
@@ -354,9 +419,11 @@ void novaNowLoop() {
                     break;
                 default:
                     targetColor = CRGB(255, 0, 0); // default red
-                    ledIndex = 0;
                     break;
             }
+
+            // Map button to LED position based on current round
+            int ledIndex = mapButtonToLedPosition(sequenceGenAnimation.currentLitButton, msg.currentRound);
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, sequenceGenAnimation.offWhite);
@@ -364,10 +431,9 @@ void novaNowLoop() {
             if (ledIndex >= 0 && ledIndex < 12) {
                 lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
             }
-            //delay(50);
-            // Turn the LED back to dim white
-            //lightUtils->protectLedRange(ledIndex, ledIndex, sequenceGenAnimation.offWhite);
         }
+        
+        previousStage = SIMONA_STAGE_SEQUENCE_GENERATION;
     }
     // Update input collection animation if in input collection stage
     else if (currentSimonaStage == SIMONA_STAGE_INPUT_COLLECTION) {
@@ -375,7 +441,6 @@ void novaNowLoop() {
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;
-            int ledIndex = inputCollectionAnimation.lastPressedButton;
             
             switch (inputCollectionAnimation.lastPressedButton) {
                 case 0:
@@ -392,9 +457,11 @@ void novaNowLoop() {
                     break;
                 default:
                     targetColor = CRGB(255, 0, 0); // default red
-                    ledIndex = 0;
                     break;
             }
+
+            // Map button to LED position based on current round
+            int ledIndex = mapButtonToLedPosition(inputCollectionAnimation.lastPressedButton, msg.currentRound);
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);
@@ -402,9 +469,6 @@ void novaNowLoop() {
             if (ledIndex >= 0 && ledIndex < 12) {
                 lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
             }
-            //delay(50);
-            // Turn all LEDs back to dim white
-            //lightUtils->protectLedRange(ledIndex, ledIndex, inputCollectionAnimation.offWhite);
         }
     }
     // Update lost animation if in game lost stage
