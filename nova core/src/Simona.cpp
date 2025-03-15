@@ -444,7 +444,7 @@ void Simona::runGameTask()
 
       // Flash LEDs in sequence 20 times
       const uint8_t allLeds[] = {BUTTON_RED_OUT, BUTTON_GREEN_OUT, BUTTON_BLUE_OUT, BUTTON_YELLOW_OUT};
-      for (int j = 0; j < 6; j++)
+      for (int j = 0; j < 4; j++)
       {
         for (int i = 0; i < 4; i++)
         {
