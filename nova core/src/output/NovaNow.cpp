@@ -160,6 +160,9 @@ static struct {
 } roundTransitionAnimation;
 
 // Add reset animation state
+
+int currentSequence = 0;
+
 static struct {
     int currentStep = 0;
     int currentColor = 0;
@@ -231,7 +234,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
         }
         
         // Assign each button a unique position from the shuffled list
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 12; i++) {
             // For safety, ensure i is less than numAvailable
             buttonToLedMapping[i] = availablePositions[i % numAvailable];
         }
@@ -241,7 +244,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     }
     
     // Return the pre-calculated mapping for this button
-    if (buttonIndex >= 0 && buttonIndex < 4) {
+    if (buttonIndex >= 0 && buttonIndex < 12) {
         return buttonToLedMapping[buttonIndex];
     }
     
@@ -401,7 +404,15 @@ void novaNowLoop() {
             mapButtonToLedPosition(0, msg.currentRound, true); // Reset mappings on stage change
         }
         
-        printSimonaMessage(msg);
+        static int lastMessageId = -1;
+        if (msg.message_id != lastMessageId) {
+            lastMessageId = msg.message_id;
+            // Execute your code here for new message_id changes
+            currentSequence++;
+        }
+
+
+        //printSimonaMessage(msg);
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;
@@ -425,7 +436,11 @@ void novaNowLoop() {
             }
 
             // Map button to LED position based on current round
-            int ledIndex = mapButtonToLedPosition(sequenceGenAnimation.currentLitButton, msg.currentRound);
+            int ledIndex = mapButtonToLedPosition(currentSequence, msg.currentRound);
+        Serial.print(">>> currentSequence: ");
+            Serial.print(currentSequence);
+            Serial.println(" <<<");
+
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, sequenceGenAnimation.offWhite);
@@ -439,11 +454,12 @@ void novaNowLoop() {
     }
     // Update input collection animation if in input collection stage
     else if (currentSimonaStage == SIMONA_STAGE_INPUT_COLLECTION) {
-        printSimonaMessage(msg);
+        //printSimonaMessage(msg);
+        currentSequence = 0;
         if (lightUtils) {
             // Map button to color
             CRGB targetColor;
-            
+
             switch (inputCollectionAnimation.lastPressedButton) {
                 case 0:
                     targetColor = CRGB(255, 0, 0); // red
@@ -463,7 +479,11 @@ void novaNowLoop() {
             }
 
             // Map button to LED position based on current round
-            int ledIndex = mapButtonToLedPosition(inputCollectionAnimation.lastPressedButton, msg.currentRound);
+            // Mapping gamePlay to LED position based on current round
+            int ledIndex = mapButtonToLedPosition(msg.gamePlay, msg.currentRound);
+            Serial.print("==== LED index mapping from gamePlay: ");
+            Serial.print(msg.gamePlay);
+            Serial.println(" ====");
 
             // Poof that star
             star->poof(ledIndex);
@@ -638,6 +658,7 @@ void novaNowLoop() {
     // Handle reset stage
     else if (currentSimonaStage == SIMONA_STAGE_RESET) {
         if (lightUtils) {
+            currentSequence = 0;
             switch (resetAnimation.animationPhase) {
                 case 0: // Initialize
                     lightUtils->protectLedRange(0, 11, resetAnimation.offWhite);
