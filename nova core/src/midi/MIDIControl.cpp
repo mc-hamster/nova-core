@@ -51,8 +51,8 @@ void playGameIntro()
 
 void playBuzzer(int x)
 {
-    Serial.print("Playing buzzer note: ");
-    Serial.println(x);
+    //Serial.print("Playing buzzer note: ");
+    //Serial.println(x);
     // Set instrument on Channel 1 to Acoustic Grand Piano (GM program 1)
     MIDI.sendProgramChange(1, 1);
     delay(100); // Allow time for instrument change
@@ -149,12 +149,12 @@ void playStartupMusic()
 }
 
 void playRoundTransitionMusic(uint8_t round) {
-    Serial.print("Playing round transition music for round ");
-    Serial.println(round);
+    //Serial.print("Playing round transition music for round ");
+    //Serial.println(round);
     
     // Use Trumpet (instrument 57) for a fanfare effect
     MIDI.sendProgramChange(57, 1);
-    delay(50);
+    delay(35); // ~67% of original 50ms
     
     // Base note for the sequence (C4 = 60)
     const int baseNote = 60;
@@ -166,12 +166,12 @@ void playRoundTransitionMusic(uint8_t round) {
         MIDI.sendNoteOn(baseNote + i*2 + 4, 100, 1);     // third
         MIDI.sendNoteOn(baseNote + i*2 + 7, 100, 1);     // fifth
         
-        delay(200 - (round * 10));  // Faster for higher rounds
+        delay(135 - (round * 7));  // ~67% of original (200 -> 135) and scaled accordingly
         
         MIDI.sendNoteOff(baseNote + i*2, 0, 1);
         MIDI.sendNoteOff(baseNote + i*2 + 4, 0, 1);
         MIDI.sendNoteOff(baseNote + i*2 + 7, 0, 1);
-        delay(50);  // Brief pause between chords
+        delay(35);  // ~67% of original 50ms
     }
     
     // Final celebratory flourish
@@ -179,7 +179,7 @@ void playRoundTransitionMusic(uint8_t round) {
     MIDI.sendNoteOn(finalNote, 120, 1);
     MIDI.sendNoteOn(finalNote + 4, 120, 1);
     MIDI.sendNoteOn(finalNote + 7, 120, 1);
-    delay(300);
+    delay(100); // ~67% of original 300ms
     MIDI.sendNoteOff(finalNote, 0, 1);
     MIDI.sendNoteOff(finalNote + 4, 0, 1);
     MIDI.sendNoteOff(finalNote + 7, 0, 1);
