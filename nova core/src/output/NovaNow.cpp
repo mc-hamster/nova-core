@@ -878,6 +878,42 @@ void novaNowLoop()
     {
         if (lightUtils)
         {
+            // Check for stage change to reset button mappings
+            if (previousStage != SIMONA_STAGE_GAME_WIN)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    star->boom(i);
+                }
+            }
+
+            // Wave inward poof animation 4 times: pair (0,11), (1,10), (2,9), …, (5,6) with 50ms non-blocking pause between pairs.
+            static unsigned long lastPoofTime = 0;
+            static int poofPairIndex = 0;
+            static int poofRepetition = 0;
+
+            if (poofRepetition < 4) {
+                if (millis() - lastPoofTime >= 50) {
+                    int led1 = poofPairIndex;
+                    int led2 = 11 - poofPairIndex;
+
+                    star->poof(led1);
+                    star->poof(led2);
+
+                    lastPoofTime = millis();
+                    poofPairIndex++;
+
+                    if (poofPairIndex > 5) {
+                        poofPairIndex = 0;
+                        poofRepetition++;
+                    }
+                }
+            } else {
+                // Reset for the next time the stage is entered
+                poofRepetition = 0;
+                poofPairIndex = 0;
+            }
+
             // Calculate sine-based brightness for smooth pulsing
             float fraction = winAnimation.stepIndex / (float)winAnimation.stepsPerPulse;
             float brightnessFactor = sinf(fraction * 3.14159f);
