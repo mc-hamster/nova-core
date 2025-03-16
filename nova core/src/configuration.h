@@ -50,7 +50,7 @@
 #define SIMONA_INPUT_TIMEOUT_SECONDS 30
 #define SIMONA_DEBUG_TIMEOUT 0  // Set to 1 to enable timeout debug messages
 #define LEVELS_PER_ROUND_DEFAULT 1
-#define SIMONA_MAX_ROUNDS 2
+#define SIMONA_MAX_ROUNDS 8
 
 // LEDC (PWM) Configuration
 #define LEDC_FREQ_HZ      5000
