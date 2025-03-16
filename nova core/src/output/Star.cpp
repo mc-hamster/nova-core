@@ -630,9 +630,10 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
     switch (cluster.stars[star].pooferOutputState)
     {
     case POOF_ON:
-        Serial.print("goPoof: On ");
-        Serial.print(star);
-        Serial.println();
+        // TODO Enable this
+        //Serial.print("goPoof: On ");
+        //Serial.print(star);
+        //Serial.println();
         cluster.stars[star].pooferPreviousMillis = currentMillis;
         novaIO->mcp_digitalWrite(cluster.stars[star].pooferOutput, HIGH, cluster.stars[star].expander);
         cluster.stars[star].pooferOutputState = POOF_ON_IDLE;
