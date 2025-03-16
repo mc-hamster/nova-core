@@ -16,6 +16,9 @@ static const size_t MAX_QUEUE_SIZE = 10; // Maximum number of messages to queue
 // Track the current Simona stage to maintain LED state
 static SimonaStage currentSimonaStage = SIMONA_STAGE_WAITING;
 
+// Add near the top with other static variables
+static SimonaStage previousStages[2] = {SIMONA_STAGE_WAITING, SIMONA_STAGE_WAITING}; // Track last 2 stages
+
 static void printSimonaMessage(const SimonaMessage &msg)
 {
     char buffer[256];
@@ -423,6 +426,99 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     return position;
 }
 
+// New function to poof all mapped LEDs
+void poofAllMappedLeds(int currentRound)
+{
+    Serial.println("Poofing all mapped LEDs for current round");
+
+    if (star)
+    {
+        // Calculate number of LEDs used in current round
+        int ledCount = 4; // Default to 4 LEDs
+        if (currentRound >= 3 && currentRound <= 4)
+        {
+            ledCount = 6;
+        }
+        else if (currentRound >= 5 && currentRound <= 6)
+        {
+            ledCount = 8;
+        }
+        else if (currentRound >= 7)
+        {
+            ledCount = 12;
+        }
+
+        // First, check the button-to-LED mapping array
+        for (int i = 0; i < 12; i++)
+        {
+            if (buttonToLedMapping[i] >= 0)
+            {
+                Serial.print("Poofing mapped LED at position ");
+                Serial.println(buttonToLedMapping[i]);
+
+                star->poof(buttonToLedMapping[i]); // Call poof on this mapped LED
+                // delay(50);                         // Small delay between poofs for visual effect
+            }
+        }
+    }
+    else
+    {
+        Serial.println("ERROR: Star object is null, cannot poof LEDs");
+    }
+}
+
+// New function to boom a specified number of mapped LEDs
+void boomMappedLeds(int currentRound, int numLedsToBoom)
+{
+    Serial.print("Booming ");
+    Serial.print(numLedsToBoom);
+    Serial.println(" mapped LEDs for current round");
+
+    if (star)
+    {
+        // Calculate number of LEDs used in current round
+        int ledCount = 4; // Default to 4 LEDs
+        if (currentRound >= 3 && currentRound <= 4)
+        {
+            ledCount = 6;
+        }
+        else if (currentRound >= 5 && currentRound <= 6)
+        {
+            ledCount = 8;
+        }
+        else if (currentRound >= 7)
+        {
+            ledCount = 12;
+        }
+
+        // Collect all mapped LEDs
+        std::vector<int> mappedLeds;
+        for (int i = 0; i < 12; i++)
+        {
+            if (buttonToLedMapping[i] >= 0)
+            {
+                mappedLeds.push_back(buttonToLedMapping[i]);
+            }
+        }
+
+        // Shuffle the mapped LEDs to randomize selection
+        std::random_shuffle(mappedLeds.begin(), mappedLeds.end());
+
+        // Boom the specified number of LEDs
+        for (int i = 0; i < numLedsToBoom && i < mappedLeds.size(); i++)
+        {
+            Serial.print("Booming mapped LED at position ");
+            Serial.println(mappedLeds[i]);
+
+            star->boom(mappedLeds[i]); // Call boom on this mapped LED
+        }
+    }
+    else
+    {
+        Serial.println("ERROR: Star object is null, cannot boom LEDs");
+    }
+}
+
 // Handle waiting stage LED animation
 static void updateWaitingAnimation()
 {
@@ -810,6 +906,14 @@ void novaNowLoop()
     // Handle round transition stage
     else if (currentSimonaStage == SIMONA_STAGE_ROUND_TRANSITION)
     {
+        // Check if we truly just entered this stage (not just continuing in it)
+        if (previousStages[1] != SIMONA_STAGE_ROUND_TRANSITION)
+        {
+            boomMappedLeds(msg.currentRound, msg.currentRound / 2); // Boom 3 LEDs for round transition
+        }
+
+        poofAllMappedLeds(msg.currentRound);
+
         if (lightUtils)
         {
             switch (roundTransitionAnimation.animationStep)
@@ -995,6 +1099,11 @@ void novaNowLoop()
             }
         }
     }
+
+    // At the end of novaNowLoop, update stage history
+    // Add this just before the closing brace of novaNowLoop()
+    previousStages[0] = previousStages[1];
+    previousStages[1] = currentSimonaStage;
 }
 
 void sendSimonaMessage(const SimonaMessage &simMsg)

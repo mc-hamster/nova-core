@@ -119,7 +119,7 @@ public:
      * @brief Get the maximum number of rounds in the game
      * @return Maximum rounds
      */
-    uint8_t getMaxRounds() const { return MAX_ROUNDS; }
+    uint8_t getMaxRounds() const { return SIMONA_MAX_ROUNDS; }
 
     /**
      * @brief Get the current game stage
@@ -189,7 +189,7 @@ public:
         if (stage == SIMONA_STAGE_WAITING) {
             return "Waiting...";
         }
-        return "Round: " + String(m_currentRound) + "/" + String(MAX_ROUNDS) + 
+        return "Round: " + String(m_currentRound) + "/" + String(SIMONA_MAX_ROUNDS) + 
                " - Level: " + String(level) + "/" + String(m_levelsInRound);
     }
 
@@ -214,7 +214,7 @@ private:
     static Simona *instance; // Singleton instance
 
     // Game configuration constants
-    static const uint8_t MAX_ROUNDS = 12; // Maximum number of rounds to win the game
+    static const uint8_t MAX_ROUNDS = SIMONA_MAX_ROUNDS; // Maximum number of rounds to win the game
 
     // Game state variables
     uint8_t m_levelsInRound = 3; // Number of levels in current round (increases per round)
