@@ -214,12 +214,15 @@ static bool mappingInitialized = false;
 static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetMapping = false)
 {
     // Sanity check - button index should be valid
-    if (buttonIndex < 0 || buttonIndex >= 12)
+    if (buttonIndex < 1 || buttonIndex > 12)
     {
         Serial.print("ERROR: Invalid button index ");
         Serial.println(buttonIndex);
         return 4; // Default to first LED as fallback
     }
+
+    // Convert from 1-based button index to 0-based array index
+    int buttonArrayIndex = buttonIndex - 1;
 
     // Progressive LED count based on round
     int ledCount = 4; // Default to 4 LEDs
@@ -244,7 +247,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     {
         // Initialize random seed each time a new round starts
         // Use multiple sources of entropy
-        randomSeed(analogRead(0) + millis() + currentRound * 17);
+        randomSeed(esp_random());
 
         // Clear all mappings
         for (int i = 0; i < 12; i++)
@@ -263,17 +266,17 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     }
 
     // Check if we already have a mapping for this button
-    if (buttonToLedMapping[buttonIndex] >= 0)
+    if (buttonToLedMapping[buttonArrayIndex] >= 0)
     {
         // Safety check - make sure no other button is using this position
-        int position = buttonToLedMapping[buttonIndex];
+        int position = buttonToLedMapping[buttonArrayIndex];
         bool collision = false;
         for (int i = 0; i < 12; i++)
         {
-            if (i != buttonIndex && buttonToLedMapping[i] == position)
+            if (i != buttonArrayIndex && buttonToLedMapping[i] == position)
             {
                 Serial.print("ERROR: Position collision detected! Button ");
-                Serial.print(buttonIndex);
+                Serial.print(buttonArrayIndex);
                 Serial.print(" and Button ");
                 Serial.print(i);
                 Serial.print(" both mapped to LED position ");
@@ -285,16 +288,19 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
 
         if (!collision)
         {
-            Serial.print("Button ");
-            Serial.print(buttonIndex);
-            Serial.print(" using existing mapping to LED position ");
-            Serial.println(position);
+            if (0)
+            {
+                Serial.print("Button ");
+                Serial.print(buttonArrayIndex);
+                Serial.print(" using existing mapping to LED position ");
+                Serial.println(position);
+            }
             return position;
         }
 
         // If there was a collision, we'll need to reassign a position
         Serial.println("Fixing collision by creating new mapping");
-        buttonToLedMapping[buttonIndex] = -1;
+        buttonToLedMapping[buttonArrayIndex] = -1;
     }
 
     // Create an array of available positions within our range
@@ -308,7 +314,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
         for (int j = 0; j < 12; j++)
         {
             // Check if this position is already assigned to another button
-            if (j != buttonIndex && buttonToLedMapping[j] == i)
+            if (j != buttonArrayIndex && buttonToLedMapping[j] == i)
             {
                 alreadyUsed = true;
                 break;
@@ -324,7 +330,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
 
     // Debug: print available positions
     Serial.print("Available positions for button ");
-    Serial.print(buttonIndex);
+    Serial.print(buttonArrayIndex);
     Serial.print(": ");
     for (int i = 0; i < availableCount; i++)
     {
@@ -385,7 +391,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     bool finalCollision = false;
     for (int i = 0; i < 12; i++)
     {
-        if (i != buttonIndex && buttonToLedMapping[i] == position)
+        if (i != buttonArrayIndex && buttonToLedMapping[i] == position)
         {
             Serial.print("CRITICAL: Collision detected with button ");
             Serial.print(i);
@@ -407,10 +413,10 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
     }
 
     // Assign the position to this button and return it
-    buttonToLedMapping[buttonIndex] = position;
+    buttonToLedMapping[buttonArrayIndex] = position;
 
     Serial.print("Button ");
-    Serial.print(buttonIndex);
+    Serial.print(buttonArrayIndex);
     Serial.print(" now assigned to LED position ");
     Serial.println(position);
 
