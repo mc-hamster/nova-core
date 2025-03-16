@@ -587,7 +587,7 @@ void switchExample(Control *sender, int value)
     else if (sender->id == simonaGameEnabledSwitch)
     {
         GAME_ENABLED = (sender->value == "1");
-        PreferencesManager::setBool("simonaGameEnabled", GAME_ENABLED);
+        PreferencesManager::setBool("gameEn", GAME_ENABLED); // Shortened from simonaGameEnabled
         Serial.printf("Game %s and saved to preferences\n", GAME_ENABLED ? "enabled" : "disabled");
     }
     else if (sender->id == simonaSequenceLocalEchoSwitch)
@@ -645,7 +645,7 @@ void webSetup()
 {
     // Load saved preferences for Simona settings
     SIMONA_CHEAT_MODE = PreferencesManager::getBool("simonaCheatMode", false);
-    GAME_ENABLED = PreferencesManager::getBool("simonaGameEnabled", true);
+    GAME_ENABLED = PreferencesManager::getBool("gameEn", true);  // Shortened from simonaGameEnabled
     SEQUENCE_LOCAL_ECHO = PreferencesManager::getBool("simonaSequenceLocalEcho", true);
 
     // Safely check if Simona is initialized before calling methods
