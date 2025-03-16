@@ -4,6 +4,7 @@
 #include "NovaIO.h"
 #include "output/StarSequence.h"
 #include "utilities/PreferencesManager.h"
+#include "LightUtils.h"
 
 /*
 
@@ -12,6 +13,7 @@ This is the Enable class. It is responsible for the emergency stop functionality
 */
 
 Enable *enable = NULL;
+extern LightUtils *lightUtils;
 
 Enable::Enable()
 {
@@ -88,6 +90,20 @@ void Enable::emergencyStopExit()
         // Incase a sequence was running, turn it off.
         starSequence->setSequence(starSequence->SEQ_OFF);
 
+        // Resume game task if it exists
+        TaskHandle_t gameTaskHandle = xTaskGetHandle("Game Task");
+        if (gameTaskHandle != NULL) {
+            vTaskResume(gameTaskHandle);
+            Serial.println("Game task resumed");
+        }
+
+        // Resume NovaNow task if it exists
+        TaskHandle_t novaNowHandle = xTaskGetHandle("NovaNow");
+        if (novaNowHandle != NULL) {
+            vTaskResume(novaNowHandle);
+            Serial.println("NovaNow task resumed");
+        }
+
         systemEnable = true;
     }
 }
@@ -100,11 +116,25 @@ This function is called when the emergency stop is entered. It turns off all the
 */
 void Enable::emergencyStopEnter()
 {
-
     Serial.println("Emergency Stop Activated. Entering fail safe.");
 
     // Incase a sequence was running, turn it off.
     starSequence->setSequence(starSequence->SEQ_OFF);
+
+    // Suspend game task if it exists
+    TaskHandle_t gameTaskHandle = xTaskGetHandle("Game Task");
+    if (gameTaskHandle != NULL) {
+        vTaskSuspend(gameTaskHandle);
+        lightUtils->unprotectAllLeds();
+        Serial.println("Game task suspended and LEDs unprotected");
+    }
+
+    // Suspend NovaNow task if it exists
+    TaskHandle_t novaNowHandle = xTaskGetHandle("NovaNow");
+    if (novaNowHandle != NULL) {
+        vTaskSuspend(novaNowHandle);
+        Serial.println("NovaNow task suspended");
+    }
 
     // Turn off all the outputs a few times incase there is a problem in the i2c bus
     for (int i = 0; i <= 4; i++)
