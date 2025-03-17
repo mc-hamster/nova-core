@@ -18,8 +18,6 @@ static SimonaStage currentSimonaStage = SIMONA_STAGE_WAITING;
 
 // Add near the top with other static variables
 static SimonaStage previousStages[2] = {SIMONA_STAGE_WAITING, SIMONA_STAGE_WAITING}; // Track last 2 stages
-static uint32_t lastInputCollectionMessageId = 0;
-static unsigned long inputCollectionStartTime = 0;
 
 static void printSimonaMessage(const SimonaMessage &msg)
 {
@@ -755,14 +753,6 @@ void novaNowLoop()
     {
         // printSimonaMessage(msg);
         currentSequence = 0;
-
-        // Check if we've got a new message for input collection
-        if (msg.message_id != lastInputCollectionMessageId)
-        {
-            inputCollectionStartTime = millis();
-            lastInputCollectionMessageId = msg.message_id;
-        }
-
         if (lightUtils)
         {
             // Map button to color
@@ -794,11 +784,8 @@ void novaNowLoop()
             // Serial.print(msg.gamePlay);
             // Serial.println(" ====");
 
-            // Only poof the star during the first 200ms after receiving a new message
-            if (millis() - inputCollectionStartTime <= 200)
-            {
-                star->poof(ledIndex);
-            }
+            // Poof that star
+            star->poof(ledIndex);
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);

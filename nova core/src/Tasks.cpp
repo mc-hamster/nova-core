@@ -56,7 +56,7 @@ void updateTaskStats(const char* name, UBaseType_t watermark, BaseType_t coreId)
     // If task not found, try to determine its initial stack size
     UBaseType_t initialStack = 4096; // Default size
     if (strcmp(name, "TaskWeb") == 0) initialStack = 8 * 1024;
-    else if (strcmp(name, "TaskModes") == 0) initialStack = 6 * 1024;
+    else if (strcmp(name, "TaskStars") == 0) initialStack = 6 * 1024;
     else if (strcmp(name, "TaskMDNS") == 0) initialStack = 4 * 1024;
     else if (strcmp(name, "TaskAmbient") == 0) initialStack = 8 * 1024;
     else if (strcmp(name, "LightUtils") == 0) initialStack = 3 * 1024;
@@ -229,12 +229,12 @@ void TaskMDNS(void *pvParameters) {
     }
 }
 
-void TaskModes(void *pvParameters) {
+void TaskStars(void *pvParameters) {
     (void)pvParameters;
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
-    Serial.println("TaskModes is running");
+    Serial.println("TaskStars is running");
 
     while (1) {
         if (enable->isSystemEnabled()) {
@@ -243,8 +243,14 @@ void TaskModes(void *pvParameters) {
             Serial.println("system disabled");
             delay(1000);
         }
-        yield();
-        vTaskDelay(pdMS_TO_TICKS(5));
+
+        // Delay once ever 4 loops to allow other tasks to run
+        static int delayCounter = 0;
+        delayCounter++;
+        if (delayCounter >= 4) {
+            delayCounter = 0;
+            vTaskDelay(pdMS_TO_TICKS(1));
+        }
 
         static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL) {
@@ -297,9 +303,9 @@ void taskSetup() {
     xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskWeb - Done");
 
-    Serial.println("Create TaskModes");
-    xTaskCreate(&TaskModes, "TaskModes", 6 * 1024, NULL, 5, NULL);
-    Serial.println("Create TaskModes - Done");
+    Serial.println("Create TaskStars");
+    xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 5, NULL);
+    Serial.println("Create TaskStars - Done");
 
     Serial.println("Create TaskMDNS");
     xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 1, NULL);
