@@ -5,6 +5,8 @@
 #include "output/StarSequence.h"
 #include "Web.h"
 #include <DNSServer.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
 #include "output/Star.h"
 #include "Simona.h"
 #include "NovaIO.h"
@@ -13,6 +15,9 @@
 
 // Using REPORT_TASK_INTERVAL from configuration.h
 #define TASK_STALL_TIMEOUT 10000 // Consider a task stalled if no update in 10 seconds
+
+// Declare external WiFiMulti object
+extern WiFiMulti wifiMulti;
 
 struct TaskStats
 {
@@ -85,6 +90,8 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 4 * 1024;
     else if (strcmp(name, "TaskMonitor") == 0)
         initialStack = 4096;
+    else if (strcmp(name, "TaskWiFiConnection") == 0)
+        initialStack = 4 * 1024;
 
     registerTaskForMonitoring(name, watermark, coreId, initialStack);
 }
@@ -356,6 +363,37 @@ void TaskStarSequence(void *pvParameters)
     }
 }
 
+void TaskWiFiConnection(void *pvParameters)
+{
+    UBaseType_t uxHighWaterMark;
+    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+    const char *pcTaskName = pcTaskGetName(xTaskHandle);
+
+    Serial.println("TaskWiFiConnection is running");
+
+    while (1)
+    {
+        if (WiFi.status() != WL_CONNECTED) {
+            Serial.println("WiFi connection lost, attempting to reconnect...");
+            if (wifiMulti.run(5000) == WL_CONNECTED) {
+                Serial.println("WiFi reconnected");
+                Serial.print("IP address: ");
+                Serial.println(WiFi.localIP());
+            }
+        }
+        
+        static uint32_t lastExecutionTime = 0;
+        if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
+        {
+            uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+            updateTaskStats(pcTaskName, uxHighWaterMark, xPortGetCoreID());
+            lastExecutionTime = millis();
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(10000)); // Check connection every 10 seconds
+    }
+}
+
 // Task definitions
 void taskSetup()
 {
@@ -406,6 +444,10 @@ void taskSetup()
     Serial.println("Create TaskMonitor");
     xTaskCreate(&TaskMonitor, "TaskMonitor", 4096, NULL, 1, NULL);
     Serial.println("Create TaskMonitor - Done");
+
+    Serial.println("Create TaskWiFiConnection");
+    xTaskCreate(&TaskWiFiConnection, "TaskWiFiConnection", 4 * 1024, NULL, 1, NULL);
+    Serial.println("Create TaskWiFiConnection - Done");
 }
 
 void gameTask(void *pvParameters)

@@ -16,6 +16,7 @@ void TaskStarSequence(void *pvParameters);
 void TaskI2CMonitor(void *pvParameters);
 void TaskNovaNow(void *pvParameters);
 void TaskMonitor(void *pvParameters);
+void TaskWiFiConnection(void *pvParameters);  // New WiFi connection management task
 
 void gameTask(void *pvParameters);
 void buttonTask(void *pvParameters);

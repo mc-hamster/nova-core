@@ -271,7 +271,6 @@ void Star::loop()
         #endif
         delay(1000);
     }
-    //vTaskDelay(1);
 }
 
 // Called by the modes task
@@ -280,6 +279,10 @@ void Star::star_loop(void)
 
     for (uint32_t outputStar = 0; outputStar < 20; outputStar++)
     {
+        
+        // Important to yield here to allow other tasks to run.
+        //  Especially important to ensure the ambient task runs.
+        yield();
 
         if (cluster.stars[outputStar].starState.pooferButtonState == POOFER_POOF)
         {

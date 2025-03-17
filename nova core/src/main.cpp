@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <WiFi.h>
+#include <WiFiMulti.h>
 #include <LittleFS.h>
 #include "FS.h"
 
@@ -31,6 +32,7 @@
 #include "Simona.h"
 #include "midi/MIDIControl.hpp"  // Updated path to MIDI module
 #include <MIDI.h>
+#include "wifi_config.h"
 
 #define FORMAT_LITTLEFS_IF_FAILED true
 
@@ -52,6 +54,8 @@ void TaskI2CMonitor(void *pvParameters);
 
 DNSServer dnsServer;
 AsyncWebServer webServer(80);
+
+WiFiMulti wifiMulti;
 
 // Add WiFi event handler function
 void WiFiEvent(WiFiEvent_t event)
@@ -84,6 +88,17 @@ void WiFiEvent(WiFiEvent_t event)
         break;
     case SYSTEM_EVENT_AP_STADISCONNECTED:
         Serial.println("Client disconnected");
+        break;
+    case SYSTEM_EVENT_STA_CONNECTED:
+        Serial.println("Connected to access point");
+        break;
+    case SYSTEM_EVENT_STA_DISCONNECTED:
+        Serial.println("Disconnected from access point");
+        break;
+    case SYSTEM_EVENT_STA_GOT_IP:
+        Serial.println("Got IP address as station");
+        Serial.print("Station IP: ");
+        Serial.println(WiFi.localIP());
         break;
     }
 }
@@ -177,6 +192,19 @@ void setup()
   WiFi.setSleep(false); // Disable power saving on the wifi interface.
 
   WiFi.onEvent(WiFiEvent);
+
+  // Initialize WiFiMulti and add access points from config
+  for (int i = 0; i < NETWORK_COUNT; i++) {
+      wifiMulti.addAP(networks[i].ssid, networks[i].password);
+  }
+  
+  // Attempt to connect to one of the networks
+  Serial.println("Connecting to WiFi...");
+  if (wifiMulti.run() == WL_CONNECTED) {
+      Serial.println("WiFi connected");
+      Serial.println("IP address: ");
+      Serial.println(WiFi.localIP());
+  }
 
   // Print network information
   Serial.println("Device Information:");

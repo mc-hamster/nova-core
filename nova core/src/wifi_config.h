@@ -14,7 +14,7 @@ struct WifiNetwork {
 // Development networks configuration
 // These are dummy values for testing/development
 static const WifiNetwork networks[] = {
-    {"dev-network", "dev-password"},
+    {"things", "stuffAndThings!"},
     {"test-network", "test-password"},
 };
 

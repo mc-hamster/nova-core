@@ -736,7 +736,7 @@ void webSetup()
         simonaSequenceLocalEchoSwitch);
 
     // Add device info and uptime to System Info tab
-    String deviceInfo = "MAC: " + WiFi.macAddress() + ", IP: " + WiFi.softAPIP().toString();
+    String deviceInfo = "MAC: " + WiFi.macAddress() + ", AP IP: " + WiFi.softAPIP().toString() + ", STA IP: " + WiFi.localIP().toString();
     uint16_t deviceInfoLabel = ESPUI.addControl(ControlType::Label, "Device Info", deviceInfo, ControlColor::None, sysInfoTab);
 
     // Move uptime to System Info tab
