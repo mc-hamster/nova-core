@@ -66,3 +66,6 @@
 
 // RMT MIDI Output Configuration
 #define RMT_BIT_DURATION_TICKS 2560  // Nova core-specific MIDI timing
+
+// Debug configurations
+#define DEBUG_STARS_ENABLED 0  // Set to 0 to disable Star debug messages in serial console
