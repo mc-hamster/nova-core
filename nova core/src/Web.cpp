@@ -586,13 +586,13 @@ void switchExample(Control *sender, int value)
     }
     else if (sender->id == simonaGameEnabledSwitch)
     {
-        GAME_ENABLED = (sender->value == "1");
+        GAME_ENABLED = (sender->value.toInt() == 1);
         PreferencesManager::setBool("gameEn", GAME_ENABLED); // Shortened from simonaGameEnabled
         Serial.printf("Game %s and saved to preferences\n", GAME_ENABLED ? "enabled" : "disabled");
     }
     else if (sender->id == simonaSequenceLocalEchoSwitch)
     {
-        SEQUENCE_LOCAL_ECHO = (sender->value == "1");
+        SEQUENCE_LOCAL_ECHO = (sender->value.toInt() == 1);
         PreferencesManager::setBool("simonaSequenceLocalEcho", SEQUENCE_LOCAL_ECHO);
 
         // Check if Simona instance exists before calling methods on it
