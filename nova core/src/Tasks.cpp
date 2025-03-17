@@ -244,12 +244,14 @@ void TaskStars(void *pvParameters) {
             delay(1000);
         }
 
-        // Delay once ever 4 loops to allow other tasks to run
+        // Delay once ever 10 loops to allow other tasks to run
         static int delayCounter = 0;
         delayCounter++;
-        if (delayCounter >= 4) {
+        if (delayCounter >= 10) {
             delayCounter = 0;
             vTaskDelay(pdMS_TO_TICKS(1));
+        } else {
+            yield();
         }
 
         static uint32_t lastExecutionTime = 0;
