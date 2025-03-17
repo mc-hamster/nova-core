@@ -14,10 +14,13 @@
 #include <esp_heap_caps.h>
 
 // Using REPORT_TASK_INTERVAL from configuration.h
-#define TASK_STALL_TIMEOUT 10000 // Consider a task stalled if no update in 10 seconds
+#define TASK_STALL_TIMEOUT 180000 // Consider a task stalled if no update in 180 seconds (longer than REPORT_TASK_INTERVAL)
 
 // Declare external WiFiMulti object
 extern WiFiMulti wifiMulti;
+
+// Add static variable for heap fragmentation high watermark
+static float heapFragmentationHighWatermark = 0.0f;
 
 struct TaskStats
 {
@@ -139,7 +142,13 @@ void TaskMonitor(void *pvParameters)
 
         // Calculate heap fragmentation as ratio of largest free block to total free heap
         float fragmentation = 100.0f * (1.0f - (float)heapInfo.largest_free_block / heapInfo.total_free_bytes);
-        Serial.printf("Heap Fragmentation: %.2f%%\n", fragmentation);
+        
+        // Update high watermark if current fragmentation is higher
+        if (fragmentation > heapFragmentationHighWatermark) {
+            heapFragmentationHighWatermark = fragmentation;
+        }
+        
+        Serial.printf("Heap Fragmentation: %.2f%% (High Watermark: %.2f%%)\n", fragmentation, heapFragmentationHighWatermark);
 
         // Monitor our own stack
         uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -307,12 +316,12 @@ void TaskStars(void *pvParameters)
         else
         {
             Serial.println("system disabled");
-            delay(1000);
+            vTaskDelay(pdMS_TO_TICKS(1000));
         }
 
         // Delay once ever 5 loops to allow other tasks to run
         delayCounter++;
-        if (delayCounter >= 5)
+        if (delayCounter >= 2)
         {
             delayCounter = 0;
             vTaskDelay(pdMS_TO_TICKS(1));
