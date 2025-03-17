@@ -198,7 +198,7 @@ void TaskWeb(void *pvParameters) {
     Serial.println("TaskWeb is running");
     while (1) {
         webLoop();
-        vTaskDelay(pdMS_TO_TICKS(2));
+        vTaskDelay(pdMS_TO_TICKS(10));
 
         static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL) {
