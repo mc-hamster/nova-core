@@ -271,7 +271,7 @@ void Star::loop()
         #endif
         delay(1000);
     }
-    vTaskDelay(1);
+    //vTaskDelay(1);
 }
 
 // Called by the modes task

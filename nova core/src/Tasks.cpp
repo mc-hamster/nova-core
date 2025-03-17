@@ -303,13 +303,13 @@ void TaskStars(void *pvParameters)
             delay(1000);
         }
 
-        // Delay once ever 10 loops to allow other tasks to run
+        // Delay once ever 5 loops to allow other tasks to run
         delayCounter++;
-        if (delayCounter >= 10)
+        if (delayCounter >= 5)
         {
             delayCounter = 0;
             vTaskDelay(pdMS_TO_TICKS(1));
-            yield();
+            //yield();
         }
         else
         {
@@ -376,7 +376,7 @@ void taskSetup()
     Serial.println("Create TaskWeb - Done");
 
     Serial.println("Create TaskStars");
-    xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 5, NULL);
+    xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskStars - Done");
 
     Serial.println("Create TaskMDNS");
@@ -392,7 +392,7 @@ void taskSetup()
     Serial.println("Create LightUtils - Done");
 
     Serial.println("Create StarSequence");
-    xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 5, NULL);
+    xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 3, NULL);
     Serial.println("Create StarSequence - Done");
 
     Serial.println("Create TaskI2CMonitor");
