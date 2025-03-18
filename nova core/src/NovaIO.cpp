@@ -134,17 +134,23 @@ NovaIO::NovaIO()
  */
 bool NovaIO::expansionDigitalRead(int pin)
 {
-    // Configurable cache duration (in milliseconds) and report logging flag.
-    const unsigned long CACHE_DURATION = 40;  // Cache duration (ms). Change this value as needed.
-    const bool REPORT_LOGGING_ENABLED = false;   // Set to false to disable report logging.
+    // Configurable cache duration and logging settings
+    const unsigned long CACHE_DURATION = 40;
+    const bool REPORT_LOGGING_ENABLED = false;
+    const uint8_t MAX_PINS = 16; // MCP23017 has 16 pins
 
     static unsigned long lastReportTime = millis();
-    static int pollCounts[256] = {0};
-    static int cacheHits[256] = {0};
-    static int cacheMisses[256] = {0};
-    static bool cachedValues[256] = { false };
-    static unsigned long cachedTime[256] = { 0 };
-    
+    static int pollCounts[MAX_PINS] = {0};
+    static int cacheHits[MAX_PINS] = {0};
+    static int cacheMisses[MAX_PINS] = {0};
+    static bool cachedValues[MAX_PINS] = { false };
+    static unsigned long cachedTime[MAX_PINS] = { 0 };
+
+    // Add bounds checking
+    if (pin >= MAX_PINS) {
+        return false;
+    }
+
     pollCounts[pin]++; // Count poll for this pin
     unsigned long currentMillis = millis();
     const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
@@ -170,7 +176,7 @@ bool NovaIO::expansionDigitalRead(int pin)
 
     if (REPORT_LOGGING_ENABLED && (currentMillis - lastReportTime >= 1000)) { // 1 second elapsed
         Serial.println("Polling report:");
-        for (int i = 0; i < 256; i++) {
+        for (int i = 0; i < MAX_PINS; i++) {
             if (pollCounts[i] > 0) {
                 Serial.print("Pin ");
                 Serial.print(i);
