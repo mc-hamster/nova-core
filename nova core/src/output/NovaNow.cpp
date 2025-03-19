@@ -429,7 +429,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
 // New function to poof all mapped LEDs
 void poofAllMappedLeds(int currentRound)
 {
-    Serial.println("Poofing all mapped LEDs for current round");
+    //Serial.println("Poofing all mapped LEDs for current round");
 
     if (star)
     {
@@ -453,8 +453,8 @@ void poofAllMappedLeds(int currentRound)
         {
             if (buttonToLedMapping[i] >= 0)
             {
-                Serial.print("Poofing mapped LED at position ");
-                Serial.println(buttonToLedMapping[i]);
+                //Serial.print("Poofing mapped LED at position ");
+                //Serial.println(buttonToLedMapping[i]);
 
                 star->poof(buttonToLedMapping[i]); // Call poof on this mapped LED
                 // delay(50);                         // Small delay between poofs for visual effect
