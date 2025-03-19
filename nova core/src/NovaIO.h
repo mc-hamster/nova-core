@@ -38,6 +38,11 @@ private:
         uint16_t expOutPort_G;
         uint16_t expOutPort_H;
 
+        // I2C statistics
+        unsigned long i2c_bytes_transferred;
+        unsigned long i2c_last_second;
+        float i2c_utilization;
+
 public:
         NovaIO();
 
@@ -76,50 +81,17 @@ public:
         void ledYellow (bool value);
         void ledWhite (bool value);
         
-/*
-Frame Buffer: Flame - For flame effects only. These effects work from the GPIO
-  expanders. Write only.
-        - Poofer
-        - Boomer
-        - Blower
-        - Igniter
-
-  Variables:
-
-        Current Frame Buffer
-
-        Future Frame Buffer
-
-        Is Future Frame Buffer "dirty"?
-                * If not dirty, then the future should match current
-
-  Functions
-        Write to GPIO
-                * Write update to future frame buffer
-                * (optionally) Flush write bufffer to the network
-
-        
-        Flush
-                * Write future frame buffer to the network
-                * Copy future frame buffer to current frame buffer
-
-
-Frame Buffer: Extended - Extended functions. This is for everything that uses the
-  digital interface. These values can be updated by both the controller
-  and represent a dynamic state from the stars.
-        - Lasers
-        - Fog Machines
-        - LED effects
-        - Other?
-*/
-
-
 
         bool expansionDigitalRead(int pin);
 
         void setStarlink(u_int8_t u_int8_t, uint8_t star);
 
         xSemaphoreHandle mutex_i2c;
+
+        // I2C statistics methods
+        void trackI2CTransfer(size_t bytes);
+        float getI2CUtilization();
+        void updateI2CStats();
 };
 
 extern NovaIO *novaIO;

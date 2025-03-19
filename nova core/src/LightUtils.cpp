@@ -119,9 +119,16 @@ LightUtils::LightUtils()
     // Load the light configuration
     Serial.println("LightUtils starting up...");
 
+    Serial.println("Loading stored brightness value...");
+    uint8_t storedBrightness = getCfgBrightness();
+    Serial.print("Loaded brightness value: ");
+    Serial.println(storedBrightness);
+
     Serial.println("Configuring FastLED");
     FastLED.addLeds<APA102, APA102_DATA, APA102_CLOCK, COLOR_ORDER, DATA_RATE_KHZ(4000)>(leds, NUM_LEDS);
-    FastLED.setBrightness(getCfgBrightness());
+    FastLED.setBrightness(storedBrightness);
+    Serial.print("FastLED brightness set to: ");
+    Serial.println(storedBrightness);
     FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it for the DMX lights.
 
 
@@ -146,6 +153,12 @@ LightUtils::LightUtils()
     Serial.println("Loading light configuration - cfgAutoTime");
     cfgAutoTime = getCfgAutoTime() ? getCfgAutoTime() : 30;
 
+    Serial.println("Loading light configuration - cfgReverseSecondRow");
+    cfgReverseSecondRow = getCfgReverseSecondRow();
+    
+    Serial.println("Loading light configuration - cfgCircularMode");
+    cfgCircularMode = getCfgCircularMode();
+
     // Setup goes in here
 }
 
@@ -163,12 +176,13 @@ void LightUtils::loop()
         if (millis() - lastAuto > cfgAutoTime * 1000)
         {
             uint32_t randomPalette = random(1, 19);
+            /*
             Serial.print("Auto changing palette to : ");
             Serial.println(randomPalette);
 
             Serial.print("Next palette change in : ");
             Serial.println(cfgAutoTime);
-
+            */
             lastAuto = millis();
             getPalette(randomPalette, false);
         }
@@ -176,9 +190,7 @@ void LightUtils::loop()
 
     uint8_t maxChanges = 12;
 
-    // Run nbledPaletteTowardPalette() 2 times to speed up blending (it looks better)
     nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
-    //nblendPaletteTowardPalette(currentPalette, targetPalette, maxChanges);
 
     if (getCfgFire())
     {
@@ -208,6 +220,27 @@ void LightUtils::loop()
 }
 
 /**
+ * Maps LED index based on strip configuration
+ */
+uint16_t LightUtils::mapLedIndex(uint16_t index) {
+    if (!cfgReverseSecondRow) return index;
+    
+    // For a two-row setup where both rows start from right
+    // First 12 LEDs (indices 0-11) are the first row
+    // Next 18 LEDs (indices 12-29) are the second row
+    if (index < 12) {
+        return index; // first row stays as is
+    } else {
+        // Calculate the position within the second row (0 to 17)
+        uint16_t secondRowPosition = index - 12;
+        // Reverse the position within the second row (17 to 0)
+        uint16_t reversedPosition = (NUM_LEDS - 12 - 1) - secondRowPosition;
+        // Map back to the full LED strip index (12 to 29)
+        return 12 + reversedPosition;
+    }
+}
+
+/**
  * Fills the LED strip with colors from the current palette starting at the given color index.
  *
  * @param colorIndex The starting index in the current palette.
@@ -215,36 +248,77 @@ void LightUtils::loop()
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
     uint8_t brightness = getCfgBrightness();
-
-    if (!getCfgReverse())
-    {
-        for (int i = 0; i < NUM_LEDS; i++)
-        {
-            if (cfgSin == 0)
-            {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
-                colorIndex += 3;
+    if (cfgCircularMode) {
+        // Special handling for circular mode - imagine the LEDs are in a circle
+        // We use sin/cos to create a circular effect instead of linear
+        float angleStep = (2 * PI) / NUM_LEDS;
+        float offset = colorIndex * 0.1; // Controls speed of rotation
+        
+        for (int i = 0; i < NUM_LEDS; i++) {
+            uint16_t mappedIndex = mapLedIndex(i);
+            
+            // Skip this LED if it's protected
+            if (protectedLeds[mappedIndex]) continue;
+            
+            // Calculate position in the circle
+            float angle = i * angleStep + offset;
+            
+            // Use sine wave to create circular pattern
+            uint8_t waveSin = sin8(i * 256 / NUM_LEDS + colorIndex);
+            uint8_t waveCos = sin8(i * 256 / NUM_LEDS + colorIndex + 64); // offset by 90 degrees
+            
+            // Combine for a more interesting pattern
+            uint8_t waveIndex = cfgSin == 0 ? colorIndex : colorIndex + (waveSin * cfgSin / 16);
+            
+            // Apply direction based on reverse setting
+            if (cfgReverse) {
+                waveIndex = colorIndex + (waveCos * cfgSin / 16);
             }
-            else
+            
+            leds[mappedIndex] = ColorFromPalette(currentPalette, waveIndex, brightness);
+        }
+    } else {
+        // Original linear pattern code
+        if (!getCfgReverse())
+        {
+            for (int i = 0; i < NUM_LEDS; i++)
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
-                colorIndex += 3;
+                uint16_t mappedIndex = mapLedIndex(i);
+                
+                // Skip this LED if it's protected
+                if (protectedLeds[mappedIndex]) continue;
+                
+                if (cfgSin == 0)
+                {
+                    leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                    colorIndex += 3;
+                }
+                else
+                {
+                    leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex + sin8(i * cfgSin), brightness);
+                    colorIndex += 3;
+                }
             }
         }
-    }
-    else
-    {
-        for (int i = NUM_LEDS - 1; i >= 0; i--)
+        else
         {
-            if (cfgSin == 0)
+            for (int i = NUM_LEDS - 1; i >= 0; i--)
             {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness);
-                colorIndex += 3;
-            }
-            else
-            {
-                leds[i] = ColorFromPalette(currentPalette, colorIndex + sin8((NUM_LEDS - 1 - i) * cfgSin), brightness);
-                colorIndex += 3;
+                uint16_t mappedIndex = mapLedIndex(i);
+                
+                // Skip this LED if it's protected
+                if (protectedLeds[mappedIndex]) continue;
+                
+                if (cfgSin == 0)
+                {
+                    leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
+                    colorIndex += 3;
+                }
+                else
+                {
+                    leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex + sin8((NUM_LEDS - 1 - i) * cfgSin), brightness);
+                    colorIndex += 3;
+                }
             }
         }
     }
@@ -261,7 +335,7 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect, bool saveSelection)
     }
     else
     {
-        Serial.println("Not saving palette selection");
+        //Serial.println("Not saving palette selection");
     }
 
     switch (paletteSelect)
@@ -440,11 +514,21 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect, bool saveSelection)
     return targetPalette;
 }
 
+void LightUtils::setCfgCircularMode(bool circularMode)
+{
+    cfgCircularMode = circularMode;
+    PreferencesManager::setBool("cfgCircularMode", circularMode);
+}
+
+bool LightUtils::getCfgCircularMode(void)
+{
+    return PreferencesManager::getBool("cfgCircularMode", false);
+}
+
 void LightUtils::Fire2012WithPalette(void)
 {
     // Array of temperature readings at each simulation cell
     static uint8_t heat[NUM_LEDS];
-
     // Step 1.  Cool down every cell a little
     for (int i = 0; i < NUM_LEDS; i++)
     {
@@ -480,7 +564,13 @@ void LightUtils::Fire2012WithPalette(void)
         {
             pixelnumber = j;
         }
-        leds[pixelnumber] = color;
+        
+        uint16_t mappedIndex = mapLedIndex(pixelnumber);
+        
+        // Skip this LED if it's protected
+        if (!protectedLeds[mappedIndex]) {
+            leds[mappedIndex] = color;
+        }
     }
 }
 
@@ -542,13 +632,22 @@ void LightUtils::setCfgProgram(uint8_t program)
 void LightUtils::setCfgReverse(bool reverse)
 {
     cfgReverse = reverse;
-    PreferencesManager::setInt("cfgReverse", reverse);
+    PreferencesManager::setBool("cfgReverse", reverse);
+}
+
+void LightUtils::setCfgReverseSecondRow(bool reverse) {
+    cfgReverseSecondRow = reverse;
+    PreferencesManager::setBool("cfgReverseSecondRow", reverse);
+}
+
+bool LightUtils::getCfgReverseSecondRow(void) {
+    return PreferencesManager::getBool("cfgReverseSecondRow", false);
 }
 
 void LightUtils::setCfgAuto(bool autoLight)
 {
     cfgAuto = autoLight;
-    PreferencesManager::setInt("cfgAuto", autoLight);
+    PreferencesManager::setBool("cfgAuto", autoLight);
 }
 
 /**
@@ -559,7 +658,7 @@ void LightUtils::setCfgAuto(bool autoLight)
 void LightUtils::setCfgFire(bool fire)
 {
     cfgFire = fire;
-    PreferencesManager::setInt("cfgFire", fire);
+    PreferencesManager::setBool("cfgFire", fire);
 }
 
 /**
@@ -570,7 +669,7 @@ void LightUtils::setCfgFire(bool fire)
 void LightUtils::setCfgLocalDisable(bool localDisable)
 {
     cfgLocalDisable = localDisable;
-    PreferencesManager::setInt("cfgLocalDisable", localDisable);
+    PreferencesManager::setBool("cfgLocalDisable", localDisable);
 }
 
 /**
@@ -580,7 +679,11 @@ void LightUtils::setCfgLocalDisable(bool localDisable)
  */
 uint8_t LightUtils::getCfgBrightness(void)
 {
-    return PreferencesManager::getInt("cfgBrightness", 255);
+    //Serial.println("getCfgBrightness called");
+    uint8_t brightness = PreferencesManager::getInt("cfgBrightness", 255);
+    //Serial.print("Preference value for cfgBrightness: ");
+    //Serial.println(brightness);
+    return brightness;
 }
 
 /**
@@ -673,4 +776,56 @@ uint16_t LightUtils::getNumberOfLeds(void)
 {
 
     return NUM_LEDS;
+}
+
+
+// New methods for protected LEDs
+
+/**
+ * Protect a range of LEDs from being updated by pattern generators
+ * and set them to a specific color.
+ * 
+ * @param start The starting index of the range (inclusive)
+ * @param end The ending index of the range (inclusive)
+ * @param color The color to set the protected LEDs to
+ */
+void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color) {
+    if (start >= NUM_LEDS || end >= NUM_LEDS || start > end) {
+        Serial.println("Invalid LED range specified for protection");
+        return;
+    }
+    
+    for (uint16_t i = start; i <= end; i++) {
+        protectedLeds[i] = true;
+        leds[i] = color;
+    }
+    
+    // Log the protection for debugging
+    /*
+    Serial.print("Protected LEDs ");
+    Serial.print(start);
+    Serial.print(" through ");
+    Serial.println(end);
+    */
+}
+
+/**
+ * Unprotect all LEDs, allowing them to be updated by pattern generators
+ */
+void LightUtils::unprotectAllLeds() {
+    for (uint16_t i = 0; i < NUM_LEDS; i++) {
+        protectedLeds[i] = false;
+    }
+    Serial.println("Unprotected all LEDs");
+}
+
+/**
+ * Check if an LED is protected
+ * 
+ * @param index The index of the LED to check
+ * @return true if the LED is protected, false otherwise
+ */
+bool LightUtils::isLedProtected(uint16_t index) {
+    if (index >= NUM_LEDS) return false;
+    return protectedLeds[index];
 }

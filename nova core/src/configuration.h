@@ -45,3 +45,27 @@
 */
 
 #define NOVANET_BAUD 921600
+
+// Game configuration constants
+#define SIMONA_INPUT_TIMEOUT_SECONDS 30
+#define SIMONA_DEBUG_TIMEOUT 0  // Set to 1 to enable timeout debug messages
+#define LEVELS_PER_ROUND_DEFAULT 1
+#define SIMONA_MAX_ROUNDS 8
+
+// LEDC (PWM) Configuration
+#define LEDC_FREQ_HZ      5000
+#define LEDC_RESOLUTION   8       // 8-bit resolution (0-255)
+#define LEDC_FULL_DUTY    255     // Full brightness duty cycle
+#define LEDC_DIM_DUTY     3      // 10% brightness duty cycle (255 * 0.10)
+
+#define LEDC_CHANNEL_RED      0
+#define LEDC_CHANNEL_GREEN    1
+#define LEDC_CHANNEL_BLUE     2
+#define LEDC_CHANNEL_YELLOW   3
+#define LEDC_CHANNEL_RESET     4
+
+// RMT MIDI Output Configuration
+#define RMT_BIT_DURATION_TICKS 2560  // Nova core-specific MIDI timing
+
+// Debug configurations
+#define DEBUG_STARS_ENABLED 0  // Set to 0 to disable Star debug messages in serial console
