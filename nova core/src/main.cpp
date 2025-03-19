@@ -5,7 +5,7 @@
 #include <LittleFS.h>
 #include "FS.h"
 
-//#include "OneButton.h"
+// #include "OneButton.h"
 
 #include <DNSServer.h>
 #include <WiFi.h>
@@ -21,7 +21,7 @@
 #include "LightUtils.h"
 #include "output/Star.h"
 #include "output/StarSequence.h"
-#include "output/NovaNow.h"  // Updated path
+#include "output/NovaNow.h" // Updated path
 #include "Web.h"
 #include "utilities/PreferencesManager.h"
 #include "fileSystemHelper.h"
@@ -30,7 +30,7 @@
 #include "utilities/utilities.h"
 
 #include "Simona.h"
-#include "midi/MIDIControl.hpp"  // Updated path to MIDI module
+#include "midi/MIDIControl.hpp" // Updated path to MIDI module
 #include <MIDI.h>
 #include "wifi_config.h"
 
@@ -104,147 +104,155 @@ void WiFiEvent(WiFiEvent_t event)
 }
 
 // Function to initialize LED with PWM
-void initLedPWM(uint8_t pin, uint8_t channel) {
+void initLedPWM(uint8_t pin, uint8_t channel)
+{
     ledcSetup(channel, LEDC_FREQ_HZ, LEDC_RESOLUTION);
     ledcAttachPin(pin, channel);
     ledcWrite(channel, LEDC_FULL_DUTY); // Initialize to full brightness (on state)
-  }
+}
 
 // Global game objects
-Simona* simona = nullptr;
+Simona *simona = nullptr;
 
 void setup()
 {
-  Serial.begin(921600);
-  delay(2000); // Give serial interface time to connect
-  Serial.println("");
-  Serial.println("NOVA: CORE");
-  Serial.print("setup() is running on core ");
-  Serial.println(xPortGetCoreID());
+    Serial.begin(921600);
+    delay(2000); // Give serial interface time to connect
+    Serial.println("");
+    Serial.println("NOVA: CORE");
+    Serial.print("setup() is running on core ");
+    Serial.println(xPortGetCoreID());
 
-  Serial.setDebugOutput(true);
+    Serial.setDebugOutput(true);
 
-  PreferencesManager::begin(); // Move this to the start
+    PreferencesManager::begin(); // Move this to the start
 
-  if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED))
-  {
-    Serial.println("LITTLEFS Mount Failed");
-    return;
-  }
-  else
-  {
-    Serial.println("LITTLEFS Mount Success");
+    if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED))
+    {
+        Serial.println("LITTLEFS Mount Failed");
+        return;
+    }
+    else
+    {
+        Serial.println("LITTLEFS Mount Success");
 
-    listDir(LittleFS, "/", 0);
-  }
-  
-  Serial.println("Setting up Serial2");
-  Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
+        listDir(LittleFS, "/", 0);
+    }
 
-  Serial.println("Pin Directions");
-  pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
+    Serial.println("Setting up Serial2");
+    Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
 
-  pinMode(BUTTON_RED_OUT, OUTPUT);
-  pinMode(BUTTON_GREEN_OUT, OUTPUT);
-  pinMode(BUTTON_BLUE_OUT, OUTPUT);
-  pinMode(BUTTON_YELLOW_OUT, OUTPUT);
-  pinMode(BUTTON_WHITE_OUT, OUTPUT);
+    Serial.println("Pin Directions");
+    pinMode(ENABLE_DEVICE_PIN, INPUT_PULLDOWN);
 
-  initLedPWM(BUTTON_RED_OUT, LEDC_CHANNEL_RED);
-  initLedPWM(BUTTON_GREEN_OUT, LEDC_CHANNEL_GREEN);
-  initLedPWM(BUTTON_BLUE_OUT, LEDC_CHANNEL_BLUE);
-  initLedPWM(BUTTON_YELLOW_OUT, LEDC_CHANNEL_YELLOW);
-  initLedPWM(BUTTON_WHITE_OUT, LEDC_CHANNEL_RESET);
+    pinMode(BUTTON_RED_OUT, OUTPUT);
+    pinMode(BUTTON_GREEN_OUT, OUTPUT);
+    pinMode(BUTTON_BLUE_OUT, OUTPUT);
+    pinMode(BUTTON_YELLOW_OUT, OUTPUT);
+    pinMode(BUTTON_WHITE_OUT, OUTPUT);
 
-  randomSeed(esp_random()); // Seed the random number generator with more entropy
+    initLedPWM(BUTTON_RED_OUT, LEDC_CHANNEL_RED);
+    initLedPWM(BUTTON_GREEN_OUT, LEDC_CHANNEL_GREEN);
+    initLedPWM(BUTTON_BLUE_OUT, LEDC_CHANNEL_BLUE);
+    initLedPWM(BUTTON_YELLOW_OUT, LEDC_CHANNEL_YELLOW);
+    initLedPWM(BUTTON_WHITE_OUT, LEDC_CHANNEL_RESET);
 
-  initializeMIDI();
+    randomSeed(esp_random()); // Seed the random number generator with more entropy
 
-  Serial.println("Set clock of I2C interface to 0.4mhz");
-  Wire.begin();
-  
-  Wire.setClock(400000UL); // 400khz
+    initializeMIDI();
 
-  Serial.println("new NovaIO");
-  novaIO = new NovaIO();
+    Serial.println("Set clock of I2C interface to 0.4mhz");
+    Wire.begin();
 
-  Serial.println("new Enable");
-  enable = new Enable();
+    Wire.setClock(400000UL); // 400khz
 
-  Serial.println("new Star");
-  star = new Star();
+    Serial.println("new NovaIO");
+    novaIO = new NovaIO();
 
-  Serial.println("new Ambient");
-  ambient = new Ambient();
+    Serial.println("new Enable");
+    enable = new Enable();
 
-  Serial.println("new LightUtils");
-  lightUtils = new LightUtils();
+    Serial.println("new Star");
+    star = new Star();
 
-  Serial.println("new Star Sequence");
-  starSequence = new StarSequence();
+    Serial.println("new Ambient");
+    ambient = new Ambient();
 
-  String apName = "NovaCore_" + getLastFourOfMac();
+    Serial.println("new LightUtils");
+    lightUtils = new LightUtils();
 
-  // Set WiFi mode to WIFI_AP_STA for simultaneous AP and STA mode
-  WiFi.mode(WIFI_AP_STA);
+    Serial.println("new Star Sequence");
+    starSequence = new StarSequence();
 
-  WiFi.softAP(apName.c_str(), "scubadandy");
-  WiFi.setSleep(false); // Disable power saving on the wifi interface.
+    String apName = "NovaCore_" + getLastFourOfMac();
 
-  WiFi.onEvent(WiFiEvent);
+    // Set WiFi mode to WIFI_AP_STA for simultaneous AP and STA mode
+    WiFi.mode(WIFI_AP_STA);
 
-  // Initialize WiFiMulti and add access points from config
-  for (int i = 0; i < NETWORK_COUNT; i++) {
-      wifiMulti.addAP(networks[i].ssid, networks[i].password);
-  }
-  
-  // Attempt to connect to one of the networks
-  Serial.println("Connecting to WiFi...");
-  if (wifiMulti.run() == WL_CONNECTED) {
-      Serial.println("WiFi connected");
-      Serial.println("IP address: ");
-      Serial.println(WiFi.localIP());
-  }
+    WiFi.softAP(apName.c_str(), "scubadandy");
+    WiFi.setSleep(false); // Disable power saving on the wifi interface.
 
-  // Print network information
-  Serial.println("Device Information:");
-  Serial.print("MAC Address: ");
-  Serial.println(WiFi.macAddress());
-  Serial.print("AP Name: ");
-  Serial.println(apName);
-  Serial.print("AP IP Address: ");
-  Serial.println(WiFi.softAPIP());
-  Serial.print("STA IP Address: ");
-  Serial.println(WiFi.localIP());
-  Serial.print("Free Heap: ");
-  Serial.println(ESP.getFreeHeap());
-  Serial.print("CPU Frequency (MHz): ");
-  Serial.println(ESP.getCpuFreqMHz());
-  Serial.print("SDK Version: ");
-  Serial.println(ESP.getSdkVersion());
+    WiFi.onEvent(WiFiEvent);
 
-  dnsServer.start(53, "*", WiFi.softAPIP());
+    // Initialize WiFiMulti and add access points from config
+    for (int i = 0; i < NETWORK_COUNT; i++)
+    {
+        wifiMulti.addAP(networks[i].ssid, networks[i].password);
+    }
 
-  // Initialize Simona singleton
-  Simona::initInstance(buttons, leds, buttonColors, ledColors);
-  
-  // Initialize NovaNow for message handling
-  novaNowSetup();
+    if (0) // We don't need this at startup. We have a task that will turn it on.
+    {
+        // Attempt to connect to one of the networks
+        Serial.println("Connecting to WiFi...");
+        if (wifiMulti.run() == WL_CONNECTED)
+        {
+            Serial.println("WiFi connected");
+            Serial.println("IP address: ");
+            Serial.println(WiFi.localIP());
+        }
+    }
 
-  Serial.println("Setting up Webserver");
-  webSetup();
-  Serial.println("Setting up Webserver - Done");
+    // Print network information
+    Serial.println("Device Information:");
+    Serial.print("MAC Address: ");
+    Serial.println(WiFi.macAddress());
+    Serial.print("AP Name: ");
+    Serial.println(apName);
+    Serial.print("AP IP Address: ");
+    Serial.println(WiFi.softAPIP());
+    Serial.print("STA IP Address: ");
+    Serial.println(WiFi.localIP());
+    Serial.print("Free Heap: ");
+    Serial.println(ESP.getFreeHeap());
+    Serial.print("CPU Frequency (MHz): ");
+    Serial.println(ESP.getCpuFreqMHz());
+    Serial.print("SDK Version: ");
+    Serial.println(ESP.getSdkVersion());
 
-  // Create all tasks
-  taskSetup();
+    dnsServer.start(53, "*", WiFi.softAPIP());
 
-  Serial.println("Setup Complete");
+    // Initialize Simona singleton
+    Simona::initInstance(buttons, leds, buttonColors, ledColors);
+
+    // Initialize NovaNow for message handling
+    novaNowSetup();
+
+    Serial.println("Setting up Webserver");
+    webSetup();
+    Serial.println("Setting up Webserver - Done");
+
+    // Create all tasks
+    taskSetup();
+
+    Serial.println("Setup Complete");
+
+    playStartupMusic(); // New: play startup music (short, under 1.5 seconds)
 }
 
 void loop()
 {
-  /* Best not to have anything in this loop.
-      Everything should be in freeRTOS tasks
-  */
-  delay(1);
+    /* Best not to have anything in this loop.
+        Everything should be in freeRTOS tasks
+    */
+    delay(1);
 }
