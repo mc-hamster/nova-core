@@ -110,8 +110,8 @@ void Simona::runGameTask()
 
   static SimonaMessage simMsg = {};
 
-  while (true)
-  {
+  //while (true)
+  //{
     switch (stage)
     {
     case SIMONA_STAGE_WAITING:
@@ -472,28 +472,28 @@ void Simona::runGameTask()
     default:
       break;
     }
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-  }
+  //  vTaskDelay(10 / portTICK_PERIOD_MS);
+  //}
 }
 
 // In runButtonTask, change reset handling to trigger the reset stage.
 void Simona::runButtonTask()
 {
-  while (true)
-  {
+  //while (true)
+  //{
     // Only process button presses if game is enabled
-    if (GAME_ENABLED && novaIO->expansionDigitalRead(BUTTON_WHITE_IN))
+    if (GAME_ENABLED && novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
     {
       stage = SIMONA_STAGE_RESET; // Set the new reset stage.
-      while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN))
+      while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
       {
-        controlLed(BUTTON_WHITE_OUT, false);         // Turn on the reset LED.
+        controlLed(BUTTON_WHITE_OUT, true);         // Turn on the reset LED.
         vTaskDelay(10 / portTICK_PERIOD_MS); // wait for button release.
       }
-      controlLed(BUTTON_WHITE_OUT, true); // Turn on the reset LED.
+      controlLed(BUTTON_WHITE_OUT, false); // Turn on the reset LED.
       // Removed direct LED off call since reset logic handles it.
     }
     // ...existing code...
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-  }
+  //  vTaskDelay(10 / portTICK_PERIOD_MS);
+  //}
 }
