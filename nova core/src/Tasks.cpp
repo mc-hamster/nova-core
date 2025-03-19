@@ -39,6 +39,7 @@ void registerTaskForMonitoring(const char *name, UBaseType_t watermark, BaseType
 {
     if (numMonitoredTasks < MAX_MONITORED_TASKS)
     {
+        Serial.printf("Registering task for monitoring: '%s' (Initial Stack: %d bytes)\n", name, initialStackSize);
         taskStats[numMonitoredTasks].name = name;
         taskStats[numMonitoredTasks].stackHighWaterMark = watermark;
         taskStats[numMonitoredTasks].initialStackSize = initialStackSize;
@@ -80,9 +81,9 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 3 * 1024;
     else if (strcmp(name, "TaskEnable") == 0)
         initialStack = 3 * 1024;
-    else if (strcmp(name, "Game Task") == 0)
+    else if (strcmp(name, "gameTask") == 0)
         initialStack = 8 * 1024;
-    else if (strcmp(name, "Button Task") == 0)
+    else if (strcmp(name, "buttonTask") == 0)
         initialStack = 4 * 1024;
     else if (strcmp(name, "I2CMonitor") == 0)
         initialStack = 3 * 1024; // Updated to match new size
@@ -90,8 +91,11 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 4 * 1024;
     else if (strcmp(name, "TaskMonitor") == 0)
         initialStack = 4096;
-    else if (strcmp(name, "TaskWiFiConnection") == 0)
+    else if (strcmp(name, "TaskWiFiConnect") == 0)
         initialStack = 4 * 1024;
+    else {
+        Serial.printf("updateTaskStats: Unknown task '%s' encountered\n", name);
+    }
 
     registerTaskForMonitoring(name, watermark, coreId, initialStack);
 }
@@ -163,6 +167,7 @@ void TaskAmbient(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskAmbient is running");
     while (1)
@@ -170,7 +175,6 @@ void TaskAmbient(void *pvParameters)
         ambient->loop();
         vTaskDelay(pdMS_TO_TICKS(3));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -186,6 +190,7 @@ void TaskLightUtils(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskLightUtils is running");
     while (1)
@@ -193,7 +198,6 @@ void TaskLightUtils(void *pvParameters)
         lightUtils->loop();
         vTaskDelay(pdMS_TO_TICKS(3));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -209,6 +213,7 @@ void TaskEnable(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskEnable is running");
     while (1)
@@ -216,7 +221,6 @@ void TaskEnable(void *pvParameters)
         enable->loop();
         vTaskDelay(pdMS_TO_TICKS(50));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -232,6 +236,7 @@ void TaskWeb(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskWeb is running");
     while (1)
@@ -239,7 +244,6 @@ void TaskWeb(void *pvParameters)
         webLoop();
         vTaskDelay(pdMS_TO_TICKS(10));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -255,6 +259,7 @@ void TaskMDNS(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskMDNS is running");
     while (1)
@@ -262,7 +267,6 @@ void TaskMDNS(void *pvParameters)
         dnsServer.processNextRequest();
         vTaskDelay(pdMS_TO_TICKS(10));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -284,6 +288,7 @@ void TaskStars(void *pvParameters)
     uint32_t loopCounter = 0;
     uint32_t lastPrintTime = millis();
     uint32_t delayCounter = 0;
+    uint32_t lastExecutionTime = 0;
 
     while (1)
     {
@@ -323,7 +328,6 @@ void TaskStars(void *pvParameters)
             yield();
         }
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -340,6 +344,7 @@ void TaskStarSequence(void *pvParameters)
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
     Serial.println("TaskStarSequence is running");
+    uint32_t lastExecutionTime = 0;
 
     while (1)
     {
@@ -353,7 +358,6 @@ void TaskStarSequence(void *pvParameters)
             vTaskDelay(pdMS_TO_TICKS(10));
         }
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -368,6 +372,7 @@ void TaskWiFiConnection(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskWiFiConnection is running");
 
@@ -382,7 +387,6 @@ void TaskWiFiConnection(void *pvParameters)
             }
         }
         
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -398,11 +402,11 @@ void TaskWiFiConnection(void *pvParameters)
 void taskSetup()
 {
     Serial.println("Create gameTask");
-    xTaskCreate(gameTask, "Game Task", 8 * 1024, NULL, 3, NULL);
+    xTaskCreate(gameTask, "gameTask", 8 * 1024, NULL, 3, NULL);
     Serial.println("Create gameTask - Done");
 
     Serial.println("Create buttonTask");
-    xTaskCreate(buttonTask, "Button Task", 4096, NULL, 1, NULL);
+    xTaskCreate(buttonTask, "buttonTask", 4096, NULL, 1, NULL);
     Serial.println("Create buttonTask - Done");
 
     Serial.println("Create TaskEnable");
@@ -455,21 +459,20 @@ void gameTask(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;  // Moved outside the loop
 
     Serial.println("Game task is running");
 
     while (true)
     {
         Simona::getInstance()->runGameTask();
-
-        static uint32_t lastExecutionTime = 0;
-        if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
+        uint32_t currentTime = millis();
+        if (currentTime - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
             updateTaskStats(pcTaskName, uxHighWaterMark, xPortGetCoreID());
-            lastExecutionTime = millis();
+            lastExecutionTime = currentTime;
         }
-
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
@@ -479,21 +482,20 @@ void buttonTask(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;  // Moved outside the loop
 
     Serial.println("Button task is running");
 
     while (true)
     {
         Simona::getInstance()->runButtonTask();
-
-        static uint32_t lastExecutionTime = 0;
-        if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
+        uint32_t currentTime = millis();
+        if (currentTime - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
             updateTaskStats(pcTaskName, uxHighWaterMark, xPortGetCoreID());
-            lastExecutionTime = millis();
+            lastExecutionTime = currentTime;
         }
-
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }
@@ -503,6 +505,7 @@ void TaskI2CMonitor(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskI2CMonitor is running");
     while (1)
@@ -511,7 +514,6 @@ void TaskI2CMonitor(void *pvParameters)
         float utilization = novaIO->getI2CUtilization();
         Serial.printf("I2C Bus Utilization: %.2f%%\n", utilization);
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -528,6 +530,7 @@ void TaskNovaNow(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
+    uint32_t lastExecutionTime = 0;
 
     Serial.println("TaskNovaNow is running");
 
@@ -536,7 +539,6 @@ void TaskNovaNow(void *pvParameters)
         novaNowLoop();
         vTaskDelay(pdMS_TO_TICKS(5));
 
-        static uint32_t lastExecutionTime = 0;
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
