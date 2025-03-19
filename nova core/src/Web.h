@@ -30,11 +30,11 @@ public:
     CaptiveRequestHandler() {}
     virtual ~CaptiveRequestHandler() {}
 
-    bool canHandle(AsyncWebServerRequest *request) const override {
-        // Only handle GET requests with a reasonable size
-        return request->method() == HTTP_GET;
+    bool canHandle(AsyncWebServerRequest *request)
+    {
+      // request->addInterestingHeader("ANY");
+      return true;
     }
-
     void handleRequest(AsyncWebServerRequest *request) override {
         request->send(200, "text/html", "<!DOCTYPE html><html><head><title>NOVA</title></head><body><p>NOVA Web Interface</p></body></html>");
     }
