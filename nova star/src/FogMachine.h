@@ -13,11 +13,15 @@ public:
     uint32_t fogOutputOffMaxTime = 20 * 1000;
     uint32_t fogOutputOnMinTime = 200;
     uint32_t fogOutputOnMaxTime = 1000;
+    bool fogEnabled = false;
 
     void setFogOutputOffMinTime(uint32_t time);
     void setFogOutputOffMaxTime(uint32_t time);
     void setFogOutputOnMinTime(uint32_t time);
     void setFogOutputOnMaxTime(uint32_t time);
+    void setFogEnabled(bool enabled);
+
+    bool getFogEnabled();
 
     FogMachine();
 

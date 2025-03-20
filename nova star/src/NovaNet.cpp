@@ -162,6 +162,26 @@ void NovaNet::receiveProtobuf()
             fogMachine->setFogOutputOffMaxTime(received_msg.configAmnesia.fogOutputOffMaxTime);
         }
 
+        // Only update the fog enabled state if it differs from the current state
+        // This prevents unnecessary writes and state changes when the value hasn't changed
+        if (received_msg.configAmnesia.fogEnabled)
+        {
+            bool currentFogEnabled = fogMachine->getFogEnabled();
+            if (!currentFogEnabled) {
+                Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
+                fogMachine->setFogEnabled(true);
+            }
+        } 
+        else 
+        {
+            bool currentFogEnabled = fogMachine->getFogEnabled();
+            if (currentFogEnabled) {
+                Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
+                fogMachine->setFogEnabled(false);
+            }
+        }   
+
+
         if (0)
         {
             Serial.print("R: ");

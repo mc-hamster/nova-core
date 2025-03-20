@@ -32,7 +32,10 @@ DmxNet::DmxNet()
     which interrupt priority it should have. If you aren't sure which interrupt
     priority to use, you can use the macro `DMX_DEFAULT_INTR_FLAG` to set the
     interrupt to its default settings.*/
-  dmx_driver_install(dmxPort, DMX_DEFAULT_INTR_FLAGS);
+    dmx_config_t config = DMX_CONFIG_DEFAULT;
+    dmx_personality_t personalities[] = {};
+    int personality_count = 0;
+    dmx_driver_install(dmxPort, &config, personalities, personality_count);
   // Setup goes in here
 }
 
@@ -105,7 +108,7 @@ void DmxNet::loop()
   }
 
   /* Now we can transmit the DMX packet! */
-  dmx_send(dmxPort, DMX_PACKET_SIZE);
+  dmx_send(dmxPort);
 
   /* If we have no more work to do, we will wait until we are done sending our
     DMX packet. */
