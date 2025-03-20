@@ -67,7 +67,11 @@ void DmxNet::loop()
   }
   else if (now - lastUpdate >= 70)
   {
-    Serial.println("No novanet data received in 5 seconds, sending test data");
+    static unsigned long lastPrintTime = 0;
+    if (now - lastPrintTime >= 5000) {
+      Serial.println("DMX: No novanet data received in 5 seconds, sending internal lighting sequence.");
+      lastPrintTime = now;
+    }
 
     /* Increment every byte in our packet. Notice we don't increment the zeroeth
       byte, since that is our DMX start code. Then we must write our changes to

@@ -15,7 +15,7 @@ void TaskFogMachine(void *pvParameters);
 void setup()
 {
   Serial.begin(921600);
-  delay(500); // Give time for the serial monitor to connect
+  delay(5000); // Give time for the serial monitor to connect
   Serial.println("NOVA: STARBASE");
 
   pinMode(BLOWER_DUTY_PIN, OUTPUT);
@@ -63,11 +63,11 @@ void setup()
   novaIO->mcp_a.pinMode(FOG_POWER, OUTPUT);
   novaIO->mcp_a.pinMode(FOG_ACTIVATE, OUTPUT);
 
-  Serial.println("Fog Machine: Turning on power to the Fog Machine.");
-  novaIO->mcp_a.digitalWrite(FOG_POWER, HIGH);
+  Serial.println("Fog Machine: Turning off power to the Fog Machine.");
+  novaIO->mcp_a.digitalWrite(FOG_POWER, 0);
 
   Serial.println("Fog Machine: Ensuring the machine is not currently active.");
-  novaIO->mcp_a.digitalWrite(FOG_ACTIVATE, LOW);
+  novaIO->mcp_a.digitalWrite(FOG_ACTIVATE, 0);
 
   Serial.println("Create TaskNovaNet");
   xTaskCreate(&TaskNovaNet, "TaskNovaNet", 6 * 1024, NULL, 6, NULL);
@@ -126,6 +126,6 @@ void TaskFogMachine(void *pvParameters) // This is a task.
   {
     fogMachine->loop();
     // yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delay(10);
+    delay(1);
   }
 }
