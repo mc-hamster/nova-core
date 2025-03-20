@@ -23,6 +23,7 @@ message ConfigAmnesia {
   uint32 fogOutputOffMinTime = 3; // For the random output, what's the minumim value?
   uint32 fogOutputOffMaxTime = 4; // For the random output, what's the minumim value?
   uint32 fogActivateTime = 5; // Turn on the fog for this duration.
+  bool fogEnabled = 6; // Is the fog enabled?
 }
 
 // Enum for power devices

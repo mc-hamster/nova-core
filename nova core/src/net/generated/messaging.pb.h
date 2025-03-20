@@ -78,6 +78,7 @@ typedef struct _messaging_ConfigAmnesia {
     uint32_t fogOutputOffMinTime; /* For the random output, what's the minumim value? */
     uint32_t fogOutputOffMaxTime; /* For the random output, what's the minumim value? */
     uint32_t fogActivateTime; /* Turn on the fog for this duration. */
+    bool fogEnabled; /* Is the fog enabled? */
 } messaging_ConfigAmnesia;
 
 typedef struct _messaging_PowerRequest {
@@ -212,7 +213,7 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define messaging_DmxRequest_init_default        {{0, {0}}, 0}
-#define messaging_ConfigAmnesia_init_default     {0, 0, 0, 0, 0}
+#define messaging_ConfigAmnesia_init_default     {0, 0, 0, 0, 0, 0}
 #define messaging_PowerRequest_init_default      {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_default  {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_default {_messaging_ConfigurationQuery_MIN}
@@ -224,7 +225,7 @@ extern "C" {
 #define messaging_ErrorResponse_init_default     {{{NULL}, NULL}}
 #define messaging_Response_init_default          {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_default}}
 #define messaging_DmxRequest_init_zero           {{0, {0}}, 0}
-#define messaging_ConfigAmnesia_init_zero        {0, 0, 0, 0, 0}
+#define messaging_ConfigAmnesia_init_zero        {0, 0, 0, 0, 0, 0}
 #define messaging_PowerRequest_init_zero         {{{NULL}, NULL}, _messaging_PowerQuery_MIN}
 #define messaging_TelemetryRequest_init_zero     {_messaging_TelemetryQuery_MIN}
 #define messaging_ConfigurationRequest_init_zero {_messaging_ConfigurationQuery_MIN}
@@ -244,6 +245,7 @@ extern "C" {
 #define messaging_ConfigAmnesia_fogOutputOffMinTime_tag 3
 #define messaging_ConfigAmnesia_fogOutputOffMaxTime_tag 4
 #define messaging_ConfigAmnesia_fogActivateTime_tag 5
+#define messaging_ConfigAmnesia_fogEnabled_tag   6
 #define messaging_PowerRequest_devices_tag       1
 #define messaging_PowerRequest_query_tag         2
 #define messaging_TelemetryRequest_query_tag     1
@@ -288,7 +290,8 @@ X(a, STATIC,   SINGULAR, UINT32,   fogOutputOnMinTime,   1) \
 X(a, STATIC,   SINGULAR, UINT32,   fogOutputOnMaxTime,   2) \
 X(a, STATIC,   SINGULAR, UINT32,   fogOutputOffMinTime,   3) \
 X(a, STATIC,   SINGULAR, UINT32,   fogOutputOffMaxTime,   4) \
-X(a, STATIC,   SINGULAR, UINT32,   fogActivateTime,   5)
+X(a, STATIC,   SINGULAR, UINT32,   fogActivateTime,   5) \
+X(a, STATIC,   SINGULAR, BOOL,     fogEnabled,        6)
 #define messaging_ConfigAmnesia_CALLBACK NULL
 #define messaging_ConfigAmnesia_DEFAULT NULL
 
@@ -407,7 +410,7 @@ extern const pb_msgdesc_t messaging_Response_msg;
 /* messaging_TelemetryResponse_size depends on runtime parameters */
 /* messaging_ErrorResponse_size depends on runtime parameters */
 /* messaging_Response_size depends on runtime parameters */
-#define messaging_ConfigAmnesia_size             30
+#define messaging_ConfigAmnesia_size             32
 #define messaging_ConfigurationRequest_size      2
 #define messaging_ConfigurationResponse_size     8
 #define messaging_DmxRequest_size                517
