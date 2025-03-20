@@ -29,6 +29,11 @@ struct TaskStats
     uint32_t lastCPUMark;  // Time marker for CPU estimation
     uint32_t prevIdleTime; // Previous idle time for CPU estimation
     float cpuUsage;        // CPU usage as percentage
+    // New memory tracking fields
+    uint32_t peakHeapUsage;
+    uint32_t peakPsramUsage;
+    uint32_t lastHeapUsage;
+    uint32_t lastPsramUsage;
 };
 
 #define MAX_MONITORED_TASKS 15
@@ -48,6 +53,11 @@ void registerTaskForMonitoring(const char *name, UBaseType_t watermark, BaseType
         taskStats[numMonitoredTasks].lastCPUMark = millis();
         taskStats[numMonitoredTasks].prevIdleTime = 0;
         taskStats[numMonitoredTasks].cpuUsage = 0;
+        // Initialize new memory tracking fields
+        taskStats[numMonitoredTasks].peakHeapUsage = 0;
+        taskStats[numMonitoredTasks].peakPsramUsage = 0;
+        taskStats[numMonitoredTasks].lastHeapUsage = heap_caps_get_free_size(MALLOC_CAP_DEFAULT);
+        taskStats[numMonitoredTasks].lastPsramUsage = heap_caps_get_free_size(MALLOC_CAP_SPIRAM);
         numMonitoredTasks++;
     }
 }
@@ -115,9 +125,14 @@ void TaskMonitor(void *pvParameters)
         Serial.println("---------------    ----------  ------  -----  ----  ------");
         uint32_t currentTime = millis();
 
-        // Get heap statistics
+        // Get heap statistics for both internal and PSRAM memory
         multi_heap_info_t heapInfo;
+        multi_heap_info_t psramInfo;
         heap_caps_get_info(&heapInfo, MALLOC_CAP_DEFAULT);
+        heap_caps_get_info(&psramInfo, MALLOC_CAP_SPIRAM);
+
+        uint32_t currentHeapUsage = heap_caps_get_total_size(MALLOC_CAP_DEFAULT) - heap_caps_get_free_size(MALLOC_CAP_DEFAULT);
+        uint32_t currentPsramUsage = heap_caps_get_total_size(MALLOC_CAP_SPIRAM) - heap_caps_get_free_size(MALLOC_CAP_SPIRAM);
 
         for (uint8_t i = 0; i < numMonitoredTasks; i++)
         {
@@ -125,6 +140,18 @@ void TaskMonitor(void *pvParameters)
 
             // Calculate stack usage percentage
             float stackUsedPercent = 100.0 * ((taskStats[i].initialStackSize - taskStats[i].stackHighWaterMark) / (float)taskStats[i].initialStackSize);
+
+            // Update peak memory usage
+            if (currentHeapUsage > taskStats[i].peakHeapUsage) {
+                taskStats[i].peakHeapUsage = currentHeapUsage;
+            }
+            if (currentPsramUsage > taskStats[i].peakPsramUsage) {
+                taskStats[i].peakPsramUsage = currentPsramUsage;
+            }
+            
+            // Update last usage
+            taskStats[i].lastHeapUsage = currentHeapUsage;
+            taskStats[i].lastPsramUsage = currentPsramUsage;
 
             Serial.printf("%-16s  %6d B   %5d B  %3.0f%%    %d    %s\n",
                           taskStats[i].name,
@@ -137,13 +164,35 @@ void TaskMonitor(void *pvParameters)
 
         // Print memory statistics
         Serial.println("\n=== Memory Statistics ===");
-        Serial.printf("Total Free Heap: %u bytes\n", heap_caps_get_free_size(MALLOC_CAP_DEFAULT));
-        Serial.printf("Total Heap Size: %u bytes\n", heap_caps_get_total_size(MALLOC_CAP_DEFAULT));
-        Serial.printf("Minimum Free Heap: %u bytes\n", heap_caps_get_minimum_free_size(MALLOC_CAP_DEFAULT));
+        Serial.println("Internal Memory:");
+        Serial.printf("  Total Size: %u bytes\n", heap_caps_get_total_size(MALLOC_CAP_DEFAULT));
+        Serial.printf("  Free Size: %u bytes\n", heap_caps_get_free_size(MALLOC_CAP_DEFAULT));
+        Serial.printf("  Minimum Free Ever: %u bytes\n", heap_caps_get_minimum_free_size(MALLOC_CAP_DEFAULT));
+        Serial.printf("  Largest Free Block: %u bytes\n", heapInfo.largest_free_block);
+        float intFragmentation = 100.0f * (1.0f - (float)heapInfo.largest_free_block / heapInfo.total_free_bytes);
+        Serial.printf("  Fragmentation: %.2f%%\n", intFragmentation);
 
-        // Calculate heap fragmentation as ratio of largest free block to total free heap
-        float fragmentation = 100.0f * (1.0f - (float)heapInfo.largest_free_block / heapInfo.total_free_bytes);
-        Serial.printf("Heap Fragmentation: %.2f%%\n", fragmentation);
+        // Print PSRAM statistics if available
+        if (heap_caps_get_total_size(MALLOC_CAP_SPIRAM) > 0) {
+            Serial.println("\nPSRAM Memory:");
+            Serial.printf("  Total Size: %u bytes\n", heap_caps_get_total_size(MALLOC_CAP_SPIRAM));
+            Serial.printf("  Free Size: %u bytes\n", heap_caps_get_free_size(MALLOC_CAP_SPIRAM));
+            Serial.printf("  Minimum Free Ever: %u bytes\n", heap_caps_get_minimum_free_size(MALLOC_CAP_SPIRAM));
+            Serial.printf("  Largest Free Block: %u bytes\n", psramInfo.largest_free_block);
+            float psramFragmentation = 100.0f * (1.0f - (float)psramInfo.largest_free_block / psramInfo.total_free_bytes);
+            Serial.printf("  Fragmentation: %.2f%%\n", psramFragmentation);
+        }
+
+        // Print peak memory usage for each task
+        Serial.println("\n=== Peak Memory Usage ===");
+        Serial.println("Task Name          Heap Peak   PSRAM Peak");
+        Serial.println("---------------    ---------   ----------");
+        for (uint8_t i = 0; i < numMonitoredTasks; i++) {
+            Serial.printf("%-16s  %6u B    %6u B\n",
+                        taskStats[i].name,
+                        taskStats[i].peakHeapUsage,
+                        taskStats[i].peakPsramUsage);
+        }
 
         // Monitor our own stack
         uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
