@@ -249,7 +249,7 @@ void TaskWeb(void *pvParameters)
         webLoop();
         
         // Increased delay to give more time for network stack processing
-        vTaskDelay(pdMS_TO_TICKS(50));
+        vTaskDelay(pdMS_TO_TICKS(2));
         
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
@@ -398,7 +398,7 @@ void taskSetup()
     Serial.println("Create TaskEnable - Done");
 
     Serial.println("Create TaskWeb");
-    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 4, NULL);
+    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 3, NULL);
     Serial.println("Create TaskWeb - Done");
 
     Serial.println("Create TaskStars");
