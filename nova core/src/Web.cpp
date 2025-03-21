@@ -22,6 +22,9 @@ bool SIMONA_CHEAT_MODE = false;
 bool GAME_ENABLED = true;
 bool SEQUENCE_LOCAL_ECHO = true;
 
+// Fog power manual control IDs
+uint16_t fogPowerManual[12];
+
 void handleRequest(AsyncWebServerRequest *request)
 {
     AsyncResponseStream *response = request->beginResponseStream("text/html");
@@ -37,6 +40,7 @@ void handleRequest(AsyncWebServerRequest *request)
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
+uint16_t deviceInfoLabel; // Add declaration for device info label
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
@@ -540,6 +544,12 @@ void switchExample(Control *sender, int value)
     {
         lightUtils->setCfgCircularMode(sender->value.toInt());
     }
+    // Handle fog power manual toggles
+    else if (sender->id >= fogPowerManual[0] && sender->id <= fogPowerManual[11])
+    {
+        int starIndex = sender->id - fogPowerManual[0];
+        star->setFogEnabled(starIndex, sender->value.toInt() == 1);
+    }
     else if (sender->id == mainDrunktardSwitch)
     {
         PreferencesManager::setBool("cfgDrunktard", sender->value.toInt() == 1);
@@ -645,7 +655,7 @@ void webSetup()
 {
     // Load saved preferences for Simona settings
     SIMONA_CHEAT_MODE = PreferencesManager::getBool("simonaCheatMode", false);
-    GAME_ENABLED = PreferencesManager::getBool("gameEn", true);  // Shortened from simonaGameEnabled
+    GAME_ENABLED = PreferencesManager::getBool("gameEn", true); // Shortened from simonaGameEnabled
     SEQUENCE_LOCAL_ECHO = PreferencesManager::getBool("simonaSequenceLocalEcho", true);
 
     // Safely check if Simona is initialized before calling methods
@@ -737,7 +747,7 @@ void webSetup()
 
     // Add device info and uptime to System Info tab
     String deviceInfo = "MAC: " + WiFi.macAddress() + ", AP IP: " + WiFi.softAPIP().toString() + ", STA IP: " + WiFi.localIP().toString();
-    uint16_t deviceInfoLabel = ESPUI.addControl(ControlType::Label, "Device Info", deviceInfo, ControlColor::None, sysInfoTab);
+    deviceInfoLabel = ESPUI.addControl(ControlType::Label, "Device Info", deviceInfo, ControlColor::None, sysInfoTab);
 
     // Move uptime to System Info tab
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, sysInfoTab);
@@ -875,13 +885,40 @@ void webSetup()
 
     // Add reverse second row toggle
     lightingReverseSecondRow = ESPUI.addControl(ControlType::Switcher, "Reverse Second Row", String(lightUtils->getCfgReverseSecondRow()), ControlColor::Alizarin, lightingTab, &switchExample);
-    
+
     // Add circular mode toggle
     lightingCircularMode = ESPUI.addControl(ControlType::Switcher, "Circular Animation", String(lightUtils->getCfgCircularMode()), ControlColor::Alizarin, lightingTab, &switchExample);
     // Add tooltip explaining circular mode
     ESPUI.addControl(ControlType::Label, "", "Treats LEDs as arranged in a circle for animations", ControlColor::None, lightingCircularMode);
-    
+
     //--- Fog Tab ---
+
+    // Add Power - Manual section
+    uint16_t fogPowerManualPanel = ESPUI.addControl(ControlType::Label, "Power - Manual", "Manual Fog Control", ControlColor::Carrot, fogTab);
+
+    // Add 12 toggles for fog power manual control in a single vertical group
+    for (int i = 0; i < 12; i++)
+    {
+        char labelBuffer[32];
+        snprintf(labelBuffer, sizeof(labelBuffer), "Star %d", i + 1);
+        // First create the control without callback
+        uint16_t controlId = ESPUI.addControl(
+            ControlType::Switcher,
+            labelBuffer,
+            star->getFogEnabled(i) ? "1" : "0",
+            ControlColor::Carrot,
+            fogPowerManualPanel);
+
+        // Store the control ID
+        fogPowerManual[i] = controlId;
+
+        // Then set the callback
+        Control *control = ESPUI.getControl(controlId);
+        if (control)
+        {
+            control->callback = &switchExample;
+        }
+    }
 
     fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);
     ESPUI.addControl(Min, "", "2000", None, fogOutputOffMinTime);
@@ -952,7 +989,7 @@ void webLoop()
     static unsigned long oldTime = 0;
     static bool switchState = false;
     static const unsigned long UPDATE_INTERVAL = 1000; // Update every 1 second
-    static bool isUpdating = false;                    // Guard against recursive updates
+    static bool isUpdating = false;                    // Guard against recursion
     static SemaphoreHandle_t webMutex = xSemaphoreCreateMutex();
 
     // Rate limit updates and prevent recursion
@@ -996,6 +1033,15 @@ void webLoop()
         if (millisControl)
         {
             ESPUI.updateControlValue(controlMillis, formattedTime);
+        }
+
+        // Update device info with current IP addresses
+        if (deviceInfoLabel)
+        {
+            String updatedDeviceInfo = "MAC: " + WiFi.macAddress() + 
+                                      ", AP IP: " + WiFi.softAPIP().toString() + 
+                                      ", STA IP: " + WiFi.localIP().toString();
+            ESPUI.updateControlValue(deviceInfoLabel, updatedDeviceInfo);
         }
 
         // Get the Simona instance with null check
