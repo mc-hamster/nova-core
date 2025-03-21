@@ -68,11 +68,11 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
     // If task not found, try to determine its initial stack size
     UBaseType_t initialStack = 4096; // Default size
     if (strcmp(name, "TaskWeb") == 0)
-        initialStack = 8 * 1024;
+        initialStack = 16 * 1024;
     else if (strcmp(name, "TaskStars") == 0)
         initialStack = 6 * 1024;
     else if (strcmp(name, "TaskMDNS") == 0)
-        initialStack = 4 * 1024;
+        initialStack = 5 * 1024;
     else if (strcmp(name, "TaskAmbient") == 0)
         initialStack = 8 * 1024;
     else if (strcmp(name, "LightUtils") == 0)
@@ -238,12 +238,23 @@ void TaskWeb(void *pvParameters)
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
     uint32_t lastExecutionTime = 0;
 
-    Serial.println("TaskWeb is running");
+    // Log the task handle to identify it in memory dumps
+    uint32_t taskAddress = (uint32_t)xTaskHandle;
+    Serial.printf("TaskWeb is running on core %d with handle 0x%08x\n", xPortGetCoreID(), taskAddress);
+    
     while (1)
     {
+        // Check stack watermark before UI operations
+        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+        if (uxHighWaterMark < 1000) {
+            Serial.printf("WARNING: Low stack in TaskWeb before webLoop: %u bytes\n", uxHighWaterMark * 4);
+        }
+        
         webLoop();
-        vTaskDelay(pdMS_TO_TICKS(10));
-
+        
+        // Increased delay to give more time for network stack processing
+        vTaskDelay(pdMS_TO_TICKS(50));
+        
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -413,16 +424,18 @@ void taskSetup()
     xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 3, NULL);
     Serial.println("Create TaskEnable - Done");
 
+    // Increase TaskWeb stack size from 8K to 14K to prevent stack overflow
     Serial.println("Create TaskWeb");
-    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 4, NULL);
+    xTaskCreate(&TaskWeb, "TaskWeb", 16 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskWeb - Done");
 
     Serial.println("Create TaskStars");
     xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskStars - Done");
 
+    // Increase MDNS task stack size to handle DNS queries safely
     Serial.println("Create TaskMDNS");
-    xTaskCreate(&TaskMDNS, "TaskMDNS", 4 * 1024, NULL, 1, NULL);
+    xTaskCreate(&TaskMDNS, "TaskMDNS", 5 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskMDNS - Done");
 
     Serial.println("Create TaskAmbient");
@@ -449,8 +462,9 @@ void taskSetup()
     xTaskCreate(&TaskMonitor, "TaskMonitor", 4096, NULL, 1, NULL);
     Serial.println("Create TaskMonitor - Done");
 
+    // Increase WiFi Connection task stack size for better stability
     Serial.println("Create TaskWiFiConnection");
-    xTaskCreate(&TaskWiFiConnection, "TaskWiFiConnection", 4 * 1024, NULL, 1, NULL);
+    xTaskCreate(&TaskWiFiConnection, "TaskWiFiConnection", 5 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskWiFiConnection - Done");
 }
 
