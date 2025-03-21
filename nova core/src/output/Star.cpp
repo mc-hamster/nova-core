@@ -24,10 +24,7 @@ void Star::setupStar(void)
     Serial.println("Setting up stars");
     #endif
 
-    /*
-        Star 20 is special. That's the "all" star. 
-    */
-    for (uint32_t i = 0; i < 21; i++)
+    for (uint32_t i = 0; i < 20; i++)
     {
         cluster.stars[i].starState.boomerButtonState = BOOMER_IDLE;
         cluster.stars[i].pooferOutputState = 0;
@@ -39,6 +36,7 @@ void Star::setupStar(void)
         cluster.stars[i].net.cache_de = 0;
         cluster.stars[i].disableBoomer = false;
         cluster.stars[i].disablePoofer = false;
+        cluster.stars[i].fogEnabled = false;
     }
 
     cluster.stars[0].expander = 0;
@@ -240,16 +238,6 @@ void Star::setupStar(void)
     cluster.stars[19].net.expander = 7;
     cluster.stars[19].net.re = 6;
     cluster.stars[19].net.de = 7;
-
-    cluster.stars[20].expander = 255;
-    cluster.stars[20].blowerOutput = 255;
-    cluster.stars[20].fuelOutput = 255;
-    cluster.stars[20].igniterOutput = 255;
-    cluster.stars[20].pooferOutput = 255;
-    cluster.stars[20].blowerOutputDuty = 255;
-    //cluster.stars[20].net.expander = 7;
-    //cluster.stars[20].net.re = 6;
-    //cluster.stars[20].net.de = 7;
 
     #if DEBUG_STARS_ENABLED
     Serial.println("Star setup complete");
@@ -909,6 +897,29 @@ void Star::manualFuel(uint8_t star, bool state)
 void Star::manualZap(uint8_t star, bool state)
 {
     novaIO->mcp_digitalWrite(cluster.stars[star].igniterOutput, state, cluster.stars[star].expander);
+}
+
+void Star::setFogEnabled(uint8_t star, bool enabled) {
+    if (star >= 20) {
+        #if DEBUG_STARS_ENABLED
+        Serial.println("Star::setFogEnabled() - star is out of range");
+        #endif
+        return;
+    }
+    cluster.stars[star].fogEnabled = enabled;
+    #if DEBUG_STARS_ENABLED
+    Serial.printf("Star %d fog %s\n", star, enabled ? "enabled" : "disabled");
+    #endif
+}
+
+bool Star::getFogEnabled(uint8_t star) {
+    if (star >= 20) {
+        #if DEBUG_STARS_ENABLED
+        Serial.println("Star::getFogEnabled() - star is out of range");
+        #endif
+        return false;
+    }
+    return cluster.stars[star].fogEnabled;
 }
 
 uint32_t Star::whatBoomerFullTime()

@@ -57,6 +57,7 @@ private:
     {
         bool disablePoofer;
         bool disableBoomer;
+        bool fogEnabled;
         starStates starState;
         boomerData boomer;
         novaNet net;
@@ -74,7 +75,7 @@ private:
     {
         // char groupName[20];
         //         int numSensors;
-        star stars[21]; // Array of stars structs
+        star stars[20]; // Array of stars structs
     };
 
     starCluster cluster;
@@ -180,6 +181,9 @@ public:
     void manualZap(uint8_t star, bool state);
 
     uint32_t whatBoomerFullTime();
+
+    void setFogEnabled(uint8_t star, bool enabled);
+    bool getFogEnabled(uint8_t star);
 };
 
 extern Star *star;
