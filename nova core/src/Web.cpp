@@ -44,7 +44,6 @@ uint16_t deviceInfoLabel; // Add declaration for device info label
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
-uint16_t lightingCircularMode; // Added missing declaration here
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
 
@@ -539,11 +538,6 @@ void switchExample(Control *sender, int value)
     {
         lightUtils->setCfgReverseSecondRow(sender->value.toInt());
     }
-    // Add handler for circular mode toggle
-    else if (sender->id == lightingCircularMode)
-    {
-        lightUtils->setCfgCircularMode(sender->value.toInt());
-    }
     // Handle fog power manual toggles
     else if (sender->id >= fogPowerManual[0] && sender->id <= fogPowerManual[11])
     {
@@ -885,11 +879,6 @@ void webSetup()
 
     // Add reverse second row toggle
     lightingReverseSecondRow = ESPUI.addControl(ControlType::Switcher, "Reverse Second Row", String(lightUtils->getCfgReverseSecondRow()), ControlColor::Alizarin, lightingTab, &switchExample);
-
-    // Add circular mode toggle
-    lightingCircularMode = ESPUI.addControl(ControlType::Switcher, "Circular Animation", String(lightUtils->getCfgCircularMode()), ControlColor::Alizarin, lightingTab, &switchExample);
-    // Add tooltip explaining circular mode
-    ESPUI.addControl(ControlType::Label, "", "Treats LEDs as arranged in a circle for animations", ControlColor::None, lightingCircularMode);
 
     //--- Fog Tab ---
 
