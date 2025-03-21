@@ -61,7 +61,7 @@ uint16_t boomerD1, boomerD2, boomerD3;
 uint16_t starManualPoof, starManualBlow, starManuallowFuel, starManualFuel, starManualZap, starManualSelect;
 uint8_t starManualSelectValue = 0;
 
-uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft, seqAllStarBoom;
+uint16_t seqBoomAll, seqBoomLeftRight, seqBoomRightLeft;
 
 uint16_t starSeq_SEQ_POOF_END_TO_END, starSeq_SEQ_BOOMER_LEFT_TO_RIGHT, starSeq_SEQ_BOOMER_RIGHT_TO_LEFT, starSeq_SEQ_BOOM_FAST, starSeq_SEQ_BOOM_WAVE_IN, starSeq_SEQ_OFF;
 uint16_t starSeq_SEQ_BOOM_POOF;
@@ -319,10 +319,6 @@ void buttonCallback(Control *sender, int type)
                 star->boom(i);
             }
         }
-    }
-    else if (sender->id == seqAllStarBoom)
-    {
-        star->boom(20);
     }
     else if (sender->id == seqBoomLeftRight)
     {
@@ -812,7 +808,6 @@ void webSetup()
     }
     //---- Tab 3 (Sequences) -----
     seqBoomAll = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
-    seqAllStarBoom = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All (Virtual Star)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomLeftRight = ESPUI.addControl(ControlType::Button, "Boomers", "L to R (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
     seqBoomRightLeft = ESPUI.addControl(ControlType::Button, "Boomers", "R to L (100ms)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
 
