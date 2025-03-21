@@ -38,7 +38,8 @@ void Ambient::loop()
     static uint32_t amnesiaLastTime = 0;
     bool sendAmnesia = false;
 
-    if (currentTime - amnesiaLastTime >= 5 * 1000)
+
+    if (currentTime - amnesiaLastTime >= 1 * 1000)
     {
         sendAmnesia = true;
         amnesiaLastTime = currentTime;
@@ -145,7 +146,7 @@ void Ambient::loop()
         sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia);
     }
 
-    if (currentTime - lastExecutionTime >= 120 * 1000)
+    if (currentTime - lastExecutionTime >= 10 * 1000)
     {
         // Calculate average frame time
         unsigned long avgFrameTime = totalFrameTime / numFrames;
