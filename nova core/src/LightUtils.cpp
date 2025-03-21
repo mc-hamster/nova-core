@@ -203,7 +203,7 @@ void LightUtils::loop()
         FillLEDsFromPaletteColors(startIndex);
     }
 
-    FastLED.setBrightness(cfgBrightness);
+    FastLED.setBrightness(getCfgBrightness());
 
     if (!getCfgLocalDisable())
     {
@@ -582,7 +582,7 @@ void LightUtils::Fire2012WithPalette(void)
 void LightUtils::setCfgBrightness(uint8_t brightness)
 {
     Serial.println("set brightness");
-    cfgBrightness = brightness;
+    //cfgBrightness = brightness;
     PreferencesManager::setInt("cfgBrightness", brightness);
 }
 
