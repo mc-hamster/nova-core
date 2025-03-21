@@ -1,5 +1,4 @@
 #include "Web.h"
-#include <DNSServer.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
@@ -30,9 +29,12 @@ void handleRequest(AsyncWebServerRequest *request)
     AsyncResponseStream *response = request->beginResponseStream("text/html");
     response->print("<!DOCTYPE html><html><head><title>Captive Portal - NOVA</title></head><body>");
     response->print("<p>NOVA</p>");
-    response->print("<p>This is our captive portal front page.</p>");
-    response->printf("<p>You were trying to reach: http://%s%s</p>", request->host().c_str(), request->url().c_str());
-    response->printf("<p>Try opening <a href='http://%s'>this link</a> instead</p>", WiFi.softAPIP().toString().c_str());
+    if (0)
+    {
+        response->print("<p>This is our captive portal front page.</p>");
+        response->printf("<p>You were trying to reach: http://%s%s</p>", request->host().c_str(), request->url().c_str());
+        response->printf("<p>Try opening <a href='http://%s'>this link</a> instead</p>", WiFi.softAPIP().toString().c_str());
+    }
     response->print("</body></html>");
     request->send(response);
 }
@@ -40,7 +42,6 @@ void handleRequest(AsyncWebServerRequest *request)
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
-uint16_t deviceInfoLabel; // Add declaration for device info label
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
@@ -739,9 +740,6 @@ void webSetup()
         ControlColor::None,
         simonaSequenceLocalEchoSwitch);
 
-    // Add device info and uptime to System Info tab
-    String deviceInfo = "MAC: " + WiFi.macAddress() + ", AP IP: " + WiFi.softAPIP().toString() + ", STA IP: " + WiFi.localIP().toString();
-    deviceInfoLabel = ESPUI.addControl(ControlType::Label, "Device Info", deviceInfo, ControlColor::None, sysInfoTab);
 
     // Move uptime to System Info tab
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, sysInfoTab);
@@ -802,15 +800,17 @@ void webSetup()
     ESPUI.addControl(ControlType::Option, "Star 10", "9", ControlColor::Alizarin, starManualSelect);
     ESPUI.addControl(ControlType::Option, "Star 11", "10", ControlColor::Alizarin, starManualSelect);
     ESPUI.addControl(ControlType::Option, "Star 12", "11", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 13", "12", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 14", "13", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 15", "14", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 16", "15", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 17", "16", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 18", "17", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 19", "18", ControlColor::Alizarin, starManualSelect);
-    ESPUI.addControl(ControlType::Option, "Star 20", "19", ControlColor::Alizarin, starManualSelect);
-
+    if (0)
+    {
+        ESPUI.addControl(ControlType::Option, "Star 13", "12", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 14", "13", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 15", "14", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 16", "15", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 17", "16", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 18", "17", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 19", "18", ControlColor::Alizarin, starManualSelect);
+        ESPUI.addControl(ControlType::Option, "Star 20", "19", ControlColor::Alizarin, starManualSelect);
+    }
     //---- Tab 3 (Sequences) -----
     seqBoomAll = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All", ControlColor::Peterriver, sequencesTab, &buttonCallback);
     seqAllStarBoom = ESPUI.addControl(ControlType::Button, "Direct Boomers", "All (Virtual Star)", ControlColor::Peterriver, seqBoomAll, &buttonCallback);
@@ -882,30 +882,29 @@ void webSetup()
 
     //--- Fog Tab ---
 
-    // Add Power - Manual section
-    uint16_t fogPowerManualPanel = ESPUI.addControl(ControlType::Label, "Power - Manual", "Manual Fog Control", ControlColor::Carrot, fogTab);
-
-    // Add 12 toggles for fog power manual control in a single vertical group
-    for (int i = 0; i < 12; i++)
+    if (1)
     {
-        char labelBuffer[32];
-        snprintf(labelBuffer, sizeof(labelBuffer), "Star %d", i + 1);
-        // First create the control without callback
-        uint16_t controlId = ESPUI.addControl(
-            ControlType::Switcher,
-            labelBuffer,
-            star->getFogEnabled(i) ? "1" : "0",
-            ControlColor::Carrot,
-            fogPowerManualPanel);
+        // Add Power - Manual section
+        uint16_t fogPowerManualPanel = ESPUI.addControl(ControlType::Label, "Power - Manual", "Manual Fog Control", ControlColor::Carrot, fogTab);
 
-        // Store the control ID
-        fogPowerManual[i] = controlId;
-
-        // Then set the callback
-        Control *control = ESPUI.getControl(controlId);
-        if (control)
+        // Add 12 toggles for fog power manual control in a single vertical group
+        for (int i = 0; i < 12; i++)
         {
-            control->callback = &switchExample;
+            char labelBuffer[12];
+            snprintf(labelBuffer, sizeof(labelBuffer), "Star %d", i + 1);
+            // First create the control without callback
+            uint16_t controlId = ESPUI.addControl(
+                ControlType::Switcher,
+                labelBuffer,
+                star->getFogEnabled(i) ? "1" : "0",
+                ControlColor::Carrot,
+                fogPowerManualPanel, &switchExample);
+
+            ESPUI.setVertical(controlId);
+
+            // Store the control ID
+            fogPowerManual[i] = controlId;
+
         }
     }
 
@@ -941,9 +940,9 @@ void webSetup()
     // ESPUI.server->addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER); // only when requested from AP
     // ESPUI->server->begin();
 
-    ESPUI.captivePortal = true;
+    ESPUI.captivePortal = false; // Disable captive portal
 
-    ESPUI.list(); // List all files on LittleFS, for info
+    //ESPUI.list(); // List all files on LittleFS, for info
     ESPUI.begin("NOVA Core");
 }
 
@@ -1022,15 +1021,6 @@ void webLoop()
         if (millisControl)
         {
             ESPUI.updateControlValue(controlMillis, formattedTime);
-        }
-
-        // Update device info with current IP addresses
-        if (deviceInfoLabel)
-        {
-            String updatedDeviceInfo = "MAC: " + WiFi.macAddress() + 
-                                      ", AP IP: " + WiFi.softAPIP().toString() + 
-                                      ", STA IP: " + WiFi.localIP().toString();
-            ESPUI.updateControlValue(deviceInfoLabel, updatedDeviceInfo);
         }
 
         // Get the Simona instance with null check
