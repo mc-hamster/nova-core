@@ -4,7 +4,6 @@
 #include "Enable.h"
 #include "output/StarSequence.h"
 #include "Web.h"
-#include <DNSServer.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
 #include "output/Star.h"
@@ -71,8 +70,6 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 16 * 1024;
     else if (strcmp(name, "TaskStars") == 0)
         initialStack = 6 * 1024;
-    else if (strcmp(name, "TaskMDNS") == 0)
-        initialStack = 5 * 1024;
     else if (strcmp(name, "TaskAmbient") == 0)
         initialStack = 8 * 1024;
     else if (strcmp(name, "LightUtils") == 0)
@@ -157,7 +154,6 @@ extern Ambient *ambient;
 extern LightUtils *lightUtils;
 extern Enable *enable;
 extern StarSequence *starSequence;
-extern DNSServer dnsServer;
 extern Star *star;
 extern NovaIO *novaIO;
 
@@ -255,29 +251,6 @@ void TaskWeb(void *pvParameters)
         // Increased delay to give more time for network stack processing
         vTaskDelay(pdMS_TO_TICKS(50));
         
-        if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
-        {
-            uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-            updateTaskStats(pcTaskName, uxHighWaterMark, xPortGetCoreID());
-            lastExecutionTime = millis();
-        }
-    }
-}
-
-void TaskMDNS(void *pvParameters)
-{
-    (void)pvParameters;
-    UBaseType_t uxHighWaterMark;
-    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-    const char *pcTaskName = pcTaskGetName(xTaskHandle);
-    uint32_t lastExecutionTime = 0;
-
-    Serial.println("TaskMDNS is running");
-    while (1)
-    {
-        dnsServer.processNextRequest();
-        vTaskDelay(pdMS_TO_TICKS(10));
-
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -432,11 +405,6 @@ void taskSetup()
     Serial.println("Create TaskStars");
     xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskStars - Done");
-
-    // Increase MDNS task stack size to handle DNS queries safely
-    Serial.println("Create TaskMDNS");
-    xTaskCreate(&TaskMDNS, "TaskMDNS", 5 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskMDNS - Done");
 
     Serial.println("Create TaskAmbient");
     xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 5, NULL);
