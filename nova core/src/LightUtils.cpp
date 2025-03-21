@@ -581,7 +581,7 @@ void LightUtils::Fire2012WithPalette(void)
  */
 void LightUtils::setCfgBrightness(uint8_t brightness)
 {
-    Serial.println("set brightness");
+    //Serial.println("set brightness");
     cfgBrightness = brightness;
     PreferencesManager::setInt("cfgBrightness", brightness);
 }

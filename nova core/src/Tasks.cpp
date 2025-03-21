@@ -67,7 +67,7 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
     // If task not found, try to determine its initial stack size
     UBaseType_t initialStack = 4096; // Default size
     if (strcmp(name, "TaskWeb") == 0)
-        initialStack = 16 * 1024;
+        initialStack = 8 * 1024;
     else if (strcmp(name, "TaskStars") == 0)
         initialStack = 6 * 1024;
     else if (strcmp(name, "TaskAmbient") == 0)
@@ -81,7 +81,7 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
     else if (strcmp(name, "gameTask") == 0)
         initialStack = 8 * 1024;
     else if (strcmp(name, "buttonTask") == 0)
-        initialStack = 4 * 1024;
+        initialStack = 3 * 1024;
     else if (strcmp(name, "I2CMonitor") == 0)
         initialStack = 3 * 1024; // Updated to match new size
     else if (strcmp(name, "NovaNow") == 0)
@@ -89,7 +89,7 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
     else if (strcmp(name, "TaskMonitor") == 0)
         initialStack = 4096;
     else if (strcmp(name, "TaskWiFiConnect") == 0)
-        initialStack = 4 * 1024;
+        initialStack = 5 * 1024;
     else {
         Serial.printf("updateTaskStats: Unknown task '%s' encountered\n", name);
     }
@@ -390,16 +390,15 @@ void taskSetup()
     Serial.println("Create gameTask - Done");
 
     Serial.println("Create buttonTask");
-    xTaskCreate(buttonTask, "buttonTask", 4096, NULL, 1, NULL);
+    xTaskCreate(buttonTask, "buttonTask", 3 * 1024, NULL, 1, NULL);
     Serial.println("Create buttonTask - Done");
 
     Serial.println("Create TaskEnable");
     xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 3, NULL);
     Serial.println("Create TaskEnable - Done");
 
-    // Increase TaskWeb stack size from 8K to 14K to prevent stack overflow
     Serial.println("Create TaskWeb");
-    xTaskCreate(&TaskWeb, "TaskWeb", 16 * 1024, NULL, 4, NULL);
+    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskWeb - Done");
 
     Serial.println("Create TaskStars");

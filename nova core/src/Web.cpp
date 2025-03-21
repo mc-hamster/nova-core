@@ -740,7 +740,6 @@ void webSetup()
         ControlColor::None,
         simonaSequenceLocalEchoSwitch);
 
-
     // Move uptime to System Info tab
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, sysInfoTab);
 
@@ -904,7 +903,6 @@ void webSetup()
 
             // Store the control ID
             fogPowerManual[i] = controlId;
-
         }
     }
 
@@ -942,7 +940,7 @@ void webSetup()
 
     ESPUI.captivePortal = false; // Disable captive portal
 
-    //ESPUI.list(); // List all files on LittleFS, for info
+    // ESPUI.list(); // List all files on LittleFS, for info
     ESPUI.begin("NOVA Core");
 }
 
