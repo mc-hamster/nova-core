@@ -482,16 +482,33 @@ void Simona::runButtonTask()
   //while (true)
   //{
     // Only process button presses if game is enabled
-    if (GAME_ENABLED && novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
+    if (GAME_ENABLED)
     {
-      stage = SIMONA_STAGE_RESET; // Set the new reset stage.
-      while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
+      // Take 5 readings and verify they're all LOW
+      const int requiredReadings = 5;
+      bool allLow = true;
+      
+      for (int i = 0; i < requiredReadings; i++)
       {
-        controlLed(BUTTON_WHITE_OUT, true);         // Turn on the reset LED.
-        vTaskDelay(10 / portTICK_PERIOD_MS); // wait for button release.
+        if (novaIO->expansionDigitalRead(BUTTON_WHITE_IN) != LOW)
+        {
+          allLow = false;
+          break;
+        }
+        vTaskDelay(1 / portTICK_PERIOD_MS); // Small delay between readings
       }
-      controlLed(BUTTON_WHITE_OUT, false); // Turn on the reset LED.
-      // Removed direct LED off call since reset logic handles it.
+
+      if (allLow)  // Only proceed if all readings were LOW
+      {
+        Serial.println("White button pressed - resetting game... runButtonTask()");
+        stage = SIMONA_STAGE_RESET; // Set the new reset stage.
+        while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
+        {
+          controlLed(BUTTON_WHITE_OUT, true);         // Turn on the reset LED.
+          vTaskDelay(10 / portTICK_PERIOD_MS); // wait for button release.
+        }
+        controlLed(BUTTON_WHITE_OUT, false); // Turn on the reset LED.
+      }
     }
     // ...existing code...
   //  vTaskDelay(10 / portTICK_PERIOD_MS);
