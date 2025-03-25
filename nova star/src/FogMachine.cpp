@@ -20,7 +20,7 @@ void FogMachine::loop()
     // Safety check: Disable fog machine if no heartbeat received within 5 seconds
     if (getTimeSinceLastAmnesiaMessage() > 5 * 1000)
     {
-        novaIO->mcpA_digitalWrite(FOG_POWER, 0);
+        novaIO->mcpA_digitalWrite(FOG_POWER, false);
         static uint32_t lastMessagePrintTime = 0;
         if (millis() - lastMessagePrintTime >= 5000)
         {
@@ -86,6 +86,7 @@ void FogMachine::setFogOutputOnMaxTime(uint32_t time)
 void FogMachine::setFogEnabled(bool enabled)
 {
   fogEnabled = enabled;
+  novaIO->mcp_a.digitalWrite(FOG_POWER, enabled);
 }
 
 bool FogMachine::getFogEnabled()

@@ -7,7 +7,7 @@
 #include "../LightUtils.h" // Include LightUtils for LED control
 
 static uint32_t currentMessageId = 0;
-static bool messageOutput = false;
+//static bool messageOutput = false;
 
 // Message queue for non-blocking processing
 static std::queue<SimonaMessage> messageQueue;
@@ -649,7 +649,7 @@ static void updateWaitingAnimation()
 
 void novaNowSetup()
 {
-    messageOutput = PreferencesManager::getBool("messageOutput", true);
+    //messageOutput = PreferencesManager::getBool("messageOutput", true);
     Serial.println("NovaNow initialized");
 }
 
@@ -662,7 +662,7 @@ void novaNowLoop()
 
     if (millis() - lastPrefsCheck >= PREFS_CHECK_INTERVAL)
     {
-        messageOutput = PreferencesManager::getBool("messageOutput", true);
+        //messageOutput = PreferencesManager::getBool("messageOutput", true);
         lastPrefsCheck = millis();
     }
 

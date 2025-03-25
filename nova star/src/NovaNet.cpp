@@ -130,71 +130,74 @@ void NovaNet::loop()
         // Handle the DMX request
         messaging_DmxRequest received_dmx_request = received_msg.request_payload.dmx_request;
 
-        if (received_msg.configAmnesia.fogActivateTime)
-        {
-            Serial.printf("Received Fog activate time: %d\n", received_msg.configAmnesia.fogActivateTime);
-            Serial.println("WARNING: fogActivateTime received but this is not implemented");
-        }
-
-        bool timingChanged = false;
-        if (received_msg.configAmnesia.fogOutputOnMinTime)
-        {
-            fogMachine->setFogOutputOnMinTime(received_msg.configAmnesia.fogOutputOnMinTime);
-            timingChanged = true;
-        }
-        if (received_msg.configAmnesia.fogOutputOnMaxTime)
-        {
-            fogMachine->setFogOutputOnMaxTime(received_msg.configAmnesia.fogOutputOnMaxTime);
-            timingChanged = true;
-        }
-        if (received_msg.configAmnesia.fogOutputOffMinTime)
-        {
-            fogMachine->setFogOutputOffMinTime(received_msg.configAmnesia.fogOutputOffMinTime);
-            timingChanged = true;
-        }
-        if (received_msg.configAmnesia.fogOutputOffMaxTime)
-        {
-            fogMachine->setFogOutputOffMaxTime(received_msg.configAmnesia.fogOutputOffMaxTime);
-            timingChanged = true;
-        }
-
-        if (timingChanged)
-        {
-            // Calculate average ON and OFF times for duty cycle
-            float avgOnTime = (received_msg.configAmnesia.fogOutputOnMinTime + received_msg.configAmnesia.fogOutputOnMaxTime) / 2.0f;
-            float avgOffTime = (received_msg.configAmnesia.fogOutputOffMinTime + received_msg.configAmnesia.fogOutputOffMaxTime) / 2.0f;
-            float dutyCycle = (avgOnTime / (avgOnTime + avgOffTime)) * 100.0f;
-
-            Serial.printf("Received Fog timings - On: %d-%dms, Off: %d-%dms (%.1f%% duty cycle)\n",
-                          received_msg.configAmnesia.fogOutputOnMinTime,
-                          received_msg.configAmnesia.fogOutputOnMaxTime,
-                          received_msg.configAmnesia.fogOutputOffMinTime,
-                          received_msg.configAmnesia.fogOutputOffMaxTime,
-                          dutyCycle);
-        }
-
         if (received_msg.has_configAmnesia)
         {
+
+            if (received_msg.configAmnesia.fogActivateTime)
+            {
+                Serial.printf("Received Fog activate time: %d\n", received_msg.configAmnesia.fogActivateTime);
+                Serial.println("WARNING: fogActivateTime received but this is not implemented");
+            }
+
+            bool timingChanged = false;
+            if (received_msg.configAmnesia.fogOutputOnMinTime)
+            {
+                fogMachine->setFogOutputOnMinTime(received_msg.configAmnesia.fogOutputOnMinTime);
+                timingChanged = true;
+            }
+            if (received_msg.configAmnesia.fogOutputOnMaxTime)
+            {
+                fogMachine->setFogOutputOnMaxTime(received_msg.configAmnesia.fogOutputOnMaxTime);
+                timingChanged = true;
+            }
+            if (received_msg.configAmnesia.fogOutputOffMinTime)
+            {
+                fogMachine->setFogOutputOffMinTime(received_msg.configAmnesia.fogOutputOffMinTime);
+                timingChanged = true;
+            }
+            if (received_msg.configAmnesia.fogOutputOffMaxTime)
+            {
+                fogMachine->setFogOutputOffMaxTime(received_msg.configAmnesia.fogOutputOffMaxTime);
+                timingChanged = true;
+            }
+
+            if (timingChanged)
+            {
+                // Calculate average ON and OFF times for duty cycle
+                float avgOnTime = (received_msg.configAmnesia.fogOutputOnMinTime + received_msg.configAmnesia.fogOutputOnMaxTime) / 2.0f;
+                float avgOffTime = (received_msg.configAmnesia.fogOutputOffMinTime + received_msg.configAmnesia.fogOutputOffMaxTime) / 2.0f;
+                float dutyCycle = (avgOnTime / (avgOnTime + avgOffTime)) * 100.0f;
+
+                Serial.printf("Received Fog timings - On: %d-%dms, Off: %d-%dms (%.1f%% duty cycle)\n",
+                              received_msg.configAmnesia.fogOutputOnMinTime,
+                              received_msg.configAmnesia.fogOutputOnMaxTime,
+                              received_msg.configAmnesia.fogOutputOffMinTime,
+                              received_msg.configAmnesia.fogOutputOffMaxTime,
+                              dutyCycle);
+            }
+
             fogMachine->updateLastAmnesiaMessageTime();
             // Serial.println("Received configAmnesia");
-        }
 
-        if (received_msg.configAmnesia.fogEnabled)
-        {
-            bool currentFogEnabled = fogMachine->getFogEnabled();
-            if (!currentFogEnabled)
+            Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
+
+            if (received_msg.configAmnesia.fogEnabled)
             {
-                Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
-                fogMachine->setFogEnabled(true);
+                bool currentFogEnabled = fogMachine->getFogEnabled();
+                if (!currentFogEnabled)
+                {
+                    Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
+                    fogMachine->setFogEnabled(true);
+                }
             }
-        }
-        else
-        {
-            bool currentFogEnabled = fogMachine->getFogEnabled();
-            if (currentFogEnabled)
+            else
             {
-                Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
-                fogMachine->setFogEnabled(false);
+                bool currentFogEnabled = fogMachine->getFogEnabled();
+                if (currentFogEnabled)
+                {
+                    Serial.printf("Received Fog enabled: %d\n", received_msg.configAmnesia.fogEnabled);
+                    fogMachine->setFogEnabled(false);
+                }
             }
         }
 
@@ -228,7 +231,8 @@ void NovaNet::loop()
     count++;
 }
 
-bool NovaNet::validateHeader(const uint8_t* header) {
+bool NovaNet::validateHeader(const uint8_t *header)
+{
     const uint8_t expected_header[4] = {0xF0, 0x9F, 0x92, 0xA5}; // "fire" emoji
     return memcmp(header, expected_header, 4) == 0;
 }

@@ -906,9 +906,11 @@ void Star::setFogEnabled(uint8_t star, bool enabled) {
         #endif
         return;
     }
-    cluster.stars[star].fogEnabled = enabled;
+    
+    cluster.stars[star].fogEnabled = true;
+
     #if DEBUG_STARS_ENABLED
-    Serial.printf("Star %d fog %s\n", star, enabled ? "enabled" : "disabled");
+    Serial.printf("Star %d fog %s\n", star, cluster.stars[star].fogEnabled ? "enabled" : "disabled");
     #endif
 }
 

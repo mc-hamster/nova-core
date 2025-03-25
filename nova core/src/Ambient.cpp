@@ -8,6 +8,7 @@
 #include "output/Star.h"
 #include "LightUtils.h"
 #include "utilities/PreferencesManager.h"
+#include "Enable.h"
 
 #include "messaging.pb.h"
 
@@ -330,6 +331,13 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
 
     request.configAmnesia.fogOutputOnMinTime = fogOnMin;
     request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
+
+    request.configAmnesia.fogEnabled = enable->isSystemEnabled() ? true : false;
+    //Serial.print("fogEnabled is: ");
+    //Serial.println(request.configAmnesia.fogEnabled ? "true" : "false");
+    
+    //request.configAmnesia.fogEnabled = false;
+
 }
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)

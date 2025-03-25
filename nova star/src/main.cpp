@@ -100,7 +100,8 @@ void TaskNovaNet(void *pvParameters) // This is a task.
   {
     novaNet->loop();
     // yield(); // Should't do anything but it's here incase the watchdog needs it.
-    delayMicroseconds(250);
+    delay(1);
+    //delayMicroseconds(250);
   }
 }
 
