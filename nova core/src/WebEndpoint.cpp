@@ -419,7 +419,6 @@ void handleSequenceCommand(AsyncWebServerRequest *request) {
         sendErrorResponseEndpoint(request, 503, "Server busy");
         return;
     }
-
     // Debug request info
     Serial.println("Sequence command received");
     Serial.print("Content-Type: ");
@@ -430,7 +429,6 @@ void handleSequenceCommand(AsyncWebServerRequest *request) {
     // Print out all headers for debugging
     int headers = request->headers();
     for(int i=0; i<headers; i++) {
-        // Fix: Use const AsyncWebHeader* instead of AsyncWebHeader*
         const AsyncWebHeader* h = request->getHeader(i);
         Serial.printf("Header[%s]: %s\n", h->name().c_str(), h->value().c_str());
     }
@@ -500,36 +498,63 @@ void handleSequenceCommand(AsyncWebServerRequest *request) {
     if (jsonParseSuccess) {
         // Process sequence command
         if (jsonDoc["sequence"].is<String>()) {
-            // ...existing code...
-        }
-        else if (jsonDoc["quick_sequence"].is<String>()) {
-            String quickSeq = jsonDoc["quick_sequence"].as<String>();
+            String sequenceName = jsonDoc["sequence"].as<String>();
+            bool activate = true;
             
-            if (quickSeq == "BOOM_ALL") {
-                for (int i = 0; i < 12; i++) {
-                    star->boom(i);
-                }
-                response["message"] = "All boomers triggered";
+            // Check if there's an activate flag
+            if (jsonDoc["activate"].is<bool>()) {
+                activate = jsonDoc["activate"].as<bool>();
             }
-            else if (quickSeq == "BOOM_LEFT_RIGHT") {
-                // ...existing code...
+            
+            // Convert string to StarSequence::sequences enum
+            StarSequence::sequences sequenceType = StarSequence::SEQ_OFF;
+            
+            if (sequenceName == "POOF_END_TO_END") {
+                sequenceType = StarSequence::SEQ_POOF_END_TO_END;
             }
-            else if (quickSeq == "BOOM_RIGHT_LEFT") {
-                // ...existing code...
+            else if (sequenceName == "BOOMER_LEFT_TO_RIGHT") {
+                sequenceType = StarSequence::SEQ_BOOMER_LEFT_TO_RIGHT;
+            }
+            else if (sequenceName == "BOOMER_RIGHT_TO_LEFT") {
+                sequenceType = StarSequence::SEQ_BOOMER_RIGHT_TO_LEFT;
+            }
+            else if (sequenceName == "BOOM_FAST") {
+                sequenceType = StarSequence::SEQ_BOOM_FAST;
+            }
+            else if (sequenceName == "BOOM_WAVE_IN") {
+                sequenceType = StarSequence::SEQ_BOOM_WAVE_IN;
+            }
+            else if (sequenceName == "BOOM_POOF") {
+                sequenceType = StarSequence::SEQ_BOOM_POOF;
+            }
+            else if (sequenceName == "OFF") {
+                sequenceType = StarSequence::SEQ_OFF;
             }
             else {
                 response["success"] = false;
-                response["error"] = "Unknown quick sequence: " + quickSeq;
+                response["error"] = "Unknown sequence type: " + sequenceName;
+                sendJsonResponseEndpoint(request, response);
+                xSemaphoreGive(endpointApiMutex);
+                return;
+            }
+            
+            // Set the sequence
+            if (activate) {
+                starSequence->setSequence(sequenceType);
+                response["message"] = "Sequence " + sequenceName + " activated";
+            } else {
+                starSequence->setSequence(StarSequence::SEQ_OFF);
+                response["message"] = "Sequence deactivated";
             }
         }
+        // Add other sequence handling code here if needed
         else {
             response["success"] = false;
-            response["error"] = "No sequence or quick_sequence specified";
+            response["error"] = "No sequence specified";
         }
     } else {
-        // If we couldn't parse JSON, return an error
         response["success"] = false;
-        response["error"] = "Could not parse request body as JSON";
+        response["error"] = "Invalid JSON or empty request";
     }
     
     sendJsonResponseEndpoint(request, response);
