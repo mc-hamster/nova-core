@@ -24,6 +24,9 @@ bool SEQUENCE_LOCAL_ECHO = true;
 // Fog power manual control IDs
 uint16_t fogPowerManual[12];
 
+// Fog power cluster control IDs
+uint16_t fogPowerClusterA, fogPowerClusterB, fogPowerClusterC, fogPowerClusterD;
+
 void handleRequest(AsyncWebServerRequest *request)
 {
     AsyncResponseStream *response = request->beginResponseStream("text/html");
@@ -72,6 +75,8 @@ uint16_t fogOutputOffMinTime, fogOutputOffMaxTime, fogOutputOnMinTime, fogOutput
 uint16_t simonaCheatModeSwitch;
 uint16_t simonaGameEnabledSwitch;
 uint16_t simonaSequenceLocalEchoSwitch;
+
+uint16_t fogPowerManualPanel;
 
 void numberCall(Control *sender, int type)
 {
@@ -732,7 +737,7 @@ void webSetup()
     ESPUI.addControl(
         ControlType::Label,
         "",
-        "When disabled, LED sequences will only play on remotes, not locally",
+        "When disabled, LED sequences will not play locally. (reboot required)",
         ControlColor::None,
         simonaSequenceLocalEchoSwitch);
 
@@ -875,30 +880,31 @@ void webSetup()
     lightingReverseSecondRow = ESPUI.addControl(ControlType::Switcher, "Reverse Second Row", String(lightUtils->getCfgReverseSecondRow()), ControlColor::Alizarin, lightingTab, &switchExample);
 
     //--- Fog Tab ---
-
     if (1)
     {
-        // Add Power - Manual section
-        uint16_t fogPowerManualPanel = ESPUI.addControl(ControlType::Label, "Power - Manual", "Manual Fog Control", ControlColor::Carrot, fogTab);
+        // Star Cluster A
+        fogPowerClusterA = ESPUI.addControl(ControlType::Label, "Star Cluster - A", "Manual Fog Control", ControlColor::Alizarin, fogTab);
+        fogPowerManual[0] = ESPUI.addControl(ControlType::Switcher, "Star 1", star->getFogEnabled(0) ? "1" : "0", ControlColor::Alizarin, fogPowerClusterA, &switchExample);
+        fogPowerManual[1] = ESPUI.addControl(ControlType::Switcher, "Star 2", star->getFogEnabled(1) ? "1" : "0", ControlColor::None, fogPowerClusterA, &switchExample);
+        fogPowerManual[2] = ESPUI.addControl(ControlType::Switcher, "Star 3", star->getFogEnabled(2) ? "1" : "0", ControlColor::None, fogPowerClusterA, &switchExample);
 
-        // Add 12 toggles for fog power manual control in a single vertical group
-        for (int i = 0; i < 12; i++)
-        {
-            char labelBuffer[12];
-            snprintf(labelBuffer, sizeof(labelBuffer), "Star %d", i + 1);
-            // First create the control without callback
-            uint16_t controlId = ESPUI.addControl(
-                ControlType::Switcher,
-                labelBuffer,
-                star->getFogEnabled(i) ? "1" : "0",
-                ControlColor::Carrot,
-                fogPowerManualPanel, &switchExample);
+        // Star Cluster B
+        fogPowerClusterB = ESPUI.addControl(ControlType::Label, "Star Cluster - B", "Manual Fog Control", ControlColor::Emerald, fogTab);
+        fogPowerManual[3] = ESPUI.addControl(ControlType::Switcher, "Star 4", star->getFogEnabled(3) ? "1" : "0", ControlColor::Emerald, fogPowerClusterB, &switchExample);
+        fogPowerManual[4] = ESPUI.addControl(ControlType::Switcher, "Star 5", star->getFogEnabled(4) ? "1" : "0", ControlColor::None, fogPowerClusterB, &switchExample);
+        fogPowerManual[5] = ESPUI.addControl(ControlType::Switcher, "Star 6", star->getFogEnabled(5) ? "1" : "0", ControlColor::None, fogPowerClusterB, &switchExample);
 
-            ESPUI.setVertical(controlId);
+        // Star Cluster C
+        fogPowerClusterC = ESPUI.addControl(ControlType::Label, "Star Cluster - C", "Manual Fog Control", ControlColor::Peterriver, fogTab);
+        fogPowerManual[6] = ESPUI.addControl(ControlType::Switcher, "Star 7", star->getFogEnabled(6) ? "1" : "0", ControlColor::Peterriver, fogPowerClusterC, &switchExample);
+        fogPowerManual[7] = ESPUI.addControl(ControlType::Switcher, "Star 8", star->getFogEnabled(7) ? "1" : "0", ControlColor::None, fogPowerClusterC, &switchExample);
+        fogPowerManual[8] = ESPUI.addControl(ControlType::Switcher, "Star 9", star->getFogEnabled(8) ? "1" : "0", ControlColor::None, fogPowerClusterC, &switchExample);
 
-            // Store the control ID
-            fogPowerManual[i] = controlId;
-        }
+        // Star Cluster D
+        fogPowerClusterD = ESPUI.addControl(ControlType::Label, "Star Cluster - D", "Manual Fog Control", ControlColor::Carrot, fogTab);
+        fogPowerManual[9] = ESPUI.addControl(ControlType::Switcher, "Star 10", star->getFogEnabled(9) ? "1" : "0", ControlColor::Carrot, fogPowerClusterD, &switchExample);
+        fogPowerManual[10] = ESPUI.addControl(ControlType::Switcher, "Star 11", star->getFogEnabled(10) ? "1" : "0", ControlColor::None, fogPowerClusterD, &switchExample);
+        fogPowerManual[11] = ESPUI.addControl(ControlType::Switcher, "Star 12", star->getFogEnabled(11) ? "1" : "0", ControlColor::None, fogPowerClusterD, &switchExample);
     }
 
     fogOutputOffMinTime = ESPUI.addControl(ControlType::Slider, "Off Time (default: 5000 / 20000)", String(ambient->getFogOutputOffMinTime() ? ambient->getFogOutputOffMinTime() : 5000), ControlColor::Alizarin, fogTab, &slider);
@@ -980,102 +986,76 @@ void webLoop()
         return;
     }
 
-    // Use RAII pattern for mutex
+    // Try to take mutex with timeout
     if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE)
     {
         return; // Couldn't get mutex, skip this update
     }
 
-    // Set update guard
     isUpdating = true;
 
-    // Wrap all UI updates in try-catch to prevent crashes
+    // Wrap UI updates in try-catch
     try
     {
-        // Update oldTime first to prevent re-entry
         oldTime = currentMillis;
 
-        // Calculate time values
+        // Use stack-based string for time formatting
+        char timeStr[32];
         unsigned long seconds = (currentMillis / 1000) % 60;
         unsigned long minutes = (currentMillis / (1000 * 60)) % 60;
         unsigned long hours = (currentMillis / (1000 * 60 * 60)) % 24;
         unsigned long days = (currentMillis / (1000 * 60 * 60 * 24));
+        snprintf(timeStr, sizeof(timeStr), "%lud %luh %lum %lus", days, hours, minutes, seconds);
 
-        // Pre-allocate the time string with enough capacity
-        String formattedTime;
-        formattedTime.reserve(32);
-        formattedTime = String(days) + "d " + String(hours) + "h " + String(minutes) + "m " + String(seconds) + "s";
-
-        // Toggle switch state
-        switchState = !switchState;
-
-        // Update uptime display with null check
-        Control *millisControl = controlMillis ? ESPUI.getControl(controlMillis) : nullptr;
-        if (millisControl)
-        {
-            ESPUI.updateControlValue(controlMillis, formattedTime);
+        // Update uptime display 
+        if (controlMillis && ESPUI.getControl(controlMillis)) {
+            ESPUI.updateControlValue(controlMillis, timeStr);
         }
 
-        // Get the Simona instance with null check
-        Simona *simona = Simona::getInstance();
-        bool validLabels = simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
-                           ESPUI.getControl(simonaProgressLabel) &&
-                           ESPUI.getControl(expectedColorLabel) &&
-                           ESPUI.getControl(timeRemainingLabel);
+        // Get Simona instance with null check 
+        Simona* simona = Simona::getInstance();
+        if (simona && simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
+            ESPUI.getControl(simonaProgressLabel) && ESPUI.getControl(expectedColorLabel) && 
+            ESPUI.getControl(timeRemainingLabel)) {
 
-        // Only update Simona-related UI if Simona is initialized and labels exist
-        if (simona && validLabels)
-        {
-            // Update game state with null checks
-            Control *progressControl = ESPUI.getControl(simonaProgressLabel);
-            if (progressControl)
-            {
-                ESPUI.updateControlValue(simonaProgressLabel, String(simona->getProgress()));
-            }
+            // Update progress directly using the String from getProgress()
+            ESPUI.updateControlValue(simonaProgressLabel, simona->getProgress());
 
-            const char *expectedColor = simona->getExpectedColorName();
-            Control *colorControl = ESPUI.getControl(expectedColorLabel);
-            if (expectedColor && colorControl)
-            {
+            // Update color info
+            const char* expectedColor = simona->getExpectedColorName();
+            Control* colorControl = ESPUI.getControl(expectedColorLabel);
+            if (expectedColor && colorControl) {
                 ESPUI.updateControlValue(expectedColorLabel, expectedColor);
                 colorControl->color = getColorForName(expectedColor);
                 ESPUI.updateControl(colorControl);
-            }
-            else if (colorControl)
-            {
+            } else if (colorControl) {
                 ESPUI.updateControlValue(expectedColorLabel, "None");
             }
 
-            Control *timeControl = ESPUI.getControl(timeRemainingLabel);
-            if (timeControl)
-            {
-                ESPUI.updateControlValue(timeRemainingLabel, String(simona->getTimeRemaining()));
-            }
+            // Update time remaining
+            char timeRemStr[16]; 
+            snprintf(timeRemStr, sizeof(timeRemStr), "%d", simona->getTimeRemaining());
+            ESPUI.updateControlValue(timeRemainingLabel, timeRemStr);
         }
 
-        // Update status message based on system state
-        Control *statusControl = status ? ESPUI.getControl(status) : nullptr;
-        if (statusControl)
-        {
-            const char *statusMsg;
+        // Update status message
+        Control* statusControl = status ? ESPUI.getControl(status) : nullptr;
+        if (statusControl) {
+            const char* statusMsg;
             ControlColor statusColor = ControlColor::Emerald;
 
-            if (!GAME_ENABLED)
-            {
+            if (!GAME_ENABLED) {
                 statusMsg = "⚠️ GAME DISABLED - Game inputs ignored";
                 statusColor = ControlColor::Alizarin;
             }
-            else if (SIMONA_CHEAT_MODE)
-            {
+            else if (SIMONA_CHEAT_MODE) {
                 statusMsg = "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️";
                 statusColor = ControlColor::Sunflower;
             }
-            else if (enable && enable->isSystemEnabled())
-            {
+            else if (enable && enable->isSystemEnabled()) {
                 statusMsg = enable->isDrunktard() ? "Drunktard" : "Enabled";
             }
-            else
-            {
+            else {
                 statusMsg = enable && enable->isDrunktard() ? "System Disabled (Drunktard)" : "System Disabled (Emergency Stop)";
             }
 
@@ -1083,17 +1063,14 @@ void webLoop()
             statusControl->color = statusColor;
             ESPUI.updateControl(statusControl);
         }
-    }
-    catch (const std::exception &e)
-    {
+
+    } catch (const std::exception& e) {
         Serial.printf("Exception in webLoop: %s\n", e.what());
-    }
-    catch (...)
-    {
+    } catch (...) {
         Serial.println("Unknown exception in webLoop");
     }
 
-    // Clear update guard and release mutex
+    // Always cleanup
     isUpdating = false;
     xSemaphoreGive(webMutex);
 }
