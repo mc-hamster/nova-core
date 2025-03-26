@@ -169,7 +169,7 @@ void TaskAmbient(void *pvParameters)
     while (1)
     {
         ambient->loop();
-        vTaskDelay(pdMS_TO_TICKS(3));
+        vTaskDelay(pdMS_TO_TICKS(2));
 
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
@@ -249,7 +249,7 @@ void TaskWeb(void *pvParameters)
         webLoop();
         
         // Increased delay to give more time for network stack processing
-        vTaskDelay(pdMS_TO_TICKS(2));
+        vTaskDelay(pdMS_TO_TICKS(20));
         
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
@@ -276,6 +276,7 @@ void TaskStars(void *pvParameters)
 
     while (1)
     {
+        /*
         // Increment the loop counter
         loopCounter++;
 
@@ -288,7 +289,8 @@ void TaskStars(void *pvParameters)
             loopCounter = 0;
             lastPrintTime = currentTime;
         }
-
+        */
+       
         if (enable->isSystemEnabled())
         {
             star->loop();
@@ -299,9 +301,9 @@ void TaskStars(void *pvParameters)
             delay(1000);
         }
 
-        // Delay once ever 5 loops to allow other tasks to run
+        // Delay once ever 3 loops to allow other tasks to run
         delayCounter++;
-        if (delayCounter >= 5)
+        if (delayCounter >= 3)
         {
             delayCounter = 0;
             vTaskDelay(pdMS_TO_TICKS(1));
@@ -378,7 +380,7 @@ void TaskWiFiConnection(void *pvParameters)
             lastExecutionTime = millis();
         }
 
-        vTaskDelay(pdMS_TO_TICKS(10000)); // Check connection every 10 seconds
+        vTaskDelay(pdMS_TO_TICKS(2000)); // Check connection every 2 seconds
     }
 }
 
@@ -394,11 +396,11 @@ void taskSetup()
     Serial.println("Create buttonTask - Done");
 
     Serial.println("Create TaskEnable");
-    xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 3, NULL);
+    xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskEnable - Done");
 
     Serial.println("Create TaskWeb");
-    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 3, NULL);
+    xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskWeb - Done");
 
     Serial.println("Create TaskStars");
@@ -406,7 +408,7 @@ void taskSetup()
     Serial.println("Create TaskStars - Done");
 
     Serial.println("Create TaskAmbient");
-    xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 5, NULL);
+    xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 4, NULL);
     Serial.println("Create TaskAmbient - Done");
 
     Serial.println("Create LightUtils");
@@ -454,7 +456,7 @@ void gameTask(void *pvParameters)
             updateTaskStats(pcTaskName, uxHighWaterMark, xPortGetCoreID());
             lastExecutionTime = currentTime;
         }
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
 
