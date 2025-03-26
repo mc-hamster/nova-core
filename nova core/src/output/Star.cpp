@@ -36,7 +36,11 @@ void Star::setupStar(void)
         cluster.stars[i].net.cache_de = 0;
         cluster.stars[i].disableBoomer = false;
         cluster.stars[i].disablePoofer = false;
-        cluster.stars[i].fogEnabled = false;
+        
+        // Load fog enabled setting from preferences
+        char prefKey[16];
+        snprintf(prefKey, sizeof(prefKey), "star%d_fog", i);
+        cluster.stars[i].fogEnabled = PreferencesManager::getBool(prefKey, false);
     }
 
     cluster.stars[0].expander = 0;
@@ -759,7 +763,8 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 bool Star::netOut(uint8_t star)
 {
 
-    for (uint32_t i = 0; i < 20; i++)
+    //for (uint32_t i = 0; i < 20; i++)
+    for (uint32_t i = 0; i < 12; i++)
     {
         if (star == 0xff)
         {
@@ -907,10 +912,15 @@ void Star::setFogEnabled(uint8_t star, bool enabled) {
         return;
     }
     
-    cluster.stars[star].fogEnabled = true;
+    cluster.stars[star].fogEnabled = enabled;
+    
+    // Save to preferences
+    char prefKey[16];
+    snprintf(prefKey, sizeof(prefKey), "star%d_fog", star);
+    PreferencesManager::setBool(prefKey, enabled);
 
     #if DEBUG_STARS_ENABLED
-    Serial.printf("Star %d fog %s\n", star, cluster.stars[star].fogEnabled ? "enabled" : "disabled");
+    Serial.printf("Star %d fog %s\n", star, enabled ? "enabled" : "disabled");
     #endif
 }
 
@@ -921,7 +931,11 @@ bool Star::getFogEnabled(uint8_t star) {
         #endif
         return false;
     }
-    return cluster.stars[star].fogEnabled;
+    
+    // Get from preferences
+    char prefKey[16];
+    snprintf(prefKey, sizeof(prefKey), "star%d_fog", star);
+    return PreferencesManager::getBool(prefKey, false);
 }
 
 uint32_t Star::whatBoomerFullTime()
