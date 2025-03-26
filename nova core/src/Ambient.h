@@ -16,14 +16,14 @@ private:
     uint32_t totalFrameTime = 0;
     uint32_t numFrames = 0;
 
-    void runAmnesiaCode(messaging_Request& request);
+    void runAmnesiaCode(messaging_Request& request, uint8_t starIndex);
 
 public:
     Ambient();
 
     void loop();
 
-    void sendDmxMessage(uint8_t* dmxValues, size_t dmxValuesSize, bool sendAmnesia);
+    void sendDmxMessage(uint8_t* dmxValues, size_t dmxValuesSize, bool sendAmnesia, uint8_t starIndex);
 
     uint32_t getFogOutputOffMinTime(void);
     uint32_t getFogOutputOffMaxTime(void);

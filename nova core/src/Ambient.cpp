@@ -144,7 +144,7 @@ void Ambient::loop()
             dmxValues[14] = 0x00;                   // null
         }
 
-        sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia);
+        sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia, starIndex);
     }
 
     if (currentTime - lastExecutionTime >= 10 * 1000)
@@ -176,7 +176,7 @@ void Ambient::loop()
  * @param dmxValues The DMX values to send.
  * @param dmxValuesSize The size of the DMX values array.
  */
-void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool sendAmnesia)
+void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool sendAmnesia, uint8_t starIndex)
 {
 
     uint8_t newDmxValues[dmxValuesSize] = {};
@@ -211,7 +211,7 @@ void Ambient::sendDmxMessage(uint8_t *dmxValues, size_t dmxValuesSize, bool send
     // TODO: This shouldn't be here. Needs to be higher up in the stack.
     if (sendAmnesia)
     {
-        runAmnesiaCode(request);
+        runAmnesiaCode(request, starIndex);
     }
 
     // Initialize a buffer stream for the encoded message
@@ -302,7 +302,7 @@ uint16_t Ambient::crc16_ccitt(const uint8_t *data, uint16_t length)
  * TODO: This needs to run for the entire frame, not just every 200ms.
  *
  */
-void Ambient::runAmnesiaCode(messaging_Request &request)
+void Ambient::runAmnesiaCode(messaging_Request &request, uint8_t starIndex)
 {
     uint32_t currentTime = millis();
 
@@ -331,8 +331,12 @@ void Ambient::runAmnesiaCode(messaging_Request &request)
 
     request.configAmnesia.fogOutputOnMinTime = fogOnMin;
     request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
-
-    request.configAmnesia.fogEnabled = enable->isSystemEnabled() ? true : false;
+    
+    if (enable->isSystemEnabled()) {
+        request.configAmnesia.fogEnabled = star->getFogEnabled(starIndex);
+    } else {
+        request.configAmnesia.fogEnabled = false;
+    }
     //Serial.print("fogEnabled is: ");
     //Serial.println(request.configAmnesia.fogEnabled ? "true" : "false");
     
