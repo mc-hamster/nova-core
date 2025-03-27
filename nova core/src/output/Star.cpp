@@ -763,8 +763,8 @@ bool Star::goPoof(uint8_t star, uint32_t intervalOn, uint32_t intervalOff)
 bool Star::netOut(uint8_t star)
 {
 
-    //for (uint32_t i = 0; i < 20; i++)
-    for (uint32_t i = 0; i < 12; i++)
+    for (uint32_t i = 0; i < 20; i++)
+    //for (uint32_t i = 0; i < 12; i++)
     {
         if (star == 0xff)
         {
