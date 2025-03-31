@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <WiFi.h>
+#include "Screen.h"
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 #include <WiFiMulti.h>
 #include <LittleFS.h>
 #include "FS.h"
@@ -35,6 +38,11 @@
 
 #define CONFIG_FILE "/config.json"
 
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+
+// Global variables
 uint8_t buttons[4] = {BUTTON_RED_IN, BUTTON_GREEN_IN, BUTTON_BLUE_IN, BUTTON_YELLOW_IN};
 uint8_t leds[4] = {BUTTON_RED_OUT, BUTTON_GREEN_OUT, BUTTON_BLUE_OUT, BUTTON_YELLOW_OUT};
 const char *buttonColors[4] = {"RED", "GREEN", "BLUE", "YELLOW"};
@@ -109,16 +117,21 @@ void initLedPWM(uint8_t pin, uint8_t channel)
 // Global game objects
 Simona *simona = nullptr;
 
-void setup()
-{
+void setup() {
     Serial.begin(921600);
-    delay(2000); // Give serial interface time to connect
+    delay(2000);
     Serial.println("");
     Serial.println("NOVA: CORE");
     Serial.print("setup() is running on core ");
     Serial.println(xPortGetCoreID());
 
     Serial.setDebugOutput(true);
+
+    // Initialize Screen
+    screen = new Screen();
+    if (!screen->begin()) {
+        Serial.println("Screen initialization failed!");
+    }
 
     PreferencesManager::begin(); // Move this to the start
 
@@ -242,8 +255,7 @@ void setup()
     playStartupMusic(); // New: play startup music (short, under 1.5 seconds)
 }
 
-void loop()
-{
+void loop() {
     /* Best not to have anything in this loop.
         Everything should be in freeRTOS tasks
     */

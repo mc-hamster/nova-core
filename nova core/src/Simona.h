@@ -93,7 +93,7 @@ public:
      * @brief Button monitoring task - runs as a FreeRTOS task
      * Monitors the reset button for game reset
      */
-    void runButtonTask();
+    void runTaskButton();
 
     // Getter methods for game state information
 

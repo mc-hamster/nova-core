@@ -80,7 +80,7 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 3 * 1024;
     else if (strcmp(name, "gameTask") == 0)
         initialStack = 8 * 1024;
-    else if (strcmp(name, "buttonTask") == 0)
+    else if (strcmp(name, "taskButton") == 0)
         initialStack = 3 * 1024;
     else if (strcmp(name, "I2CMonitor") == 0)
         initialStack = 3 * 1024; // Updated to match new size
@@ -391,9 +391,9 @@ void taskSetup()
     xTaskCreate(gameTask, "gameTask", 8 * 1024, NULL, 3, NULL);
     Serial.println("Create gameTask - Done");
 
-    Serial.println("Create buttonTask");
-    xTaskCreate(buttonTask, "buttonTask", 3 * 1024, NULL, 1, NULL);
-    Serial.println("Create buttonTask - Done");
+    Serial.println("Create taskButton");
+    xTaskCreate(taskButton, "taskButton", 3 * 1024, NULL, 1, NULL);
+    Serial.println("Create taskButton - Done");
 
     Serial.println("Create TaskEnable");
     xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
@@ -435,6 +435,10 @@ void taskSetup()
     Serial.println("Create TaskWiFiConnection");
     xTaskCreate(&TaskWiFiConnection, "TaskWiFiConnection", 5 * 1024, NULL, 1, NULL);
     Serial.println("Create TaskWiFiConnection - Done");
+
+    Serial.println("Create TaskScreen");
+    xTaskCreate(&TaskScreen, "TaskScreen", 4 * 1024, NULL, 1, NULL);
+    Serial.println("Create TaskScreen - Done");
 }
 
 void gameTask(void *pvParameters)
@@ -460,7 +464,7 @@ void gameTask(void *pvParameters)
     }
 }
 
-void buttonTask(void *pvParameters)
+void taskButton(void *pvParameters)
 {
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
@@ -471,7 +475,7 @@ void buttonTask(void *pvParameters)
 
     while (true)
     {
-        Simona::getInstance()->runButtonTask();
+        Simona::getInstance()->runTaskButton();
         uint32_t currentTime = millis();
         if (currentTime - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {

@@ -476,8 +476,8 @@ void Simona::runGameTask()
   //}
 }
 
-// In runButtonTask, change reset handling to trigger the reset stage.
-void Simona::runButtonTask()
+// In runTaskButton, change reset handling to trigger the reset stage.
+void Simona::runTaskButton()
 {
   //while (true)
   //{
@@ -500,7 +500,7 @@ void Simona::runButtonTask()
 
       if (allLow)  // Only proceed if all readings were LOW
       {
-        Serial.println("White button pressed - resetting game... runButtonTask()");
+        Serial.println("White button pressed - resetting game... runTaskButton()");
         stage = SIMONA_STAGE_RESET; // Set the new reset stage.
         while (novaIO->expansionDigitalRead(BUTTON_WHITE_IN) == LOW)
         {

@@ -42,6 +42,7 @@ void sendJsonResponse(AsyncWebServerRequest *request, JsonDocument &doc) {
 void sendErrorResponse(AsyncWebServerRequest *request, int code, const String &message) {
     AsyncResponseStream *response = request->beginResponseStream("application/json");
     JsonDocument doc;
+    doc.to<JsonObject>(); // Initialize as object
     doc["success"] = false;
     doc["error"] = message;
     serializeJson(doc, *response);
@@ -56,6 +57,7 @@ void handleStatusRequest(AsyncWebServerRequest *request) {
     }
     
     JsonDocument doc;  // Changed from DynamicJsonDocument
+    doc.to<JsonObject>(); // Initialize as object
     doc["success"] = true;
     
     // System status
@@ -110,10 +112,11 @@ void handleSimonaCommand(AsyncWebServerRequest *request, const JsonVariant &json
     
     JsonObject jsonObj = json.as<JsonObject>();
     bool updated = false;
-    DynamicJsonDocument response(512);
+    JsonDocument response;  // Using JsonDocument directly now
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     
-    if (jsonObj.containsKey("cheat_mode")) {
+    if (jsonObj["cheat_mode"].is<bool>()) {
         SIMONA_CHEAT_MODE = jsonObj["cheat_mode"].as<bool>();
         PreferencesManager::setBool("simonaCheatMode", SIMONA_CHEAT_MODE);
         Simona *simona = Simona::getInstance();
@@ -123,13 +126,13 @@ void handleSimonaCommand(AsyncWebServerRequest *request, const JsonVariant &json
         updated = true;
     }
     
-    if (jsonObj.containsKey("game_enabled")) {
+    if (jsonObj["game_enabled"].is<bool>()) {
         GAME_ENABLED = jsonObj["game_enabled"].as<bool>();
         PreferencesManager::setBool("gameEn", GAME_ENABLED);
         updated = true;
     }
     
-    if (jsonObj.containsKey("sequence_local_echo")) {
+    if (jsonObj["sequence_local_echo"].is<bool>()) {
         SEQUENCE_LOCAL_ECHO = jsonObj["sequence_local_echo"].as<bool>();
         PreferencesManager::setBool("simonaSequenceLocalEcho", SEQUENCE_LOCAL_ECHO);
         Simona *simona = Simona::getInstance();
@@ -159,10 +162,11 @@ void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json) 
     }
     
     JsonObject jsonObj = json.as<JsonObject>();
-    DynamicJsonDocument response(512);
+    JsonDocument response;  // Using JsonDocument directly now
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     
-    if (jsonObj.containsKey("poof")) {
+    if (jsonObj["poof"].is<int>()) {
         int starIndex = jsonObj["poof"].as<int>();
         if (starIndex >= 0 && starIndex < 12) {
             star->poof(starIndex);
@@ -172,7 +176,7 @@ void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json) 
             response["error"] = "Invalid star index (must be 0-11)";
         }
     } 
-    else if (jsonObj.containsKey("boom")) {
+    else if (jsonObj["boom"].is<int>()) {
         int starIndex = jsonObj["boom"].as<int>();
         if (starIndex >= 0 && starIndex < 12) {
             star->boom(starIndex);
@@ -182,7 +186,7 @@ void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json) 
             response["error"] = "Invalid star index (must be 0-11)";
         }
     }
-    else if (jsonObj.containsKey("fog_enabled")) {
+    else if (jsonObj["fog_enabled"].is<JsonObject>()) {
         JsonObject fogSettings = jsonObj["fog_enabled"].as<JsonObject>();
         for (JsonPair kv : fogSettings) {
             int starIndex = atoi(kv.key().c_str());
@@ -194,7 +198,7 @@ void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json) 
         }
         response["message"] = "Fog settings updated";
     }
-    else if (jsonObj.containsKey("manual")) {
+    else if (jsonObj["manual"].is<JsonObject>()) {
         int starIndex = jsonObj["star_index"].as<int>();
         String action = jsonObj["action"].as<String>();
         bool state = jsonObj["state"].as<bool>();
@@ -247,12 +251,13 @@ void handleSequenceCommand(AsyncWebServerRequest *request, const JsonVariant &js
     }
     
     JsonObject jsonObj = json.as<JsonObject>();
-    DynamicJsonDocument response(512);
+    JsonDocument response;  // Using JsonDocument directly
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     
-    if (jsonObj.containsKey("sequence")) {
+    if (jsonObj["sequence"].is<String>()) {
         String seq = jsonObj["sequence"].as<String>();
-        bool activate = jsonObj.containsKey("activate") ? jsonObj["activate"].as<bool>() : true;
+        bool activate = jsonObj["activate"].is<bool>() ? jsonObj["activate"].as<bool>() : true;
         
         if (seq == "POOF_END_TO_END") {
             starSequence->setSequence(activate ? starSequence->SEQ_POOF_END_TO_END : starSequence->SEQ_OFF);
@@ -287,7 +292,7 @@ void handleSequenceCommand(AsyncWebServerRequest *request, const JsonVariant &js
             response["error"] = "Unknown sequence: " + seq;
         }
     }
-    else if (jsonObj.containsKey("quick_sequence")) {
+    else if (jsonObj["quick_sequence"].is<String>()) {
         String quickSeq = jsonObj["quick_sequence"].as<String>();
         
         if (quickSeq == "BOOM_ALL") {
@@ -334,11 +339,12 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
     }
     
     JsonObject jsonObj = json.as<JsonObject>();
-    DynamicJsonDocument response(512);
+    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     bool updated = false;
     
-    if (jsonObj.containsKey("brightness")) {
+    if (jsonObj["brightness"].is<int>()) {
         int value = jsonObj["brightness"].as<int>();
         if (value >= 0 && value <= 255) {
             lightUtils->setCfgBrightness(value);
@@ -347,7 +353,7 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
         }
     }
     
-    if (jsonObj.containsKey("program")) {
+    if (jsonObj["program"].is<int>()) {
         int value = jsonObj["program"].as<int>();
         if (value >= 1 && value <= 50) {
             lightUtils->setCfgProgram(value);
@@ -356,7 +362,7 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
         }
     }
     
-    if (jsonObj.containsKey("sin")) {
+    if (jsonObj["sin"].is<int>()) {
         int value = jsonObj["sin"].as<int>();
         if (value >= 0 && value <= 32) {
             lightUtils->setCfgSin(value);
@@ -365,7 +371,7 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
         }
     }
     
-    if (jsonObj.containsKey("updates")) {
+    if (jsonObj["updates"].is<int>()) {
         int value = jsonObj["updates"].as<int>();
         if (value >= 1 && value <= 255) {
             lightUtils->setCfgUpdates(value);
@@ -374,35 +380,35 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
         }
     }
     
-    if (jsonObj.containsKey("reverse")) {
+    if (jsonObj["reverse"].is<bool>()) {
         bool value = jsonObj["reverse"].as<bool>();
         lightUtils->setCfgReverse(value ? 1 : 0);
         updated = true;
         response["reverse"] = value;
     }
     
-    if (jsonObj.containsKey("fire")) {
+    if (jsonObj["fire"].is<bool>()) {
         bool value = jsonObj["fire"].as<bool>();
         lightUtils->setCfgFire(value ? 1 : 0);
         updated = true;
         response["fire"] = value;
     }
     
-    if (jsonObj.containsKey("local_disable")) {
+    if (jsonObj["local_disable"].is<bool>()) {
         bool value = jsonObj["local_disable"].as<bool>();
         lightUtils->setCfgLocalDisable(value ? 1 : 0);
         updated = true;
         response["local_disable"] = value;
     }
     
-    if (jsonObj.containsKey("auto")) {
+    if (jsonObj["auto"].is<bool>()) {
         bool value = jsonObj["auto"].as<bool>();
         lightUtils->setCfgAuto(value ? 1 : 0);
         updated = true;
         response["auto"] = value;
     }
     
-    if (jsonObj.containsKey("auto_time")) {
+    if (jsonObj["auto_time"].is<int>()) {
         int value = jsonObj["auto_time"].as<int>();
         if (value >= 1 && value <= 3600) {
             lightUtils->setCfgAutoTime(value);
@@ -411,7 +417,7 @@ void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &js
         }
     }
     
-    if (jsonObj.containsKey("reverse_second_row")) {
+    if (jsonObj["reverse_second_row"].is<bool>()) {
         bool value = jsonObj["reverse_second_row"].as<bool>();
         lightUtils->setCfgReverseSecondRow(value ? 1 : 0);
         updated = true;
@@ -438,11 +444,12 @@ void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant 
     }
     
     JsonObject jsonObj = json.as<JsonObject>();
-    DynamicJsonDocument response(512);
+    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     bool updated = false;
     
-    if (jsonObj.containsKey("off_min_time")) {
+    if (jsonObj["off_min_time"].is<int>()) {
         int value = jsonObj["off_min_time"].as<int>();
         if (value >= 2000 && value <= 60000) {
             ambient->setFogOutputOffMinTime(value);
@@ -451,7 +458,7 @@ void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant 
         }
     }
     
-    if (jsonObj.containsKey("off_max_time")) {
+    if (jsonObj["off_max_time"].is<int>()) {
         int value = jsonObj["off_max_time"].as<int>();
         if (value >= 2000 && value <= 60000) {
             ambient->setFogOutputOffMaxTime(value);
@@ -460,7 +467,7 @@ void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant 
         }
     }
     
-    if (jsonObj.containsKey("on_min_time")) {
+    if (jsonObj["on_min_time"].is<int>()) {
         int value = jsonObj["on_min_time"].as<int>();
         if (value >= 200 && value <= 2000) {
             ambient->setFogOutputOnMinTime(value);
@@ -469,7 +476,7 @@ void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant 
         }
     }
     
-    if (jsonObj.containsKey("on_max_time")) {
+    if (jsonObj["on_max_time"].is<int>()) {
         int value = jsonObj["on_max_time"].as<int>();
         if (value >= 200 && value <= 2000) {
             ambient->setFogOutputOnMaxTime(value);
@@ -498,15 +505,16 @@ void handleSystemCommand(AsyncWebServerRequest *request, const JsonVariant &json
     }
     
     JsonObject jsonObj = json.as<JsonObject>();
-    DynamicJsonDocument response(512);
+    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
     
-    if (jsonObj.containsKey("drunktard")) {
+    if (jsonObj["drunktard"].is<bool>()) {
         bool value = jsonObj["drunktard"].as<bool>();
         PreferencesManager::setBool("cfgDrunktard", value);
         response["message"] = "Drunktard mode " + String(value ? "enabled" : "disabled");
     }
-    else if (jsonObj.containsKey("reset_config") && jsonObj["reset_config"].as<bool>()) {
+    else if (jsonObj["reset_config"].is<bool>() && jsonObj["reset_config"].as<bool>()) {
         // PreferencesManager::clear();
         // PreferencesManager::save();
         response["message"] = "Config reset requested. Device will reboot.";
@@ -518,7 +526,7 @@ void handleSystemCommand(AsyncWebServerRequest *request, const JsonVariant &json
             ESP.restart();
         });
     }
-    else if (jsonObj.containsKey("reboot") && jsonObj["reboot"].as<bool>()) {
+    else if (jsonObj["reboot"].is<bool>() && jsonObj["reboot"].as<bool>()) {
         response["message"] = "System reboot requested";
         
         // Schedule a reboot after response is sent
@@ -538,8 +546,8 @@ void handleSystemCommand(AsyncWebServerRequest *request, const JsonVariant &json
     request->send(resp);
     
     if (response["success"].as<bool>() && 
-        !jsonObj.containsKey("reset_config") && 
-        !jsonObj.containsKey("reboot")) {
+        !jsonObj["reset_config"].is<bool>() &&
+        !jsonObj["reboot"].is<bool>()) {
         xSemaphoreGive(apiMutex);
     }
 }
@@ -562,6 +570,7 @@ void handleRequest(AsyncWebServerRequest *request)
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
+uint16_t networkInfo;  // Add network info label
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
@@ -997,7 +1006,7 @@ void buttonCallback(Control *sender, int type)
             break;
 
         case B_UP:
-            Serial.println("starSeq_SEQ_BOOMER_RIGHT_TO_LEFT UP");
+            Serial.println("starSeq_SEQ_BOOMER_LEFT_TO_RIGHT UP");
             starSequence->setSequence(starSequence->SEQ_OFF);
             break;
         }
@@ -1260,6 +1269,7 @@ void webSetup()
 
     // Move uptime to System Info tab
     controlMillis = ESPUI.addControl(ControlType::Label, "Uptime", "0", ControlColor::Emerald, sysInfoTab);
+    networkInfo = ESPUI.addControl(ControlType::Label, "Network Info", "", ControlColor::Emerald, sysInfoTab);
 
     //----- (Settings) -----
     // ESPUI.addControl(ControlType::Switcher, "Sleep (Disable)", "", ControlColor::None, settingsTab, &switchExample);
@@ -1558,6 +1568,14 @@ void webLoop()
             ESPUI.updateControlValue(timeRemainingLabel, timeRemStr);
         }
 
+        // Update network info display
+        if (networkInfo && ESPUI.getControl(networkInfo)) {
+            String networkStatus = "MAC: " + WiFi.macAddress() + "<br>";
+            networkStatus += "AP IP: " + WiFi.softAPIP().toString() + "<br>";
+            networkStatus += "Client IP: " + WiFi.localIP().toString();
+            ESPUI.updateControlValue(networkInfo, networkStatus);
+        }
+
         // Update status message
         Control* statusControl = status ? ESPUI.getControl(status) : nullptr;
         if (statusControl) {
@@ -1576,21 +1594,19 @@ void webLoop()
                 statusMsg = enable->isDrunktard() ? "Drunktard" : "Enabled";
             }
             else {
-                statusMsg = enable && enable->isDrunktard() ? "System Disabled (Drunktard)" : "System Disabled (Emergency Stop)";
+                statusMsg = enable && enable->isDrunktard() ? "System Disabled - Drunktard" : "System Disabled";
+                statusColor = ControlColor::Alizarin;
             }
 
             ESPUI.updateControlValue(status, statusMsg);
             statusControl->color = statusColor;
             ESPUI.updateControl(statusControl);
         }
-
-    } catch (const std::exception& e) {
-        Serial.printf("Exception in webLoop: %s\n", e.what());
-    } catch (...) {
-        Serial.println("Unknown exception in webLoop");
+    }
+    catch (...) {
+        Serial.println("Error occurred during webLoop update");
     }
 
-    // Always cleanup
     isUpdating = false;
     xSemaphoreGive(webMutex);
 }
