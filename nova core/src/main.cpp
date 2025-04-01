@@ -127,11 +127,6 @@ void setup() {
 
     Serial.setDebugOutput(true);
 
-    // Initialize Screen
-    screen = new Screen();
-    if (!screen->begin()) {
-        Serial.println("Screen initialization failed!");
-    }
 
     PreferencesManager::begin(); // Move this to the start
 
@@ -176,6 +171,15 @@ void setup() {
 
     Serial.println("new NovaIO");
     novaIO = new NovaIO();
+
+    // Initialize Screen
+    screen = new Screen();
+    if (!screen->begin()) {
+        Serial.println("Screen initialization failed!");
+    } else {
+        Serial.println("Screen initialization successful!");
+    }
+
 
     Serial.println("new Enable");
     enable = new Enable();
