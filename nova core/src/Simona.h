@@ -210,6 +210,57 @@ public:
         return getInputTimeRemaining();
     }
 
+    /**
+     * @brief Set the game stage for testing purposes
+     * @param newStage The stage to set
+     */
+    void setStage(SimonaStage newStage) {
+        stage = newStage;
+    }
+
+    /**
+     * @brief Set the current level for testing purposes
+     * @param newLevel The level to set
+     */
+    void setLevel(uint8_t newLevel) {
+        level = newLevel;
+    }
+
+    /**
+     * @brief Set the lost state for testing purposes
+     * @param lostState The lost state to set
+     */
+    void setLost(bool lostState) {
+        lost = lostState;
+    }
+
+    /**
+     * @brief Set the current round for testing purposes
+     * @param round The round number to set
+     */
+    void setCurrentRound(uint8_t round) {
+        m_currentRound = round;
+    }
+
+    /**
+     * @brief Set levels in round for testing purposes
+     * @param levels Number of levels to set
+     */
+    void setLevelsInRound(uint8_t levels) {
+        m_levelsInRound = levels;
+    }
+
+    /**
+     * @brief Reset game state for testing purposes
+     */
+    void resetGameState() {
+        level = 1;
+        game_play = 1;
+        lost = false;
+        m_currentRound = 1;
+        m_levelsInRound = LEVELS_PER_ROUND_DEFAULT;
+    }
+
 private:
     static Simona *instance; // Singleton instance
 

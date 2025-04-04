@@ -1,5 +1,5 @@
 #include "Web.h"
-#include "WebEndpoint.h"  // Added this include to fix the WebEndpoint not declared error
+#include "WebEndpoint.h"
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include "ESPAsyncWebServer.h"
@@ -16,7 +16,8 @@
 #include "Simona.h"
 #include "freertos/semphr.h"
 #include <Preferences.h>
-#include <ArduinoJson.h>  // Added for JSON API
+#include <ArduinoJson.h>
+#include "output/NovaNow.h"  // Add this include for sendSimonaMessage
 
 // Global game control variables
 bool SIMONA_CHEAT_MODE = false;
@@ -604,6 +605,17 @@ uint16_t simonaSequenceLocalEchoSwitch;
 
 uint16_t fogPowerManualPanel;
 
+// Add control IDs for Simona test buttons
+uint16_t simonaTestWaitingButton;
+uint16_t simonaTestSequenceGenButton;
+uint16_t simonaTestTransitionButton;
+uint16_t simonaTestInputCollectionButton;
+uint16_t simonaTestVerificationButton;
+uint16_t simonaTestGameLostButton;
+uint16_t simonaTestGameWinButton;
+uint16_t simonaTestResetButton;
+uint16_t simonaTestRoundTransitionButton;
+
 void numberCall(Control *sender, int type)
 {
     Serial.println(sender->value);
@@ -1041,6 +1053,122 @@ void buttonCallback(Control *sender, int type)
             break;
         }
     }
+    
+    // Add handlers for Simona test buttons
+    else if (sender->id == simonaTestWaitingButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_WAITING);
+                simona->setLevel(1);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_WAITING;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestSequenceGenButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_SEQUENCE_GENERATION);
+                simona->setLevel(1);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_SEQUENCE_GENERATION;
+                simMsg.level = 1;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestTransitionButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_TRANSITION);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_TRANSITION;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestInputCollectionButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_INPUT_COLLECTION);
+                simona->setLevel(1);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_INPUT_COLLECTION;
+                simMsg.level = 1;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestVerificationButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_VERIFICATION);
+                simona->setLevel(1);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_VERIFICATION;
+                simMsg.level = 1;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestGameLostButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_GAME_LOST);
+                simona->setLost(true);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_GAME_LOST;
+                simMsg.lost = 1;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestGameWinButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_GAME_WIN);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_GAME_WIN;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestResetButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->resetGameState();
+                simona->setStage(SIMONA_STAGE_RESET);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_RESET;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
+    else if (sender->id == simonaTestRoundTransitionButton) {
+        if (type == B_DOWN) {
+            Simona* simona = Simona::getInstance();
+            if (simona) {
+                simona->setStage(SIMONA_STAGE_ROUND_TRANSITION);
+                simona->setCurrentRound(1);
+                simona->setLevelsInRound(3);
+                SimonaMessage simMsg = {};
+                simMsg.stage = SIMONA_STAGE_ROUND_TRANSITION;
+                simMsg.currentRound = 1;
+                simMsg.maxRounds = SIMONA_MAX_ROUNDS;
+                simMsg.levelsInRound = 3;
+                sendSimonaMessage(simMsg);
+            }
+        }
+    }
 }
 
 void switchExample(Control *sender, int value)
@@ -1203,6 +1331,21 @@ void webSetup()
     uint16_t fogTab = ESPUI.addControl(ControlType::Tab, "Fog", "Fog");
     uint16_t sysInfoTab = ESPUI.addControl(ControlType::Tab, "System Info", "System Info");
     uint16_t resetTab = ESPUI.addControl(ControlType::Tab, "Reset", "Reset");
+    uint16_t simonaTestTab = ESPUI.addControl(ControlType::Tab, "Simona Test", "Simona Test"); // Add new tab
+
+    // Add test buttons for each Simona stage
+    simonaTestWaitingButton = ESPUI.addControl(ControlType::Button, "Test Stages", "WAITING", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestSequenceGenButton = ESPUI.addControl(ControlType::Button, "", "SEQUENCE_GENERATION", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestTransitionButton = ESPUI.addControl(ControlType::Button, "", "TRANSITION", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestInputCollectionButton = ESPUI.addControl(ControlType::Button, "", "INPUT_COLLECTION", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestVerificationButton = ESPUI.addControl(ControlType::Button, "", "VERIFICATION", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestGameLostButton = ESPUI.addControl(ControlType::Button, "", "GAME_LOST", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestGameWinButton = ESPUI.addControl(ControlType::Button, "", "GAME_WIN", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestResetButton = ESPUI.addControl(ControlType::Button, "", "RESET", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+    simonaTestRoundTransitionButton = ESPUI.addControl(ControlType::Button, "", "ROUND_TRANSITION", ControlColor::Carrot, simonaTestTab, &buttonCallback);
+
+    // Add warning label
+    ESPUI.addControl(ControlType::Label, "", "⚠️ These buttons force Simona game stages for testing. Use with caution!", ControlColor::Carrot, simonaTestTab);
 
     // Add status label above all tabs
     status = ESPUI.addControl(ControlType::Label, "Status:", "Unknown Status", ControlColor::Turquoise);
@@ -1448,7 +1591,7 @@ void webSetup()
 
     fogOutputOnMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOnMaxTime() ? ambient->getFogOutputOnMaxTime() : 1000), ControlColor::Alizarin, fogOutputOnMinTime, &slider);
     ESPUI.addControl(Min, "", "200", None, fogOutputOnMaxTime);
-    ESPUI.addControl(Max, "", "2000", None, fogOutputOnMaxTime);
+    ESPUI.addControl(Min,"", "2000", None, fogOutputOnMaxTime);
     /*
      */
 
@@ -1475,9 +1618,6 @@ void webSetup()
     WebEndpoint::setupApiEndpoints(ESPUI.WebServer());
 }
 
-/**
- * Updates the web interface controls every n-second.
- */
 ControlColor getColorForName(const char *colorName)
 {
     if (!colorName)
