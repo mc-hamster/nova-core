@@ -122,11 +122,11 @@ NovaIO::NovaIO()
 
 /**
  * Reads the digital value of the specified pin on the MCP23017H expander.
- * 
+ *
  * The function caches the pin reading for a configurable period (CACHE_DURATION).
  * If the cached value is older than CACHE_DURATION, it is refreshed from hardware (cache miss);
  * otherwise, the cached value is returned (cache hit).
- * 
+ *
  * Additionally, report logging can be enabled or disabled via REPORT_LOGGING_ENABLED.
  *
  * @param pin The pin number to read.
@@ -143,22 +143,26 @@ bool NovaIO::expansionDigitalRead(int pin)
     static int pollCounts[MAX_PINS] = {0};
     static int cacheHits[MAX_PINS] = {0};
     static int cacheMisses[MAX_PINS] = {0};
-    static bool cachedValues[MAX_PINS] = { false };
-    static unsigned long cachedTime[MAX_PINS] = { 0 };
+    static bool cachedValues[MAX_PINS] = {false};
+    static unsigned long cachedTime[MAX_PINS] = {0};
+    static bool lastSuccessfulValues[MAX_PINS] = {false}; // Store last successful read values
 
     // Add bounds checking
-    if (pin >= MAX_PINS) {
+    if (pin >= MAX_PINS)
+    {
         return false;
     }
 
     pollCounts[pin]++; // Count poll for this pin
     unsigned long currentMillis = millis();
-    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
+    // const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
 
-    if (currentMillis - cachedTime[pin] >= CACHE_DURATION) { // Cache miss: cache older than CACHE_DURATION
+    if (currentMillis - cachedTime[pin] >= CACHE_DURATION)
+    { // Cache miss: cache older than CACHE_DURATION
         cacheMisses[pin]++;
         bool readValue = false;
-        if (xSemaphoreTake(mutex_i2c, xMaxBlockTime) == pdTRUE) {
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
+        {
             readValue = mcp_h.digitalRead(pin);
             // Count actual I2C transaction bytes:
             // - Device address + write bit (1 byte)
@@ -167,17 +171,28 @@ bool NovaIO::expansionDigitalRead(int pin)
             // - Data byte (1 byte)
             trackI2CTransfer(4);
             xSemaphoreGive(mutex_i2c);
+            lastSuccessfulValues[pin] = readValue; // Save successful read value
+        }
+        else
+        {
+            Serial.printf("Semaphore timeout on pin %d. Using last successful value.\n", pin);
+            readValue = lastSuccessfulValues[pin]; // Use last successful value
         }
         cachedValues[pin] = readValue;
         cachedTime[pin] = currentMillis;
-    } else {
+    }
+    else
+    {
         cacheHits[pin]++;
     }
 
-    if (REPORT_LOGGING_ENABLED && (currentMillis - lastReportTime >= 1000)) { // 1 second elapsed
+    if (REPORT_LOGGING_ENABLED && (currentMillis - lastReportTime >= 1000))
+    { // 1 second elapsed
         Serial.println("Polling report:");
-        for (int i = 0; i < MAX_PINS; i++) {
-            if (pollCounts[i] > 0) {
+        for (int i = 0; i < MAX_PINS; i++)
+        {
+            if (pollCounts[i] > 0)
+            {
                 Serial.print("Pin ");
                 Serial.print(i);
                 Serial.print(": Hits = ");
@@ -195,7 +210,7 @@ bool NovaIO::expansionDigitalRead(int pin)
         }
         lastReportTime = currentMillis;
     }
-    
+
     return cachedValues[pin];
 }
 
@@ -337,7 +352,7 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
             mcp_a.digitalWrite(pin, value);
             // Count actual I2C transaction bytes:
             // - Device address + write bit (1 byte)
-            // - Register address (1 byte) 
+            // - Register address (1 byte)
             // - Data byte (1 byte)
             trackI2CTransfer(3);
             break;
@@ -350,28 +365,47 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
 
 /**
  * Writes a digital value to the specified pin on the selected MCP23017 expander.
- * 
+ *
  * @param pin The pin number to write to.
  * @param value The digital value to write (HIGH or LOW).
  * @param expander The expander number to write to (0-7).
  */
 void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 {
-    while (1) {
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
-            switch(expander) {
-                case 0: mcp_a.digitalWrite(pin, value); break;
-                case 1: mcp_b.digitalWrite(pin, value); break;
-                case 2: mcp_c.digitalWrite(pin, value); break;
-                case 3: mcp_d.digitalWrite(pin, value); break;
-                case 4: mcp_e.digitalWrite(pin, value); break;
-                case 5: mcp_f.digitalWrite(pin, value); break;
-                case 6: mcp_g.digitalWrite(pin, value); break;
-                case 7: mcp_h.digitalWrite(pin, value); break;
+    while (1)
+    {
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
+        {
+            switch (expander)
+            {
+            case 0:
+                mcp_a.digitalWrite(pin, value);
+                break;
+            case 1:
+                mcp_b.digitalWrite(pin, value);
+                break;
+            case 2:
+                mcp_c.digitalWrite(pin, value);
+                break;
+            case 3:
+                mcp_d.digitalWrite(pin, value);
+                break;
+            case 4:
+                mcp_e.digitalWrite(pin, value);
+                break;
+            case 5:
+                mcp_f.digitalWrite(pin, value);
+                break;
+            case 6:
+                mcp_g.digitalWrite(pin, value);
+                break;
+            case 7:
+                mcp_h.digitalWrite(pin, value);
+                break;
             }
             // Count actual I2C transaction bytes:
             // - Device address + write bit (1 byte)
-            // - Register address (1 byte) 
+            // - Register address (1 byte)
             // - Data byte (1 byte)
             trackI2CTransfer(3);
             xSemaphoreGive(novaIO->mutex_i2c);
@@ -601,26 +635,30 @@ void NovaIO::ledWhite(bool value)
     }
 }
 
-void NovaIO::trackI2CTransfer(size_t bytes) {
+void NovaIO::trackI2CTransfer(size_t bytes)
+{
     i2c_bytes_transferred += bytes;
     updateI2CStats();
 }
 
-float NovaIO::getI2CUtilization() {
+float NovaIO::getI2CUtilization()
+{
     updateI2CStats();
     return i2c_utilization;
 }
 
-void NovaIO::updateI2CStats() {
+void NovaIO::updateI2CStats()
+{
     unsigned long current_time = millis();
-    if (current_time - i2c_last_second >= 1000) {
+    if (current_time - i2c_last_second >= 1000)
+    {
         // Calculate utilization as percentage of theoretical maximum bandwidth
         // Each byte takes 9 bits (8 data + 1 ack)
         // Maximum bytes per second = clock_speed / 9
         // Using fixed 400kHz speed
         const float max_bytes_per_sec = 400000.0 / 9.0;
         i2c_utilization = (i2c_bytes_transferred / max_bytes_per_sec) * 100.0;
-        
+
         // Reset for next second
         i2c_bytes_transferred = 0;
         i2c_last_second = current_time;
