@@ -392,7 +392,7 @@ void taskSetup()
     Serial.println("Create gameTask - Done");
 
     Serial.println("Create taskButton");
-    xTaskCreate(taskButton, "taskButton", 3 * 1024, NULL, 1, NULL);
+    xTaskCreate(taskButton, "taskButton", 3 * 1024, NULL, 3, NULL);
     Serial.println("Create taskButton - Done");
 
     Serial.println("Create TaskEnable");
