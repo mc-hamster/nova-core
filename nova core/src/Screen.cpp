@@ -154,6 +154,6 @@ void TaskScreen(void* pvParameters) {
             lastExecutionTime = millis();
         }
         
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(250));
     }
 }
