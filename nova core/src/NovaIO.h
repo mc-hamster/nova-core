@@ -43,6 +43,17 @@ private:
         unsigned long i2c_last_second;
         float i2c_utilization;
 
+        // New monitoring stats
+        struct {
+            unsigned long mutex_contention_count;
+            unsigned long transaction_errors;
+            unsigned long cache_hits;
+            unsigned long cache_misses;
+            unsigned long consecutive_errors[8]; // Per expander
+            unsigned long operation_time_total;
+            unsigned long operation_count;
+        } stats;
+
 public:
         NovaIO();
 
@@ -92,6 +103,17 @@ public:
         void trackI2CTransfer(size_t bytes);
         float getI2CUtilization();
         void updateI2CStats();
+
+        // Get monitoring stats methods
+        unsigned long getMutexContentionCount() { return stats.mutex_contention_count; }
+        unsigned long getTransactionErrors() { return stats.transaction_errors; }
+        float getCacheHitRatio();
+        float getAverageOperationTime() { 
+            return stats.operation_count ? (float)stats.operation_time_total / stats.operation_count : 0; 
+        }
+        unsigned long getConsecutiveErrors(uint8_t expander) { 
+            return expander < 8 ? stats.consecutive_errors[expander] : 0; 
+        }
 };
 
 extern NovaIO *novaIO;
