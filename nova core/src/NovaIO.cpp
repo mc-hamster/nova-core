@@ -14,6 +14,9 @@ NovaIO::NovaIO()
     i2c_last_second = millis();
     i2c_utilization = 0;
 
+    // Initialize monitoring stats
+    memset(&stats, 0, sizeof(stats));
+
     /*
     These should be initilized to 0 for us, but let's do it again
     anyway just to be sure. We can't let an unitilized variable be a safety
@@ -134,81 +137,48 @@ NovaIO::NovaIO()
  */
 bool NovaIO::expansionDigitalRead(int pin)
 {
-    // Configurable cache duration and logging settings
     const unsigned long CACHE_DURATION = 40;
-    const bool REPORT_LOGGING_ENABLED = false;
-    const uint8_t MAX_PINS = 16; // MCP23017 has 16 pins
+    const uint8_t MAX_PINS = 16;
 
-    static unsigned long lastReportTime = millis();
-    static int pollCounts[MAX_PINS] = {0};
-    static int cacheHits[MAX_PINS] = {0};
-    static int cacheMisses[MAX_PINS] = {0};
     static bool cachedValues[MAX_PINS] = {false};
     static unsigned long cachedTime[MAX_PINS] = {0};
-    static bool lastSuccessfulValues[MAX_PINS] = {false}; // Store last successful read values
+    static bool lastSuccessfulValues[MAX_PINS] = {false};
 
-    // Add bounds checking
-    if (pin >= MAX_PINS)
-    {
+    if (pin >= MAX_PINS) {
         return false;
     }
 
-    pollCounts[pin]++; // Count poll for this pin
     unsigned long currentMillis = millis();
-    // const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); // 100ms timeout
 
-    if (currentMillis - cachedTime[pin] >= CACHE_DURATION)
-    { // Cache miss: cache older than CACHE_DURATION
-        cacheMisses[pin]++;
+    if (currentMillis - cachedTime[pin] >= CACHE_DURATION) {
+        stats.cache_misses++;
         bool readValue = false;
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
-        {
-            readValue = mcp_h.digitalRead(pin);
-            // Count actual I2C transaction bytes:
-            // - Device address + write bit (1 byte)
-            // - Register address (1 byte)
-            // - Device address + read bit (1 byte)
-            // - Data byte (1 byte)
-            trackI2CTransfer(4);
+        unsigned long start_time = millis();
+        
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
+            try {
+                readValue = mcp_h.digitalRead(pin);
+                lastSuccessfulValues[pin] = readValue;
+                trackI2CTransfer(4);
+                
+                unsigned long duration = millis() - start_time;
+                stats.operation_time_total += duration;
+                stats.operation_count++;
+            } catch (...) {
+                stats.transaction_errors++;
+                readValue = lastSuccessfulValues[pin];
+                Serial.printf("I2C read error on pin %d, using last value\n", pin);
+            }
             xSemaphoreGive(mutex_i2c);
-            lastSuccessfulValues[pin] = readValue; // Save successful read value
+        } else {
+            stats.mutex_contention_count++;
+            readValue = lastSuccessfulValues[pin];
         }
-        else
-        {
-            Serial.printf("Semaphore timeout on pin %d. Using last successful value.\n", pin);
-            readValue = lastSuccessfulValues[pin]; // Use last successful value
-        }
+        
         cachedValues[pin] = readValue;
         cachedTime[pin] = currentMillis;
-    }
-    else
-    {
-        cacheHits[pin]++;
-    }
-
-    if (REPORT_LOGGING_ENABLED && (currentMillis - lastReportTime >= 1000))
-    { // 1 second elapsed
-        Serial.println("Polling report:");
-        for (int i = 0; i < MAX_PINS; i++)
-        {
-            if (pollCounts[i] > 0)
-            {
-                Serial.print("Pin ");
-                Serial.print(i);
-                Serial.print(": Hits = ");
-                Serial.print(cacheHits[i]);
-                Serial.print(", Misses = ");
-                Serial.print(cacheMisses[i]);
-                Serial.print(" (Total polls: ");
-                Serial.print(pollCounts[i]);
-                Serial.println(")");
-                // Reset counters
-                pollCounts[i] = 0;
-                cacheHits[i] = 0;
-                cacheMisses[i] = 0;
-            }
-        }
-        lastReportTime = currentMillis;
+    } else {
+        stats.cache_hits++;
     }
 
     return cachedValues[pin];
@@ -372,46 +342,45 @@ void NovaIO::mcpA_digitalWrite(uint8_t pin, uint8_t value)
  */
 void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 {
-    while (1)
-    {
-        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE)
-        {
-            switch (expander)
-            {
-            case 0:
-                mcp_a.digitalWrite(pin, value);
-                break;
-            case 1:
-                mcp_b.digitalWrite(pin, value);
-                break;
-            case 2:
-                mcp_c.digitalWrite(pin, value);
-                break;
-            case 3:
-                mcp_d.digitalWrite(pin, value);
-                break;
-            case 4:
-                mcp_e.digitalWrite(pin, value);
-                break;
-            case 5:
-                mcp_f.digitalWrite(pin, value);
-                break;
-            case 6:
-                mcp_g.digitalWrite(pin, value);
-                break;
-            case 7:
-                mcp_h.digitalWrite(pin, value);
+    unsigned long start_time = millis();
+    bool success = false;
+
+    while (1) {
+        if (xSemaphoreTake(mutex_i2c, BLOCK_TIME) == pdTRUE) {
+            try {
+                switch (expander) {
+                    case 0: mcp_a.digitalWrite(pin, value); break;
+                    case 1: mcp_b.digitalWrite(pin, value); break;
+                    case 2: mcp_c.digitalWrite(pin, value); break;
+                    case 3: mcp_d.digitalWrite(pin, value); break;
+                    case 4: mcp_e.digitalWrite(pin, value); break;
+                    case 5: mcp_f.digitalWrite(pin, value); break;
+                    case 6: mcp_g.digitalWrite(pin, value); break;
+                    case 7: mcp_h.digitalWrite(pin, value); break;
+                }
+                success = true;
+                stats.consecutive_errors[expander] = 0; // Reset error counter on success
+            } catch (...) {
+                stats.transaction_errors++;
+                stats.consecutive_errors[expander]++;
+                Serial.printf("I2C error on expander %d after %lu consecutive errors\n", 
+                    expander, stats.consecutive_errors[expander]);
+            }
+            
+            trackI2CTransfer(3);
+            xSemaphoreGive(mutex_i2c);
+            
+            if (success) {
+                // Track timing only for successful operations
+                unsigned long duration = millis() - start_time;
+                stats.operation_time_total += duration;
+                stats.operation_count++;
                 break;
             }
-            // Count actual I2C transaction bytes:
-            // - Device address + write bit (1 byte)
-            // - Register address (1 byte)
-            // - Data byte (1 byte)
-            trackI2CTransfer(3);
-            xSemaphoreGive(novaIO->mutex_i2c);
-            return;
+        } else {
+            stats.mutex_contention_count++;
         }
-        yield(); // Feed the watchdog while waiting
+        yield();
     }
 }
 
@@ -663,4 +632,9 @@ void NovaIO::updateI2CStats()
         i2c_bytes_transferred = 0;
         i2c_last_second = current_time;
     }
+}
+
+float NovaIO::getCacheHitRatio() {
+    unsigned long total = stats.cache_hits + stats.cache_misses;
+    return total ? (float)stats.cache_hits / total : 0;
 }
