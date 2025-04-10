@@ -498,8 +498,50 @@ void TaskI2CMonitor(void *pvParameters)
     while (1)
     {
         novaIO->updateI2CStats();
+        
+        // I2C Bus Statistics
         float utilization = novaIO->getI2CUtilization();
+        Serial.println("\n=== I2C Health Report ===");
         Serial.printf("I2C Bus Utilization: %.2f%%\n", utilization);
+
+        // Cache Performance
+        float cacheHitRatio = novaIO->getCacheHitRatio();
+        Serial.printf("Cache Hit Ratio: %.2f%%\n", cacheHitRatio * 100.0f);
+
+        // Operation Timing
+        float avgOpTime = novaIO->getAverageOperationTime();
+        Serial.printf("Average Operation Time: %.2fms\n", avgOpTime);
+
+        // Error Statistics
+        Serial.printf("Total Transaction Errors: %lu\n", novaIO->getTransactionErrors());
+        Serial.printf("Mutex Contentions: %lu\n", novaIO->getMutexContentionCount());
+
+        // Consecutive Errors Per Expander
+        Serial.println("\nExpander Error Status:");
+        for(uint8_t i = 0; i < 8; i++) {
+            unsigned long errors = novaIO->getConsecutiveErrors(i);
+            if(errors > 0) {
+                Serial.printf("  Expander %d: %lu consecutive errors\n", i, errors);
+            }
+        }
+
+        // Health Assessment
+        Serial.println("\nHealth Assessment:");
+        if(utilization > 80.0f) {
+            Serial.println("  [WARNING] High I2C bus utilization");
+        }
+        if(cacheHitRatio < 0.5f) {
+            Serial.println("  [WARNING] Low cache hit ratio");
+        }
+        if(avgOpTime > 10.0f) {
+            Serial.println("  [WARNING] High average operation time");
+        }
+        for(uint8_t i = 0; i < 8; i++) {
+            if(novaIO->getConsecutiveErrors(i) > 5) {
+                Serial.printf("  [CRITICAL] Expander %d showing repeated failures\n", i);
+            }
+        }
+        Serial.println("=====================\n");
 
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
@@ -508,7 +550,8 @@ void TaskI2CMonitor(void *pvParameters)
             lastExecutionTime = millis();
         }
 
-        vTaskDelay(pdMS_TO_TICKS(1200000));
+        // Run health check every 2 minutes
+        vTaskDelay(pdMS_TO_TICKS(120000));
     }
 }
 
