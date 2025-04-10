@@ -167,7 +167,8 @@ void setup() {
     Serial.println("Set clock of I2C interface to 0.4mhz");
     Wire.begin();
 
-    Wire.setClock(400000UL); // 400khz
+    //Wire.setClock(400000UL); // 400khz
+    Wire.setClock(800000UL); // 600khz
 
     Serial.println("new NovaIO");
     novaIO = new NovaIO();
