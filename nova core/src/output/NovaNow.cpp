@@ -7,7 +7,7 @@
 #include "../LightUtils.h" // Include LightUtils for LED control
 
 static uint32_t currentMessageId = 0;
-//static bool messageOutput = false;
+// static bool messageOutput = false;
 
 // Message queue for non-blocking processing
 static std::queue<SimonaMessage> messageQueue;
@@ -429,7 +429,7 @@ static int mapButtonToLedPosition(int buttonIndex, int currentRound, bool resetM
 // New function to poof all mapped LEDs
 void poofAllMappedLeds(int currentRound)
 {
-    //Serial.println("Poofing all mapped LEDs for current round");
+    // Serial.println("Poofing all mapped LEDs for current round");
 
     if (star)
     {
@@ -453,8 +453,8 @@ void poofAllMappedLeds(int currentRound)
         {
             if (buttonToLedMapping[i] >= 0)
             {
-                //Serial.print("Poofing mapped LED at position ");
-                //Serial.println(buttonToLedMapping[i]);
+                // Serial.print("Poofing mapped LED at position ");
+                // Serial.println(buttonToLedMapping[i]);
 
                 star->poof(buttonToLedMapping[i]); // Call poof on this mapped LED
                 // delay(50);                         // Small delay between poofs for visual effect
@@ -649,7 +649,7 @@ static void updateWaitingAnimation()
 
 void novaNowSetup()
 {
-    //messageOutput = PreferencesManager::getBool("messageOutput", true);
+    // messageOutput = PreferencesManager::getBool("messageOutput", true);
     Serial.println("NovaNow initialized");
 }
 
@@ -662,7 +662,7 @@ void novaNowLoop()
 
     if (millis() - lastPrefsCheck >= PREFS_CHECK_INTERVAL)
     {
-        //messageOutput = PreferencesManager::getBool("messageOutput", true);
+        // messageOutput = PreferencesManager::getBool("messageOutput", true);
         lastPrefsCheck = millis();
     }
 
@@ -684,14 +684,14 @@ void novaNowLoop()
         }
     }
 
-    // Update waiting animation if in waiting stage
-    if (currentSimonaStage == SIMONA_STAGE_WAITING)
+    // Handle different Simona stages
+    switch (currentSimonaStage)
     {
+    case SIMONA_STAGE_WAITING:
         updateWaitingAnimation();
-    }
-    // Update sequence generation animation if in sequence generation stage
-    else if (currentSimonaStage == SIMONA_STAGE_SEQUENCE_GENERATION)
-    {
+        break;
+
+    case SIMONA_STAGE_SEQUENCE_GENERATION:
         // Check for stage change to reset button mappings
         if (previousStage != SIMONA_STAGE_SEQUENCE_GENERATION)
         {
@@ -747,10 +747,9 @@ void novaNowLoop()
         }
 
         previousStage = SIMONA_STAGE_SEQUENCE_GENERATION;
-    }
-    // Update input collection animation if in input collection stage
-    else if (currentSimonaStage == SIMONA_STAGE_INPUT_COLLECTION)
-    {
+        break;
+
+    case SIMONA_STAGE_INPUT_COLLECTION:
         // printSimonaMessage(msg);
         currentSequence = 0;
         if (lightUtils)
@@ -795,10 +794,9 @@ void novaNowLoop()
                 lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
             }
         }
-    }
-    // Update lost animation if in game lost stage
-    else if (currentSimonaStage == SIMONA_STAGE_GAME_LOST)
-    {
+        break;
+
+    case SIMONA_STAGE_GAME_LOST:
         if (lightUtils)
         {
             float t = lostAnimation.stepIndex / (float)lostAnimation.steps;
@@ -813,10 +811,9 @@ void novaNowLoop()
                 lostAnimation.stepIndex = 0; // Reset for next fade out cycle
             }
         }
-    }
-    // Handle verification stage
-    else if (currentSimonaStage == SIMONA_STAGE_VERIFICATION)
-    {
+        break;
+
+    case SIMONA_STAGE_VERIFICATION:
         if (lightUtils)
         {
             float t = verificationAnimation.stepIndex / (float)verificationAnimation.steps;
@@ -843,9 +840,9 @@ void novaNowLoop()
                 verificationAnimation.fadeOut = !verificationAnimation.fadeOut; // Toggle fade direction
             }
         }
-    }
-    else if (currentSimonaStage == SIMONA_STAGE_TRANSITION)
-    {
+        break;
+
+    case SIMONA_STAGE_TRANSITION:
         if (lightUtils)
         {
             float t = transitionAnimation.stepIndex / (float)transitionAnimation.steps;
@@ -872,10 +869,9 @@ void novaNowLoop()
                 transitionAnimation.fadeOut = !transitionAnimation.fadeOut; // Toggle fade direction
             }
         }
-    }
-    // Handle game win state
-    else if (currentSimonaStage == SIMONA_STAGE_GAME_WIN)
-    {
+        break;
+
+    case SIMONA_STAGE_GAME_WIN:
         if (lightUtils)
         {
             // Check for stage change to reset button mappings
@@ -892,8 +888,10 @@ void novaNowLoop()
             static int poofPairIndex = 0;
             static int poofRepetition = 0;
 
-            if (poofRepetition < 4) {
-                if (millis() - lastPoofTime >= 50) {
+            if (poofRepetition < 4)
+            {
+                if (millis() - lastPoofTime >= 50)
+                {
                     int led1 = poofPairIndex;
                     int led2 = 11 - poofPairIndex;
 
@@ -903,12 +901,15 @@ void novaNowLoop()
                     lastPoofTime = millis();
                     poofPairIndex++;
 
-                    if (poofPairIndex > 5) {
+                    if (poofPairIndex > 5)
+                    {
                         poofPairIndex = 0;
                         poofRepetition++;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // Reset for the next time the stage is entered
                 poofRepetition = 0;
                 poofPairIndex = 0;
@@ -938,10 +939,9 @@ void novaNowLoop()
                 }
             }
         }
-    }
-    // Handle round transition stage
-    else if (currentSimonaStage == SIMONA_STAGE_ROUND_TRANSITION)
-    {
+        break;
+
+    case SIMONA_STAGE_ROUND_TRANSITION:
         // Check if we truly just entered this stage (not just continuing in it)
         if (previousStages[1] != SIMONA_STAGE_ROUND_TRANSITION)
         {
@@ -1021,10 +1021,9 @@ void novaNowLoop()
             }
             }
         }
-    }
-    // Handle reset stage
-    else if (currentSimonaStage == SIMONA_STAGE_RESET)
-    {
+        break;
+
+    case SIMONA_STAGE_RESET:
         if (lightUtils)
         {
             currentSequence = 0;
@@ -1134,6 +1133,7 @@ void novaNowLoop()
             }
             }
         }
+        break;
     }
 
     // At the end of novaNowLoop, update stage history
