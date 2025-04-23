@@ -6,10 +6,12 @@
 #include "DmxNet.h"
 #include "globals.h"
 #include "FogMachine.h"
+#include "Sensors.h"
 
 void TaskNovaNet(void *pvParameters);
 void TaskDmxNet(void *pvParameters);
 void TaskFogMachine(void *pvParameters);
+void TaskSensors(void *pvParameters);
 
 
 void setup()
@@ -81,7 +83,13 @@ void setup()
   xTaskCreate(&TaskFogMachine, "TaskFogMachine", 6 * 1024, NULL, 4, NULL);
   Serial.println("Create TaskFogMachine - Done");
 
-  
+  Serial.println("new Sensors");
+  sensors = new Sensors(novaIO);
+  sensors->begin();
+
+  Serial.println("Create TaskSensors");
+  xTaskCreate(&TaskSensors, "TaskSensors", 6 * 1024, NULL, 3, NULL);
+  Serial.println("Create TaskSensors - Done");
 }
 
 void loop()
@@ -127,6 +135,18 @@ void TaskFogMachine(void *pvParameters) // This is a task.
   {
     fogMachine->loop();
     // yield(); // Should't do anything but it's here incase the watchdog needs it.
+    delay(1);
+  }
+}
+
+void TaskSensors(void *pvParameters) // This is a task.
+{
+  (void)pvParameters;
+
+  Serial.println("TaskSensors is running");
+  while (1) // A Task shall never return or exit.
+  {
+    sensors->runTask();
     delay(1);
   }
 }

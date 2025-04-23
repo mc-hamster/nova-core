@@ -47,6 +47,7 @@ void Enable::loop()
         analogWrite(BUTTON_GREEN_OUT, disabledBrightness);
         analogWrite(BUTTON_BLUE_OUT, disabledBrightness);
         analogWrite(BUTTON_YELLOW_OUT, disabledBrightness);
+        analogWrite(BUTTON_WHITE_OUT, disabledBrightness);
 
         disabledBrightness = disabledBrightness + disabledBrightnessFade;
 

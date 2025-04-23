@@ -1,7 +1,11 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#include "NovaNet.h"
+#include "NovaIO.h"
+#include "DmxNet.h"
+#include "FogMachine.h"
+#include "Sensors.h"
 
-#pragma once
-
-
-#endif
+extern NovaNet *novaNet;
+extern NovaIO *novaIO;
+extern DmxNet *dmxNet;
+extern FogMachine *fogMachine;
+extern Sensors *sensors;

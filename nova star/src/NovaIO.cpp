@@ -5,8 +5,6 @@
 #include "configuration.h"
 #include "main.h"
 
-NovaIO *novaIO = NULL;
-
 NovaIO::NovaIO()
 {
 

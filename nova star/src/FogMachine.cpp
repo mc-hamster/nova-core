@@ -4,8 +4,6 @@
 #include "NovaIO.h"
 #include "FogMachine.h"
 
-FogMachine *fogMachine = NULL;
-
 FogMachine::FogMachine()
 {
     // Initialize state machine variables

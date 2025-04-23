@@ -26,6 +26,10 @@ private:
     bool readWithTimeout(uint8_t* buffer, size_t size, unsigned long timeout_ms = 1000);
     bool validateHeader(const uint8_t* header);
     static const unsigned long SERIAL_READ_TIMEOUT_MS = 1000; // 1 second timeout
+
+    // Message frequency tracking
+    unsigned long lastTime;  // Last time we calculated message frequency
+    unsigned int count;      // Message count since last frequency calculation
 };
 
 extern NovaNet *novaNet;

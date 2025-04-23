@@ -10,8 +10,6 @@ This class is responsible for sending and receiving messages over the NovaNet pr
 
 */
 
-DmxNet *dmxNet = NULL;
-
 dmx_port_t dmxPort = 1;
 
 unsigned long lastUpdate = millis();

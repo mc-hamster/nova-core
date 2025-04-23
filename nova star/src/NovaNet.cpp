@@ -16,14 +16,8 @@ This class is responsible for sending and receiving messages over the NovaNet pr
 
 */
 
-NovaNet *novaNet = NULL;
-
-unsigned long lastTime = 0;
-unsigned int count = 0;
-
-NovaNet::NovaNet()
+NovaNet::NovaNet() : lastTime(0), count(0)
 {
-
     // messaging_Request request = messaging_Request_init_zero;
     Serial.println("NovaNet setup started");
 
