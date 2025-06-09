@@ -17,7 +17,7 @@
 #include "freertos/semphr.h"
 #include <Preferences.h>
 #include <ArduinoJson.h>
-#include "output/NovaNow.h"  // Add this include for sendSimonaMessage
+#include "output/NovaNow.h" // Add this include for sendSimonaMessage
 
 // Global game control variables
 bool SIMONA_CHEAT_MODE = false;
@@ -34,41 +34,46 @@ uint16_t fogPowerClusterA, fogPowerClusterB, fogPowerClusterC, fogPowerClusterD;
 SemaphoreHandle_t apiMutex = NULL;
 
 // API response helpers
-void sendJsonResponse(AsyncWebServerRequest *request, JsonDocument &doc) {
+void sendJsonResponse(AsyncWebServerRequest *request, JsonDocument &doc)
+{
     AsyncResponseStream *response = request->beginResponseStream("application/json");
     serializeJson(doc, *response);
     request->send(response);
 }
 
-void sendErrorResponse(AsyncWebServerRequest *request, int code, const String &message) {
+void sendErrorResponse(AsyncWebServerRequest *request, int code, const String &message)
+{
     AsyncResponseStream *response = request->beginResponseStream("application/json");
     JsonDocument doc;
     doc.to<JsonObject>(); // Initialize as object
     doc["success"] = false;
     doc["error"] = message;
     serializeJson(doc, *response);
-    request->send(response);  // Changed from request->send(code, "application/json", response);
+    request->send(response); // Changed from request->send(code, "application/json", response);
 }
 
 // API route handlers
-void handleStatusRequest(AsyncWebServerRequest *request) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)1000) != pdTRUE) {
+void handleStatusRequest(AsyncWebServerRequest *request)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)1000) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
-    JsonDocument doc;  // Changed from DynamicJsonDocument
+
+    JsonDocument doc;     // Changed from DynamicJsonDocument
     doc.to<JsonObject>(); // Initialize as object
     doc["success"] = true;
-    
+
     // System status
     doc["status"]["uptime"] = millis();
     doc["status"]["emergency_stop"] = !enable->isSystemEnabled();
     doc["status"]["drunktard_mode"] = enable->isDrunktard();
-    
+
     // Simona game status
-    Simona* simona = Simona::getInstance();
-    if (simona) {
+    Simona *simona = Simona::getInstance();
+    if (simona)
+    {
         doc["simona"]["game_enabled"] = GAME_ENABLED;
         doc["simona"]["cheat_mode"] = SIMONA_CHEAT_MODE;
         doc["simona"]["sequence_local_echo"] = SEQUENCE_LOCAL_ECHO;
@@ -76,7 +81,7 @@ void handleStatusRequest(AsyncWebServerRequest *request) {
         doc["simona"]["expected_color"] = simona->getExpectedColorName();
         doc["simona"]["time_remaining"] = simona->getTimeRemaining();
     }
-    
+
     // Lighting settings
     doc["lighting"]["brightness"] = lightUtils->getCfgBrightness();
     doc["lighting"]["program"] = lightUtils->getCfgProgram();
@@ -88,467 +93,563 @@ void handleStatusRequest(AsyncWebServerRequest *request) {
     doc["lighting"]["auto"] = lightUtils->getCfgAuto() != 0;
     doc["lighting"]["auto_time"] = lightUtils->getCfgAutoTime();
     doc["lighting"]["reverse_second_row"] = lightUtils->getCfgReverseSecondRow() != 0;
-    
+
     // Fog settings - Fix create method to modern syntax
-    JsonArray fogArray = doc["fog_enabled"].to<JsonArray>();  // Changed from doc.createNestedArray
-    for (int i = 0; i < 12; i++) {
+    JsonArray fogArray = doc["fog_enabled"].to<JsonArray>(); // Changed from doc.createNestedArray
+    for (int i = 0; i < 12; i++)
+    {
         fogArray.add(star->getFogEnabled(i));
     }
-    
+
     doc["fog_settings"]["off_min_time"] = ambient->getFogOutputOffMinTime();
     doc["fog_settings"]["off_max_time"] = ambient->getFogOutputOffMaxTime();
     doc["fog_settings"]["on_min_time"] = ambient->getFogOutputOnMinTime();
     doc["fog_settings"]["on_max_time"] = ambient->getFogOutputOnMaxTime();
-    
+
     sendJsonResponse(request, doc);
     xSemaphoreGive(apiMutex);
 }
 
 // API command handlers
-void handleSimonaCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleSimonaCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
     bool updated = false;
-    JsonDocument response;  // Using JsonDocument directly now
+    JsonDocument response;     // Using JsonDocument directly now
     response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
-    
-    if (jsonObj["cheat_mode"].is<bool>()) {
+
+    if (jsonObj["cheat_mode"].is<bool>())
+    {
         SIMONA_CHEAT_MODE = jsonObj["cheat_mode"].as<bool>();
         PreferencesManager::setBool("simonaCheatMode", SIMONA_CHEAT_MODE);
         Simona *simona = Simona::getInstance();
-        if (simona) {
+        if (simona)
+        {
             simona->setCheatMode(SIMONA_CHEAT_MODE);
         }
         updated = true;
     }
-    
-    if (jsonObj["game_enabled"].is<bool>()) {
+
+    if (jsonObj["game_enabled"].is<bool>())
+    {
         GAME_ENABLED = jsonObj["game_enabled"].as<bool>();
         PreferencesManager::setBool("gameEn", GAME_ENABLED);
         updated = true;
     }
-    
-    if (jsonObj["sequence_local_echo"].is<bool>()) {
+
+    if (jsonObj["sequence_local_echo"].is<bool>())
+    {
         SEQUENCE_LOCAL_ECHO = jsonObj["sequence_local_echo"].as<bool>();
         PreferencesManager::setBool("simonaSequenceLocalEcho", SEQUENCE_LOCAL_ECHO);
         Simona *simona = Simona::getInstance();
-        if (simona) {
+        if (simona)
+        {
             simona->setSequenceLocalEcho(SEQUENCE_LOCAL_ECHO);
         }
         updated = true;
     }
-    
-    if (updated) {
+
+    if (updated)
+    {
         response["message"] = "Simona settings updated";
-    } else {
+    }
+    else
+    {
         response["message"] = "No settings changed";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
+
     xSemaphoreGive(apiMutex);
 }
 
-void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleStarCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
-    JsonDocument response;  // Using JsonDocument directly now
+    JsonDocument response;     // Using JsonDocument directly now
     response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
-    
-    if (jsonObj["poof"].is<int>()) {
+
+    if (jsonObj["poof"].is<int>())
+    {
         int starIndex = jsonObj["poof"].as<int>();
-        if (starIndex >= 0 && starIndex < 12) {
+        if (starIndex >= 0 && starIndex < 12)
+        {
             star->poof(starIndex);
             response["message"] = "Poof command sent to star " + String(starIndex);
-        } else {
-            response["success"] = false;
-            response["error"] = "Invalid star index (must be 0-11)";
         }
-    } 
-    else if (jsonObj["boom"].is<int>()) {
-        int starIndex = jsonObj["boom"].as<int>();
-        if (starIndex >= 0 && starIndex < 12) {
-            star->boom(starIndex);
-            response["message"] = "Boom command sent to star " + String(starIndex);
-        } else {
+        else
+        {
             response["success"] = false;
             response["error"] = "Invalid star index (must be 0-11)";
         }
     }
-    else if (jsonObj["fog_enabled"].is<JsonObject>()) {
+    else if (jsonObj["boom"].is<int>())
+    {
+        int starIndex = jsonObj["boom"].as<int>();
+        if (starIndex >= 0 && starIndex < 12)
+        {
+            star->boom(starIndex);
+            response["message"] = "Boom command sent to star " + String(starIndex);
+        }
+        else
+        {
+            response["success"] = false;
+            response["error"] = "Invalid star index (must be 0-11)";
+        }
+    }
+    else if (jsonObj["fog_enabled"].is<JsonObject>())
+    {
         JsonObject fogSettings = jsonObj["fog_enabled"].as<JsonObject>();
-        for (JsonPair kv : fogSettings) {
+        for (JsonPair kv : fogSettings)
+        {
             int starIndex = atoi(kv.key().c_str());
             bool enabled = kv.value().as<bool>();
-            if (starIndex >= 0 && starIndex < 12) {
+            if (starIndex >= 0 && starIndex < 12)
+            {
                 star->setFogEnabled(starIndex, enabled);
                 response["updated"][String(starIndex)] = enabled;
             }
         }
         response["message"] = "Fog settings updated";
     }
-    else if (jsonObj["manual"].is<JsonObject>()) {
+    else if (jsonObj["manual"].is<JsonObject>())
+    {
         int starIndex = jsonObj["star_index"].as<int>();
         String action = jsonObj["action"].as<String>();
         bool state = jsonObj["state"].as<bool>();
-        
-        if (starIndex >= 0 && starIndex < 12) {
-            if (action == "poof") {
+
+        if (starIndex >= 0 && starIndex < 12)
+        {
+            if (action == "poof")
+            {
                 star->manualPoof(starIndex, state ? HIGH : LOW);
-            } 
-            else if (action == "blow") {
+            }
+            else if (action == "blow")
+            {
                 star->manualBlow(starIndex, state ? HIGH : LOW);
             }
-            else if (action == "blow_fuel") {
+            else if (action == "blow_fuel")
+            {
                 star->manualBlowFuel(starIndex, state ? HIGH : LOW);
             }
-            else if (action == "fuel") {
+            else if (action == "fuel")
+            {
                 star->manualFuel(starIndex, state ? HIGH : LOW);
             }
-            else if (action == "zap") {
+            else if (action == "zap")
+            {
                 star->manualZap(starIndex, state ? HIGH : LOW);
             }
-            else {
+            else
+            {
                 response["success"] = false;
                 response["error"] = "Unknown action: " + action;
             }
-            
-            if (response["success"].as<bool>()) {
+
+            if (response["success"].as<bool>())
+            {
                 response["message"] = action + " command sent with state " + (state ? "HIGH" : "LOW");
             }
-        } else {
+        }
+        else
+        {
             response["success"] = false;
             response["error"] = "Invalid star index (must be 0-11)";
         }
     }
-    else {
+    else
+    {
         response["success"] = false;
         response["error"] = "No valid command specified";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
+
     xSemaphoreGive(apiMutex);
 }
 
-void handleSequenceCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleSequenceCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
-    JsonDocument response;  // Using JsonDocument directly
+    JsonDocument response;     // Using JsonDocument directly
     response.to<JsonObject>(); // Initialize as object
     response["success"] = true;
-    
-    if (jsonObj["sequence"].is<String>()) {
+
+    if (jsonObj["sequence"].is<String>())
+    {
         String seq = jsonObj["sequence"].as<String>();
         bool activate = jsonObj["activate"].is<bool>() ? jsonObj["activate"].as<bool>() : true;
-        
-        if (seq == "POOF_END_TO_END") {
+
+        if (seq == "POOF_END_TO_END")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_POOF_END_TO_END : starSequence->SEQ_OFF);
             response["message"] = "POOF_END_TO_END sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "BOOMER_LEFT_TO_RIGHT") {
+        else if (seq == "BOOMER_LEFT_TO_RIGHT")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_BOOMER_LEFT_TO_RIGHT : starSequence->SEQ_OFF);
             response["message"] = "BOOMER_LEFT_TO_RIGHT sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "BOOMER_RIGHT_TO_LEFT") {
+        else if (seq == "BOOMER_RIGHT_TO_LEFT")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_BOOMER_RIGHT_TO_LEFT : starSequence->SEQ_OFF);
             response["message"] = "BOOMER_RIGHT_TO_LEFT sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "BOOM_FAST") {
+        else if (seq == "BOOM_FAST")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_BOOM_FAST : starSequence->SEQ_OFF);
             response["message"] = "BOOM_FAST sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "BOOM_WAVE_IN") {
+        else if (seq == "BOOM_WAVE_IN")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_BOOM_WAVE_IN : starSequence->SEQ_OFF);
             response["message"] = "BOOM_WAVE_IN sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "BOOM_POOF") {
+        else if (seq == "BOOM_POOF")
+        {
             starSequence->setSequence(activate ? starSequence->SEQ_BOOM_POOF : starSequence->SEQ_OFF);
             response["message"] = "BOOM_POOF sequence " + String(activate ? "activated" : "deactivated");
         }
-        else if (seq == "OFF") {
+        else if (seq == "OFF")
+        {
             starSequence->setSequence(starSequence->SEQ_OFF);
             response["message"] = "All sequences deactivated";
         }
-        else {
+        else
+        {
             response["success"] = false;
             response["error"] = "Unknown sequence: " + seq;
         }
     }
-    else if (jsonObj["quick_sequence"].is<String>()) {
+    else if (jsonObj["quick_sequence"].is<String>())
+    {
         String quickSeq = jsonObj["quick_sequence"].as<String>();
-        
-        if (quickSeq == "BOOM_ALL") {
-            for (int i = 0; i < 12; i++) {
+
+        if (quickSeq == "BOOM_ALL")
+        {
+            for (int i = 0; i < 12; i++)
+            {
                 star->boom(i);
             }
             response["message"] = "All boomers triggered";
         }
-        else if (quickSeq == "BOOM_LEFT_RIGHT") {
-            for (int i = 0; i < 12; i++) {
+        else if (quickSeq == "BOOM_LEFT_RIGHT")
+        {
+            for (int i = 0; i < 12; i++)
+            {
                 star->boom(i);
                 delay(100);
             }
             response["message"] = "Left to right boom sequence triggered";
         }
-        else if (quickSeq == "BOOM_RIGHT_LEFT") {
-            for (int i = 11; i >= 0; i--) {
+        else if (quickSeq == "BOOM_RIGHT_LEFT")
+        {
+            for (int i = 11; i >= 0; i--)
+            {
                 star->boom(i);
                 delay(100);
             }
             response["message"] = "Right to left boom sequence triggered";
         }
-        else {
+        else
+        {
             response["success"] = false;
             response["error"] = "Unknown quick sequence: " + quickSeq;
         }
     }
-    else {
+    else
+    {
         response["success"] = false;
         response["error"] = "No sequence or quick_sequence specified";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
+
     xSemaphoreGive(apiMutex);
 }
 
-void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleLightingCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
-    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
-    response.to<JsonObject>(); // Initialize as object
+    StaticJsonDocument<512> response; // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>();        // Initialize as object
     response["success"] = true;
     bool updated = false;
-    
-    if (jsonObj["brightness"].is<int>()) {
+
+    if (jsonObj["brightness"].is<int>())
+    {
         int value = jsonObj["brightness"].as<int>();
-        if (value >= 0 && value <= 255) {
+        if (value >= 0 && value <= 255)
+        {
             lightUtils->setCfgBrightness(value);
             updated = true;
             response["brightness"] = value;
         }
     }
-    
-    if (jsonObj["program"].is<int>()) {
+
+    if (jsonObj["program"].is<int>())
+    {
         int value = jsonObj["program"].as<int>();
-        if (value >= 1 && value <= 50) {
+        if (value >= 1 && value <= 50)
+        {
             lightUtils->setCfgProgram(value);
             updated = true;
             response["program"] = value;
         }
     }
-    
-    if (jsonObj["sin"].is<int>()) {
+
+    if (jsonObj["sin"].is<int>())
+    {
         int value = jsonObj["sin"].as<int>();
-        if (value >= 0 && value <= 32) {
+        if (value >= 0 && value <= 32)
+        {
             lightUtils->setCfgSin(value);
             updated = true;
             response["sin"] = value;
         }
     }
-    
-    if (jsonObj["updates"].is<int>()) {
+
+    if (jsonObj["updates"].is<int>())
+    {
         int value = jsonObj["updates"].as<int>();
-        if (value >= 1 && value <= 255) {
+        if (value >= 1 && value <= 255)
+        {
             lightUtils->setCfgUpdates(value);
             updated = true;
             response["updates"] = value;
         }
     }
-    
-    if (jsonObj["reverse"].is<bool>()) {
+
+    if (jsonObj["reverse"].is<bool>())
+    {
         bool value = jsonObj["reverse"].as<bool>();
         lightUtils->setCfgReverse(value ? 1 : 0);
         updated = true;
         response["reverse"] = value;
     }
-    
-    if (jsonObj["fire"].is<bool>()) {
+
+    if (jsonObj["fire"].is<bool>())
+    {
         bool value = jsonObj["fire"].as<bool>();
         lightUtils->setCfgFire(value ? 1 : 0);
         updated = true;
         response["fire"] = value;
     }
-    
-    if (jsonObj["local_disable"].is<bool>()) {
+
+    if (jsonObj["local_disable"].is<bool>())
+    {
         bool value = jsonObj["local_disable"].as<bool>();
         lightUtils->setCfgLocalDisable(value ? 1 : 0);
         updated = true;
         response["local_disable"] = value;
     }
-    
-    if (jsonObj["auto"].is<bool>()) {
+
+    if (jsonObj["auto"].is<bool>())
+    {
         bool value = jsonObj["auto"].as<bool>();
         lightUtils->setCfgAuto(value ? 1 : 0);
         updated = true;
         response["auto"] = value;
     }
-    
-    if (jsonObj["auto_time"].is<int>()) {
+
+    if (jsonObj["auto_time"].is<int>())
+    {
         int value = jsonObj["auto_time"].as<int>();
-        if (value >= 1 && value <= 3600) {
+        if (value >= 1 && value <= 3600)
+        {
             lightUtils->setCfgAutoTime(value);
             updated = true;
             response["auto_time"] = value;
         }
     }
-    
-    if (jsonObj["reverse_second_row"].is<bool>()) {
+
+    if (jsonObj["reverse_second_row"].is<bool>())
+    {
         bool value = jsonObj["reverse_second_row"].as<bool>();
         lightUtils->setCfgReverseSecondRow(value ? 1 : 0);
         updated = true;
         response["reverse_second_row"] = value;
     }
-    
-    if (updated) {
+
+    if (updated)
+    {
         response["message"] = "Lighting settings updated";
-    } else {
+    }
+    else
+    {
         response["message"] = "No settings changed";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
+
     xSemaphoreGive(apiMutex);
 }
 
-void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleFogSettingsCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
-    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
-    response.to<JsonObject>(); // Initialize as object
+    StaticJsonDocument<512> response; // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>();        // Initialize as object
     response["success"] = true;
     bool updated = false;
-    
-    if (jsonObj["off_min_time"].is<int>()) {
+
+    if (jsonObj["off_min_time"].is<int>())
+    {
         int value = jsonObj["off_min_time"].as<int>();
-        if (value >= 2000 && value <= 60000) {
+        if (value >= 2000 && value <= 60000)
+        {
             ambient->setFogOutputOffMinTime(value);
             updated = true;
             response["off_min_time"] = value;
         }
     }
-    
-    if (jsonObj["off_max_time"].is<int>()) {
+
+    if (jsonObj["off_max_time"].is<int>())
+    {
         int value = jsonObj["off_max_time"].as<int>();
-        if (value >= 2000 && value <= 60000) {
+        if (value >= 2000 && value <= 60000)
+        {
             ambient->setFogOutputOffMaxTime(value);
             updated = true;
             response["off_max_time"] = value;
         }
     }
-    
-    if (jsonObj["on_min_time"].is<int>()) {
+
+    if (jsonObj["on_min_time"].is<int>())
+    {
         int value = jsonObj["on_min_time"].as<int>();
-        if (value >= 200 && value <= 2000) {
+        if (value >= 200 && value <= 2000)
+        {
             ambient->setFogOutputOnMinTime(value);
             updated = true;
             response["on_min_time"] = value;
         }
     }
-    
-    if (jsonObj["on_max_time"].is<int>()) {
+
+    if (jsonObj["on_max_time"].is<int>())
+    {
         int value = jsonObj["on_max_time"].as<int>();
-        if (value >= 200 && value <= 2000) {
+        if (value >= 200 && value <= 2000)
+        {
             ambient->setFogOutputOnMaxTime(value);
             updated = true;
             response["on_max_time"] = value;
         }
     }
-    
-    if (updated) {
+
+    if (updated)
+    {
         response["message"] = "Fog timing settings updated";
-    } else {
+    }
+    else
+    {
         response["message"] = "No settings changed";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
+
     xSemaphoreGive(apiMutex);
 }
 
-void handleSystemCommand(AsyncWebServerRequest *request, const JsonVariant &json) {
-    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE) {
+void handleSystemCommand(AsyncWebServerRequest *request, const JsonVariant &json)
+{
+    if (xSemaphoreTake(apiMutex, (TickType_t)500) != pdTRUE)
+    {
         sendErrorResponse(request, 503, "Server busy");
         return;
     }
-    
+
     JsonObject jsonObj = json.as<JsonObject>();
-    StaticJsonDocument<512> response;  // Changed from JsonDocument to StaticJsonDocument with size
-    response.to<JsonObject>(); // Initialize as object
+    StaticJsonDocument<512> response; // Changed from JsonDocument to StaticJsonDocument with size
+    response.to<JsonObject>();        // Initialize as object
     response["success"] = true;
-    
-    if (jsonObj["drunktard"].is<bool>()) {
+
+    if (jsonObj["drunktard"].is<bool>())
+    {
         bool value = jsonObj["drunktard"].as<bool>();
         PreferencesManager::setBool("cfgDrunktard", value);
         response["message"] = "Drunktard mode " + String(value ? "enabled" : "disabled");
     }
-    else if (jsonObj["reset_config"].is<bool>() && jsonObj["reset_config"].as<bool>()) {
+    else if (jsonObj["reset_config"].is<bool>() && jsonObj["reset_config"].as<bool>())
+    {
         // PreferencesManager::clear();
         // PreferencesManager::save();
         response["message"] = "Config reset requested. Device will reboot.";
-        
+
         // Schedule a reboot after response is sent
-        xSemaphoreGive(apiMutex);  // Release mutex before reboot
-        request->onDisconnect([](){
+        xSemaphoreGive(apiMutex); // Release mutex before reboot
+        request->onDisconnect([]()
+                              {
             delay(100);
-            ESP.restart();
-        });
+            ESP.restart(); });
     }
-    else if (jsonObj["reboot"].is<bool>() && jsonObj["reboot"].as<bool>()) {
+    else if (jsonObj["reboot"].is<bool>() && jsonObj["reboot"].as<bool>())
+    {
         response["message"] = "System reboot requested";
-        
+
         // Schedule a reboot after response is sent
-        xSemaphoreGive(apiMutex);  // Release mutex before reboot
-        request->onDisconnect([](){
+        xSemaphoreGive(apiMutex); // Release mutex before reboot
+        request->onDisconnect([]()
+                              {
             delay(100);
-            ESP.restart();
-        });
+            ESP.restart(); });
     }
-    else {
+    else
+    {
         response["success"] = false;
         response["error"] = "No valid command specified";
     }
-    
+
     AsyncResponseStream *resp = request->beginResponseStream("application/json");
     serializeJson(response, *resp);
     request->send(resp);
-    
-    if (response["success"].as<bool>() && 
+
+    if (response["success"].as<bool>() &&
         !jsonObj["reset_config"].is<bool>() &&
-        !jsonObj["reboot"].is<bool>()) {
+        !jsonObj["reboot"].is<bool>())
+    {
         xSemaphoreGive(apiMutex);
     }
 }
@@ -571,7 +672,7 @@ void handleRequest(AsyncWebServerRequest *request)
 uint16_t switchOne;
 uint16_t status;
 uint16_t controlMillis;
-uint16_t networkInfo;  // Add network info label
+uint16_t networkInfo; // Add network info label
 
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
@@ -1053,12 +1154,15 @@ void buttonCallback(Control *sender, int type)
             break;
         }
     }
-    
+
     // Add handlers for Simona test buttons
-    else if (sender->id == simonaTestWaitingButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestWaitingButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_WAITING);
                 simona->setLevel(1);
                 SimonaMessage simMsg = {};
@@ -1067,10 +1171,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestSequenceGenButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestSequenceGenButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_SEQUENCE_GENERATION);
                 simona->setLevel(1);
                 SimonaMessage simMsg = {};
@@ -1080,10 +1187,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestTransitionButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestTransitionButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_TRANSITION);
                 SimonaMessage simMsg = {};
                 simMsg.stage = SIMONA_STAGE_TRANSITION;
@@ -1091,10 +1201,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestInputCollectionButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestInputCollectionButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_INPUT_COLLECTION);
                 simona->setLevel(1);
                 SimonaMessage simMsg = {};
@@ -1104,10 +1217,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestVerificationButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestVerificationButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_VERIFICATION);
                 simona->setLevel(1);
                 SimonaMessage simMsg = {};
@@ -1117,10 +1233,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestGameLostButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestGameLostButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_GAME_LOST);
                 simona->setLost(true);
                 SimonaMessage simMsg = {};
@@ -1130,10 +1249,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestGameWinButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestGameWinButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_GAME_WIN);
                 SimonaMessage simMsg = {};
                 simMsg.stage = SIMONA_STAGE_GAME_WIN;
@@ -1141,10 +1263,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestResetButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestResetButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->resetGameState();
                 simona->setStage(SIMONA_STAGE_RESET);
                 SimonaMessage simMsg = {};
@@ -1153,10 +1278,13 @@ void buttonCallback(Control *sender, int type)
             }
         }
     }
-    else if (sender->id == simonaTestRoundTransitionButton) {
-        if (type == B_DOWN) {
-            Simona* simona = Simona::getInstance();
-            if (simona) {
+    else if (sender->id == simonaTestRoundTransitionButton)
+    {
+        if (type == B_DOWN)
+        {
+            Simona *simona = Simona::getInstance();
+            if (simona)
+            {
                 simona->setStage(SIMONA_STAGE_ROUND_TRANSITION);
                 simona->setCurrentRound(1);
                 simona->setLevelsInRound(3);
@@ -1591,7 +1719,7 @@ void webSetup()
 
     fogOutputOnMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOnMaxTime() ? ambient->getFogOutputOnMaxTime() : 1000), ControlColor::Alizarin, fogOutputOnMinTime, &slider);
     ESPUI.addControl(Min, "", "200", None, fogOutputOnMaxTime);
-    ESPUI.addControl(Min,"", "2000", None, fogOutputOnMaxTime);
+    ESPUI.addControl(Min, "", "2000", None, fogOutputOnMaxTime);
     /*
      */
 
@@ -1677,73 +1805,82 @@ void webLoop()
         unsigned long days = (currentMillis / (1000 * 60 * 60 * 24));
         snprintf(timeStr, sizeof(timeStr), "%lud %luh %lum %lus", days, hours, minutes, seconds);
 
-        // Update uptime display 
-        if (controlMillis && ESPUI.getControl(controlMillis)) {
+        // Update uptime display
+        if (controlMillis && ESPUI.getControl(controlMillis))
+        {
             ESPUI.updateControlValue(controlMillis, timeStr);
         }
 
-        // Get Simona instance with null check 
-        Simona* simona = Simona::getInstance();
+        // Get Simona instance with null check
+        Simona *simona = Simona::getInstance();
         if (simona && simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
-            ESPUI.getControl(simonaProgressLabel) && ESPUI.getControl(expectedColorLabel) && 
-            ESPUI.getControl(timeRemainingLabel)) {
+            ESPUI.getControl(simonaProgressLabel) && ESPUI.getControl(expectedColorLabel) &&
+            ESPUI.getControl(timeRemainingLabel))
+        {
 
             // Update progress directly using the String from getProgress()
             ESPUI.updateControlValue(simonaProgressLabel, simona->getProgress());
 
             // Update color info
-            const char* expectedColor = simona->getExpectedColorName();
-            Control* colorControl = ESPUI.getControl(expectedColorLabel);
-            if (expectedColor && colorControl) {
+            const char *expectedColor = simona->getExpectedColorName();
+            Control *colorControl = ESPUI.getControl(expectedColorLabel);
+            if (expectedColor && colorControl)
+            {
                 ESPUI.updateControlValue(expectedColorLabel, expectedColor);
                 colorControl->color = getColorForName(expectedColor);
                 ESPUI.updateControl(colorControl);
-            } else if (colorControl) {
+            }
+            else if (colorControl)
+            {
                 ESPUI.updateControlValue(expectedColorLabel, "None");
             }
 
             // Update time remaining
-            char timeRemStr[16]; 
+            char timeRemStr[16];
             snprintf(timeRemStr, sizeof(timeRemStr), "%d", simona->getTimeRemaining());
             ESPUI.updateControlValue(timeRemainingLabel, timeRemStr);
         }
 
         // Update network info display
-        if (networkInfo && ESPUI.getControl(networkInfo)) {
+        if (networkInfo && ESPUI.getControl(networkInfo))
+        {
             String networkStatus = "MAC: " + WiFi.macAddress() + "<br>";
             networkStatus += "AP IP: " + WiFi.softAPIP().toString() + "<br>";
             networkStatus += "Client IP: " + WiFi.localIP().toString();
             ESPUI.updateControlValue(networkInfo, networkStatus);
         }
 
-        // Update status message
-        Control* statusControl = status ? ESPUI.getControl(status) : nullptr;
-        if (statusControl) {
-            const char* statusMsg;
+        Control *statusControl = ESPUI.getControl(status);
+        if (statusControl)
+        {
+            String statusMsg;
             ControlColor statusColor = ControlColor::Emerald;
-
-            if (!GAME_ENABLED) {
+            if (!GAME_ENABLED)
+            {
                 statusMsg = "⚠️ GAME DISABLED - Game inputs ignored";
                 statusColor = ControlColor::Alizarin;
             }
-            else if (SIMONA_CHEAT_MODE) {
+            else if (SIMONA_CHEAT_MODE)
+            {
                 statusMsg = "⚠️ CHEAT MODE ENABLED - Game sequence predictable ⚠️";
                 statusColor = ControlColor::Sunflower;
             }
-            else if (enable && enable->isSystemEnabled()) {
+            else if (enable && enable->isSystemEnabled())
+            {
                 statusMsg = enable->isDrunktard() ? "Drunktard" : "Enabled";
             }
-            else {
-                statusMsg = enable && enable->isDrunktard() ? "System Disabled - Drunktard" : "System Disabled";
+            else
+            {
+                statusMsg = (enable && enable->isDrunktard()) ? "System Disabled - Drunktard" : "System Disabled";
                 statusColor = ControlColor::Alizarin;
             }
-
             ESPUI.updateControlValue(status, statusMsg);
             statusControl->color = statusColor;
             ESPUI.updateControl(statusControl);
         }
     }
-    catch (...) {
+    catch (...)
+    {
         Serial.println("Error occurred during webLoop update");
     }
 
