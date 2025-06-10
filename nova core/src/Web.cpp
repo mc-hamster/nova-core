@@ -1770,29 +1770,37 @@ ControlColor getColorForName(const char *colorName)
 
 void webLoop()
 {
+    // Toggle to enable or disable using the webMutex (set to false for testing without mutex)
+    bool useMutex = false; // change to false to disable mutex usage
+
     // Initialize static variables
     static unsigned long oldTime = 0;
-    static bool switchState = false;
     static const unsigned long UPDATE_INTERVAL = 1000; // Update every 1 second
-    static bool isUpdating = false;                    // Guard against recursion
     static SemaphoreHandle_t webMutex = xSemaphoreCreateMutex();
 
-    // Rate limit updates and prevent recursion
     unsigned long currentMillis = millis();
-    if (currentMillis - oldTime < UPDATE_INTERVAL || isUpdating)
+    if (currentMillis - oldTime < UPDATE_INTERVAL)
     {
         return;
     }
 
-    // Try to take mutex with timeout
-    if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE)
+    if (useMutex)
     {
-        return; // Couldn't get mutex, skip this update
+        if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE)
+        {
+            Serial.println("Couldn't get webMutex");
+            return; // Couldn't get mutex, skip this update
+        }
+        else
+        {
+            Serial.println("Got webMutex");
+        }
+    }
+    else
+    {
+        Serial.println("Mutex disabled for testing");
     }
 
-    isUpdating = true;
-
-    // Wrap UI updates in try-catch
     try
     {
         oldTime = currentMillis;
@@ -1840,7 +1848,6 @@ void webLoop()
             snprintf(timeRemStr, sizeof(timeRemStr), "%d", simona->getTimeRemaining());
             ESPUI.updateControlValue(timeRemainingLabel, timeRemStr);
         }
-
         // Update network info display
         if (networkInfo && ESPUI.getControl(networkInfo))
         {
@@ -1849,6 +1856,7 @@ void webLoop()
             networkStatus += "Client IP: " + WiFi.localIP().toString();
             ESPUI.updateControlValue(networkInfo, networkStatus);
         }
+            return;
 
         Control *statusControl = ESPUI.getControl(status);
         if (statusControl)
@@ -1874,9 +1882,17 @@ void webLoop()
                 statusMsg = (enable && enable->isDrunktard()) ? "System Disabled - Drunktard" : "System Disabled";
                 statusColor = ControlColor::Alizarin;
             }
-            ESPUI.updateControlValue(status, statusMsg);
-            statusControl->color = statusColor;
-            ESPUI.updateControl(statusControl);
+            if (1)
+            {
+                
+                Serial.print("statusMsg: ");
+                Serial.println(statusMsg);
+                Serial.print("statusMsg length: ");
+                Serial.println(statusMsg.length());
+                ESPUI.updateControlValue(status, statusMsg);
+                statusControl->color = statusColor;
+                ESPUI.updateControl(statusControl);
+            }
         }
     }
     catch (...)
@@ -1884,6 +1900,8 @@ void webLoop()
         Serial.println("Error occurred during webLoop update");
     }
 
-    isUpdating = false;
-    xSemaphoreGive(webMutex);
+    if (useMutex)
+    {
+        xSemaphoreGive(webMutex);
+    }
 }
