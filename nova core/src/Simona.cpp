@@ -43,13 +43,14 @@ Simona::Simona(uint8_t *buttons, uint8_t *leds, const char **buttonColors, const
   {
     button[i] = false;
   }
+  
+  // Initialize the sequence arrays
+  for (uint8_t i = 0; i < 100; i++)
+  {
+    led_simonSaid[i] = 0;
+    bt_simonSaid[i] = 0;
+  }
 }
-
-// Ensure that arrays like led_simonSaid and bt_simonSaid are declared with enough size. For example:
-// (Assuming MAX_LEVEL is defined)
-#define MAX_LEVEL 20
-uint8_t led_simonSaid[MAX_LEVEL + 1]; // Index 0 unused if looping from 1
-uint8_t bt_simonSaid[MAX_LEVEL + 1];
 
 void Simona::controlLed(uint8_t led, bool state)
 {

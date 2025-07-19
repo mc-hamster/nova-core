@@ -80,6 +80,7 @@ void handleStatusRequest(AsyncWebServerRequest *request)
         doc["simona"]["progress"] = simona->getProgress();
         doc["simona"]["expected_color"] = simona->getExpectedColorName();
         doc["simona"]["time_remaining"] = simona->getTimeRemaining();
+        doc["simona"]["full_sequence"] = simona->getFullSequenceString();
     }
 
     // Lighting settings
@@ -674,7 +675,7 @@ uint16_t status;
 uint16_t controlMillis;
 uint16_t networkInfo; // Add network info label
 
-uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel;
+uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel, fullSequenceLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
 uint16_t mainDrunktardSwitch;
 uint16_t resetConfigSwitch, resetRebootSwitch;
@@ -1326,7 +1327,19 @@ void switchExample(Control *sender, int value)
     else if (sender->id >= fogPowerManual[0] && sender->id <= fogPowerManual[11])
     {
         int starIndex = sender->id - fogPowerManual[0];
+
+        // Adjust starIndex based on the manual switch ID to accomodate for the panel layout
+        if (starIndex >= 12) {
+            starIndex = starIndex - 3;
+        } else if (starIndex >= 8) {
+            starIndex = starIndex - 2;
+        } else if (starIndex >= 4) {
+            starIndex = starIndex - 1;
+        }
+
         star->setFogEnabled(starIndex, sender->value.toInt() == 1);
+
+        //Serial.printf("Fog Power Manual Switch: ID: %d, Index: %d, fogPowerManual[0]: %d, Value: %s\n", sender->id, starIndex, fogPowerManual[0], sender->value.c_str());
     }
     else if (sender->id == mainDrunktardSwitch)
     {
@@ -1482,6 +1495,7 @@ void webSetup()
     // Simona game status labels
     simonaProgressLabel = ESPUI.addControl(ControlType::Label, "Simona Progress:", "0", ControlColor::Emerald, mainTab);
     expectedColorLabel = ESPUI.addControl(ControlType::Label, "Expected Color:", "None", ControlColor::Emerald, mainTab);
+    fullSequenceLabel = ESPUI.addControl(ControlType::Label, "Full Sequence:", "None", ControlColor::Emerald, mainTab);
     timeRemainingLabel = ESPUI.addControl(ControlType::Label, "Time Remaining:", "0", ControlColor::Emerald, mainTab);
 
     mainDrunktardSwitch = ESPUI.addControl(ControlType::Switcher, "Drunktard", String(PreferencesManager::getBool("cfgDrunktard", false)), ControlColor::None, mainTab, &switchExample);
@@ -1681,25 +1695,25 @@ void webSetup()
     if (1)
     {
         // Star Cluster A
-        fogPowerClusterA = ESPUI.addControl(ControlType::Label, "Star Cluster - A", "Manual Fog Control", ControlColor::Alizarin, fogTab);
+        fogPowerClusterA = ESPUI.addControl(ControlType::Label, "Star Cluster - A", "Manual Fog Control - 1 2 3", ControlColor::Alizarin, fogTab);
         fogPowerManual[0] = ESPUI.addControl(ControlType::Switcher, "Star 1", star->getFogEnabled(0) ? "1" : "0", ControlColor::Alizarin, fogPowerClusterA, &switchExample);
         fogPowerManual[1] = ESPUI.addControl(ControlType::Switcher, "Star 2", star->getFogEnabled(1) ? "1" : "0", ControlColor::None, fogPowerClusterA, &switchExample);
         fogPowerManual[2] = ESPUI.addControl(ControlType::Switcher, "Star 3", star->getFogEnabled(2) ? "1" : "0", ControlColor::None, fogPowerClusterA, &switchExample);
 
         // Star Cluster B
-        fogPowerClusterB = ESPUI.addControl(ControlType::Label, "Star Cluster - B", "Manual Fog Control", ControlColor::Emerald, fogTab);
+        fogPowerClusterB = ESPUI.addControl(ControlType::Label, "Star Cluster - B", "Manual Fog Control - 4 5 6", ControlColor::Emerald, fogTab);
         fogPowerManual[3] = ESPUI.addControl(ControlType::Switcher, "Star 4", star->getFogEnabled(3) ? "1" : "0", ControlColor::Emerald, fogPowerClusterB, &switchExample);
         fogPowerManual[4] = ESPUI.addControl(ControlType::Switcher, "Star 5", star->getFogEnabled(4) ? "1" : "0", ControlColor::None, fogPowerClusterB, &switchExample);
         fogPowerManual[5] = ESPUI.addControl(ControlType::Switcher, "Star 6", star->getFogEnabled(5) ? "1" : "0", ControlColor::None, fogPowerClusterB, &switchExample);
 
         // Star Cluster C
-        fogPowerClusterC = ESPUI.addControl(ControlType::Label, "Star Cluster - C", "Manual Fog Control", ControlColor::Peterriver, fogTab);
+        fogPowerClusterC = ESPUI.addControl(ControlType::Label, "Star Cluster - C", "Manual Fog Control - 7 8 9", ControlColor::Peterriver, fogTab);
         fogPowerManual[6] = ESPUI.addControl(ControlType::Switcher, "Star 7", star->getFogEnabled(6) ? "1" : "0", ControlColor::Peterriver, fogPowerClusterC, &switchExample);
         fogPowerManual[7] = ESPUI.addControl(ControlType::Switcher, "Star 8", star->getFogEnabled(7) ? "1" : "0", ControlColor::None, fogPowerClusterC, &switchExample);
         fogPowerManual[8] = ESPUI.addControl(ControlType::Switcher, "Star 9", star->getFogEnabled(8) ? "1" : "0", ControlColor::None, fogPowerClusterC, &switchExample);
 
         // Star Cluster D
-        fogPowerClusterD = ESPUI.addControl(ControlType::Label, "Star Cluster - D", "Manual Fog Control", ControlColor::Carrot, fogTab);
+        fogPowerClusterD = ESPUI.addControl(ControlType::Label, "Star Cluster - D", "Manual Fog Control - 10 11 12", ControlColor::Carrot, fogTab);
         fogPowerManual[9] = ESPUI.addControl(ControlType::Switcher, "Star 10", star->getFogEnabled(9) ? "1" : "0", ControlColor::Carrot, fogPowerClusterD, &switchExample);
         fogPowerManual[10] = ESPUI.addControl(ControlType::Switcher, "Star 11", star->getFogEnabled(10) ? "1" : "0", ControlColor::None, fogPowerClusterD, &switchExample);
         fogPowerManual[11] = ESPUI.addControl(ControlType::Switcher, "Star 12", star->getFogEnabled(11) ? "1" : "0", ControlColor::None, fogPowerClusterD, &switchExample);
@@ -1801,9 +1815,9 @@ void webLoop()
 
         // Get Simona instance with null check
         Simona *simona = Simona::getInstance();
-        if (simona && simonaProgressLabel && expectedColorLabel && timeRemainingLabel &&
+        if (simona && simonaProgressLabel && expectedColorLabel && timeRemainingLabel && fullSequenceLabel &&
             ESPUI.getControl(simonaProgressLabel) && ESPUI.getControl(expectedColorLabel) &&
-            ESPUI.getControl(timeRemainingLabel))
+            ESPUI.getControl(timeRemainingLabel) && ESPUI.getControl(fullSequenceLabel))
         {
 
             // Update progress directly using the String from getProgress()
@@ -1827,6 +1841,14 @@ void webLoop()
             char timeRemStr[16];
             snprintf(timeRemStr, sizeof(timeRemStr), "%d", simona->getTimeRemaining());
             ESPUI.updateControlValue(timeRemainingLabel, timeRemStr);
+
+            // Update full sequence
+            String fullSequence = simona->getFullSequenceString();
+            if (fullSequence.length() > 0) {
+                ESPUI.updateControlValue(fullSequenceLabel, fullSequence);
+            } else {
+                ESPUI.updateControlValue(fullSequenceLabel, "None");
+            }
         }
         // Update network info display
         if (networkInfo && ESPUI.getControl(networkInfo))

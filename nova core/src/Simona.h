@@ -261,6 +261,67 @@ public:
         m_levelsInRound = LEVELS_PER_ROUND_DEFAULT;
     }
 
+    /**
+     * @brief Get the current game level
+     * @return Current level number
+     */
+    uint8_t getLevel() const { return level; }
+
+    /**
+     * @brief Get the LED sequence value at a specific position
+     * @param position The position in the sequence (1-based indexing)
+     * @return The LED color index at that position, or 255 if position is invalid
+     */
+    uint8_t getLedSimonSaid(uint8_t position) const {
+        if (position >= 1 && position <= level && position < 100) {
+            return led_simonSaid[position];
+        }
+        return 255; // Invalid position
+    }
+
+    /**
+     * @brief Get a copy of the current LED sequence up to the current level
+     * @param sequence Pointer to array to fill with the sequence (must be at least level+1 size)
+     * @param maxSize Maximum size of the provided array
+     * @return Number of elements copied
+     */
+    uint8_t getLedSequence(uint8_t* sequence, uint8_t maxSize) const {
+        if (!sequence || maxSize == 0) return 0;
+
+        uint8_t copyCount = (level < maxSize) ? level : maxSize - 1;
+        for (uint8_t i = 1; i <= copyCount; i++) {
+            sequence[i] = led_simonSaid[i];
+        }
+        return copyCount;
+    }
+
+    /**
+     * @brief Get the color name for a given LED index
+     * @param ledIndex The LED index (0-3)
+     * @return The color name string, or "Unknown" if index is invalid
+     */
+    const char* getLedColorName(uint8_t ledIndex) const {
+        if (ledIndex < 4 && ledColors) {
+            return ledColors[ledIndex];
+        }
+        return "Unknown";
+    }
+
+    /**
+     * @brief Get the full sequence as a formatted string for display
+     * @return String containing the full sequence (e.g., "RED GREEN BLUE ")
+     */
+    String getFullSequenceString() const {
+        String sequenceStr = "";
+        for (uint8_t i = 1; i <= level; i++) {
+            if (led_simonSaid[i] < 4 && ledColors) {
+                sequenceStr += ledColors[led_simonSaid[i]];
+                sequenceStr += " ";
+            }
+        }
+        return sequenceStr;
+    }
+
 private:
     static Simona *instance; // Singleton instance
 
