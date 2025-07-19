@@ -1721,7 +1721,7 @@ void webSetup()
 
     fogOutputOnMaxTime = ESPUI.addControl(ControlType::Slider, "", String(ambient->getFogOutputOnMaxTime() ? ambient->getFogOutputOnMaxTime() : 1000), ControlColor::Alizarin, fogOutputOnMinTime, &slider);
     ESPUI.addControl(Min, "", "200", None, fogOutputOnMaxTime);
-    ESPUI.addControl(Min, "", "2000", None, fogOutputOnMaxTime);
+    ESPUI.addControl(Max, "", "2000", None, fogOutputOnMaxTime);
     /*
      */
 
