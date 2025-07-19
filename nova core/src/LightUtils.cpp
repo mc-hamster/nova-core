@@ -131,7 +131,6 @@ LightUtils::LightUtils()
     Serial.println(storedBrightness);
     FastLED.setDither(0); // Disable dithering for faster performance and because we don't need it for the DMX lights.
 
-
     Serial.println("Loading light configuration - currentPalette");
     currentPalette = getPalette((PreferencesManager::getInt("cfgProgram", 1)), false);
 
@@ -155,7 +154,7 @@ LightUtils::LightUtils()
 
     Serial.println("Loading light configuration - cfgReverseSecondRow");
     cfgReverseSecondRow = getCfgReverseSecondRow();
-    
+
     Serial.println("Loading light configuration - cfgCircularMode");
     cfgCircularMode = getCfgCircularMode();
 
@@ -222,15 +221,20 @@ void LightUtils::loop()
 /**
  * Maps LED index based on strip configuration
  */
-uint16_t LightUtils::mapLedIndex(uint16_t index) {
-    if (!cfgReverseSecondRow) return index;
-    
+uint16_t LightUtils::mapLedIndex(uint16_t index)
+{
+    if (!cfgReverseSecondRow)
+        return index;
+
     // For a two-row setup where both rows start from right
     // First 12 LEDs (indices 0-11) are the first row
     // Next 18 LEDs (indices 12-29) are the second row
-    if (index < 12) {
+    if (index < 12)
+    {
         return index; // first row stays as is
-    } else {
+    }
+    else
+    {
         // Calculate the position within the second row (0 to 17)
         uint16_t secondRowPosition = index - 12;
         // Reverse the position within the second row (17 to 0)
@@ -248,46 +252,53 @@ uint16_t LightUtils::mapLedIndex(uint16_t index) {
 void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
 {
     uint8_t brightness = getCfgBrightness();
-    if (cfgCircularMode) {
+    if (cfgCircularMode)
+    {
         // Special handling for circular mode - imagine the LEDs are in a circle
         // We use sin/cos to create a circular effect instead of linear
         float angleStep = (2 * PI) / NUM_LEDS;
         float offset = colorIndex * 0.1; // Controls speed of rotation
-        
-        for (int i = 0; i < NUM_LEDS; i++) {
+
+        for (int i = 0; i < NUM_LEDS; i++)
+        {
             uint16_t mappedIndex = mapLedIndex(i);
-            
+
             // Skip this LED if it's protected
-            if (protectedLeds[mappedIndex]) continue;
-            
+            if (protectedLeds[mappedIndex])
+                continue;
+
             // Calculate position in the circle
             float angle = i * angleStep + offset;
-            
+
             // Use sine wave to create circular pattern
             uint8_t waveSin = sin8(i * 256 / NUM_LEDS + colorIndex);
             uint8_t waveCos = sin8(i * 256 / NUM_LEDS + colorIndex + 64); // offset by 90 degrees
-            
+
             // Combine for a more interesting pattern
             uint8_t waveIndex = cfgSin == 0 ? colorIndex : colorIndex + (waveSin * cfgSin / 16);
-            
+
             // Apply direction based on reverse setting
-            if (cfgReverse) {
+            if (cfgReverse)
+            {
                 waveIndex = colorIndex + (waveCos * cfgSin / 16);
             }
-            
+
             leds[mappedIndex] = ColorFromPalette(currentPalette, waveIndex, brightness);
         }
-    } else {
+    }
+    else
+    {
         // Original linear pattern code
         if (!getCfgReverse())
         {
             for (int i = 0; i < NUM_LEDS; i++)
             {
                 uint16_t mappedIndex = mapLedIndex(i);
-                
+
                 // Skip this LED if it's protected
-                if (protectedLeds[mappedIndex]) continue;
-                
+                if (protectedLeds[mappedIndex])
+                    continue;
+
                 if (cfgSin == 0)
                 {
                     leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
@@ -305,10 +316,11 @@ void LightUtils::FillLEDsFromPaletteColors(uint8_t colorIndex)
             for (int i = NUM_LEDS - 1; i >= 0; i--)
             {
                 uint16_t mappedIndex = mapLedIndex(i);
-                
+
                 // Skip this LED if it's protected
-                if (protectedLeds[mappedIndex]) continue;
-                
+                if (protectedLeds[mappedIndex])
+                    continue;
+
                 if (cfgSin == 0)
                 {
                     leds[mappedIndex] = ColorFromPalette(currentPalette, colorIndex, brightness);
@@ -335,7 +347,7 @@ CRGBPalette16 LightUtils::getPalette(uint32_t paletteSelect, bool saveSelection)
     }
     else
     {
-        //Serial.println("Not saving palette selection");
+        // Serial.println("Not saving palette selection");
     }
 
     switch (paletteSelect)
@@ -564,11 +576,12 @@ void LightUtils::Fire2012WithPalette(void)
         {
             pixelnumber = j;
         }
-        
+
         uint16_t mappedIndex = mapLedIndex(pixelnumber);
-        
+
         // Skip this LED if it's protected
-        if (!protectedLeds[mappedIndex]) {
+        if (!protectedLeds[mappedIndex])
+        {
             leds[mappedIndex] = color;
         }
     }
@@ -581,7 +594,7 @@ void LightUtils::Fire2012WithPalette(void)
  */
 void LightUtils::setCfgBrightness(uint8_t brightness)
 {
-    //Serial.println("set brightness");
+    // Serial.println("set brightness");
     cfgBrightness = brightness;
     PreferencesManager::setInt("cfgBrightness", brightness);
 }
@@ -635,12 +648,14 @@ void LightUtils::setCfgReverse(bool reverse)
     PreferencesManager::setBool("cfgReverse", reverse);
 }
 
-void LightUtils::setCfgReverseSecondRow(bool reverse) {
+void LightUtils::setCfgReverseSecondRow(bool reverse)
+{
     cfgReverseSecondRow = reverse;
     PreferencesManager::setBool("cfgReverseSecondRow", reverse);
 }
 
-bool LightUtils::getCfgReverseSecondRow(void) {
+bool LightUtils::getCfgReverseSecondRow(void)
+{
     return PreferencesManager::getBool("cfgReverseSecondRow", false);
 }
 
@@ -679,10 +694,10 @@ void LightUtils::setCfgLocalDisable(bool localDisable)
  */
 uint8_t LightUtils::getCfgBrightness(void)
 {
-    //Serial.println("getCfgBrightness called");
+    // Serial.println("getCfgBrightness called");
     uint8_t brightness = PreferencesManager::getInt("cfgBrightness", 255);
-    //Serial.print("Preference value for cfgBrightness: ");
-    //Serial.println(brightness);
+    // Serial.print("Preference value for cfgBrightness: ");
+    // Serial.println(brightness);
     return brightness;
 }
 
@@ -778,28 +793,30 @@ uint16_t LightUtils::getNumberOfLeds(void)
     return NUM_LEDS;
 }
 
-
 // New methods for protected LEDs
 
 /**
  * Protect a range of LEDs from being updated by pattern generators
  * and set them to a specific color.
- * 
+ *
  * @param start The starting index of the range (inclusive)
  * @param end The ending index of the range (inclusive)
  * @param color The color to set the protected LEDs to
  */
-void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color) {
-    if (start >= NUM_LEDS || end >= NUM_LEDS || start > end) {
+void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color)
+{
+    if (start >= NUM_LEDS || end >= NUM_LEDS || start > end)
+    {
         Serial.println("Invalid LED range specified for protection");
         return;
     }
-    
-    for (uint16_t i = start; i <= end; i++) {
+
+    for (uint16_t i = start; i <= end; i++)
+    {
         protectedLeds[i] = true;
         leds[i] = color;
     }
-    
+
     // Log the protection for debugging
     /*
     Serial.print("Protected LEDs ");
@@ -812,8 +829,10 @@ void LightUtils::protectLedRange(uint16_t start, uint16_t end, CRGB color) {
 /**
  * Unprotect all LEDs, allowing them to be updated by pattern generators
  */
-void LightUtils::unprotectAllLeds() {
-    for (uint16_t i = 0; i < NUM_LEDS; i++) {
+void LightUtils::unprotectAllLeds()
+{
+    for (uint16_t i = 0; i < NUM_LEDS; i++)
+    {
         protectedLeds[i] = false;
     }
     Serial.println("Unprotected all LEDs");
@@ -821,11 +840,13 @@ void LightUtils::unprotectAllLeds() {
 
 /**
  * Check if an LED is protected
- * 
+ *
  * @param index The index of the LED to check
  * @return true if the LED is protected, false otherwise
  */
-bool LightUtils::isLedProtected(uint16_t index) {
-    if (index >= NUM_LEDS) return false;
+bool LightUtils::isLedProtected(uint16_t index)
+{
+    if (index >= NUM_LEDS)
+        return false;
     return protectedLeds[index];
 }
