@@ -23,6 +23,15 @@ Enable::Enable()
 
 void Enable::loop()
 {
+    static unsigned long lastEmergencyStopEnterCall = 0;
+
+    /*
+        TODO: FIX ME!!!
+        This is here as a workaround. If the system is enabled during boot, the game and lighting will not enter the emergency stop mode immediately.
+
+        For the first bootGraceMs-miliseconds after boot, we will periodically force "emergencyStopEnter();"
+    */
+    static const unsigned long bootGraceMs = 3000;
 
     if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
@@ -32,7 +41,6 @@ void Enable::loop()
     else if (systemEnable == false && digitalRead(ENABLE_DEVICE_PIN) == true)
     {
         // System was disabled but it is now enabled.
-
         emergencyStopExit();
     }
     else if (systemEnable == true && digitalRead(ENABLE_DEVICE_PIN) == false)
@@ -42,7 +50,6 @@ void Enable::loop()
     else if (systemEnable == false && digitalRead(ENABLE_DEVICE_PIN) == false)
     {
         // We are in the safety mode.
-
         analogWrite(BUTTON_RED_OUT, disabledBrightness);
         analogWrite(BUTTON_GREEN_OUT, disabledBrightness);
         analogWrite(BUTTON_BLUE_OUT, disabledBrightness);
@@ -52,6 +59,15 @@ void Enable::loop()
         disabledBrightness = disabledBrightness + disabledBrightnessFade;
 
         delay(2);
+
+        // TODO: FIX ME!!!
+        // Work around for initial emergency stop on boot up.
+        if (millis() < bootGraceMs &&
+            millis() - lastEmergencyStopEnterCall >= 250)
+        {
+            emergencyStopEnter();
+            lastEmergencyStopEnterCall = millis();
+        }
     }
 }
 
@@ -64,7 +80,7 @@ This function is called when the emergency stop is exited. It checks if the syst
 void Enable::emergencyStopExit()
 {
 
-    bool rebootOnEmergencyStopExit = false;
+    bool rebootOnEmergencyStopExit = true;
 
     if (rebootOnEmergencyStopExit)
     {
@@ -92,17 +108,27 @@ void Enable::emergencyStopExit()
         starSequence->setSequence(starSequence->SEQ_OFF);
 
         // Resume game task if it exists
-        TaskHandle_t gameTaskHandle = xTaskGetHandle("Game Task");
-        if (gameTaskHandle != NULL) {
+        TaskHandle_t gameTaskHandle = xTaskGetHandle("gameTask");
+        if (gameTaskHandle != NULL)
+        {
             vTaskResume(gameTaskHandle);
-            Serial.println("Game task resumed");
+            Serial.println(">> Game task resumed");
+        }
+        else
+        {
+            Serial.println(">> Game task not found, skipping resume");
         }
 
         // Resume NovaNow task if it exists
         TaskHandle_t novaNowHandle = xTaskGetHandle("NovaNow");
-        if (novaNowHandle != NULL) {
+        if (novaNowHandle != NULL)
+        {
             vTaskResume(novaNowHandle);
-            Serial.println("NovaNow task resumed");
+            Serial.println(">> NovaNow task resumed");
+        }
+        else
+        {
+            Serial.println(">> NovaNow task not found, skipping resume");
         }
 
         systemEnable = true;
@@ -123,18 +149,28 @@ void Enable::emergencyStopEnter()
     starSequence->setSequence(starSequence->SEQ_OFF);
 
     // Suspend game task if it exists
-    TaskHandle_t gameTaskHandle = xTaskGetHandle("Game Task");
-    if (gameTaskHandle != NULL) {
+    TaskHandle_t gameTaskHandle = xTaskGetHandle("gameTask");
+    if (gameTaskHandle != NULL)
+    {
         vTaskSuspend(gameTaskHandle);
         lightUtils->unprotectAllLeds();
-        Serial.println("Game task suspended and LEDs unprotected");
+        Serial.println(">> Game task suspended and LEDs unprotected");
+    }
+    else
+    {
+        Serial.println(">> Game task not found, skipping suspension");
     }
 
     // Suspend NovaNow task if it exists
     TaskHandle_t novaNowHandle = xTaskGetHandle("NovaNow");
-    if (novaNowHandle != NULL) {
+    if (novaNowHandle != NULL)
+    {
         vTaskSuspend(novaNowHandle);
-        Serial.println("NovaNow task suspended");
+        Serial.println(">> NovaNow task suspended");
+    }
+    else
+    {
+        Serial.println(">> NovaNow task not found, skipping suspension");
     }
 
     // Turn off all the outputs a few times incase there is a problem in the i2c bus
@@ -176,7 +212,7 @@ This function returns the current state of the cfgDrunktard variable.
 bool Enable::isDrunktard(void)
 {
     bool result = PreferencesManager::getBool("cfgDrunktard", false);
-    //Serial.print("isDrunktard returning: ");
-    //Serial.println(result);
+    // Serial.print("isDrunktard returning: ");
+    // Serial.println(result);
     return result;
 }

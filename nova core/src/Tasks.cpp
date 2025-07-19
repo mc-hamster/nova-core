@@ -90,7 +90,8 @@ void updateTaskStats(const char *name, UBaseType_t watermark, BaseType_t coreId)
         initialStack = 4096;
     else if (strcmp(name, "TaskWiFiConnect") == 0)
         initialStack = 5 * 1024;
-    else {
+    else
+    {
         Serial.printf("updateTaskStats: Unknown task '%s' encountered\n", name);
     }
 
@@ -237,20 +238,21 @@ void TaskWeb(void *pvParameters)
     // Log the task handle to identify it in memory dumps
     uint32_t taskAddress = (uint32_t)xTaskHandle;
     Serial.printf("TaskWeb is running on core %d with handle 0x%08x\n", xPortGetCoreID(), taskAddress);
-    
+
     while (1)
     {
         // Check stack watermark before UI operations
         uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-        if (uxHighWaterMark < 1000) {
+        if (uxHighWaterMark < 1000)
+        {
             Serial.printf("WARNING: Low stack in TaskWeb before webLoop: %u bytes\n", uxHighWaterMark * 4);
         }
-        
+
         webLoop();
-        
+
         // Increased delay to give more time for network stack processing
         vTaskDelay(pdMS_TO_TICKS(20));
-        
+
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -276,28 +278,14 @@ void TaskStars(void *pvParameters)
 
     while (1)
     {
-        /*
-        // Increment the loop counter
-        loopCounter++;
 
-        // Check if a second has passed to print the loop rate
-        uint32_t currentTime = millis();
-
-        if (currentTime - lastPrintTime >= 1000)
-        {
-            //Serial.printf("TaskStars loop rate: %u loops/second\n", loopCounter);
-            loopCounter = 0;
-            lastPrintTime = currentTime;
-        }
-        */
-       
         if (enable->isSystemEnabled())
         {
             star->loop();
         }
         else
         {
-            Serial.println("system disabled");
+            Serial.println("system disabled - TaskStars");
             delay(1000);
         }
 
@@ -307,7 +295,7 @@ void TaskStars(void *pvParameters)
         {
             delayCounter = 0;
             vTaskDelay(pdMS_TO_TICKS(1));
-            //yield();
+            // yield();
         }
         else
         {
@@ -364,15 +352,17 @@ void TaskWiFiConnection(void *pvParameters)
 
     while (1)
     {
-        if (WiFi.status() != WL_CONNECTED) {
+        if (WiFi.status() != WL_CONNECTED)
+        {
             Serial.println("WiFi connection lost, attempting to reconnect...");
-            if (wifiMulti.run(5000) == WL_CONNECTED) {
+            if (wifiMulti.run(5000) == WL_CONNECTED)
+            {
                 Serial.println("WiFi reconnected");
                 Serial.print("IP address: ");
                 Serial.println(WiFi.localIP());
             }
         }
-        
+
         if (millis() - lastExecutionTime >= REPORT_TASK_INTERVAL)
         {
             uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
@@ -387,17 +377,17 @@ void TaskWiFiConnection(void *pvParameters)
 // Task definitions
 void taskSetup()
 {
+    Serial.println("Create TaskEnable");
+    xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
+    Serial.println("Create TaskEnable - Done");
+
     Serial.println("Create gameTask");
-    xTaskCreate(gameTask, "gameTask", 8 * 1024, NULL, 3, NULL);
+    xTaskCreate(gameTask, "gameTask", 8 * 1024, NULL, 4, NULL);
     Serial.println("Create gameTask - Done");
 
     Serial.println("Create taskButton");
     xTaskCreate(taskButton, "taskButton", 3 * 1024, NULL, 3, NULL);
     Serial.println("Create taskButton - Done");
-
-    Serial.println("Create TaskEnable");
-    xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskEnable - Done");
 
     Serial.println("Create TaskWeb");
     xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 1, NULL);
@@ -446,7 +436,7 @@ void gameTask(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
-    uint32_t lastExecutionTime = 0;  // Moved outside the loop
+    uint32_t lastExecutionTime = 0; // Moved outside the loop
 
     Serial.println("Game task is running");
 
@@ -469,7 +459,7 @@ void taskButton(void *pvParameters)
     UBaseType_t uxHighWaterMark;
     TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
     const char *pcTaskName = pcTaskGetName(xTaskHandle);
-    uint32_t lastExecutionTime = 0;  // Moved outside the loop
+    uint32_t lastExecutionTime = 0; // Moved outside the loop
 
     Serial.println("Button task is running");
 
@@ -498,7 +488,7 @@ void TaskI2CMonitor(void *pvParameters)
     while (1)
     {
         novaIO->updateI2CStats();
-        
+
         // I2C Bus Statistics
         float utilization = novaIO->getI2CUtilization();
         Serial.println("\n=== I2C Health Report ===");
@@ -518,26 +508,33 @@ void TaskI2CMonitor(void *pvParameters)
 
         // Consecutive Errors Per Expander
         Serial.println("\nExpander Error Status:");
-        for(uint8_t i = 0; i < 8; i++) {
+        for (uint8_t i = 0; i < 8; i++)
+        {
             unsigned long errors = novaIO->getConsecutiveErrors(i);
-            if(errors > 0) {
+            if (errors > 0)
+            {
                 Serial.printf("  Expander %d: %lu consecutive errors\n", i, errors);
             }
         }
 
         // Health Assessment
         Serial.println("\nHealth Assessment:");
-        if(utilization > 80.0f) {
+        if (utilization > 80.0f)
+        {
             Serial.println("  [WARNING] High I2C bus utilization");
         }
-        if(cacheHitRatio < 0.5f) {
+        if (cacheHitRatio < 0.5f)
+        {
             Serial.println("  [WARNING] Low cache hit ratio");
         }
-        if(avgOpTime > 10.0f) {
+        if (avgOpTime > 10.0f)
+        {
             Serial.println("  [WARNING] High average operation time");
         }
-        for(uint8_t i = 0; i < 8; i++) {
-            if(novaIO->getConsecutiveErrors(i) > 5) {
+        for (uint8_t i = 0; i < 8; i++)
+        {
+            if (novaIO->getConsecutiveErrors(i) > 5)
+            {
                 Serial.printf("  [CRITICAL] Expander %d showing repeated failures\n", i);
             }
         }
