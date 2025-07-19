@@ -1770,13 +1770,10 @@ ControlColor getColorForName(const char *colorName)
 
 void webLoop()
 {
-    // Toggle to enable or disable using the webMutex (set to false for testing without mutex)
-    bool useMutex = false; // change to false to disable mutex usage
+    // Remove webMutex code, just use timing for updates
 
-    // Initialize static variables
     static unsigned long oldTime = 0;
     static const unsigned long UPDATE_INTERVAL = 1000; // Update every 1 second
-    static SemaphoreHandle_t webMutex = xSemaphoreCreateMutex();
 
     unsigned long currentMillis = millis();
     if (currentMillis - oldTime < UPDATE_INTERVAL)
@@ -1784,27 +1781,10 @@ void webLoop()
         return;
     }
 
-    if (useMutex)
-    {
-        if (xSemaphoreTake(webMutex, (TickType_t)100) != pdTRUE)
-        {
-            Serial.println("Couldn't get webMutex");
-            return; // Couldn't get mutex, skip this update
-        }
-        else
-        {
-            Serial.println("Got webMutex");
-        }
-    }
-    else
-    {
-        Serial.println("Mutex disabled for testing");
-    }
+    oldTime = currentMillis;
 
     try
     {
-        oldTime = currentMillis;
-
         // Use stack-based string for time formatting
         char timeStr[32];
         unsigned long seconds = (currentMillis / 1000) % 60;
@@ -1884,7 +1864,6 @@ void webLoop()
             }
             if (1)
             {
-                
                 Serial.print("statusMsg: ");
                 Serial.println(statusMsg);
                 Serial.print("statusMsg length: ");
@@ -1898,10 +1877,5 @@ void webLoop()
     catch (...)
     {
         Serial.println("Error occurred during webLoop update");
-    }
-
-    if (useMutex)
-    {
-        xSemaphoreGive(webMutex);
     }
 }
