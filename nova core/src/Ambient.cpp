@@ -39,8 +39,7 @@ void Ambient::loop()
     static uint32_t amnesiaLastTime = 0;
     bool sendAmnesia = false;
 
-
-    if (currentTime - amnesiaLastTime >= 1 * 1000)
+    if (currentTime - amnesiaLastTime >= 2 * 1000)
     {
         sendAmnesia = true;
         amnesiaLastTime = currentTime;
@@ -114,9 +113,9 @@ void Ambient::loop()
                 dmxValues[9 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].r;  // red
                 dmxValues[10 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].g; // green
                 dmxValues[11 + (7 * lightsPostIndex)] = leds[starIndex + dmxFixture + 15].b; // blue
-                dmxValues[12] = 0x00;                                                       // null
-                dmxValues[13] = 0x00;                                                       // null
-                dmxValues[14] = 0x00;                                                       // null
+                dmxValues[12] = 0x00;                                                        // null
+                dmxValues[13] = 0x00;                                                        // null
+                dmxValues[14] = 0x00;                                                        // null
 
                 dmxFixture++;
                 // Serial.println("dmxFixture");
@@ -331,17 +330,25 @@ void Ambient::runAmnesiaCode(messaging_Request &request, uint8_t starIndex)
 
     request.configAmnesia.fogOutputOnMinTime = fogOnMin;
     request.configAmnesia.fogOutputOnMaxTime = fogOnMax;
-    
-    if (enable->isSystemEnabled()) {
+
+    if (enable->isSystemEnabled())
+    {
         request.configAmnesia.fogEnabled = star->getFogEnabled(starIndex);
-    } else {
+    }
+    else
+    {
         request.configAmnesia.fogEnabled = false;
     }
-    //Serial.print("fogEnabled is: ");
-    //Serial.println(request.configAmnesia.fogEnabled ? "true" : "false");
-    
-    //request.configAmnesia.fogEnabled = false;
 
+    if (1) // DEBUG
+    {
+        Serial.print("Star Index: ");
+        Serial.print(starIndex);
+        Serial.print(" fogEnabled is: ");
+        Serial.println(request.configAmnesia.fogEnabled ? "true" : "false");
+    }
+
+    // request.configAmnesia.fogEnabled = false;
 }
 
 bool Ambient::setFogOutputOffMinTime(uint32_t time)
