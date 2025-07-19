@@ -678,7 +678,7 @@ uint16_t networkInfo; // Add network info label
 uint16_t simonaProgressLabel, expectedColorLabel, timeRemainingLabel, fullSequenceLabel;
 uint16_t lightingBrightnessSlider, lightingSinSlider, lightingProgramSelect, lightingUpdatesSlider, lightingReverseSwitch, lightingFireSwitch, lightingLocalDisable, lightingAuto, lightingAutoTime, lightingReverseSecondRow;
 uint16_t mainDrunktardSwitch;
-uint16_t resetConfigSwitch, resetRebootSwitch;
+uint16_t resetRebootSwitch;
 
 uint16_t pooferA1, pooferA2, pooferA3;
 uint16_t pooferB1, pooferB2, pooferB3;
@@ -1347,18 +1347,6 @@ void switchExample(Control *sender, int value)
         Serial.print("Drunktard Switch Value: ");
         Serial.println(sender->value.toInt());
     }
-    else if (sender->id == resetConfigSwitch)
-    {
-        // TODO:
-        //    - Give the user a chance to cancel the config reset.
-        if (sender->value.toInt())
-        {
-            // PreferencesManager::clear();
-            // PreferencesManager::save();
-            delay(50);
-            ESP.restart();
-        }
-    }
     else if (sender->id == resetRebootSwitch)
     {
         if (sender->value.toInt())
@@ -1741,7 +1729,6 @@ void webSetup()
 
     // Reset tab
     ESPUI.addControl(ControlType::Label, "**WARNING**", "Don't even think of doing anything in this tab unless you want to break something!!", ControlColor::Sunflower, resetTab);
-    resetConfigSwitch = ESPUI.addControl(ControlType::Switcher, "Reset Configurations", "0", ControlColor::Sunflower, resetTab, &switchExample);
     resetRebootSwitch = ESPUI.addControl(ControlType::Switcher, "Reboot", "0", ControlColor::Sunflower, resetTab, &switchExample);
 
     // Enable this option if you want sliders to be continuous (update during move) and not discrete (update on stop)

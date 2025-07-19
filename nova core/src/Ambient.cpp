@@ -340,7 +340,7 @@ void Ambient::runAmnesiaCode(messaging_Request &request, uint8_t starIndex)
         request.configAmnesia.fogEnabled = false;
     }
 
-    if (1) // DEBUG
+    if (0) // DEBUG
     {
         Serial.print("Star Index: ");
         Serial.print(starIndex);
