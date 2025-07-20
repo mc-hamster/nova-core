@@ -224,6 +224,7 @@ void Simona::runGameTask()
 
   case SIMONA_STAGE_INPUT_COLLECTION: // 3
   {
+    // Serial.println("   -- SIMONA_STAGE_INPUT_COLLECTION --   ");
     // Remove any local declarations of inputStart
     if (inputStart == 0)
     {
@@ -278,6 +279,8 @@ void Simona::runGameTask()
           simMsg.lastPressedButton = i;
           bt_simonSaid[game_play] = i;
 
+          Serial.print("***** Button Pressed: ");
+          Serial.println(buttonColors[i]);
           updateAndSendSimMsg(simMsg);
 
           controlLed(leds[i], true);
