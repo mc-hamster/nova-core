@@ -104,6 +104,11 @@ static struct
 // Track previous stage to detect stage changes
 static SimonaStage previousStage = SIMONA_STAGE_WAITING;
 
+// Timer to limit poof calls in input collection state
+static unsigned long inputCollectionEnterTime = 0;
+// Track last message ID for poof calls in INPUT_COLLECTION
+static uint32_t lastPoofMessageId = 0;
+
 // Track animation state for lost mode
 static struct
 {
@@ -750,6 +755,12 @@ void novaNowLoop()
         break;
 
     case SIMONA_STAGE_INPUT_COLLECTION:
+        // Reset poof timer when entering input collection
+        if (previousStage != SIMONA_STAGE_INPUT_COLLECTION) {
+            inputCollectionEnterTime = millis();
+            lastPoofMessageId = 0;
+        }
+
         // printSimonaMessage(msg);
         currentSequence = 0;
         if (lightUtils)
@@ -783,8 +794,26 @@ void novaNowLoop()
             // Serial.print(msg.gamePlay);
             // Serial.println(" ====");
 
-            // Poof that star
-            star->poof(ledIndex);
+            // Poof on new message_id and start timer
+            if (msg.message_id != lastPoofMessageId) {
+                // Debug: log new poof event
+                Serial.print("DEBUG: new poof LED ");
+                Serial.print(ledIndex);
+                Serial.print(", message_id ");
+                Serial.println(msg.message_id);
+                lastPoofMessageId = msg.message_id;
+                inputCollectionEnterTime = millis();
+            }
+            // Poof within the first 200ms after new message
+            else if (millis() - inputCollectionEnterTime <= 200) {
+                // Debug: log timer-based poof
+                Serial.print("DEBUG: timer poof LED ");
+                Serial.print(ledIndex);
+                Serial.print(", message_id ");
+                Serial.println(msg.message_id);
+                star->poof(ledIndex);
+            }
+
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);
@@ -794,6 +823,9 @@ void novaNowLoop()
                 lightUtils->protectLedRange(ledIndex, ledIndex, targetColor);
             }
         }
+
+        // Update previousStage to current state for next loop
+        previousStage = SIMONA_STAGE_INPUT_COLLECTION;
         break;
 
     case SIMONA_STAGE_GAME_LOST:
