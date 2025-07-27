@@ -9,6 +9,8 @@
 
 #define BLOWER_DUTY_PIN 15 // Used to define the duty cycle of the blower to moderate voltage.
 
+#define BOOM_IGNITE_PIN 26 // Used to ignite the boomers.
+
 
 #define DMX_DE 4 // Expansion A
 #define DMX_RE 5 // Expansion A

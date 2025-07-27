@@ -21,6 +21,7 @@ void setup()
   Serial.println("NOVA: STARBASE");
 
   pinMode(BLOWER_DUTY_PIN, OUTPUT);
+  pinMode(BOOM_IGNITE_PIN, INPUT);
 
   Serial.println("Setting up Serial2");
   Serial2.begin(921600, SERIAL_8N1, UART2_RX, UART2_TX);
