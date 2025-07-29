@@ -128,7 +128,7 @@ typedef struct _messaging_TelemetryResponse {
     uint32_t chip_free_heap; /* Device chip free heap */
     pb_callback_t sdk_version; /* Device SDK version */
     pb_callback_t sketch_md5; /* Device sketch MD5 */
-    pb_callback_t sketch_compile_time; /* Device sketch compile time */
+    pb_callback_t sketch_compile_datetime; /* Device sketch compile datetime */
     uint32_t sketch_size; /* Device sketch size */
 } messaging_TelemetryResponse;
 
@@ -274,7 +274,7 @@ extern "C" {
 #define messaging_TelemetryResponse_chip_free_heap_tag 9
 #define messaging_TelemetryResponse_sdk_version_tag 10
 #define messaging_TelemetryResponse_sketch_md5_tag 11
-#define messaging_TelemetryResponse_sketch_compile_time_tag 12
+#define messaging_TelemetryResponse_sketch_compile_datetime_tag 12
 #define messaging_TelemetryResponse_sketch_size_tag 13
 #define messaging_ConfigurationResponse_device_type_tag 1
 #define messaging_ConfigurationResponse_blower_tag 2
@@ -357,7 +357,7 @@ X(a, CALLBACK, SINGULAR, STRING,   chip_revision,     8) \
 X(a, STATIC,   SINGULAR, UINT32,   chip_free_heap,    9) \
 X(a, CALLBACK, SINGULAR, STRING,   sdk_version,      10) \
 X(a, CALLBACK, SINGULAR, STRING,   sketch_md5,       11) \
-X(a, CALLBACK, SINGULAR, STRING,   sketch_compile_time,  12) \
+X(a, CALLBACK, SINGULAR, STRING,   sketch_compile_datetime,  12) \
 X(a, STATIC,   SINGULAR, UINT32,   sketch_size,      13)
 #define messaging_TelemetryResponse_CALLBACK pb_default_field_callback
 #define messaging_TelemetryResponse_DEFAULT NULL
