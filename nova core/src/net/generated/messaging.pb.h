@@ -14,7 +14,7 @@
 typedef enum _messaging_RequestType {
     messaging_RequestType_REQUEST_DMX = 0,
     messaging_RequestType_REQUEST_POWER = 1,
-    messaging_RequestType_REQUEST_ELEMETRY = 2,
+    messaging_RequestType_REQUEST_TELEMETRY = 2,
     messaging_RequestType_REQUEST_CONFIGURATION = 3
 } messaging_RequestType;
 
@@ -119,12 +119,16 @@ typedef struct _messaging_PowerResponse {
 typedef struct _messaging_TelemetryResponse {
     float temperature; /* Device temperature */
     float humidity; /* Device humidity */
-    float peak_boom; /* Device peak boom */
+    float accel_min_z; /* Z-axis acceleration */
+    float accel_max_z; /* Z-axis acceleration */
+    float accel_min_z_time;
+    float accel_max_z_time;
     pb_callback_t chip_model; /* Device chip model */
     pb_callback_t chip_revision; /* Device chip revision */
     uint32_t chip_free_heap; /* Device chip free heap */
     pb_callback_t sdk_version; /* Device SDK version */
     pb_callback_t sketch_md5; /* Device sketch MD5 */
+    pb_callback_t sketch_compile_time; /* Device sketch compile time */
     uint32_t sketch_size; /* Device sketch size */
 } messaging_TelemetryResponse;
 
@@ -220,7 +224,7 @@ extern "C" {
 #define messaging_Request_init_default           {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_default}, false, messaging_ConfigAmnesia_init_default}
 #define messaging_DmxResponse_init_default       {_messaging_ResponseStatus_MIN}
 #define messaging_PowerResponse_init_default     {{{NULL}, NULL}, {{NULL}, NULL}}
-#define messaging_TelemetryResponse_init_default {0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0}
+#define messaging_TelemetryResponse_init_default {0, 0, 0, 0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0}
 #define messaging_ConfigurationResponse_init_default {_messaging_ConfigurationDeviceType_MIN, 0}
 #define messaging_ErrorResponse_init_default     {{{NULL}, NULL}}
 #define messaging_Response_init_default          {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_default}}
@@ -232,7 +236,7 @@ extern "C" {
 #define messaging_Request_init_zero              {_messaging_RequestType_MIN, 0, {messaging_DmxRequest_init_zero}, false, messaging_ConfigAmnesia_init_zero}
 #define messaging_DmxResponse_init_zero          {_messaging_ResponseStatus_MIN}
 #define messaging_PowerResponse_init_zero        {{{NULL}, NULL}, {{NULL}, NULL}}
-#define messaging_TelemetryResponse_init_zero    {0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0}
+#define messaging_TelemetryResponse_init_zero    {0, 0, 0, 0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, 0, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0}
 #define messaging_ConfigurationResponse_init_zero {_messaging_ConfigurationDeviceType_MIN, 0}
 #define messaging_ErrorResponse_init_zero        {{{NULL}, NULL}}
 #define messaging_Response_init_zero             {_messaging_ResponseType_MIN, 0, {messaging_DmxResponse_init_zero}}
@@ -261,13 +265,17 @@ extern "C" {
 #define messaging_PowerResponse_power_requested_tag 2
 #define messaging_TelemetryResponse_temperature_tag 1
 #define messaging_TelemetryResponse_humidity_tag 2
-#define messaging_TelemetryResponse_peak_boom_tag 3
-#define messaging_TelemetryResponse_chip_model_tag 4
-#define messaging_TelemetryResponse_chip_revision_tag 5
-#define messaging_TelemetryResponse_chip_free_heap_tag 6
-#define messaging_TelemetryResponse_sdk_version_tag 7
-#define messaging_TelemetryResponse_sketch_md5_tag 8
-#define messaging_TelemetryResponse_sketch_size_tag 9
+#define messaging_TelemetryResponse_accel_min_z_tag 3
+#define messaging_TelemetryResponse_accel_max_z_tag 4
+#define messaging_TelemetryResponse_accel_min_z_time_tag 5
+#define messaging_TelemetryResponse_accel_max_z_time_tag 6
+#define messaging_TelemetryResponse_chip_model_tag 7
+#define messaging_TelemetryResponse_chip_revision_tag 8
+#define messaging_TelemetryResponse_chip_free_heap_tag 9
+#define messaging_TelemetryResponse_sdk_version_tag 10
+#define messaging_TelemetryResponse_sketch_md5_tag 11
+#define messaging_TelemetryResponse_sketch_compile_time_tag 12
+#define messaging_TelemetryResponse_sketch_size_tag 13
 #define messaging_ConfigurationResponse_device_type_tag 1
 #define messaging_ConfigurationResponse_blower_tag 2
 #define messaging_ErrorResponse_message_tag      1
@@ -340,13 +348,17 @@ X(a, CALLBACK, REPEATED, UENUM,    power_requested,   2)
 #define messaging_TelemetryResponse_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, FLOAT,    temperature,       1) \
 X(a, STATIC,   SINGULAR, FLOAT,    humidity,          2) \
-X(a, STATIC,   SINGULAR, FLOAT,    peak_boom,         3) \
-X(a, CALLBACK, SINGULAR, STRING,   chip_model,        4) \
-X(a, CALLBACK, SINGULAR, STRING,   chip_revision,     5) \
-X(a, STATIC,   SINGULAR, UINT32,   chip_free_heap,    6) \
-X(a, CALLBACK, SINGULAR, STRING,   sdk_version,       7) \
-X(a, CALLBACK, SINGULAR, STRING,   sketch_md5,        8) \
-X(a, STATIC,   SINGULAR, UINT32,   sketch_size,       9)
+X(a, STATIC,   SINGULAR, FLOAT,    accel_min_z,       3) \
+X(a, STATIC,   SINGULAR, FLOAT,    accel_max_z,       4) \
+X(a, STATIC,   SINGULAR, FLOAT,    accel_min_z_time,   5) \
+X(a, STATIC,   SINGULAR, FLOAT,    accel_max_z_time,   6) \
+X(a, CALLBACK, SINGULAR, STRING,   chip_model,        7) \
+X(a, CALLBACK, SINGULAR, STRING,   chip_revision,     8) \
+X(a, STATIC,   SINGULAR, UINT32,   chip_free_heap,    9) \
+X(a, CALLBACK, SINGULAR, STRING,   sdk_version,      10) \
+X(a, CALLBACK, SINGULAR, STRING,   sketch_md5,       11) \
+X(a, CALLBACK, SINGULAR, STRING,   sketch_compile_time,  12) \
+X(a, STATIC,   SINGULAR, UINT32,   sketch_size,      13)
 #define messaging_TelemetryResponse_CALLBACK pb_default_field_callback
 #define messaging_TelemetryResponse_DEFAULT NULL
 

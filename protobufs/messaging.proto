@@ -7,7 +7,7 @@ package messaging;
 enum RequestType {
   REQUEST_DMX = 0;
   REQUEST_POWER = 1;
-  REQUEST_ELEMETRY = 2;
+  REQUEST_TELEMETRY = 2;
   REQUEST_CONFIGURATION = 3;
 }
 
@@ -105,13 +105,17 @@ message PowerResponse {
 message TelemetryResponse {
   float temperature = 1;  // Device temperature
   float humidity = 2;  // Device humidity
-  float peak_boom = 3;  // Device peak boom
-  string chip_model = 4;  // Device chip model
-  string chip_revision = 5;  // Device chip revision
-  uint32 chip_free_heap = 6;  // Device chip free heap
-  string sdk_version = 7;  // Device SDK version
-  string sketch_md5 = 8;  // Device sketch MD5
-  uint32 sketch_size = 9;  // Device sketch size
+  float accel_min_z = 3;  // Z-axis acceleration
+  float accel_max_z = 4;  // Z-axis acceleration
+  float accel_min_z_time = 5;
+  float accel_max_z_time = 6;
+  string chip_model = 7;  // Device chip model
+  string chip_revision = 8;  // Device chip revision
+  uint32 chip_free_heap = 9;  // Device chip free heap
+  string sdk_version = 10;  // Device SDK version
+  string sketch_md5 = 11;  // Device sketch MD5
+  string sketch_compile_datetime = 12;  // Device sketch compile datetime
+  uint32 sketch_size = 13;  // Device sketch size
 }
 
 // Enum for device types in ConfigurationResponse
