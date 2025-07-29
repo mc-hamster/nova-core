@@ -212,31 +212,7 @@ float Sensors::getStoredTemperature() const
     return _storedTemperature;
 }
 
-// Getter for time since boomStartTime for max Z acceleration
-// Returns the time in milliseconds since boomStartTime when the maximum Z-axis acceleration was recorded.
-// Example usage:
-// Sensors sensors;
-// uint32_t timeForMaxZ = sensors.getTimeSinceBoomForMaxAccelZ();
-// Serial.print("Time for Max Z Acceleration: ");
-// Serial.print(timeForMaxZ);
-// Serial.println(" ms");
-uint32_t Sensors::getTimeSinceBoomForMaxAccelZ() const
-{
-    return _timeSinceBoomForMaxAccelZ;
-}
-
-// Getter for time since boomStartTime for min Z acceleration
-// Returns the time in milliseconds since boomStartTime when the minimum Z-axis acceleration was recorded.
-// Example usage:
-// Sensors sensors;
-// uint32_t timeForMinZ = sensors.getTimeSinceBoomForMinAccelZ();
-// Serial.print("Time for Min Z Acceleration: ");
-// Serial.print(timeForMinZ);
-// Serial.println(" ms");
-uint32_t Sensors::getTimeSinceBoomForMinAccelZ() const
-{
-    return _timeSinceBoomForMinAccelZ;
-}
+// ...existing code...
 
 float Sensors::readTMP102Temperature()
 {
