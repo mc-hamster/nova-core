@@ -23,9 +23,8 @@ NovaNet::NovaNet() : lastTime(0), count(0)
 
     // Serial2.begin(NOVANET_BAUD);
 
-    // Set the NovaNet pins to receive
-    novaIO->mcp_digitalWrite(NOVANET_RE, LOW, 0);
-    novaIO->mcp_digitalWrite(NOVANET_DE, HIGH, 0);
+    // Set the NovaNet transceiver to receive mode using setStarlink
+    novaIO->setStarlink(NovaIO::STARLINK_RECEIVE);
 
     // Setup goes in here
 }
@@ -119,14 +118,15 @@ void NovaNet::loop()
         Serial.println("NovaNet: Decode Error");
     }
 
-    if (received_msg.which_request_payload == messaging_Request_dmx_request_tag)
+    switch (received_msg.which_request_payload)
+    {
+    case messaging_Request_dmx_request_tag:
     {
         // Handle the DMX request
         messaging_DmxRequest received_dmx_request = received_msg.request_payload.dmx_request;
 
         if (received_msg.has_configAmnesia)
         {
-
             if (received_msg.configAmnesia.fogActivateTime)
             {
                 Serial.printf("Received Fog activate time: %d\n", received_msg.configAmnesia.fogActivateTime);
@@ -197,16 +197,25 @@ void NovaNet::loop()
 
         // Send the DMX values to the DMX output
         dmxNet->receiveDMX512(received_dmx_request.values.bytes);
+        break;
     }
-    else if (received_msg.which_request_payload == messaging_Request_power_request_tag)
+    case messaging_Request_power_request_tag:
     {
         // Handle the power request
         messaging_PowerRequest received_power_request = received_msg.request_payload.power_request;
         Serial.println("Power request: ???");
+        break;
     }
-    else
+    case messaging_Request_telemetry_request_tag:
     {
-        Serial.println("NovaNet: Invalid request payload");
+        // Handle the telemetry request
+        Serial.println("Telemetry request: placeholder");
+        break;
+    }
+    // Add additional cases for other payload types as needed
+    default:
+        Serial.println("NovaNet: Invalid or unhandled request payload");
+        break;
     }
 
     /*

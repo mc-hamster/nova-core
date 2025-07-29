@@ -92,36 +92,49 @@ void NovaIO::mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander)
 }
 
 /*
-direction is one of:
-  0 - Receive
-  1 - Transmit
-  3 - High Impedance
-  4 - Shutdown
+Set the function of the RS485 half duplex transceiver.
+direction is one of StarlinkDirection enum:
+  STARLINK_RECEIVE
+  STARLINK_TRANSMIT
+  STARLINK_HIGH_IMPEDANCE
+  STARLINK_SHUTDOWN
 */
-void NovaIO::setStarlink(u_int8_t direction, uint8_t star)
+void NovaIO::setStarlink(StarlinkDirection direction)
 {
+    // Pin assignments for RS485 transceiver control
+    // These should match the hardware wiring and configuration.h
+    const uint8_t RE_PIN = NOVANET_RE; // Receive Enable
+    const uint8_t DE_PIN = NOVANET_DE; // Driver Enable
 
-    /*
+    // Default states
+    uint8_t re_state = LOW;
+    uint8_t de_state = LOW;
 
-        Source: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX1487-MAX491.pdf
-          See Function table from Page 10
+    switch (direction) {
+        case STARLINK_RECEIVE:
+            re_state = LOW;
+            de_state = LOW;
+            break;
+        case STARLINK_TRANSMIT:
+            re_state = LOW;
+            de_state = HIGH;
+            break;
+        case STARLINK_HIGH_IMPEDANCE:
+            re_state = LOW;
+            de_state = LOW;
+            break;
+        case STARLINK_SHUTDOWN:
+            re_state = HIGH;
+            de_state = LOW;
+            break;
+        default:
+            // Invalid direction, default to receive
+            re_state = LOW;
+            de_state = LOW;
+            break;
+    }
 
-        Receiving
-            Receive Enable (RE) = Low
-            Driver Enable (DE) = Low
-
-        Transmitting
-            Receive Enable (RE) = Low
-            Driver Enable (DE) = High
-
-        High Impedance
-            Receive Enable (RE) = Low
-            Driver Enable (DE) = Low
-
-        Shutdown
-            Receive Enable (RE) = High
-            Driver Enable (DE) = Low
-
-
-    */
+    // Set the RE and DE pins using the port expander
+    mcp_digitalWrite(RE_PIN, re_state, 0);
+    mcp_digitalWrite(DE_PIN, de_state, 0);
 }

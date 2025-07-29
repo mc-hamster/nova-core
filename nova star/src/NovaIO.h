@@ -22,12 +22,19 @@ private:
 public:
         NovaIO();
         Adafruit_MCP23X17 mcp_a;
-        //Adafruit_MCP23X17 mcp_h; // Button inputs are on h
+        // Adafruit_MCP23X17 mcp_h; // Button inputs are on h
 
         void digitalWrite(enum expansionIO, int pin, bool state);
         void mcpA_digitalWrite(uint8_t pin, uint8_t value);
         void mcp_digitalWrite(uint8_t pin, uint8_t value, uint8_t expander);
-        void setStarlink(u_int8_t u_int8_t, uint8_t star);
+        enum StarlinkDirection
+        {
+                STARLINK_RECEIVE = 0,
+                STARLINK_TRANSMIT = 1,
+                STARLINK_HIGH_IMPEDANCE = 3,
+                STARLINK_SHUTDOWN = 4
+        };
+        void setStarlink(StarlinkDirection direction);
 
         xSemaphoreHandle mutex_i2c;
 };
