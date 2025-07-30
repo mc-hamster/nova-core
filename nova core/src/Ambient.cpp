@@ -146,6 +146,19 @@ void Ambient::loop()
         sendDmxMessage(dmxValues, DMX512_MAX, sendAmnesia, starIndex);
     }
 
+    // Run this telemetry block once every 30 seconds
+    static uint32_t lastTelemetryBlock = 0;
+    if (currentTime - lastTelemetryBlock >= 30 * 1000)
+    {
+        lastTelemetryBlock = currentTime;
+        for (int starIndex = 0; starIndex < 12; starIndex++)
+        {
+            // Request telemetry data from each star
+            star->netOut(starIndex);
+            requestTelemetry(starIndex);
+        }
+    }
+
     if (currentTime - lastExecutionTime >= 30 * 1000)
     {
         // Calculate average frame time
@@ -291,6 +304,77 @@ uint16_t Ambient::crc16_ccitt(const uint8_t *data, uint16_t length)
     }
 
     return crc; // Return the final CRC value
+}
+
+/**
+ * Sends a request for telemetry data over NovaNet.
+ *
+ * This function creates a TelemetryRequest message with TELEMETRY_ALL
+ * to request all telemetry information from the specified star.
+ *
+ * @param starIndex The index of the star to request telemetry from.
+ */
+void Ambient::requestTelemetry(uint8_t starIndex)
+{
+    // Create a TelemetryRequest object
+    messaging_TelemetryRequest telemetryRequest = messaging_TelemetryRequest_init_zero;
+
+    // Set the query to TELEMETRY_ALL to request all telemetry data
+    telemetryRequest.query = messaging_TelemetryQuery_TELEMETRY_ALL;
+
+    // Create a Request object and set its type to REQUEST_TELEMETRY
+    messaging_Request request = messaging_Request_init_zero;
+    // request.type = messaging_RequestType_REQUEST_TELEMETRY;
+    request.request_payload.telemetry_request = telemetryRequest;
+    request.which_request_payload = messaging_Request_telemetry_request_tag;
+
+    // Initialize a buffer stream for the encoded message
+    uint8_t buffer[NOVABUF_MAX];
+    pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
+
+    // Encode the protobuf
+    if (!pb_encode(&stream, messaging_Request_fields, &request))
+    {
+        // Encode error. Maybe the buffer isn't big enough?
+        Serial.println("PB_Encode Error!!!");
+        return;
+    }
+
+    // Calculate the CRC of the protobuf
+    uint16_t protobuf_crc = crc16_ccitt(buffer, stream.bytes_written);
+
+    // Prepare the header: F0 9F 92 A5 followed by the CRC and the size of the protobuf
+    uint8_t header[4] = {0xF0, 0x9F, 0x92, 0xA5};
+    uint16_t msg_size = stream.bytes_written;
+
+    // Send the header
+    Serial2.write(header, sizeof(header));
+
+    // Send the CRC of the protobuf
+    Serial2.write((uint8_t *)&protobuf_crc, sizeof(protobuf_crc));
+
+    // Send the size of the protobuf
+    Serial2.write((uint8_t *)&msg_size, sizeof(msg_size));
+
+    // Then send the protobuf
+    Serial2.write(buffer, msg_size);
+
+    // TODO: Cleanup the magic numbers.
+    //  8 microseconds for each byte
+    //
+    //  8 bytes in the header before the message
+    //  sizeof(msg_size) for the message.
+    delayMicroseconds(8 * (8 + sizeof(msg_size)));
+
+    // Wait for to make sure that the serial buffer is empty
+    Serial2.flush(true);
+
+    // Debug output
+    if (1) // Set to 1 for debugging
+    {
+        Serial.print("Sent telemetry request to star: ");
+        Serial.println(starIndex);
+    }
 }
 
 /**
