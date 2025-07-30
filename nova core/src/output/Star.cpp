@@ -764,88 +764,97 @@ bool Star::netOut(uint8_t star)
 {
 
     for (uint32_t i = 0; i < 20; i++)
-    //for (uint32_t i = 0; i < 12; i++)
     {
-        if (star == 0xff)
+        if (star == i)
         {
-            // Selected transceiver to output
-            if (cluster.stars[i].net.cache_re == HIGH)
+            // Set selected star to transmit mode (RE=HIGH, DE=HIGH)
+            if (cluster.stars[i].net.cache_re != HIGH)
             {
-                // If cache_re is already high, then we don't need ot do anything.
-            }
-            else
-            {
+                // Only write if RE is not already HIGH
                 novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
                 cluster.stars[i].net.cache_re = HIGH;
             }
-
-            if (cluster.stars[i].net.cache_de == HIGH)
+            if (cluster.stars[i].net.cache_de != HIGH)
             {
-                // If cache_de is already high, then we don't need ot do anything.
-            }
-            else
-            {
+                // Only write if DE is not already HIGH
                 novaIO->mcp_digitalWrite(cluster.stars[i].net.de, HIGH, cluster.stars[i].net.expander);
                 cluster.stars[i].net.cache_de = HIGH;
             }
         }
         else
         {
-
-            if (star == i)
+            // Set all other stars to high impedance (RE=HIGH, DE=LOW)
+            if (cluster.stars[i].net.cache_re != HIGH)
             {
-                // *** Set RE to High and DE to High
-
-                // Selected transceiver to output
-                if (cluster.stars[i].net.cache_re == HIGH)
-                {
-                    // If cache_re is already high, then we don't need ot do anything.
-                }
-                else
-                {
-                    novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
-                    cluster.stars[i].net.cache_re = HIGH;
-                }
-
-                if (cluster.stars[i].net.cache_de == HIGH)
-                {
-                    // If cache_de is already high, then we don't need ot do anything.
-                }
-                else
-                {
-                    novaIO->mcp_digitalWrite(cluster.stars[i].net.de, HIGH, cluster.stars[i].net.expander);
-                    cluster.stars[i].net.cache_de = HIGH;
-                }
+                // Only write if RE is not already HIGH
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_re = HIGH;
             }
-            else
+            if (cluster.stars[i].net.cache_de == HIGH)
             {
-                // *** Set RE to High and DE Low
+                // Only write if DE is HIGH (needs to be set LOW)
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_de = LOW;
+            }
+        }
+    }
+    return 1; // Success
+}
 
-                // Everything else to high impediance
-                // novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
-                // novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
+/*
+    Sets the output of the selected star to receive.
+    The other stars will be set to high impediance.
 
-                // Selected transceiver to output
-                if (cluster.stars[i].net.cache_re == HIGH)
-                {
-                    // If cache_re is already high, then we don't need ot do anything.
-                }
-                else
-                {
-                    novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
-                    cluster.stars[i].net.cache_re = HIGH;
-                }
+    If the star is 0xff, then sets all stars to receive.
 
-                if (cluster.stars[i].net.cache_de == HIGH)
-                {
-                    // If cache_de is high, then we don't need to set it low
-                    novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
-                    cluster.stars[i].net.cache_de = LOW;
-                }
-                else
-                {
-                    // If cache_de is low, then we don't need to do anything
-                }
+    RE - Receiver Output Enable Active LOW
+    DE - Driver Output Enable Active HIGH
+
+    From SP3485EN-L_TR.pdf:
+
+    RE
+        A logic LOW on RE (pin 2) will enable the differential receiver. A logic HIGH on RE
+        (pin 2) of the SP3485 will disable the receiver.
+    DE
+        A logic HIGH on DE (pin 3) will enable the differential driver outputs. A logic LOW
+        on the DE (pin 3) will tri-state the driver outputs.
+
+*/
+bool Star::netIn(uint8_t star)
+{
+
+    for (uint32_t i = 0; i < 20; i++)
+    {
+        if (star == i)
+        {
+            // Set selected star to receive mode (RE=LOW, DE=LOW)
+            if (cluster.stars[i].net.cache_re != LOW)
+            {
+                // Only write if RE is not already LOW
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.re, LOW, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_re = LOW;
+            }
+            if (cluster.stars[i].net.cache_de != LOW)
+            {
+                // Only write if DE is not already LOW
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_de = LOW;
+            }
+        }
+        else
+        {
+            // Set all other stars to high impedance (RE=HIGH, DE=LOW)
+            if (cluster.stars[i].net.cache_re != HIGH)
+            {
+                // Only write if RE is not already HIGH
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.re, HIGH, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_re = HIGH;
+            }
+            if (cluster.stars[i].net.cache_de != LOW)
+            {
+                // Only write if DE is not already LOW
+                novaIO->mcp_digitalWrite(cluster.stars[i].net.de, LOW, cluster.stars[i].net.expander);
+                cluster.stars[i].net.cache_de = LOW;
             }
         }
     }
