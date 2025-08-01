@@ -10,6 +10,7 @@ struct WifiNetwork {
 
 // Add your networks here
 static const WifiNetwork networks[] = {
+    {"NovaArt", "BigBigBoom!"},
     {"things", "stuffAndThings!"},
     {"your-ssid-2", "your-password-2"},
     // Add more networks as needed
