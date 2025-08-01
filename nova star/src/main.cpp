@@ -13,7 +13,6 @@ void TaskDmxNet(void *pvParameters);
 void TaskFogMachine(void *pvParameters);
 void TaskSensors(void *pvParameters);
 
-
 void setup()
 {
   Serial.begin(921600);
@@ -43,6 +42,9 @@ void setup()
   Serial.println(" volts DC");
 
   Serial.println("new NovaNet");
+  novaIO->mcp_a.pinMode(NOVANET_DE, OUTPUT);
+  novaIO->mcp_a.pinMode(NOVANET_RE, OUTPUT);
+
   novaNet = new NovaNet();
 
   Serial.println("new DmxNet");
@@ -110,7 +112,7 @@ void TaskNovaNet(void *pvParameters) // This is a task.
     novaNet->loop();
     // yield(); // Should't do anything but it's here incase the watchdog needs it.
     delay(1);
-    //delayMicroseconds(250);
+    // delayMicroseconds(250);
   }
 }
 

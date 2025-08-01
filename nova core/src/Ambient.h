@@ -25,6 +25,9 @@ public:
 
     void sendDmxMessage(uint8_t* dmxValues, size_t dmxValuesSize, bool sendAmnesia, uint8_t starIndex);
     void requestTelemetry(uint8_t starIndex);
+    bool receiveTelemetryResponse(uint8_t starIndex);
+    bool readWithTimeout(uint8_t *buffer, size_t size, unsigned long timeout_ms = 1);
+    bool validateHeader(const uint8_t *header);
 
     uint32_t getFogOutputOffMinTime(void);
     uint32_t getFogOutputOffMaxTime(void);

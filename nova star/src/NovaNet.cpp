@@ -7,6 +7,7 @@
 #include "DmxNet.h"
 #include "globals.h"
 #include "FogMachine.h"
+#include "Sensors.h"
 
 #include "messaging.pb.h"
 
@@ -64,7 +65,7 @@ void NovaNet::loop()
 
     if (!validateHeader(received_header))
     {
-        Serial.println("NovaNet: Invalid Header");
+        //Serial.println("NovaNet: Invalid Header");
         return;
     }
 
@@ -209,7 +210,11 @@ void NovaNet::loop()
     case messaging_Request_telemetry_request_tag:
     {
         // Handle the telemetry request
-        Serial.println("Telemetry request: placeholder");
+        messaging_TelemetryRequest received_telemetry_request = received_msg.request_payload.telemetry_request;
+        Serial.println("Received telemetry request, sending response");
+
+        // Send telemetry response
+        sendTelemetryResponse();
         break;
     }
     // Add additional cases for other payload types as needed
@@ -238,6 +243,132 @@ bool NovaNet::validateHeader(const uint8_t *header)
 {
     const uint8_t expected_header[4] = {0xF0, 0x9F, 0x92, 0xA5}; // "fire" emoji
     return memcmp(header, expected_header, 4) == 0;
+}
+
+// Helper function for string encoding in nanopb
+bool NovaNet::encode_string_callback(pb_ostream_t *stream, const pb_field_t *field, void *const *arg)
+{
+    const char *str = (const char *)(*arg);
+    if (!str)
+        return true;
+
+    if (!pb_encode_tag_for_field(stream, field))
+        return false;
+
+    return pb_encode_string(stream, (const uint8_t *)str, strlen(str));
+}
+
+/**
+ * Sends a telemetry response with the current telemetry data.
+ * Sets the Starlink to transmit before sending and back to receive afterward.
+ */
+void NovaNet::sendTelemetryResponse()
+{
+    // Set the NovaNet transceiver to transmit mode
+    novaIO->setStarlink(NovaIO::STARLINK_TRANSMIT);
+
+    // Create a TelemetryResponse object
+    messaging_TelemetryResponse telemetryResponse = messaging_TelemetryResponse_init_zero;
+
+    // Fill in telemetry data
+    telemetryResponse.temperature = sensors->getTemperature();
+    telemetryResponse.humidity = 0.0; // No humidity sensor available
+
+    // Set acceleration data from stored min/max values
+    telemetryResponse.accel_min_z = sensors->getMinAccelZ();
+    telemetryResponse.accel_max_z = sensors->getMaxAccelZ();
+    telemetryResponse.accel_min_z_time = sensors->getTimeSinceBoomForMinAccelZ() / 1000.0f; // Convert ms to seconds
+    telemetryResponse.accel_max_z_time = sensors->getTimeSinceBoomForMaxAccelZ() / 1000.0f; // Convert ms to seconds
+
+    // Set chip free heap and sketch size (numeric values)
+    //telemetryResponse.chip_free_heap = ESP.getFreeHeap();
+
+    /*
+    telemetryResponse.sketch_size = ESP.getSketchSize();
+
+    // For string fields, we need to use callbacks
+    // Set up static strings to be used by callbacks
+    static const char *chip_model = "ESP32";
+    static char chip_revision[8];
+    static const char *sdk_version = ESP.getSdkVersion();
+    static char sketch_md5[33];
+    static char datetime[30];
+
+    // Fill in the static strings
+    sprintf(chip_revision, "v%d", ESP.getChipRevision());
+    strcpy(sketch_md5, ESP.getSketchMD5().c_str());
+    sprintf(datetime, "%s %s", __DATE__, __TIME__);
+
+    // Set up callbacks for string fields
+    telemetryResponse.chip_model.funcs.encode = &encode_string_callback;
+    telemetryResponse.chip_model.arg = (void *)chip_model;
+
+    telemetryResponse.chip_revision.funcs.encode = &encode_string_callback;
+    telemetryResponse.chip_revision.arg = (void *)chip_revision;
+
+    telemetryResponse.sdk_version.funcs.encode = &encode_string_callback;
+    telemetryResponse.sdk_version.arg = (void *)sdk_version;
+
+    telemetryResponse.sketch_md5.funcs.encode = &encode_string_callback;
+    telemetryResponse.sketch_md5.arg = (void *)sketch_md5;
+
+    telemetryResponse.sketch_compile_datetime.funcs.encode = &encode_string_callback;
+    telemetryResponse.sketch_compile_datetime.arg = (void *)datetime;
+    */
+
+    // Create a Response object
+    messaging_Response response = messaging_Response_init_zero;
+    response.type = messaging_ResponseType_RESPONSE_TELEMETRY;
+    response.response_payload.telemetry_response = telemetryResponse;
+    response.which_response_payload = messaging_Response_telemetry_response_tag;
+
+    // Initialize a buffer stream for the encoded message
+    uint8_t buffer[NOVABUF_MAX];
+    pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
+
+    // Encode the protobuf
+    if (!pb_encode(&stream, messaging_Response_fields, &response))
+    {
+        // Encode error. Maybe the buffer isn't big enough?
+        Serial.println("PB_Encode Error!!!");
+
+        // Set the NovaNet transceiver back to receive mode
+        novaIO->setStarlink(NovaIO::STARLINK_RECEIVE);
+        return;
+    }
+
+    // Calculate the CRC of the protobuf
+    uint16_t protobuf_crc = crc16_ccitt(buffer, stream.bytes_written);
+
+    // Prepare the header: F0 9F 92 A5 followed by the CRC and the size of the protobuf
+    uint8_t header[4] = {0xF0, 0x9F, 0x92, 0xA5};
+    uint16_t msg_size = stream.bytes_written;
+
+    // Send the header
+    Serial2.write(header, sizeof(header));
+
+    // Send the CRC of the protobuf
+    Serial2.write((uint8_t *)&protobuf_crc, sizeof(protobuf_crc));
+
+    // Send the size of the protobuf
+    Serial2.write((uint8_t *)&msg_size, sizeof(msg_size));
+
+    // Then send the protobuf
+    Serial2.write(buffer, msg_size);
+
+    // Short delay to ensure transmission completes
+    delayMicroseconds(8 * (8 + sizeof(msg_size) + msg_size));
+
+    // Wait for serial buffer to empty
+    Serial2.flush(true);
+
+    // Set the NovaNet transceiver back to receive mode
+    novaIO->setStarlink(NovaIO::STARLINK_RECEIVE);
+
+    // Calculate the total response size: header (4) + CRC (2) + message size field (2) + protobuf body (msg_size)
+    size_t totalResponseSize = 4 + sizeof(protobuf_crc) + sizeof(msg_size) + msg_size;
+    Serial.printf("Telemetry response sent (Total size: %u bytes, Protobuf: %u bytes)\n",
+                  totalResponseSize, msg_size);
 }
 
 // CRC-16-CCITT function

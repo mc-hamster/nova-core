@@ -18,8 +18,8 @@
 #define DMX_RO 2 
 #define DMX_DI 4 
 
-#define NOVANET_DE 3 // Expansion A
-#define NOVANET_RE 2 // Expansion A
+#define NOVANET_DE 6 // Expansion A
+#define NOVANET_RE 7 // Expansion A
 
 #define UART2_RX 16
 #define UART2_TX 17

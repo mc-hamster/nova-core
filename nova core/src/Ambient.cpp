@@ -148,7 +148,7 @@ void Ambient::loop()
 
     // Run this telemetry block once every 30 seconds
     static uint32_t lastTelemetryBlock = 0;
-    if (currentTime - lastTelemetryBlock >= 30 * 1000)
+    if (currentTime - lastTelemetryBlock >= 3 * 1000)
     {
         lastTelemetryBlock = currentTime;
         for (int starIndex = 0; starIndex < 12; starIndex++)
@@ -156,6 +156,33 @@ void Ambient::loop()
             // Request telemetry data from each star
             star->netOut(starIndex);
             requestTelemetry(starIndex);
+
+            // Set the interface to input mode to receive the response
+            star->netIn(starIndex);
+
+            // Wait for response (up to 1ms)
+            uint32_t startWaitTime = millis();
+            bool responseReceived = false;
+
+            while (millis() - startWaitTime < 1)
+            {
+                if (Serial2.available() >= 4)
+                {
+                    responseReceived = receiveTelemetryResponse(starIndex);
+                    if (responseReceived)
+                        break;
+                }
+                // Short delay to prevent busy-waiting
+                delayMicroseconds(100);
+            }
+
+            // Set the star back to output mode
+            star->netOut(starIndex);
+
+            if (!responseReceived)
+            {
+                Serial.printf("No telemetry response from star %d\n", starIndex);
+            }
         }
     }
 
@@ -375,6 +402,145 @@ void Ambient::requestTelemetry(uint8_t starIndex)
         Serial.print("Sent telemetry request to star: ");
         Serial.println(starIndex);
     }
+}
+
+/**
+ * Reads data from Serial2 with timeout.
+ *
+ * @param buffer The buffer to read the data into.
+ * @param size The number of bytes to read.
+ * @param timeout_ms Maximum time to wait in milliseconds.
+ * @return True if all requested bytes were read, false if timeout occurred.
+ */
+bool Ambient::readWithTimeout(uint8_t *buffer, size_t size, unsigned long timeout_ms)
+{
+    unsigned long startTime = millis();
+    while (Serial2.available() < size)
+    {
+        if (millis() - startTime >= timeout_ms)
+        {
+            return false; // Timeout
+        }
+        delayMicroseconds(100); // Short delay to prevent busy-waiting
+    }
+    size_t bytesRead = Serial2.readBytes((char *)buffer, size);
+    return bytesRead == size;
+}
+
+/**
+ * Validates the received header against the expected format.
+ *
+ * @param header The header to validate.
+ * @return True if the header is valid, false otherwise.
+ */
+bool Ambient::validateHeader(const uint8_t *header)
+{
+    const uint8_t expected_header[4] = {0xF0, 0x9F, 0x92, 0xA5}; // "fire" emoji
+    return memcmp(header, expected_header, 4) == 0;
+}
+
+/**
+ * Receives and processes a telemetry response from a star.
+ *
+ * @param starIndex The index of the star to receive telemetry from.
+ * @return True if a valid telemetry response was received, false otherwise.
+ */
+bool Ambient::receiveTelemetryResponse(uint8_t starIndex)
+{
+    // Prepare to read the header
+    uint8_t received_header[4];
+
+    // Read and validate header with timeout
+    if (!readWithTimeout(received_header, sizeof(received_header)))
+    {
+        return false;
+    }
+
+    if (!validateHeader(received_header))
+    {
+        Serial.println("Telemetry: Invalid Header");
+        return false;
+    }
+
+    // Read the CRC of the protobuf with timeout
+    uint16_t received_protobuf_crc;
+    if (!readWithTimeout((uint8_t *)&received_protobuf_crc, sizeof(received_protobuf_crc)))
+    {
+        return false;
+    }
+
+    // Read the size of the received protobuf with timeout
+    uint16_t received_size;
+    if (!readWithTimeout((uint8_t *)&received_size, sizeof(received_size)))
+    {
+        return false;
+    }
+
+    // Validate size
+    if (received_size > NOVABUF_MAX || received_size == 0)
+    {
+        Serial.printf("Telemetry: Invalid message size (%d bytes). Must be between 1 and %d bytes\n",
+                      received_size, NOVABUF_MAX);
+        return false;
+    }
+
+    // Read the protobuf data with timeout
+    uint8_t received_buffer[NOVABUF_MAX];
+    if (!readWithTimeout(received_buffer, received_size))
+    {
+        return false;
+    }
+
+    // Calculate and validate CRC
+    uint16_t calculated_protobuf_crc = crc16_ccitt(received_buffer, received_size);
+    if (received_protobuf_crc != calculated_protobuf_crc)
+    {
+        Serial.println("Telemetry: Invalid receive CRC");
+        return false;
+    }
+
+    // Initialize a protobuf input stream
+    pb_istream_t pb_istream = pb_istream_from_buffer(received_buffer, received_size);
+
+    // Decode the received protobuf
+    messaging_Response received_msg = messaging_Response_init_zero;
+    if (!pb_decode(&pb_istream, messaging_Response_fields, &received_msg))
+    {
+        Serial.println("Telemetry: Decode Error");
+        return false;
+    }
+
+    // Verify this is a telemetry response
+    if (received_msg.type != messaging_ResponseType_RESPONSE_TELEMETRY ||
+        received_msg.which_response_payload != messaging_Response_telemetry_response_tag)
+    {
+        Serial.println("Telemetry: Unexpected response type");
+        return false;
+    }
+
+    // Process the telemetry data
+    messaging_TelemetryResponse telemetry = received_msg.response_payload.telemetry_response;
+
+    // Display telemetry information
+    Serial.printf("Telemetry from star %d:\n", starIndex);
+    Serial.printf("  Temperature: %.2f°C\n", telemetry.temperature);
+    Serial.printf("  Humidity: %.2f%%\n", telemetry.humidity);
+
+    if (telemetry.accel_min_z != 0 || telemetry.accel_max_z != 0)
+    {
+        Serial.printf("  Acceleration Z: min=%.2fg (%.2fs ago), max=%.2fg (%.2fs ago)\n",
+                      telemetry.accel_min_z, telemetry.accel_min_z_time,
+                      telemetry.accel_max_z, telemetry.accel_max_z_time);
+    }
+
+    Serial.printf("  Heap: %u bytes free\n", telemetry.chip_free_heap);
+
+    // Calculate the total response size
+    size_t totalResponseSize = 4 + sizeof(received_protobuf_crc) + sizeof(received_size) + received_size;
+    Serial.printf("  Total message size: %u bytes (protobuf: %u bytes)\n",
+                  totalResponseSize, received_size);
+
+    return true;
 }
 
 /**
