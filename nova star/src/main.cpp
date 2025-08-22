@@ -83,13 +83,13 @@ void setup()
   xTaskCreate(&TaskFogMachine, "TaskFogMachine", 6 * 1024, NULL, 4, NULL);
   Serial.println("Create TaskFogMachine - Done");
 
-  Serial.println("new Sensors");
-  sensors = new Sensors(novaIO);
-  sensors->begin();
+  //Serial.println("new Sensors");
+  //sensors = new Sensors(novaIO);
+  //sensors->begin();
 
-  Serial.println("Create TaskSensors");
-  xTaskCreate(&TaskSensors, "TaskSensors", 6 * 1024, NULL, 3, NULL);
-  Serial.println("Create TaskSensors - Done");
+  //Serial.println("Create TaskSensors");
+  //xTaskCreate(&TaskSensors, "TaskSensors", 6 * 1024, NULL, 3, NULL);
+  //Serial.println("Create TaskSensors - Done");
 }
 
 void loop()

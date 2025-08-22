@@ -34,7 +34,9 @@ DmxNet::DmxNet()
     dmx_personality_t personalities[] = {};
     int personality_count = 0;
     dmx_driver_install(dmxPort, &config, personalities, personality_count);
-  // Setup goes in here
+
+    // Set the DMX hardware pins
+    dmx_set_pin(dmxPort, DMX_DI, DMX_PIN_NO_CHANGE, GPIO_NUM_21);
 }
 
 void DmxNet::loop()
@@ -51,6 +53,7 @@ void DmxNet::loop()
     // Serial.println("Received packet less than 5 seconds ago");
     //  Do something if the last packet was received less than 10 seconds ago
     dmx_write(dmxPort, data, DMX_PACKET_SIZE);
+    dmx_send(dmxPort); // Send the DMX packet
 
     if (0)
     {
@@ -105,12 +108,13 @@ void DmxNet::loop()
     hue++;
 
     dmx_write(dmxPort, data, DMX_PACKET_SIZE);
+    dmx_send(dmxPort); // Send the DMX packet
 
     lastUpdate = now;
   }
 
   /* Now we can transmit the DMX packet! */
-  dmx_send(dmxPort);
+  // dmx_send(dmxPort); // This should not be called on every loop
 
   /* If we have no more work to do, we will wait until we are done sending our
     DMX packet. */
