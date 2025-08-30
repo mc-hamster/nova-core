@@ -756,7 +756,8 @@ void novaNowLoop()
 
     case SIMONA_STAGE_INPUT_COLLECTION:
         // Reset poof timer when entering input collection
-        if (previousStage != SIMONA_STAGE_INPUT_COLLECTION) {
+        if (previousStage != SIMONA_STAGE_INPUT_COLLECTION)
+        {
             inputCollectionEnterTime = millis();
             lastPoofMessageId = 0;
         }
@@ -795,7 +796,8 @@ void novaNowLoop()
             // Serial.println(" ====");
 
             // Poof on new message_id and start timer
-            if (msg.message_id != lastPoofMessageId) {
+            if (msg.message_id != lastPoofMessageId)
+            {
                 // Debug: log new poof event
                 Serial.print("DEBUG: new poof LED ");
                 Serial.print(ledIndex);
@@ -805,15 +807,15 @@ void novaNowLoop()
                 inputCollectionEnterTime = millis();
             }
             // Poof within the first 200ms after new message
-            else if (millis() - inputCollectionEnterTime <= 200) {
+            else if (millis() - inputCollectionEnterTime <= 500)
+            {
                 // Debug: log timer-based poof
-                Serial.print("DEBUG: timer poof LED ");
-                Serial.print(ledIndex);
-                Serial.print(", message_id ");
-                Serial.println(msg.message_id);
+                //Serial.print("DEBUG: timer poof LED ");
+                //Serial.print(ledIndex);
+                //Serial.print(", message_id ");
+                //Serial.println(msg.message_id);
                 star->poof(ledIndex);
             }
-
 
             // Set all LEDs to dim white
             lightUtils->protectLedRange(0, 11, inputCollectionAnimation.offWhite);
@@ -920,7 +922,7 @@ void novaNowLoop()
             static int poofPairIndex = 0;
             static int poofRepetition = 0;
 
-            if (poofRepetition < 4)
+            if (poofRepetition < 8)
             {
                 if (millis() - lastPoofTime >= 50)
                 {
@@ -980,7 +982,11 @@ void novaNowLoop()
             boomMappedLeds(msg.currentRound, msg.currentRound / 2); // Boom 3 LEDs for round transition
         }
 
-        poofAllMappedLeds(msg.currentRound);
+        //poofAllMappedLeds(msg.currentRound);
+        for (int i = 0; i < 12; i++)
+        {
+            star->poof(i);
+        }
 
         if (lightUtils)
         {

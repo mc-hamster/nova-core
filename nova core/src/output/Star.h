@@ -9,7 +9,7 @@
 class Star
 {
 private:
-    uint32_t pooferDuration = 100;
+    uint32_t pooferDuration = 120;
 
     uint32_t boomerTimeBlowerOn = 50;
     uint32_t boomerTimeFuelOn = 2500;

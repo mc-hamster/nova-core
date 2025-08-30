@@ -12,6 +12,11 @@
 #include "output/NovaNow.h"
 #include <esp_heap_caps.h>
 
+// --- Core Pinning Toggle ---
+// Set to 1 to enable pinning tasks to specific CPU cores for improved stability.
+// Set to 0 to use the original FreeRTOS scheduler without core affinity.
+#define USE_CORE_PINNING 1
+
 // Using REPORT_TASK_INTERVAL from configuration.h
 #define TASK_STALL_TIMEOUT 10000 // Consider a task stalled if no update in 10 seconds
 
@@ -377,58 +382,96 @@ void TaskWiFiConnection(void *pvParameters)
 // Task definitions
 void taskSetup()
 {
-    Serial.println("Create TaskEnable");
+    Serial.println("Tasks: Setup");
+
+#if USE_CORE_PINNING
+    Serial.println("Core Pinning: ENABLED");
+    // --- Core-Pinned Task Creation ---
+
+    // Core 1: Application Tasks (higher priority for real-time game logic)
+    xTaskCreatePinnedToCore(gameTask, "gameTask", 8 * 1024, NULL, 4, NULL, 1);
+    registerTaskForMonitoring("gameTask", 8 * 1024, 1, 8 * 1024);
+
+    xTaskCreatePinnedToCore(taskButton, "taskButton", 3 * 1024, NULL, 3, NULL, 1);
+    registerTaskForMonitoring("taskButton", 3 * 1024, 1, 3 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskStars, "TaskStars", 6 * 1024, NULL, 4, NULL, 1);
+    registerTaskForMonitoring("TaskStars", 6 * 1024, 1, 6 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 4, NULL, 1);
+    registerTaskForMonitoring("TaskAmbient", 8 * 1024, 1, 8 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskLightUtils, "LightUtils", 3 * 1024, NULL, 3, NULL, 1);
+    registerTaskForMonitoring("LightUtils", 3 * 1024, 1, 3 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 3, NULL, 1);
+    registerTaskForMonitoring("StarSequence", 3 * 1024, 1, 3 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskNovaNow, "NovaNow", 4 * 1024, NULL, 1, NULL, 1);
+    registerTaskForMonitoring("NovaNow", 4 * 1024, 1, 4 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskScreen, "TaskScreen", 4 * 1024, NULL, 1, NULL, 1);
+    registerTaskForMonitoring("TaskScreen", 4 * 1024, 1, 4 * 1024);
+
+    // Core 0: Network and System Tasks (higher priority for connectivity)
+    xTaskCreatePinnedToCore(&TaskWiFiConnection, "TaskWiFiConnection", 5 * 1024, NULL, 2, NULL, 0);
+    registerTaskForMonitoring("TaskWiFiConnection", 5 * 1024, 0, 5 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 2, NULL, 0);
+    registerTaskForMonitoring("TaskWeb", 8 * 1024, 0, 8 * 1024);
+
+    // Lower priority system tasks on Core 1
+    xTaskCreatePinnedToCore(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL, 1);
+    registerTaskForMonitoring("TaskEnable", 3 * 1024, 1, 3 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskI2CMonitor, "I2CMonitor", 3 * 1024, NULL, 1, NULL, 1);
+    registerTaskForMonitoring("I2CMonitor", 3 * 1024, 1, 3 * 1024);
+
+    xTaskCreatePinnedToCore(&TaskMonitor, "TaskMonitor", 4096, NULL, 1, NULL, 1);
+    registerTaskForMonitoring("TaskMonitor", 4096, 1, 4096);
+
+#else
+    Serial.println("Core Pinning: DISABLED (Original Behavior)");
+    // --- Original Task Creation ---
     xTaskCreate(&TaskEnable, "TaskEnable", 3 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskEnable - Done");
+    registerTaskForMonitoring("TaskEnable", 3 * 1024, -1, 3 * 1024); // Core -1 for unpinned
 
-    Serial.println("Create gameTask");
     xTaskCreate(gameTask, "gameTask", 8 * 1024, NULL, 4, NULL);
-    Serial.println("Create gameTask - Done");
+    registerTaskForMonitoring("gameTask", 8 * 1024, -1, 8 * 1024);
 
-    Serial.println("Create taskButton");
     xTaskCreate(taskButton, "taskButton", 3 * 1024, NULL, 3, NULL);
-    Serial.println("Create taskButton - Done");
+    registerTaskForMonitoring("taskButton", 3 * 1024, -1, 3 * 1024);
 
-    Serial.println("Create TaskWeb");
     xTaskCreate(&TaskWeb, "TaskWeb", 8 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskWeb - Done");
+    registerTaskForMonitoring("TaskWeb", 8 * 1024, -1, 8 * 1024);
 
-    Serial.println("Create TaskStars");
     xTaskCreate(&TaskStars, "TaskStars", 6 * 1024, NULL, 4, NULL);
-    Serial.println("Create TaskStars - Done");
+    registerTaskForMonitoring("TaskStars", 6 * 1024, -1, 6 * 1024);
 
-    Serial.println("Create TaskAmbient");
     xTaskCreate(&TaskAmbient, "TaskAmbient", 8 * 1024, NULL, 4, NULL);
-    Serial.println("Create TaskAmbient - Done");
+    registerTaskForMonitoring("TaskAmbient", 8 * 1024, -1, 8 * 1024);
 
-    Serial.println("Create LightUtils");
     xTaskCreate(&TaskLightUtils, "LightUtils", 3 * 1024, NULL, 3, NULL);
-    Serial.println("Create LightUtils - Done");
+    registerTaskForMonitoring("LightUtils", 3 * 1024, -1, 3 * 1024);
 
-    Serial.println("Create StarSequence");
     xTaskCreate(&TaskStarSequence, "StarSequence", 3 * 1024, NULL, 3, NULL);
-    Serial.println("Create StarSequence - Done");
+    registerTaskForMonitoring("StarSequence", 3 * 1024, -1, 3 * 1024);
 
-    Serial.println("Create TaskI2CMonitor");
     xTaskCreate(&TaskI2CMonitor, "I2CMonitor", 3 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskI2CMonitor - Done");
+    registerTaskForMonitoring("I2CMonitor", 3 * 1024, -1, 3 * 1024);
 
-    Serial.println("Create TaskNovaNow");
     xTaskCreate(&TaskNovaNow, "NovaNow", 4 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskNovaNow - Done");
+    registerTaskForMonitoring("NovaNow", 4 * 1024, -1, 4 * 1024);
 
-    Serial.println("Create TaskMonitor");
     xTaskCreate(&TaskMonitor, "TaskMonitor", 4096, NULL, 1, NULL);
-    Serial.println("Create TaskMonitor - Done");
+    registerTaskForMonitoring("TaskMonitor", 4096, -1, 4096);
 
-    // Increase WiFi Connection task stack size for better stability
-    Serial.println("Create TaskWiFiConnection");
     xTaskCreate(&TaskWiFiConnection, "TaskWiFiConnection", 5 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskWiFiConnection - Done");
+    registerTaskForMonitoring("TaskWiFiConnection", 5 * 1024, -1, 5 * 1024);
 
-    Serial.println("Create TaskScreen");
     xTaskCreate(&TaskScreen, "TaskScreen", 4 * 1024, NULL, 1, NULL);
-    Serial.println("Create TaskScreen - Done");
+    registerTaskForMonitoring("TaskScreen", 4 * 1024, -1, 4 * 1024);
+#endif
 }
 
 void gameTask(void *pvParameters)
